@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Winning Fellowship | 당신의 인생을 스스로 결정하는 힘</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#fafaf8',
+            surface: '#f2f2ee',
+            elevated: '#ffffff',
+            hover: '#e8e8e4',
+            accent: '#fbbf24',
+            'accent-dim': '#f59e0b',
+            'accent-deep': '#d97706',
+            'accent-light': '#fef9e7',
+            blue: '#3b82f6',
+            'blue-dim': '#2563eb',
+            'blue-light': '#eff6ff',
+            dark: '#141414',
+            'text-primary': '#1a1a1a',
+            'text-secondary': '#6b6b6b',
+            'text-muted': '#9a9a9a',
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    section { scroll-margin-top: 80px; }
+    .gradient-text {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glow-border { border: 1px solid rgba(251, 191, 36, 0.12); }
+    .glow-border:hover { border-color: rgba(251, 191, 36, 0.35); }
+    .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(251, 191, 36, 0.06); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .stagger-children .fade-in:nth-child(1) { transition-delay: 0s; }
+    .stagger-children .fade-in:nth-child(2) { transition-delay: 0.12s; }
+    .stagger-children .fade-in:nth-child(3) { transition-delay: 0.24s; }
+    .stagger-children .fade-in:nth-child(4) { transition-delay: 0.36s; }
+    .stagger-children .fade-in:nth-child(5) { transition-delay: 0.48s; }
+    .accent-glow { box-shadow: 0 0 24px rgba(251, 191, 36, 0.3); }
+    .track-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.15), transparent); }
+    section.track-sep { position: relative; }
+    section.track-sep::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.15), transparent);
+    }
+    .dday-pulse { animation: pulse-glow 2s ease-in-out infinite; }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 8px rgba(251, 191, 36, 0.25); }
+      50% { box-shadow: 0 0 18px rgba(251, 191, 36, 0.5); }
+    }
+    .dark-section { background: #141414; color: #fafafa; }
+    .dark-section .text-text-primary { color: #fafafa; }
+    .dark-section .text-text-secondary { color: #a0a0a0; }
+    .dark-section .text-text-muted { color: #666; }
+
+    /* Blob float animation */
+    @keyframes blob-float {
+      0%, 100% { transform: translate(-50%, 0) scale(1); }
+      33% { transform: translate(-48%, -12px) scale(1.03); }
+      66% { transform: translate(-52%, 8px) scale(0.97); }
+    }
+    .blob-float { animation: blob-float 8s ease-in-out infinite; }
+
+    /* CTA button enhanced hover */
+    .cta-primary {
+      transition: all 0.3s ease;
+    }
+    .cta-primary:hover {
+      box-shadow: 0 0 40px rgba(251, 191, 36, 0.5), 0 0 80px rgba(251, 191, 36, 0.2);
+      transform: scale(1.05);
+    }
+
+    /* Timeline styles */
+    .timeline-line {
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(251, 191, 36, 0.15);
+    }
+    .timeline-progress {
+      position: absolute;
+      left: 15px;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: linear-gradient(180deg, #fbbf24, #f59e0b);
+      transition: height 0.1s linear;
+    }
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #333;
+      border: 2px solid rgba(251, 191, 36, 0.3);
+      position: relative;
+      z-index: 2;
+      transition: all 0.4s ease;
+      flex-shrink: 0;
+    }
+    .timeline-dot.active {
+      background: #fbbf24;
+      border-color: #fbbf24;
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+    }
+
+    /* FAQ accordion */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-answer.open {
+      max-height: 300px;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    .faq-icon.open {
+      transform: rotate(45deg);
+    }
+
+    /* 키워드 골드 텍스트 강조 */
+    .highlight-line {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
+    /* 카드 좌측 골드 액센트 바 (hover) */
+    .card-accent { position: relative; overflow: hidden; }
+    .card-accent::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: #fbbf24;
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+      transform-origin: bottom;
+    }
+    .card-accent:hover::after { transform: scaleY(1); }
+
+    /* 카드 내 아이콘 바운스 */
+    .card-accent:hover .card-icon { animation: icon-bounce 0.5s ease; }
+    @keyframes icon-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* Create Your Own + 아이콘 pulse */
+    .plus-pulse { animation: plus-pulse 2s ease-in-out infinite; }
+    @keyframes plus-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Benefits 아이콘 float on hover */
+    .benefit-icon { transition: transform 0.3s ease; }
+    .benefit-card:hover .benefit-icon { transform: translateY(-6px); }
+
+    /* CTA 배경 blob pulse */
+    @keyframes cta-blob-pulse {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, 0) scale(1); }
+      50% { opacity: 0.8; transform: translate(-50%, 0) scale(1.1); }
+    }
+    .cta-blob-pulse { animation: cta-blob-pulse 4s ease-in-out infinite; }
+
+    /* Marquee animation */
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-container {
+      overflow: hidden;
+      width: 100%;
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 24px;
+      animation: marquee-scroll 120s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-card {
+      flex-shrink: 0;
+      width: 340px;
+    }
+
+    /* Venn Diagram */
+    .venn-container {
+      position: relative;
+      width: 320px;
+      height: 340px;
+    }
+    .venn-circle {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      opacity: 0.15;
+    }
+    .venn-challenge {
+      background: #fbbf24;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .venn-growth {
+      background: #34d399;
+      bottom: 40px;
+      left: 10px;
+    }
+    .venn-connection {
+      background: #60a5fa;
+      bottom: 40px;
+      right: 10px;
+    }
+    .venn-label {
+      position: absolute;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      z-index: 3;
+    }
+    .venn-label-challenge {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fbbf24;
+    }
+    .venn-label-growth {
+      bottom: 0;
+      left: 6px;
+      color: #34d399;
+    }
+    .venn-label-connection {
+      bottom: 0;
+      right: 0;
+      color: #60a5fa;
+    }
+    .venn-center {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fafafa;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 24px rgba(251,191,36,0.5);
+      z-index: 4;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .venn-circle, .venn-label { cursor: pointer; transition: all 0.3s ease; }
+    .venn-circle.active { opacity: 0.35; }
+    .venn-label.active { font-size: 1.25rem; }
+    .venn-center.active { font-size: 1rem; text-shadow: 0 0 32px rgba(251,191,36,0.8); }
+
+    /* Venn popup card */
+    .venn-popup {
+      display: none;
+      max-width: 360px;
+      margin: 0 auto;
+      animation: venn-pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .venn-popup.active { display: block; }
+    @keyframes venn-pop {
+      from { opacity: 0; transform: scale(0.9) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .venn-popup-nav {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: none;
+      color: #999;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .venn-popup-nav:hover { background: rgba(255,255,255,0.15); color: #fafafa; }
+    .venn-popup-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .venn-popup-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: all 0.2s;
+    }
+    .venn-popup-dot.active { background: #fbbf24; transform: scale(1.3); }
+    .venn-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .venn-tag-challenge { background: rgba(251,191,36,0.15); color: #fbbf24; }
+    .venn-tag-growth { background: rgba(52,211,153,0.15); color: #34d399; }
+    .venn-tag-connection { background: rgba(96,165,250,0.15); color: #60a5fa; }
+    .venn-tag-center { background: rgba(251,191,36,0.1); color: #fafafa; border: 1px solid rgba(251,191,36,0.3); }
+
+    /* Disabled button style */
+    .btn-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Counter animation */
+    .counter-value {
+      display: inline-block;
+    }
+
+    /* Side navigation */
+    .side-nav {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .side-nav.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .side-nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .side-nav-dot:hover {
+      background: rgba(251, 191, 36, 0.4);
+      border-color: rgba(251, 191, 36, 0.6);
+      transform: scale(1.3);
+    }
+    .side-nav-dot.active {
+      background: #fbbf24;
+      border-color: #fbbf24;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+      transform: scale(1.2);
+    }
+    .side-nav-dot .side-nav-label {
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fafafa;
+      background: rgba(20,20,20,0.9);
+      backdrop-filter: blur(8px);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(251,191,36,0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: translateY(-50%) translateX(6px);
+    }
+    .side-nav-dot:hover .side-nav-label {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+    .side-nav-top {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1.5px solid rgba(251, 191, 36, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      margin-bottom: 8px;
+    }
+    .side-nav-top:hover {
+      background: #fbbf24;
+      border-color: #fbbf24;
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.4);
+      transform: scale(1.1);
+    }
+    .side-nav-top:hover svg {
+      color: #141414;
+    }
+    /* Light section aware dots */
+    .side-nav.on-light .side-nav-dot {
+      background: rgba(0,0,0,0.1);
+      border-color: rgba(0,0,0,0.15);
+    }
+    .side-nav.on-light .side-nav-dot:hover {
+      background: rgba(251, 191, 36, 0.4);
+      border-color: rgba(251, 191, 36, 0.6);
+    }
+    .side-nav.on-light .side-nav-dot.active {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    }
+    .side-nav.on-light .side-nav-dot .side-nav-label {
+      color: #1a1a1a;
+      background: rgba(255,255,255,0.95);
+      border-color: rgba(0,0,0,0.08);
+    }
+    .side-nav.on-light .side-nav-top {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+    .side-nav.on-light .side-nav-top:hover {
+      background: #f59e0b;
+      border-color: #f59e0b;
+    }
+    @media (max-width: 768px) {
+      .side-nav { right: 12px; gap: 5px; }
+      .side-nav-dot { width: 8px; height: 8px; }
+      .side-nav-dot .side-nav-label { display: none; }
+      .side-nav-top { width: 32px; height: 32px; }
+    }
+  </style>
+</head>
+<body class="font-sans text-text-primary bg-base">
+
+  <!-- Side Navigation -->
+  <div class="side-nav" id="side-nav">
+    <button class="side-nav-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로">
+      <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+    </button>
+    <div class="side-nav-dot" data-section="about"><span class="side-nav-label">소개</span></div>
+    <div class="side-nav-dot" data-section="timeline"><span class="side-nav-label">일정</span></div>
+    <div class="side-nav-dot" data-section="reviews"><span class="side-nav-label">후기</span></div>
+    <div class="side-nav-dot" data-section="career"><span class="side-nav-label">Career</span></div>
+    <div class="side-nav-dot" data-section="global"><span class="side-nav-label">Global</span></div>
+    <div class="side-nav-dot" data-section="life"><span class="side-nav-label">Life</span></div>
+    <div class="side-nav-dot" data-section="benefits"><span class="side-nav-label">혜택</span></div>
+    <div class="side-nav-dot" data-section="faq"><span class="side-nav-label">FAQ</span></div>
+    <div class="side-nav-dot" data-section="apply"><span class="side-nav-label">지원</span></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-[#1a1a1a]/80 backdrop-blur-md z-50 border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold text-[#fafafa]">Winning <span class="gradient-text">Fellowship</span></a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-[#b0b0b0]">
+        <a href="#about" class="hover:text-accent transition-colors">소개</a>
+        <a href="#timeline" class="hover:text-accent transition-colors">일정</a>
+        <a href="#career" class="hover:text-accent transition-colors">Career</a>
+        <a href="#global" class="hover:text-accent transition-colors">Global</a>
+        <a href="#life" class="hover:text-accent transition-colors">Life</a>
+        <a href="#apply" class="inline-flex items-center px-5 py-2.5 bg-accent text-dark rounded-full text-sm font-bold hover:bg-accent-dim transition-all hover:shadow-lg hover:shadow-accent/20">3기 소식 받기</a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden p-2 text-[#b0b0b0]">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-3 bg-[#1a1a1a]/95 backdrop-blur-md">
+      <a href="#about" class="block text-[#b0b0b0] hover:text-accent">소개</a>
+      <a href="#timeline" class="block text-[#b0b0b0] hover:text-accent">일정</a>
+      <a href="#career" class="block text-[#b0b0b0] hover:text-accent">Career</a>
+      <a href="#global" class="block text-[#b0b0b0] hover:text-accent">Global</a>
+      <a href="#life" class="block text-[#b0b0b0] hover:text-accent">Life</a>
+      <a href="#apply" class="block text-center px-5 py-2.5 bg-accent text-dark rounded-full text-sm font-bold">3기 소식 받기</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO (DARK) ===== -->
+  <section class="min-h-screen flex items-center justify-center dark-section pt-20 relative overflow-hidden">
+    <div class="absolute top-1/4 left-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] pointer-events-none blob-float"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <div class="flex items-center justify-center gap-3 mb-8">
+        <div id="dday-badge" class="inline-block px-5 py-2 bg-accent/10 text-accent rounded-full text-sm font-bold border border-accent/20 dday-pulse"></div>
+        <div class="inline-block px-4 py-2 bg-white/5 text-[#b0b0b0] rounded-full text-sm font-medium border border-white/10">2기 모집 마감</div>
+      </div>
+      <p class="text-lg md:text-xl text-[#b0b0b0] mb-4 tracking-wide">남들이 멈출 때, 우리는 당신의 가능성에 집중합니다.</p>
+      <h1 class="text-5xl md:text-7xl font-bold text-[#fafafa] leading-tight mb-6">
+        <span class="gradient-text">Winning Fellowship</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-[#b0b0b0] max-w-2xl mx-auto mb-12 leading-relaxed">
+        당신의 인생을 <strong class="text-[#fafafa]">스스로 결정하는 힘</strong>
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#apply" class="px-8 py-4 bg-accent text-dark rounded-full text-lg font-bold cta-primary accent-glow">3기 소식 받기</a>
+        <a href="#about" class="px-8 py-4 text-[#b0b0b0] rounded-full text-lg font-medium hover:bg-[#232323] transition-colors border border-white/10">더 알아보기 &darr;</a>
+      </div>
+      <div class="mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto">
+        <div class="py-5 px-4 rounded-xl border border-accent/20 bg-accent/5">
+          <div class="text-3xl font-bold gradient-text counter-value" data-target="3">0</div><div class="text-sm text-[#666] mt-1">트랙</div>
+        </div>
+        <div class="py-5 px-4 rounded-xl border border-accent/20 bg-accent/5">
+          <div class="text-3xl font-bold gradient-text counter-value" data-target="7">0</div><div class="text-sm text-[#666] mt-1">전문 팀</div>
+        </div>
+        <div class="py-5 px-4 rounded-xl border border-accent/20 bg-accent/5">
+          <div class="text-3xl font-bold gradient-text counter-value" data-target="12" data-suffix="주">0</div><div class="text-sm text-[#666] mt-1">성장 여정</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="min-h-screen flex items-center py-24 bg-surface track-sep">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="fade-in text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">Winning Fellowship이란?</h2>
+        <p class="text-text-secondary text-lg">왜 지금, 이 프로그램인가?</p>
+      </div>
+      <div class="stagger-children space-y-12">
+        <div class="fade-in flex gap-6 items-start">
+          <div class="flex-shrink-0 w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center mt-1"><span class="text-accent font-bold text-lg">01</span></div>
+          <div>
+            <h3 class="text-xl font-bold text-text-primary mb-3">사라지는 기회 속에서 찾은 확신</h3>
+            <p class="text-text-secondary leading-relaxed text-lg">많은 기업이 대외활동을 줄여가는 지금, 피니토는 오히려 더 깊은 고민을 시작했습니다. 단순히 스펙을 쌓는 활동이 아니라, <strong class="text-text-primary">20대 초반이라는 가장 소중한 시기에 '진정한 나'를 발견할 기회</strong>가 점점 사라지고 있기 때문입니다.</p>
+          </div>
+        </div>
+        <div class="fade-in flex gap-6 items-start">
+          <div class="flex-shrink-0 w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center mt-1"><span class="text-accent font-bold text-lg">02</span></div>
+          <div>
+            <h3 class="text-xl font-bold text-text-primary mb-3">방황은 낭비가 아닌, '항해'의 시작입니다</h3>
+            <p class="text-text-secondary leading-relaxed text-lg">수능 직후, 혹은 대학 생활의 시작점에서 마주하는 막막함을 혼자 견디게 두지 않겠습니다. 우리는 <strong class="text-text-primary">동료들과 함께 고민하고 성장하며</strong>, 스스로의 삶을 주도적으로 설계하는 <strong class="text-accent">'위닝(Winning)'</strong>의 경험을 제공하고자 합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TIMELINE (DARK) ===== -->
+  <section id="timeline" class="pt-32 pb-24 dark-section relative overflow-hidden track-sep">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/3 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <div class="fade-in text-center mb-16">
+        <div class="inline-block px-4 py-1.5 bg-accent/15 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">2기 일정</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-[#fafafa] mb-4">12주간의 <span class="gradient-text">성장 로드맵</span></h2>
+        <p class="text-[#b0b0b0] text-lg">체계적인 일정 속에서 자기주도적으로 성장합니다</p>
+      </div>
+
+      <div class="fade-in relative max-w-2xl mx-auto" id="timeline-container">
+        <div class="timeline-line"></div>
+        <div class="timeline-progress" id="timeline-progress"></div>
+
+        <div class="space-y-8 relative">
+          <!-- ~3/1 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5"></div>
+            <div class="pb-2">
+              <div class="text-accent font-bold text-sm mb-1">~ 3/1</div>
+              <div class="text-[#fafafa] font-semibold">모집 마감</div>
+              <p class="text-[#b0b0b0] text-sm mt-1">2기 펠로우 선발 완료</p>
+            </div>
+          </div>
+          <!-- 3/6 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5"></div>
+            <div class="pb-2">
+              <div class="text-accent font-bold text-sm mb-1">3/6 (금)</div>
+              <div class="text-[#fafafa] font-semibold">OT (오리엔테이션)</div>
+              <p class="text-[#b0b0b0] text-sm mt-1">펠로우 첫 만남, 팀 빌딩 & 방향 설정</p>
+            </div>
+          </div>
+          <!-- 3/9~3/29 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5"></div>
+            <div class="pb-2">
+              <div class="text-accent font-bold text-sm mb-1">3/9 ~ 3/29</div>
+              <div class="text-[#fafafa] font-semibold">네트워킹 및 커리큘럼 공동 설계</div>
+              <p class="text-[#b0b0b0] text-sm mt-1">팀원들과 신뢰를 쌓고, 12주 활동 계획을 함께 설계</p>
+            </div>
+          </div>
+          <!-- 3/30~4/19 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5"></div>
+            <div class="pb-2">
+              <div class="text-accent font-bold text-sm mb-1">3/30 ~ 4/19</div>
+              <div class="text-[#fafafa] font-semibold">팀별 마이크로 프로젝트 실행</div>
+              <p class="text-[#b0b0b0] text-sm mt-1">작은 단위의 프로젝트를 빠르게 실행하며 감각 익히기</p>
+            </div>
+          </div>
+          <!-- 4/20~4/26 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5" style="background: #333; border-color: rgba(255,255,255,0.15);"></div>
+            <div class="pb-2">
+              <div class="text-[#666] font-bold text-sm mb-1">4/20 ~ 4/26</div>
+              <div class="text-[#888] font-semibold">중간고사 활동 중단</div>
+              <p class="text-[#666] text-sm mt-1">학업에 집중하는 시간</p>
+            </div>
+          </div>
+          <!-- 4/27~5/17 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5"></div>
+            <div class="pb-2">
+              <div class="text-accent font-bold text-sm mb-1">4/27 ~ 5/17</div>
+              <div class="text-[#fafafa] font-semibold">몰입 &mdash; 목표달성 본격화</div>
+              <p class="text-[#b0b0b0] text-sm mt-1">팀별 핵심 목표를 향해 깊이 있게 몰입하는 기간</p>
+            </div>
+          </div>
+          <!-- 5/18~6/7 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5"></div>
+            <div class="pb-2">
+              <div class="text-accent font-bold text-sm mb-1">5/18 ~ 6/7</div>
+              <div class="text-[#fafafa] font-semibold">성과 정리 및 결과물 고도화</div>
+              <p class="text-[#b0b0b0] text-sm mt-1">12주간의 성장을 정리하고 결과물을 완성</p>
+            </div>
+          </div>
+          <!-- 6/8~6/12 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5" style="background: #333; border-color: rgba(255,255,255,0.15);"></div>
+            <div class="pb-2">
+              <div class="text-[#666] font-bold text-sm mb-1">6/8 ~ 6/12</div>
+              <div class="text-[#888] font-semibold">기말고사 활동 중단</div>
+              <p class="text-[#666] text-sm mt-1">학업에 집중하는 시간</p>
+            </div>
+          </div>
+          <!-- 6/14 -->
+          <div class="flex items-start gap-6 timeline-item">
+            <div class="timeline-dot mt-1.5"></div>
+            <div class="pb-2">
+              <div class="text-accent font-bold text-sm mb-1">6/14 (일)</div>
+              <div class="text-[#fafafa] font-semibold">수료식</div>
+              <p class="text-[#b0b0b0] text-sm mt-1">12주간의 여정을 축하하고, 다음 챕터를 열다</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FELLOW'S ROLE ===== -->
+  <section class="py-24 bg-surface track-sep">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="fade-in text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">펠로우가 된다는 것</h2>
+        <p class="text-text-secondary text-lg">12주 뒤, 당신은 어떤 사람이 되어 있을까요?</p>
+      </div>
+      <div class="stagger-children grid md:grid-cols-2 gap-8">
+        <div class="fade-in p-8 rounded-2xl bg-elevated border border-black/5 shadow-sm">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-3">피니토의 정신을 확산하는 엔진</h3>
+          <p class="text-text-secondary leading-relaxed">Winning Fellowship의 수료생은 단순한 참가자를 넘어, 피니토가 지향하는 <strong class="text-text-primary">'주도적인 삶'의 가치를 세상에 알리는 브랜드 앰배서더</strong>가 됩니다.</p>
+        </div>
+        <div class="fade-in p-8 rounded-2xl bg-elevated border border-black/5 shadow-sm">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-3">우리는 함께 성장합니다</h3>
+          <p class="text-text-secondary leading-relaxed">여러분의 변화된 삶이 곧 피니토의 브랜드가 됩니다. 우리는 여러분이 <strong class="text-text-primary">세상에 긍정적인 영향력을 퍼뜨리는 리더</strong>로 성장할 수 있도록 끝까지 지원합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 1기 후기 ===== -->
+  <section id="reviews" class="py-24 dark-section track-sep">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="fade-in text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#fafafa] mb-4">펠로우십과 함께 <span class="gradient-text">얻는 가치</span></h2>
+        <p class="text-[#b0b0b0] text-lg mb-12">1기 펠로우들이 직접 증명한 이야기</p>
+      </div>
+
+      <!-- Venn Diagram -->
+      <div class="fade-in flex justify-center mb-16">
+        <div class="venn-container">
+          <div class="venn-circle venn-challenge" data-venn="challenge" onclick="toggleVenn('challenge')"></div>
+          <div class="venn-circle venn-growth" data-venn="growth" onclick="toggleVenn('growth')"></div>
+          <div class="venn-circle venn-connection" data-venn="connection" onclick="toggleVenn('connection')"></div>
+          <span class="venn-label venn-label-challenge" data-venn="challenge" onclick="toggleVenn('challenge')">도전</span>
+          <span class="venn-label venn-label-growth" data-venn="growth" onclick="toggleVenn('growth')">성장</span>
+          <span class="venn-label venn-label-connection" data-venn="connection" onclick="toggleVenn('connection')">연결</span>
+          <div class="venn-center" onclick="toggleVenn('center')">Fellowship</div>
+        </div>
+      </div>
+
+      <!-- Venn Popup Card -->
+      <!-- 클릭 힌트 -->
+      <p class="text-center text-[#666] text-sm mt-6 mb-2" id="venn-hint">각 키워드를 눌러보세요</p>
+
+      <div class="venn-popup" id="venn-popup">
+        <div class="p-5 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm" id="venn-popup-avatar"></div>
+              <div><p class="text-[#fafafa] font-semibold text-sm" id="venn-popup-name"></p><p class="text-xs text-[#666]" id="venn-popup-team"></p></div>
+            </div>
+            <span class="venn-tag" id="venn-popup-tag"></span>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm" id="venn-popup-text"></p>
+          <div class="flex items-center justify-between mt-4">
+            <button class="venn-popup-nav" onclick="vennPopupPrev()">&#8249;</button>
+            <div class="venn-popup-dots" id="venn-popup-dots"></div>
+            <button class="venn-popup-nav" onclick="vennPopupNext()">&#8250;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16"></div>
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <!-- === 원본 21장 === -->
+        <!-- Flow Crew (7) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">강</div>
+            <div><p class="text-[#fafafa] font-semibold">강○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"인바디 비교 시 상체, 복부 근육이 표준 이하에서 표준으로 올랐고, 들 수 있는 무게도 5~10kg 늘었어요. <span class="highlight-line">산 정상에서의 개방감과 성취감은 정말 남달랐습니다.</span>"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">강</div>
+            <div><p class="text-[#fafafa] font-semibold">강○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"혼자였다면 겨울에 산 정상까지 오르는 걸 엄두도 내지 못했을 텐데, <span class="highlight-line">여럿이서 으쌰으쌰 하는 분위기 덕분에 등산을 재밌게 할 수 있었어요!</span> 운동 생활에 새로운 패러다임을 제시해준 활동이었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"<span class="highlight-line">체력뿐 아니라 마음까지 단단해진 시간이었습니다.</span> 다양한 러닝 코스를 뛰어보고 마지막에는 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정 자체가 오래 기억에 남을 것 같아요."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">양</div>
+            <div><p class="text-[#fafafa] font-semibold">양○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"꾸준한 운동 습관을 기를 수 있었고, 혼자서는 시도하기 어려웠던 등산도 서로 응원하며 정상까지 오를 수 있었습니다. <span class="highlight-line">좋은 인연을 만들고 다양한 경험을 쌓을 수 있었던 소중한 시간이었어요.</span>"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">오</div>
+            <div><p class="text-[#fafafa] font-semibold">오○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"혼자 할 때는 흥미 없고 오래 하기 힘들었던 러닝을, <span class="highlight-line">펠로우들과 다 같이 뛰니 힘들어도 어떻게든 뛰게 되고</span> 시간도 빨리 가서 매우 즐거웠습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">황</div>
+            <div><p class="text-[#fafafa] font-semibold">황○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"<span class="highlight-line">정신이 맑아지고 아침을 상쾌하게 시작할 수 있어서</span> 의미 있는 활동이었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"평소라면 귀찮아서 안 할 운동을 하게 만들어줘서 좋았습니다. <span class="highlight-line">근육도 꽤 붙은 것 같아요.</span>"</p>
+        </div>
+        <!-- 노이즈 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">노이즈</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"팀 대표로서 매주 업로드 일정을 수립하고 편집 회의를 주도하며 리더의 역할을 깊이 있게 경험할 수 있었습니다. <span class="highlight-line">진정한 리딩은 소통과 배려에서 시작됨을 깨달았습니다.</span> 팀원들의 헌신 덕분에 프로젝트를 성공적으로 마무리할 수 있었으며, 팀워크의 중요성을 배우는 소중한 계기가 되었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">노이즈</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"펠로우십하길 잘했다고 생각이 들 정도로 정말 재미있게 활동했습니다. <span class="highlight-line">팀원들과의 결속력이 단단했기 때문에 지금까지 달려올 수 있었다고 생각합니다.</span> 좋은 사람들과 재미있고 다양한 콘텐츠를 만들 수 있음에 감사하고 뿌듯합니다."</p>
+        </div>
+        <!-- 고스차일드 (1) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">고스차일드</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"인생에서 처음으로 해보는 밴드였고, 성인이 된 후 처음으로 해보는 리더 자리였습니다. <span class="highlight-line">맡은 역할에 최선을 다하자는 책임감 하나만으로 활동을 마무리할 수 있었습니다.</span> 드럼 연습을 많이 할 수 있어서 얻어가는 것이 있었고, 좋은 분들을 알게 되어 좋았습니다."</p>
+        </div>
+        <!-- 수다디 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">수다디</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"PA로 6주간 활동하며 <span class="highlight-line">리더에게 가장 중요한 것은 팀원들 간 케미 형성이라는 점을 배웠습니다.</span> 첫 모임 후 팀원 모두가 금방 친해졌고, 서로의 의견을 존중하며 상상했던 것보다 만족스럽게 활동을 마무리했습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">전</div>
+            <div><p class="text-[#fafafa] font-semibold">전○○</p><p class="text-xs text-[#666]">수다디</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"정말 좋은 언니, 오빠를 만났고 <span class="highlight-line">팀 분위기가 펠로우십에서도 정말 최상위권이라고 생각합니다.</span> 계획을 하나하나 실현해보는 경험이 좋았고, 연락도 빨리 보고 의견 반영도 잘 되어서 수다디 최고였습니다!"</p>
+        </div>
+        <!-- 말랑말랑 (1) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">최</div>
+            <div><p class="text-[#fafafa] font-semibold">최○○</p><p class="text-xs text-[#666]">말랑말랑</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 <span class="highlight-line">어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다.</span> 팀원들이 매주 공유를 해줬기에 그 믿음을 져버릴 수 없어서 끝까지 달릴 수 있었습니다."</p>
+        </div>
+        <!-- 개발새발개발자 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">개발새발개발자</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"단체 포트폴리오를 제작하는 과정에서 공통된 웃음 포인트를 만들어 팀 단합에 기여할 수 있었습니다. <span class="highlight-line">팀 단합에 있어 공감할 수 있는 대화 주제 형성이 가장 중요하다는 것을 느꼈습니다.</span>"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">개발새발개발자</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"예상치 못한 코딩 문제가 터졌을 때 리더로서 가장 먼저 앞장서서 해결책을 찾았습니다. <span class="highlight-line">당황스러운 상황 속에서도 끝까지 고민하며 문제를 풀어내며 위기 관리 능력을 키울 수 있었습니다.</span> 리더의 결단력이 팀의 방향성에 미치는 영향을 체감했습니다."</p>
+        </div>
+        <!-- 에셋메이커 (4) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"활동을 통해 <span class="highlight-line">매일 아침 경제 뉴스를 스크랩하는 습관을 들일 수 있었습니다.</span> 스스로 종목을 선택하고 차트를 분석하는 방법을 배우며, 기초 지식을 넘어 본격적인 투자의 세계로 발을 넓힐 수 있었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">박</div>
+            <div><p class="text-[#fafafa] font-semibold">박○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"용어를 대충 알던 수준에서 영상 시청과 모의 투자를 통해 <span class="highlight-line">드디어 실전 투자에 한 발자국 더 가까워진 느낌이 듭니다.</span> 첫 수익을 냈을 때의 설렘, 시드 확보의 중요성을 체감한 순간이 기억에 남습니다. 주식 공부는 빨리 시작할수록 좋습니다!"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">이</div>
+            <div><p class="text-[#fafafa] font-semibold">이○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"단타는 패가망신의 지름길이라 생각했지만, 강연을 통해 거래량과 시장 심리를 분석하는 논리를 배웠습니다. <span class="highlight-line">잃어도 이유를 찾고, 벌어도 이유를 찾는 복기 습관이 생겼습니다.</span> 배운 대로 진입해서 수익을 냈을 때의 짜릿함, 나만의 투자 철학이 단단해지는 과정 자체가 즐거웠습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">전</div>
+            <div><p class="text-[#fafafa] font-semibold">전○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"경제 흐름에 전혀 무지했던 제가 매일 뉴스를 접하고 시장을 파악하는 훈련을 통해 <span class="highlight-line">투자에 대한 막연한 심리적 장벽을 허무는 결정적인 계기가 되었습니다.</span> 팀원들과 같은 시장을 두고 서로 다른 시각을 공유하며 사고의 폭을 넓힐 수 있었던 소중한 경험이었습니다."</p>
+        </div>
+        <!-- 루멘 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">최</div>
+            <div><p class="text-[#fafafa] font-semibold">최○○</p><p class="text-xs text-[#666]">루멘</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"마케팅에 대한 막연한 꿈만 가지고 있었는데, <span class="highlight-line">무에서 유(팔로워 100명)를 만들어내며 성취감과 자신감을 얻었습니다.</span> 루멘은 정말 가족 같은 분위기였고, 서로 매일 응원하며 힘을 얻었던 유일한 크루였습니다. 어떻게 표현해야 사람들의 관심을 끌 수 있는지 고민하는 시간이 되었어요."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">루멘</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"팀원들의 조언과 레퍼런스 공유를 통해 각자의 제작 능력을 강화하고, <span class="highlight-line">함께 성장을 이루어낸 모습이 눈에 보이면서 너무나도 기특했습니다.</span> 브랜딩이라는 낯선 주제에서 좋은 동료들과 PA로 활동한 것은 어디서도 쉽게 얻지 못할 소중한 기회였습니다."</p>
+        </div>
+
+        <!-- === 복제본 21장 (무한 루프용) === -->
+        <!-- Flow Crew (7) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">강</div>
+            <div><p class="text-[#fafafa] font-semibold">강○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"인바디 비교 시 상체, 복부 근육이 표준 이하에서 표준으로 올랐고, 들 수 있는 무게도 5~10kg 늘었어요. <span class="highlight-line">산 정상에서의 개방감과 성취감은 정말 남달랐습니다.</span>"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">강</div>
+            <div><p class="text-[#fafafa] font-semibold">강○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"혼자였다면 겨울에 산 정상까지 오르는 걸 엄두도 내지 못했을 텐데, <span class="highlight-line">여럿이서 으쌰으쌰 하는 분위기 덕분에 등산을 재밌게 할 수 있었어요!</span> 운동 생활에 새로운 패러다임을 제시해준 활동이었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"<span class="highlight-line">체력뿐 아니라 마음까지 단단해진 시간이었습니다.</span> 다양한 러닝 코스를 뛰어보고 마지막에는 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정 자체가 오래 기억에 남을 것 같아요."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">양</div>
+            <div><p class="text-[#fafafa] font-semibold">양○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"꾸준한 운동 습관을 기를 수 있었고, 혼자서는 시도하기 어려웠던 등산도 서로 응원하며 정상까지 오를 수 있었습니다. <span class="highlight-line">좋은 인연을 만들고 다양한 경험을 쌓을 수 있었던 소중한 시간이었어요.</span>"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">오</div>
+            <div><p class="text-[#fafafa] font-semibold">오○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"혼자 할 때는 흥미 없고 오래 하기 힘들었던 러닝을, <span class="highlight-line">펠로우들과 다 같이 뛰니 힘들어도 어떻게든 뛰게 되고</span> 시간도 빨리 가서 매우 즐거웠습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">황</div>
+            <div><p class="text-[#fafafa] font-semibold">황○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"<span class="highlight-line">정신이 맑아지고 아침을 상쾌하게 시작할 수 있어서</span> 의미 있는 활동이었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">Flow Crew</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"평소라면 귀찮아서 안 할 운동을 하게 만들어줘서 좋았습니다. <span class="highlight-line">근육도 꽤 붙은 것 같아요.</span>"</p>
+        </div>
+        <!-- 노이즈 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">노이즈</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"팀 대표로서 매주 업로드 일정을 수립하고 편집 회의를 주도하며 리더의 역할을 깊이 있게 경험할 수 있었습니다. <span class="highlight-line">진정한 리딩은 소통과 배려에서 시작됨을 깨달았습니다.</span> 팀원들의 헌신 덕분에 프로젝트를 성공적으로 마무리할 수 있었으며, 팀워크의 중요성을 배우는 소중한 계기가 되었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">노이즈</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"펠로우십하길 잘했다고 생각이 들 정도로 정말 재미있게 활동했습니다. <span class="highlight-line">팀원들과의 결속력이 단단했기 때문에 지금까지 달려올 수 있었다고 생각합니다.</span> 좋은 사람들과 재미있고 다양한 콘텐츠를 만들 수 있음에 감사하고 뿌듯합니다."</p>
+        </div>
+        <!-- 고스차일드 (1) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">고스차일드</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"인생에서 처음으로 해보는 밴드였고, 성인이 된 후 처음으로 해보는 리더 자리였습니다. <span class="highlight-line">맡은 역할에 최선을 다하자는 책임감 하나만으로 활동을 마무리할 수 있었습니다.</span> 드럼 연습을 많이 할 수 있어서 얻어가는 것이 있었고, 좋은 분들을 알게 되어 좋았습니다."</p>
+        </div>
+        <!-- 수다디 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">수다디</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"PA로 6주간 활동하며 <span class="highlight-line">리더에게 가장 중요한 것은 팀원들 간 케미 형성이라는 점을 배웠습니다.</span> 첫 모임 후 팀원 모두가 금방 친해졌고, 서로의 의견을 존중하며 상상했던 것보다 만족스럽게 활동을 마무리했습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">전</div>
+            <div><p class="text-[#fafafa] font-semibold">전○○</p><p class="text-xs text-[#666]">수다디</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"정말 좋은 언니, 오빠를 만났고 <span class="highlight-line">팀 분위기가 펠로우십에서도 정말 최상위권이라고 생각합니다.</span> 계획을 하나하나 실현해보는 경험이 좋았고, 연락도 빨리 보고 의견 반영도 잘 되어서 수다디 최고였습니다!"</p>
+        </div>
+        <!-- 말랑말랑 (1) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">최</div>
+            <div><p class="text-[#fafafa] font-semibold">최○○</p><p class="text-xs text-[#666]">말랑말랑</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 <span class="highlight-line">어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다.</span> 팀원들이 매주 공유를 해줬기에 그 믿음을 져버릴 수 없어서 끝까지 달릴 수 있었습니다."</p>
+        </div>
+        <!-- 개발새발개발자 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">개발새발개발자</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"단체 포트폴리오를 제작하는 과정에서 공통된 웃음 포인트를 만들어 팀 단합에 기여할 수 있었습니다. <span class="highlight-line">팀 단합에 있어 공감할 수 있는 대화 주제 형성이 가장 중요하다는 것을 느꼈습니다.</span>"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">개발새발개발자</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"예상치 못한 코딩 문제가 터졌을 때 리더로서 가장 먼저 앞장서서 해결책을 찾았습니다. <span class="highlight-line">당황스러운 상황 속에서도 끝까지 고민하며 문제를 풀어내며 위기 관리 능력을 키울 수 있었습니다.</span> 리더의 결단력이 팀의 방향성에 미치는 영향을 체감했습니다."</p>
+        </div>
+        <!-- 에셋메이커 (4) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"활동을 통해 <span class="highlight-line">매일 아침 경제 뉴스를 스크랩하는 습관을 들일 수 있었습니다.</span> 스스로 종목을 선택하고 차트를 분석하는 방법을 배우며, 기초 지식을 넘어 본격적인 투자의 세계로 발을 넓힐 수 있었습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">박</div>
+            <div><p class="text-[#fafafa] font-semibold">박○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"용어를 대충 알던 수준에서 영상 시청과 모의 투자를 통해 <span class="highlight-line">드디어 실전 투자에 한 발자국 더 가까워진 느낌이 듭니다.</span> 첫 수익을 냈을 때의 설렘, 시드 확보의 중요성을 체감한 순간이 기억에 남습니다. 주식 공부는 빨리 시작할수록 좋습니다!"</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">이</div>
+            <div><p class="text-[#fafafa] font-semibold">이○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"단타는 패가망신의 지름길이라 생각했지만, 강연을 통해 거래량과 시장 심리를 분석하는 논리를 배웠습니다. <span class="highlight-line">잃어도 이유를 찾고, 벌어도 이유를 찾는 복기 습관이 생겼습니다.</span> 배운 대로 진입해서 수익을 냈을 때의 짜릿함, 나만의 투자 철학이 단단해지는 과정 자체가 즐거웠습니다."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">전</div>
+            <div><p class="text-[#fafafa] font-semibold">전○○</p><p class="text-xs text-[#666]">에셋메이커</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"경제 흐름에 전혀 무지했던 제가 매일 뉴스를 접하고 시장을 파악하는 훈련을 통해 <span class="highlight-line">투자에 대한 막연한 심리적 장벽을 허무는 결정적인 계기가 되었습니다.</span> 팀원들과 같은 시장을 두고 서로 다른 시각을 공유하며 사고의 폭을 넓힐 수 있었던 소중한 경험이었습니다."</p>
+        </div>
+        <!-- 루멘 (2) -->
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">최</div>
+            <div><p class="text-[#fafafa] font-semibold">최○○</p><p class="text-xs text-[#666]">루멘</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"마케팅에 대한 막연한 꿈만 가지고 있었는데, <span class="highlight-line">무에서 유(팔로워 100명)를 만들어내며 성취감과 자신감을 얻었습니다.</span> 루멘은 정말 가족 같은 분위기였고, 서로 매일 응원하며 힘을 얻었던 유일한 크루였습니다. 어떻게 표현해야 사람들의 관심을 끌 수 있는지 고민하는 시간이 되었어요."</p>
+        </div>
+        <div class="marquee-card p-6 rounded-xl bg-[#232323] border border-white/8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent font-bold text-sm">김</div>
+            <div><p class="text-[#fafafa] font-semibold">김○○</p><p class="text-xs text-[#666]">루멘</p></div>
+          </div>
+          <p class="text-[#b0b0b0] leading-relaxed text-sm">"팀원들의 조언과 레퍼런스 공유를 통해 각자의 제작 능력을 강화하고, <span class="highlight-line">함께 성장을 이루어낸 모습이 눈에 보이면서 너무나도 기특했습니다.</span> 브랜딩이라는 낯선 주제에서 좋은 동료들과 PA로 활동한 것은 어디서도 쉽게 얻지 못할 소중한 기회였습니다."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAREER TRACK ===== -->
+  <section id="career" class="min-h-screen flex items-center dark-section relative overflow-hidden track-sep">
+    <div class="absolute top-1/3 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-6 py-24 relative z-10">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="fade-in">
+          <div class="inline-block px-4 py-1.5 bg-accent/15 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">Track 01</div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-4"><span class="gradient-text">Career</span> <span class="text-[#fafafa]">Track</span></h2>
+          <p class="text-xl text-[#b0b0b0] mb-6">단순 업무가 아닌, <strong class="text-[#fafafa]">직업관의 형성</strong></p>
+          <p class="text-[#b0b0b0] leading-relaxed mb-8 text-lg"><span class="highlight-line">지원은 피니토가</span>, <strong class="text-[#fafafa]">주인공은 여러분이.</strong></p>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3 text-[#b0b0b0]"><div class="w-2 h-2 rounded-full bg-accent"></div><span class="highlight-line">활동 내용부터 실행까지, 모두 내 손으로</span></div>
+            <div class="flex items-center gap-3 text-[#b0b0b0]"><div class="w-2 h-2 rounded-full bg-accent"></div><span class="highlight-line">활동비 전액 지원</span></div>
+            <div class="flex items-center gap-3 text-[#b0b0b0]"><div class="w-2 h-2 rounded-full bg-accent"></div><span class="highlight-line">12주로 완성하는 나만의 포트폴리오</span></div>
+          </div>
+        </div>
+        <div class="stagger-children space-y-4">
+          <div class="fade-in p-6 rounded-xl bg-[#232323] border border-white/8 card-hover card-accent">
+            <div class="flex items-center gap-4 mb-3"><div class="text-2xl card-icon">&#x1f4da;</div><div><h4 class="font-bold text-[#fafafa]">브릿지 <span class="text-accent text-xs font-bold ml-1">NEW!</span></h4><p class="text-sm text-[#666]">교육업 역량 탐구</p></div></div>
+            <p class="text-sm text-[#b0b0b0] mb-3">직접 교육 콘텐츠를 기획하고, 교육업의 다양한 가능성을 탐색합니다</p>
+            <div class="text-xs text-accent bg-accent/8 px-3 py-2 rounded-lg flex items-center gap-2"><span class="font-bold">GOAL</span> 다양한 교육업 종사자와의 네트워크 형성</div>
+          </div>
+          <div class="fade-in p-6 rounded-xl bg-[#232323] border border-white/8 card-hover card-accent">
+            <div class="flex items-center gap-4 mb-3"><div class="text-2xl card-icon">&#x1f4bb;</div><div><h4 class="font-bold text-[#fafafa]">개발새발개발자</h4><p class="text-sm text-[#666]">코딩 역량 강화 & 결과물 도출</p></div></div>
+            <p class="text-sm text-[#b0b0b0] mb-3">직접 코딩하고 결과물을 만들어내며, 개발자로서의 첫 발을 내딛습니다</p>
+            <div class="text-xs text-accent bg-accent/8 px-3 py-2 rounded-lg flex items-center gap-2"><span class="font-bold">GOAL</span> 내 손으로 만든 결과물로 실력 증명하기</div>
+          </div>
+          <div class="fade-in p-6 rounded-xl bg-[#232323] border border-white/8 card-hover card-accent">
+            <div class="flex items-center gap-4 mb-3"><div class="text-2xl card-icon">&#x1f4f8;</div><div><h4 class="font-bold text-[#fafafa]">루멘</h4><p class="text-sm text-[#666]">인스타 브랜딩 & 마케팅</p></div></div>
+            <p class="text-sm text-[#b0b0b0] mb-3">펠로우십 인스타그램을 직접 운영하며 마케팅 실전 감각을 키웁니다</p>
+            <div class="text-xs text-accent bg-accent/8 px-3 py-2 rounded-lg flex items-center gap-2"><span class="font-bold">GOAL</span> 브랜드를 직접 기획하고 운영한 경험 쌓기</div>
+          </div>
+          <div class="fade-in p-6 rounded-xl bg-[#232323] border border-white/8 card-hover card-accent">
+            <div class="flex items-center gap-4 mb-3"><div class="text-2xl card-icon">&#x1f4c8;</div><div><h4 class="font-bold text-[#fafafa]">에셋메이커</h4><p class="text-sm text-[#666]">주식 & 모의투자</p></div></div>
+            <p class="text-sm text-[#b0b0b0] mb-3">모의투자와 스터디를 통해 나만의 투자 관점을 만들어갑니다</p>
+            <div class="text-xs text-accent bg-accent/8 px-3 py-2 rounded-lg flex items-center gap-2"><span class="font-bold">GOAL</span> 나만의 투자 철학과 자산관리 역량 구축</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GLOBAL TRACK ===== -->
+  <section id="global" class="min-h-screen flex items-center bg-surface relative overflow-hidden track-sep">
+    <div class="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-6 py-24 relative z-10">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="fade-in order-2 md:order-1">
+          <div class="p-8 rounded-2xl bg-elevated border border-accent/20 shadow-sm card-hover card-accent">
+            <div class="flex items-center gap-4 mb-6"><div class="text-3xl card-icon">&#x1f5e3;&#xfe0f;</div><div><h4 class="text-xl font-bold text-text-primary">수다디</h4><p class="text-sm text-text-muted">온오프라인 영어 회화</p></div></div>
+            <p class="text-text-secondary leading-relaxed mb-6">영어로 대화하는 것이 두려웠다면, 여기서 그 두려움이 자신감으로 바뀝니다. 같은 목표를 가진 동료들과 함께 직접 회화 세션을 기획하고 진행합니다.</p>
+            <div class="text-sm text-dark bg-accent px-4 py-3 rounded-lg flex items-center gap-2 font-semibold"><span class="font-bold">GOAL</span> 영어로 자신있게 대화하는 나를 만나기</div>
+            <div class="mt-6 pt-6 border-t border-black/5 space-y-3">
+              <div class="flex items-center gap-3 text-text-secondary text-sm"><div class="w-2 h-2 rounded-full bg-accent"></div>팀원이 직접 회화 세션 기획 & 운영</div>
+              <div class="flex items-center gap-3 text-text-secondary text-sm"><div class="w-2 h-2 rounded-full bg-accent"></div>온라인 & 오프라인 병행</div>
+              <div class="flex items-center gap-3 text-text-secondary text-sm"><div class="w-2 h-2 rounded-full bg-accent"></div>활동비 지원으로 다양한 시도 가능</div>
+            </div>
+          </div>
+        </div>
+        <div class="fade-in order-1 md:order-2">
+          <div class="inline-block px-4 py-1.5 bg-accent-light text-accent rounded-full text-sm font-medium mb-6 border border-accent/15">Track 02</div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-4"><span class="gradient-text">Global</span> <span class="text-text-primary">Track</span></h2>
+          <p class="text-xl text-text-secondary mb-6">한국을 넘어, <strong class="text-text-primary">더 넓은 무대로</strong></p>
+          <p class="text-text-secondary leading-relaxed text-lg"><span class="highlight-line">외국어는 스킬이 아닌, 세상과 연결되는 통로.</span> 두려움을 자신감으로 바꾸세요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LIFE TRACK ===== -->
+  <section id="life" class="min-h-screen flex items-center dark-section relative overflow-hidden track-sep">
+    <div class="absolute top-1/3 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-6 py-24 relative z-10">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="fade-in">
+          <div class="inline-block px-4 py-1.5 bg-accent/15 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">Track 03</div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-4"><span class="gradient-text">Life</span> <span class="text-[#fafafa]">Track</span></h2>
+          <p class="text-xl text-[#b0b0b0] mb-6">동료들과 함께 건강한 삶을 만들어가는<br><strong class="text-[#fafafa]">자기주도적 네트워킹</strong></p>
+          <p class="text-[#b0b0b0] leading-relaxed mb-8 text-lg"><span class="highlight-line">커리어만이 답은 아닙니다.</span> 몸을 움직이고, 영감을 나누고, 진짜 동료를 만나세요.</p>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3 text-[#b0b0b0]"><div class="w-2 h-2 rounded-full bg-accent"></div><span class="highlight-line">함께 만드는 변화</span></div>
+            <div class="flex items-center gap-3 text-[#b0b0b0]"><div class="w-2 h-2 rounded-full bg-accent"></div><span class="highlight-line">취미로 연결되는 깊은 관계</span></div>
+            <div class="flex items-center gap-3 text-[#b0b0b0]"><div class="w-2 h-2 rounded-full bg-accent"></div><span class="highlight-line">건강한 에너지 순환</span></div>
+          </div>
+        </div>
+        <div class="stagger-children space-y-4">
+          <div class="fade-in p-6 rounded-xl bg-[#232323] border border-white/8 card-hover card-accent">
+            <div class="flex items-center gap-4 mb-3"><div class="text-2xl card-icon">&#x1f3c3;</div><div><h4 class="font-bold text-[#fafafa]">Flow Crew</h4><p class="text-sm text-[#666]">운동 & 커뮤니티 강화</p></div></div>
+            <p class="text-sm text-[#b0b0b0] mb-3">함께 뛰고, 함께 변하는 경험. 운동 종목과 일정을 직접 정하고, 동료가 동기부여가 됩니다.</p>
+            <div class="text-xs text-accent bg-accent/8 px-3 py-2 rounded-lg flex items-center gap-2"><span class="font-bold">GOAL</span> 12주간의 신체적 변화를 눈으로 확인하기</div>
+          </div>
+          <div class="fade-in p-6 rounded-xl bg-[#232323] border border-white/8 card-hover card-accent">
+            <div class="flex items-center gap-4 mb-3"><div class="text-2xl card-icon">&#x1f3a8;</div><div><h4 class="font-bold text-[#fafafa]">아르키비아</h4><p class="text-sm text-[#666]">네트워킹 & 취미 공유</p></div></div>
+            <p class="text-sm text-[#b0b0b0] mb-3">취미가 같은 사람과의 만남은 다릅니다. 활동을 직접 기획하며, 가벼운 공유에서 깊은 연결로.</p>
+            <div class="text-xs text-accent bg-accent/8 px-3 py-2 rounded-lg flex items-center gap-2"><span class="font-bold">GOAL</span> 취미를 통해 평생 함께할 동료 만들기</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== YOUR OWN TEAM ===== -->
+  <section class="py-24 bg-surface relative overflow-hidden track-sep">
+    <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+      <div class="fade-in">
+        <div class="inline-block px-4 py-1.5 bg-accent-light text-accent rounded-full text-sm font-medium mb-6 border border-accent/15">+ Create Your Own</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-6">하고 싶은 활동이 <span class="gradient-text">따로 있다면?</span></h2>
+        <p class="text-text-secondary text-lg leading-relaxed mb-8">위 팀에 없는 활동이라도 괜찮습니다.<br>본인이 하고 싶은 활동이나 팀이 있다면,<br><strong class="text-text-primary">새롭게 만드는 것도 언제든지 환영</strong>합니다.</p>
+        <div class="inline-flex items-center gap-3 px-6 py-4 bg-elevated rounded-xl border border-black/5 shadow-sm">
+          <div class="plus-pulse"><svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg></div>
+          <span class="text-text-secondary">나만의 트랙 & 팀을 제안해 주세요</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BENEFITS ===== -->
+  <section id="benefits" class="min-h-screen flex items-center py-24 bg-surface track-sep">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="fade-in text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">펠로우에게 <span class="gradient-text">드리는 것들</span></h2>
+        <p class="text-text-secondary text-lg">성장에만 집중할 수 있도록, 피니토가 지원합니다</p>
+      </div>
+      <div class="stagger-children grid md:grid-cols-3 gap-6">
+        <div class="fade-in p-8 rounded-2xl bg-elevated border border-black/5 shadow-sm card-hover benefit-card">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center mb-5 benefit-icon">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-3">활동비 지원</h3>
+          <p class="text-text-secondary leading-relaxed">팀별 프로젝트 활동비를 제공합니다. 비용 걱정 없이 원하는 활동에 집중하세요.</p>
+        </div>
+        <div class="fade-in p-8 rounded-2xl bg-elevated border border-black/5 shadow-sm card-hover benefit-card">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center mb-5 benefit-icon">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-3">수료 인증</h3>
+          <p class="text-text-secondary leading-relaxed">12주 완주 시 공식 수료증을 발급합니다. 주도적 성장의 증거를 남기세요.</p>
+        </div>
+        <div class="fade-in p-8 rounded-2xl bg-elevated border border-black/5 shadow-sm card-hover benefit-card">
+          <div class="w-12 h-12 bg-accent-light rounded-xl flex items-center justify-center mb-5 benefit-icon">
+            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-text-primary mb-3">네트워크</h3>
+          <p class="text-text-secondary leading-relaxed">전 기수 펠로우와의 커뮤니티에 연결됩니다. 12주 이후에도 함께 성장하세요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ (DARK) ===== -->
+  <section id="faq" class="py-24 dark-section track-sep">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="fade-in text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#fafafa] mb-4">자주 묻는 <span class="gradient-text">질문</span></h2>
+        <p class="text-[#b0b0b0] text-lg">궁금한 점이 있으신가요?</p>
+      </div>
+      <div class="fade-in space-y-3" id="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item rounded-xl border border-white/8 overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-white/3 transition-colors" onclick="toggleFaq(this)">
+            <span class="text-[#fafafa] font-semibold pr-4">지원 자격은 어떻게 되나요?</span>
+            <span class="faq-icon text-accent text-2xl leading-none flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-[#b0b0b0] leading-relaxed pb-6">수능을 마친 수험생부터 20대 초반 누구나 지원 가능합니다. 특별한 자격 요건은 없으며, '자기주도적 삶'에 관심이 있다면 환영합니다.</p>
+          </div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="faq-item rounded-xl border border-white/8 overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-white/3 transition-colors" onclick="toggleFaq(this)">
+            <span class="text-[#fafafa] font-semibold pr-4">활동 비용이 있나요?</span>
+            <span class="faq-icon text-accent text-2xl leading-none flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-[#b0b0b0] leading-relaxed pb-6">참가비는 없습니다. 팀별 활동비도 피니토에서 지원합니다.</p>
+          </div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="faq-item rounded-xl border border-white/8 overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-white/3 transition-colors" onclick="toggleFaq(this)">
+            <span class="text-[#fafafa] font-semibold pr-4">온라인으로만 참여할 수 있나요?</span>
+            <span class="faq-icon text-accent text-2xl leading-none flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-[#b0b0b0] leading-relaxed pb-6">기본적으로 온오프라인 병행입니다. 팀별로 자율적으로 일정을 조율하되, 주요 행사(OT, 수료식)는 오프라인으로 진행됩니다.</p>
+          </div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="faq-item rounded-xl border border-white/8 overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-white/3 transition-colors" onclick="toggleFaq(this)">
+            <span class="text-[#fafafa] font-semibold pr-4">팀은 어떻게 배정되나요?</span>
+            <span class="faq-icon text-accent text-2xl leading-none flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-[#b0b0b0] leading-relaxed pb-6">지원 시 희망 트랙과 팀을 선택하며, 관심사와 목표를 기반으로 배정됩니다.</p>
+          </div>
+        </div>
+        <!-- FAQ 5 -->
+        <div class="faq-item rounded-xl border border-white/8 overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-white/3 transition-colors" onclick="toggleFaq(this)">
+            <span class="text-[#fafafa] font-semibold pr-4">중간에 팀 변경이 가능한가요?</span>
+            <span class="faq-icon text-accent text-2xl leading-none flex-shrink-0">+</span>
+          </button>
+          <div class="faq-answer px-6">
+            <p class="text-[#b0b0b0] leading-relaxed pb-6">특별한 사유가 있는 경우 담당 매니저와 상의 후 조율 가능합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section id="apply" class="py-24 dark-section relative overflow-hidden track-sep">
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/5 rounded-full blur-[120px] pointer-events-none cta-blob-pulse"></div>
+    <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+      <div class="fade-in">
+        <div class="inline-block px-4 py-2 bg-white/5 text-[#b0b0b0] rounded-full text-sm font-medium mb-6 border border-white/10">2기 모집 마감 &middot; 3기 준비 중</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-[#fafafa] mb-6 leading-tight">
+          가장 혼란스러운 시기에,<br><span class="gradient-text">가장 선명한 길</span>을 찾고 싶다면
+        </h2>
+        <p class="text-[#b0b0b0] text-lg mb-4 leading-relaxed">
+          수능을 마친 수험생, 주도적인 삶을 갈망하는 20대 초반 누구나.
+        </p>
+        <p class="text-accent font-medium mb-10">3기는 2026년 6월 말~7월 시작 예정입니다</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#" class="px-8 py-4 bg-accent text-dark rounded-full text-lg font-bold cta-primary accent-glow">3기 소식 받기</a>
+          <a href="#" class="px-8 py-4 border border-white/15 text-[#b0b0b0] rounded-full text-lg font-medium hover:border-white/30 hover:text-white transition-colors">인스타그램 보기</a>
+          <a href="#" class="px-8 py-4 border border-white/15 text-[#b0b0b0] rounded-full text-lg font-medium hover:border-white/30 hover:text-white transition-colors">문의하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-base border-t border-black/5">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-text-muted">&copy; 2026 피니토 주식회사. All rights reserved.</div>
+      <div class="flex items-center gap-6 text-sm text-text-muted">
+        <a href="#" class="hover:text-text-primary transition-colors">개인정보처리방침</a>
+        <a href="#" class="hover:text-text-primary transition-colors">이용약관</a>
+        <a href="#" class="hover:text-text-primary transition-colors">문의하기</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // D-day calculation
+    const startDate = new Date('2026-03-06T00:00:00+09:00');
+    const today = new Date(); today.setHours(0,0,0,0);
+    const diff = Math.ceil((startDate - today) / 86400000);
+    document.getElementById('dday-badge').textContent = diff > 0 ? `2기 시작까지 D-${diff}` : diff === 0 ? '2기 시작 D-DAY' : '2기 진행 중';
+
+    // Mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    // Fade-in observer with stagger support
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Counter animation
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          let current = 0;
+          const duration = 1200;
+          const step = Math.max(1, Math.floor(target / (duration / 30)));
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            el.textContent = current + suffix;
+          }, 30);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter-value').forEach(el => counterObserver.observe(el));
+
+    // Timeline scroll progress
+    const timelineContainer = document.getElementById('timeline-container');
+    const timelineProgress = document.getElementById('timeline-progress');
+    const timelineDots = document.querySelectorAll('.timeline-dot');
+
+    if (timelineContainer && timelineProgress) {
+      const timelineObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            window.addEventListener('scroll', updateTimeline);
+            updateTimeline();
+          }
+        });
+      }, { threshold: 0 });
+      timelineObserver.observe(timelineContainer);
+
+      function updateTimeline() {
+        const rect = timelineContainer.getBoundingClientRect();
+        const containerTop = rect.top;
+        const containerHeight = rect.height;
+        const windowHeight = window.innerHeight;
+
+        // Calculate how far through the timeline we've scrolled
+        const scrollProgress = Math.min(1, Math.max(0, (windowHeight * 0.6 - containerTop) / containerHeight));
+        const progressHeight = scrollProgress * containerHeight;
+        timelineProgress.style.height = progressHeight + 'px';
+
+        // Activate dots as progress reaches them
+        timelineDots.forEach((dot, i) => {
+          const dotTop = dot.offsetTop;
+          if (progressHeight >= dotTop) {
+            dot.classList.add('active');
+          }
+        });
+      }
+    }
+
+    // Venn diagram interaction
+    const vennData = {
+      challenge: {
+        tag: '도전', tagClass: 'venn-tag-challenge',
+        items: [
+          { avatar: '강', name: '강○○', team: 'Flow Crew', text: '"혼자였다면 겨울에 산 정상까지 오르는 걸 엄두도 내지 못했을 텐데, <span class=\'highlight-line\'>여럿이서 으쌰으쌰 하는 분위기 덕분에 등산을 재밌게 할 수 있었어요!</span>"' },
+          { avatar: '김', name: '김○○', team: '고스차일드', text: '"인생에서 처음으로 해보는 밴드였고, 첫 리더 자리였습니다. <span class=\'highlight-line\'>책임감 하나만으로 활동을 마무리할 수 있었습니다.</span>"' },
+          { avatar: '최', name: '최○○', team: '말랑말랑', text: '"다짐만 하던 제가 <span class=\'highlight-line\'>어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다.</span>"' },
+          { avatar: '박', name: '박○○', team: '에셋메이커', text: '"영상 시청과 모의 투자를 통해 <span class=\'highlight-line\'>드디어 실전 투자에 한 발자국 더 가까워진 느낌이 듭니다.</span>"' }
+        ]
+      },
+      growth: {
+        tag: '성장', tagClass: 'venn-tag-growth',
+        items: [
+          { avatar: '강', name: '강○○', team: 'Flow Crew', text: '"인바디 비교 시 상체, 복부 근육이 표준 이하에서 표준으로 올랐고, <span class=\'highlight-line\'>산 정상에서의 개방감과 성취감은 정말 남달랐습니다.</span>"' },
+          { avatar: '김', name: '김○○', team: '노이즈', text: '"리더의 역할을 깊이 있게 경험할 수 있었습니다. <span class=\'highlight-line\'>진정한 리딩은 소통과 배려에서 시작됨을 깨달았습니다.</span>"' },
+          { avatar: '김', name: '김○○', team: '에셋메이커', text: '"활동을 통해 <span class=\'highlight-line\'>매일 아침 경제 뉴스를 스크랩하는 습관을 들일 수 있었습니다.</span>"' },
+          { avatar: '최', name: '최○○', team: '루멘', text: '"막연한 꿈만 가지고 있었는데, <span class=\'highlight-line\'>무에서 유(팔로워 100명)를 만들어내며 성취감과 자신감을 얻었습니다.</span>"' }
+        ]
+      },
+      connection: {
+        tag: '연결', tagClass: 'venn-tag-connection',
+        items: [
+          { avatar: '양', name: '양○○', team: 'Flow Crew', text: '"서로 응원하며 정상까지 오를 수 있었습니다. <span class=\'highlight-line\'>좋은 인연을 만들고 다양한 경험을 쌓을 수 있었던 소중한 시간이었어요.</span>"' },
+          { avatar: '김', name: '김○○', team: '노이즈', text: '"정말 재미있게 활동했습니다. <span class=\'highlight-line\'>팀원들과의 결속력이 단단했기 때문에 지금까지 달려올 수 있었다고 생각합니다.</span>"' },
+          { avatar: '전', name: '전○○', team: '수다디', text: '"정말 좋은 언니, 오빠를 만났고 <span class=\'highlight-line\'>팀 분위기가 펠로우십에서도 정말 최상위권이라고 생각합니다.</span>"' },
+          { avatar: '김', name: '김○○', team: '루멘', text: '"각자의 제작 능력을 강화하고, <span class=\'highlight-line\'>함께 성장을 이루어낸 모습이 눈에 보이면서 너무나도 기특했습니다.</span>"' }
+        ]
+      },
+      center: {
+        tag: '도전 · 성장 · 연결', tagClass: 'venn-tag-center',
+        items: [
+          { avatar: '김', name: '김○○', team: 'Flow Crew', text: '"<span class=\'highlight-line\'>체력뿐 아니라 마음까지 단단해진 시간이었습니다.</span> 다양한 러닝 코스를 뛰어보고 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정이 오래 기억에 남을 것 같아요."' }
+        ]
+      }
+    };
+    let activeVenn = null;
+    let vennIdx = 0;
+
+    function renderVennPopup(type, idx) {
+      const data = vennData[type];
+      const item = data.items[idx];
+      const popup = document.getElementById('venn-popup');
+      document.getElementById('venn-popup-avatar').textContent = item.avatar;
+      document.getElementById('venn-popup-name').textContent = item.name;
+      document.getElementById('venn-popup-team').textContent = item.team;
+      document.getElementById('venn-popup-text').innerHTML = item.text;
+      const tag = document.getElementById('venn-popup-tag');
+      tag.textContent = data.tag;
+      tag.className = 'venn-tag ' + data.tagClass;
+      // Dots
+      const dots = document.getElementById('venn-popup-dots');
+      dots.innerHTML = data.items.map((_, i) =>
+        '<div class="venn-popup-dot' + (i === idx ? ' active' : '') + '"></div>'
+      ).join('');
+      popup.classList.add('active');
+      popup.style.animation = 'none';
+      popup.offsetHeight;
+      popup.style.animation = '';
+    }
+
+    function toggleVenn(type) {
+      const popup = document.getElementById('venn-popup');
+      const hint = document.getElementById('venn-hint');
+      if (hint) hint.style.display = 'none';
+      if (activeVenn === type) {
+        activeVenn = null;
+        document.querySelectorAll('[data-venn]').forEach(el => el.classList.remove('active'));
+        document.querySelector('.venn-center').classList.remove('active');
+        popup.classList.remove('active');
+        return;
+      }
+      activeVenn = type;
+      vennIdx = 0;
+      document.querySelectorAll('[data-venn]').forEach(el => el.classList.remove('active'));
+      document.querySelector('.venn-center').classList.remove('active');
+      if (type === 'center') {
+        document.querySelector('.venn-center').classList.add('active');
+      } else {
+        document.querySelectorAll('[data-venn="' + type + '"]').forEach(el => el.classList.add('active'));
+      }
+      renderVennPopup(type, 0);
+    }
+
+    function vennPopupNext() {
+      if (!activeVenn) return;
+      const items = vennData[activeVenn].items;
+      vennIdx = (vennIdx + 1) % items.length;
+      renderVennPopup(activeVenn, vennIdx);
+    }
+    function vennPopupPrev() {
+      if (!activeVenn) return;
+      const items = vennData[activeVenn].items;
+      vennIdx = (vennIdx - 1 + items.length) % items.length;
+      renderVennPopup(activeVenn, vennIdx);
+    }
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = answer.classList.contains('open');
+
+      // Close all other FAQs
+      document.querySelectorAll('.faq-answer.open').forEach(a => {
+        a.classList.remove('open');
+        a.previousElementSibling.querySelector('.faq-icon').classList.remove('open');
+      });
+
+      // Toggle current
+      if (!isOpen) {
+        answer.classList.add('open');
+        icon.classList.add('open');
+      }
+    }
+
+    // Side navigation
+    const sideNav = document.getElementById('side-nav');
+    const sideNavDots = sideNav.querySelectorAll('.side-nav-dot');
+    const sectionIds = Array.from(sideNavDots).map(d => d.dataset.section);
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    // Click to scroll
+    sideNavDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const target = document.getElementById(dot.dataset.section);
+        if (target) {
+          const rect = target.getBoundingClientRect();
+          const sectionH = rect.height;
+          const winH = window.innerHeight;
+          if (sectionH <= winH) {
+            // Short section → center it in viewport
+            const sectionCenter = rect.top + window.scrollY + sectionH / 2;
+            const y = sectionCenter - winH / 2;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+          } else {
+            // Tall section → scroll to top with offset
+            const y = rect.top + window.scrollY - 10;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Show/hide side nav + highlight active section + detect light/dark
+    function updateSideNav() {
+      const scrollY = window.scrollY;
+      const winH = window.innerHeight;
+
+      // Show after scrolling past hero
+      if (scrollY > winH * 0.5) {
+        sideNav.classList.add('visible');
+      } else {
+        sideNav.classList.remove('visible');
+      }
+
+      // Find active section
+      let activeId = sectionIds[0];
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= winH * 0.4) {
+          activeId = section.id;
+        }
+      }
+
+      sideNavDots.forEach(dot => {
+        dot.classList.toggle('active', dot.dataset.section === activeId);
+      });
+
+      // Detect if side nav is over a light or dark section
+      const navCenterY = winH / 2;
+      let onLight = false;
+      document.querySelectorAll('section, footer').forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= navCenterY && rect.bottom >= navCenterY) {
+          onLight = !sec.classList.contains('dark-section');
+        }
+      });
+      sideNav.classList.toggle('on-light', onLight);
+    }
+
+    window.addEventListener('scroll', updateSideNav, { passive: true });
+    updateSideNav();
+  </script>
+</body>
+</html>
