@@ -1,23 +1,29 @@
-# Winning Fellowship 랜딩페이지
+# Fellowship Landing - CLAUDE.md
 
-## 규칙
-- 항상 한국어로 대화할 것
+위닝 펠로우십 랜딩 페이지 프로젝트.
 
-## 프로젝트 개요
-- Winning Fellowship 모집용 랜딩페이지
-- 단일 HTML 파일 구조 (index.html)
-- Tailwind CSS CDN + Pretendard 폰트 사용
-- GitHub Pages 배포: https://finhyun.github.io/fellowship-landing/
+## 주요 파일
 
-## 파일 구조
-- `index.html` - 메인 랜딩페이지 (네비, 히어로, 벤다이어그램, 후기 마키, FAQ, CTA)
-- `privacy.html` - 개인정보처리방침
-- `terms.html` - 이용약관
-- `lime-light.html` - 구버전 (미사용)
+- **메인**: `lime-light.html` (확정 버전)
+- 구버전: `index.html`(구 퍼플), `gold.html`, `neon.html`, `lime.html` — 참고용
 
-## 작업 히스토리
-- 펠로우십 랜딩페이지 초기 구축 (벤다이어그램 + 마키 후기 + 섹션 배치)
-- 배포용 index.html 추가 및 gitignore 설정
-- 개인정보처리방침/이용약관 페이지 추가
-- FAQ 스크롤 보정 및 네비 스타일 개선
-- 상단 네비바 크기 확대
+## 디자인 시스템
+
+- **액센트 컬러**: 노란색(#fbbf24) 단일 사용 — 파란색은 브랜드 색이지만 웹에서는 제외
+- **레이아웃**: 다크/라이트 교차 섹션
+- **밝은 섹션**: `bg-surface` 통일
+- **히어로**: 다크 배경 + 수치 카드(`border-accent/20 bg-accent/5`)
+- **섹션 순서**: Hero(DARK) → About(LIGHT) → Career(DARK) → Global(LIGHT) → Life(DARK) → Your Own(LIGHT) → Fellow's Role(LIGHT) → CTA(DARK)
+
+## 디자인 선호도
+
+- 단색 액센트 통일 (색이 섞이면 이질감)
+- 밝은 배경은 `bg-surface`로 통일
+- 히어로는 다크 배경 (경계감 있는 첫인상)
+
+## TODO
+
+- [ ] 3기 지원하기 버튼에 실제 지원 링크 연결
+- [ ] 인스타그램 보기 버튼에 실제 인스타 링크 연결
+- [ ] 문의하기 버튼 링크 연결
+- [ ] 최종 확정 후 `lime-light.html` → `index.html`로 복사
