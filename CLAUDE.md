@@ -29,6 +29,12 @@
 - 밝은 배경은 `bg-surface`로 통일
 - 히어로는 다크 배경 (경계감 있는 첫인상)
 
+## Google Form 주의사항
+
+- Google Forms API(addFormQuestion)는 질문을 **맨 위(position 0)**에 삽입함
+- 따라서 원하는 순서대로 나오게 하려면 **역순으로 추가**해야 함
+- 예: Q1→Q2→Q3 순서를 원하면, Q3→Q2→Q1 순서로 addFormQuestion 호출
+
 ## TODO
 
 - [ ] 3기 지원하기 버튼에 실제 지원 링크 연결
