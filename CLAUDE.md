@@ -2,10 +2,18 @@
 
 위닝 펠로우십 랜딩 페이지 프로젝트.
 
+## 배포
+
+- **호스팅**: GitHub Pages
+- **URL**: https://finito-corp.github.io/fellowship-landing/
+- **배포 방식**: `main` 브랜치 push → 자동 배포 (1~2분 소요)
+- **서빙 파일**: `index.html` (루트)
+
 ## 주요 파일
 
-- **메인**: `lime-light.html` (확정 버전)
-- 구버전: `index.html`(구 퍼플), `gold.html`, `neon.html`, `lime.html` — 참고용
+- **메인**: `index.html` (배포 대상) + `lime-light.html` (동일 내용 유지)
+- 구버전: `gold.html`, `neon.html`, `lime.html` — 참고용
+- **편집 후**: `index.html`과 `lime-light.html` 양쪽 모두 동일하게 유지할 것
 
 ## 디자인 시스템
 
