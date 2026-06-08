@@ -95,6 +95,8 @@ b,strong{color:var(--ivory);font-weight:500;}
 .era h3{font-size:clamp(17px,2.1vw,21px);color:var(--ivory);font-weight:700;margin:8px 0 12px;}
 .era p{color:var(--ivory-dim);font-size:clamp(14px,1.6vw,15.5px);font-weight:300;line-height:1.78;}
 .era .voice{margin-top:14px;padding-left:16px;border-left:1px solid var(--gold-dim);font-style:italic;color:var(--gold-br);font-size:clamp(13px,1.5vw,14.5px);}
+.proof-voices{margin-top:22px;}
+.proof-voices .voice{margin:16px 0;padding-left:16px;border-left:1px solid var(--gold-dim);font-style:italic;color:var(--gold-br);font-size:clamp(13px,1.6vw,15px);line-height:1.8;}
 .strip{display:flex;gap:10px;margin-top:16px;}
 .strip .gframe{flex:1;position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--gold-dim);aspect-ratio:4/5;background:#0d0b08;}
 .strip .gframe img{width:100%;height:100%;object-fit:cover;filter:brightness(.76) saturate(.94) blur(.4px);transition:filter .6s ease;}
@@ -155,6 +157,30 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;}
 .reveal.in{opacity:1;transform:none;}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.gate{display:none;}.scrollcue:after{animation:none;}}
+/* RSVP */
+.rsvp-wrap{text-align:center;margin-top:34px;}
+.rsvp-btn{display:inline-block;font-family:inherit;font-size:15px;letter-spacing:.04em;color:var(--bg);background:linear-gradient(180deg,var(--gold-br),var(--gold));border:0;border-radius:4px;padding:15px 40px;cursor:pointer;font-weight:700;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 6px 22px rgba(201,168,106,.18);}
+.rsvp-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,106,.3);}
+.rsvp-hint{margin-top:14px;font-size:12.5px;color:var(--muted);font-weight:300;letter-spacing:.02em;}
+.modal-ov{position:fixed;inset:0;z-index:90;background:rgba(8,7,4,.82);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:24px;}
+.modal-ov.open{display:flex;}
+.modal{width:100%;max-width:420px;background:linear-gradient(180deg,var(--card-a),var(--card-b));border:1px solid var(--gold-dim);border-radius:8px;padding:34px clamp(22px,5vw,34px);position:relative;}
+.modal h3{font-family:'Nanum Myeongjo',serif;font-size:22px;color:var(--gold-br);text-align:center;margin-bottom:8px;}
+.modal .mdesc{font-size:13px;color:var(--ivory-dim);text-align:center;margin-bottom:22px;font-weight:300;line-height:1.7;}
+.modal label{display:block;font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin:14px 0 7px;}
+.modal input,.modal textarea{width:100%;background:rgba(0,0,0,.28);border:1px solid var(--gold-dim);border-radius:4px;padding:12px 13px;color:var(--ivory);font-family:inherit;font-size:14.5px;box-sizing:border-box;}
+.modal textarea{resize:vertical;min-height:62px;}
+.modal input:focus,.modal textarea:focus{outline:none;border-color:var(--gold);}
+.modal .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
+.modal .msubmit{width:100%;margin-top:22px;font-family:inherit;font-size:15px;color:var(--bg);background:linear-gradient(180deg,var(--gold-br),var(--gold));border:0;border-radius:4px;padding:14px;cursor:pointer;font-weight:700;}
+.modal .msubmit:disabled{opacity:.55;cursor:default;}
+.modal .mclose{position:absolute;top:12px;right:16px;background:none;border:0;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;}
+.modal .mstatus{margin-top:14px;text-align:center;font-size:13px;min-height:18px;}
+.modal .mstatus.ok{color:var(--gold-br);}
+.modal .mstatus.err{color:#e0a07a;}
+.modal .done{text-align:center;padding:14px 0 4px;}
+.modal .done .big{font-family:'Nanum Myeongjo',serif;font-size:21px;color:var(--gold-br);margin-bottom:10px;}
+.modal .done p{font-size:13.5px;color:var(--ivory-dim);line-height:1.8;}
 </style>
 </head>
 <body>
@@ -191,6 +217,21 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
     </div>
     <div class="why">
       <p>저는 이 일을 한 번의 행사가 아니라, <b>오래 이어갈 일</b>이라고 생각합니다. 그 다음 장을 함께 열 분들을 모시려 합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 왜 지금, 왜 우리가 (문제의식) -->
+<section>
+  <div class="wrap reveal">
+    <div class="label">왜 지금, 왜 우리가</div>
+    <div class="hairline"></div>
+    <div class="body">
+      <p>수능을 치르고 다음 단계로 나아가는 세대에게, 정작 그 길을 함께 걸어 주는 곳은 많지 않습니다. 취업의 문은 점점 좁아지고, AI가 일자리를 빠르게 바꾸면서 인턴 한 자리조차 쉽지 않은 것이 지금의 현실입니다.</p>
+      <p>그러다 보니 많은 학생이 다시 수능으로 돌아갑니다. 그렇게 입시를 한 번 더 끝내고 나도, 방향을 찾지 못한 채 그 시기를 홀로 보내는 경우가 적지 않습니다. 그 공백을 함께 책임지는 곳은, 아직 마땅치 않습니다.</p>
+    </div>
+    <div class="why">
+      <p>위닝 펠로우십은 바로 그 시기의 학생들과 함께하려고 시작했습니다. 혼자였다면 그냥 흘려보냈을 시간을, <b>곁에서 함께 채우는 일</b>입니다.</p>
     </div>
   </div>
 </section>
@@ -258,6 +299,26 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
   </div>
 </section>
 
+<!-- 1년이 증명한 것 (증명) -->
+<section>
+  <div class="wrap reveal">
+    <div class="label">1년이 증명한 것</div>
+    <div class="hairline"></div>
+    <div class="body">
+      <p>1기는 <b>52명으로 시작해 49명이 끝까지 함께</b>했습니다. 참가비도, 강제도 없는 자율 프로그램에서 나온 완주율 94%입니다. 수능 직후의 공백기를, 펠로우들이 서로를 붙잡아 가며 끝까지 채운 결과였습니다.</p>
+      <p>무엇보다, 펠로우들이 직접 남긴 말이 이 일을 계속할 이유가 되었습니다.</p>
+    </div>
+    <div class="proof-voices">
+      <p class="voice">“인생에서 처음으로 해보는 밴드였고, 성인이 된 후 처음으로 해보는 리더 자리였습니다. 맡은 역할에 최선을 다하자는 책임감 하나만으로 활동을 마무리할 수 있었습니다.” — 김** · 1기</p>
+      <p class="voice">“평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다.” — 최** · 1기</p>
+      <p class="voice">“경제 흐름에 전혀 무지했던 제가 매일 뉴스를 접하고 시장을 파악하는 훈련을 통해 투자에 대한 막연한 심리적 장벽을 허무는 결정적인 계기가 되었습니다.” — 전** · 1기</p>
+    </div>
+    <div class="why">
+      <p>펠로우십이 없었다면 그냥 흘려보냈을 시간 — 이 말을 듣고, 우리는 이 길을 계속 가기로 했습니다.</p>
+    </div>
+  </div>
+</section>
+
 <!-- 왜 이 자리에 (정점) -->
 <section class="peak">
   <div class="wrap reveal">
@@ -285,6 +346,10 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
       </div>
       <a class="maplink" href="https://maps.google.com/?q=%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EC%97%AD%EC%82%BC%EB%8F%99%20629-1" target="_blank" rel="noopener">지도에서 보기 →</a>
     </div>
+    <div class="rsvp-wrap">
+      <button type="button" class="rsvp-btn" onclick="openRsvp()">참가 신청하기</button>
+      <p class="rsvp-hint">참석 여부를 알려 주시면, 그날 자리를 준비하는 데 큰 도움이 됩니다.</p>
+    </div>
   </div>
 </section>
 
@@ -309,6 +374,53 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
   },{threshold:.14});
   els.forEach(function(e){io.observe(e);});
 })();
+
+/* RSVP 참가 신청 */
+var RSVP_ENDPOINT = "https://fellowship-rsvp.vercel.app/api/rsvp";
+function openRsvp(){document.getElementById('rsvpOv').classList.add('open');}
+function closeRsvp(){document.getElementById('rsvpOv').classList.remove('open');}
+(function(){var ov=document.getElementById('rsvpOv');if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeRsvp();});})();
+function submitRsvp(){
+  var name=document.getElementById('rsvpName').value.trim();
+  var contact=document.getElementById('rsvpContact').value.trim();
+  var note=document.getElementById('rsvpNote').value.trim();
+  var company=document.getElementById('rsvpCompany').value.trim();
+  var st=document.getElementById('rsvpStatus');
+  var btn=document.getElementById('rsvpSubmit');
+  if(!name||!contact){st.className='mstatus err';st.textContent='성함과 연락처를 입력해 주세요.';return;}
+  btn.disabled=true;st.className='mstatus';st.textContent='보내는 중…';
+  fetch(RSVP_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,note:note,company:company})})
+    .then(function(r){return r.json().catch(function(){return {ok:r.ok};});})
+    .then(function(d){
+      if(d&&d.ok){document.getElementById('rsvpForm').style.display='none';document.getElementById('rsvpDone').style.display='block';}
+      else{st.className='mstatus err';st.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';btn.disabled=false;}
+    })
+    .catch(function(){st.className='mstatus err';st.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';btn.disabled=false;});
+}
 </script>
+
+<!-- RSVP 모달 -->
+<div class="modal-ov" id="rsvpOv">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="참가 신청">
+    <button type="button" class="mclose" onclick="closeRsvp()" aria-label="닫기">&times;</button>
+    <div id="rsvpForm">
+      <h3>참가 신청</h3>
+      <p class="mdesc">헤리티지 나이트에 함께해 주세요.<br>아래를 남겨 주시면 자리를 준비하겠습니다.</p>
+      <label for="rsvpName">성함</label>
+      <input id="rsvpName" type="text" maxlength="40" autocomplete="name" placeholder="성함을 입력해 주세요">
+      <label for="rsvpContact">연락처</label>
+      <input id="rsvpContact" type="text" maxlength="80" placeholder="휴대폰 번호 또는 이메일">
+      <label for="rsvpNote">한 말씀 (선택)</label>
+      <textarea id="rsvpNote" maxlength="200" placeholder="전하실 말씀이 있다면 적어 주세요"></textarea>
+      <input class="hp" id="rsvpCompany" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="button" class="msubmit" id="rsvpSubmit" onclick="submitRsvp()">신청 보내기</button>
+      <div class="mstatus" id="rsvpStatus"></div>
+    </div>
+    <div id="rsvpDone" class="done" style="display:none;">
+      <div class="big">신청이 접수되었습니다</div>
+      <p>함께해 주셔서 감사합니다.<br>그날 저녁, 자리에서 직접 뵙겠습니다.</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
