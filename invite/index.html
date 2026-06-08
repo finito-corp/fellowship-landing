@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winning Fellowship · 초대</title>
+<meta name="description" content="다음 세대의 자립을, 함께 세우는 길에. 2026. 6. 19 (금) 저녁 · 강남 역삼">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Winning Fellowship · 초대">
+<meta property="og:description" content="다음 세대의 자립을, 함께 세우는 길에. 2026. 6. 19 (금) 저녁 · 강남 역삼">
+<meta property="og:image" content="https://finito-corp.github.io/fellowship-landing/invite/photos/g1_graduation.jpg">
+<meta property="og:url" content="https://finito-corp.github.io/fellowship-landing/invite/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Winning Fellowship · 초대">
+<meta name="twitter:description" content="다음 세대의 자립을, 함께 세우는 길에. 2026. 6. 19 (금) 저녁 · 강남 역삼">
+<meta name="twitter:image" content="https://finito-corp.github.io/fellowship-landing/invite/photos/g1_graduation.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#100e0a; --card-a:#221d15; --card-b:#15120d;
+  --gold:#c9a86a; --gold-br:#e7cf99; --gold-dim:rgba(201,168,106,.40);
+  --ivory:#ece2cd; --ivory-dim:#bcb199; --muted:#8c8068;
+  --maxw:720px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  color:var(--ivory-dim);
+  background:radial-gradient(135% 80% at 50% -10%, #271f16 0%, var(--card-a) 32%, var(--bg) 76%), var(--bg);
+  line-height:1.85; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.serif{font-family:'Nanum Myeongjo','AppleMyungjo',serif;}
+.eng{font-family:'Cormorant Garamond',serif;}
+
+/* 문 열림 entrance */
+.gate{position:fixed;inset:0;z-index:200;pointer-events:none;}
+.gate .half{position:absolute;top:0;bottom:0;width:50.5%;background:linear-gradient(135deg,#1c1810,#100e0a);}
+.gate .l{left:0;border-right:1px solid var(--gold-dim);animation:openL 1.7s cubic-bezier(.76,0,.24,1) .55s forwards;}
+.gate .r{right:0;border-left:1px solid var(--gold-dim);animation:openR 1.7s cubic-bezier(.76,0,.24,1) .55s forwards;}
+@keyframes openL{to{transform:translateX(-101%);}}
+@keyframes openR{to{transform:translateX(101%);}}
+.gate .seal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;text-align:center;animation:sealOut .85s ease .15s forwards;}
+.gate .seal .ring{width:96px;height:96px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 0 0 6px rgba(201,168,106,.08);}
+.gate .seal .ring span{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold-br);}
+.gate .seal .wm{font-family:'Nanum Myeongjo',serif;color:var(--gold);font-size:15px;letter-spacing:.3em;}
+.gate .seal .iv{margin-top:8px;font-size:10px;letter-spacing:.5em;color:var(--muted);text-transform:uppercase;}
+@keyframes sealOut{to{opacity:0;transform:translate(-50%,-50%) scale(.82);}}
+
+section{position:relative;padding:clamp(72px,10vw,116px) 26px;}
+.wrap{max-width:var(--maxw);margin:0 auto;position:relative;z-index:2;}
+.hairline{width:42px;height:1px;background:var(--gold);opacity:.75;margin:24px 0;}
+.label{font-size:11px;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;font-weight:500;}
+.body p{color:var(--ivory-dim);font-size:clamp(15px,1.7vw,16.5px);font-weight:300;margin-bottom:18px;}
+.body p:last-child{margin-bottom:0;}
+.lead{color:var(--gold);font-weight:400;}
+b,strong{color:var(--ivory);font-weight:500;}
+
+.bgphoto{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.bgphoto img{width:100%;height:100%;object-fit:cover;filter:blur(8px) brightness(.3) saturate(.85);transform:scale(1.12);}
+.bgphoto:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg),rgba(16,14,10,.55) 45%,var(--bg));}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 26px;}
+.hero .wrap{display:flex;flex-direction:column;align-items:center;}
+.hero .wordmark{font-size:13px;letter-spacing:.34em;color:var(--gold);font-weight:700;text-transform:uppercase;}
+.hero .accent{margin-top:28px;font-size:clamp(13px,2.3vw,17px);letter-spacing:.46em;color:var(--gold-br);text-transform:uppercase;}
+.hero .tagline{margin-top:14px;font-size:clamp(14px,1.8vw,16px);color:var(--gold);letter-spacing:.18em;}
+.hero h1{margin-top:24px;font-size:clamp(28px,6vw,46px);line-height:1.45;color:var(--ivory);font-weight:700;letter-spacing:-.5px;}
+.hero .when{margin-top:36px;font-size:13px;letter-spacing:.28em;color:var(--gold-dim);}
+.scrollcue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);width:1px;height:46px;background:linear-gradient(var(--gold-dim),transparent);z-index:3;}
+.scrollcue:after{content:"";position:absolute;top:0;left:50%;width:5px;height:5px;border-right:1px solid var(--gold-dim);border-bottom:1px solid var(--gold-dim);transform:translateX(-50%) rotate(45deg);animation:cue 2.4s ease-in-out infinite;}
+@keyframes cue{0%,100%{opacity:.2;}50%{opacity:.9;transform:translate(-50%,8px) rotate(45deg);}}
+
+.to{font-size:clamp(18px,2.4vw,22px);color:var(--gold-br);font-weight:600;margin-bottom:28px;}
+.to .u{border-bottom:1px solid var(--gold-dim);padding-bottom:5px;}
+
+/* 왜 이걸 하는지 — 고연승 1인칭 */
+.why{margin-top:30px;padding:24px 26px;border-left:2px solid var(--gold);background:rgba(201,168,106,.05);border-radius:0 8px 8px 0;}
+.why p{color:var(--ivory);font-size:clamp(14.5px,1.6vw,16px);font-weight:300;line-height:1.85;margin-bottom:12px;}
+.why p:last-child{margin-bottom:0;}
+.why .sig{margin-top:14px;font-size:12.5px;color:var(--gold);letter-spacing:.04em;}
+
+/* 기수별 내러티브 */
+.era{margin-top:46px;}
+.era:first-of-type{margin-top:30px;}
+.era .etag{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.era .etag .n{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.6vw,26px);color:var(--gold-br);letter-spacing:.04em;}
+.era .etag .yr{font-size:11px;letter-spacing:.18em;color:var(--muted);}
+.era h3{font-size:clamp(17px,2.1vw,21px);color:var(--ivory);font-weight:700;margin:8px 0 12px;}
+.era p{color:var(--ivory-dim);font-size:clamp(14px,1.6vw,15.5px);font-weight:300;line-height:1.78;}
+.era .voice{margin-top:14px;padding-left:16px;border-left:1px solid var(--gold-dim);font-style:italic;color:var(--gold-br);font-size:clamp(13px,1.5vw,14.5px);}
+.strip{display:flex;gap:10px;margin-top:16px;}
+.strip .gframe{flex:1;position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--gold-dim);aspect-ratio:4/5;background:#0d0b08;}
+.strip .gframe img{width:100%;height:100%;object-fit:cover;filter:brightness(.76) saturate(.94) blur(.4px);transition:filter .6s ease;}
+.strip .gframe:hover img{filter:brightness(.9) saturate(1);}
+.strip .gframe.igc img{filter:brightness(.97) saturate(1) blur(0);}
+.strip .gframe.igc:hover img{filter:brightness(1.02) saturate(1.03);}
+.carou{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:18px;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--gold-dim) transparent;}
+.carou::-webkit-scrollbar{height:6px;}
+.carou::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+.carou::-webkit-scrollbar-track{background:transparent;}
+.carou .it{flex:0 0 auto;width:min(74%,230px);scroll-snap-align:start;position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--gold-dim);background:#0d0b08;}
+.carou .it img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:filter .5s ease;}
+.carou .it.ph-candid img{filter:brightness(.84) saturate(.95);}
+.carou .it.ph-ig img{filter:brightness(.99) saturate(1);}
+.carou .it .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;font-size:10.5px;letter-spacing:.02em;color:var(--ivory);background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.72));}
+.swipe{margin-top:9px;font-size:10.5px;letter-spacing:.16em;color:var(--muted);text-align:center;}
+.strip .gframe .cap{position:absolute;left:0;right:0;bottom:0;padding:20px 10px 9px;font-size:10px;letter-spacing:.02em;color:var(--ivory);background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.7));}
+.era.future .box{margin-top:14px;border:1px solid var(--gold-dim);border-radius:10px;padding:22px 24px;background:linear-gradient(180deg,rgba(201,168,106,.06),transparent);}
+.era.future .box p{color:var(--ivory);}
+@media(max-width:560px){.strip{flex-wrap:wrap;}.strip .gframe{flex:1 1 45%;}}
+
+/* 정점 */
+.peak{border-top:1px solid var(--gold-dim);border-bottom:1px solid var(--gold-dim);background:rgba(201,168,106,.045);}
+.peak .beat{color:var(--ivory);font-size:clamp(16px,1.9vw,18px);font-weight:400;margin-bottom:22px;line-height:1.9;}
+.peak .beat:last-child{margin-bottom:0;color:var(--gold-br);}
+
+/* 초대 + 약도 */
+.scene{color:var(--ivory-dim);font-size:clamp(15px,1.7vw,16.5px);font-weight:300;margin-bottom:34px;}
+.card{border:1px solid var(--gold-dim);padding:32px clamp(22px,5vw,40px);text-align:center;background:linear-gradient(180deg,rgba(201,168,106,.06),transparent);border-radius:4px;}
+.card .row{margin:13px 0;}
+.card .k{display:block;font-size:10.5px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
+.card .v{font-size:clamp(15px,1.9vw,17px);color:var(--ivory);}
+.card .v small{display:block;font-size:12.5px;color:var(--ivory-dim);margin-top:5px;font-weight:300;letter-spacing:0;}
+.card .divs{width:30px;height:1px;background:var(--gold-dim);margin:16px auto;}
+.mapbox{margin-top:14px;border:1px dashed var(--gold-dim);border-radius:10px;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);text-align:center;padding:24px;background:rgba(201,168,106,.03);}
+.mapbox .mt{font-size:12px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;}
+.mapbox .md{font-size:13px;margin-top:8px;font-weight:300;}
+.mapwrap{margin-top:16px;border:1px solid var(--gold-dim);border-radius:10px;overflow:hidden;line-height:0;}
+.mapwrap iframe{width:100%;height:280px;border:0;filter:grayscale(.25) contrast(.95) brightness(.95);}
+.maplink{display:inline-block;margin-top:13px;font-size:12.5px;color:var(--gold);letter-spacing:.04em;border-bottom:1px solid var(--gold-dim);padding-bottom:2px;text-decoration:none;}
+.gframe.ig{display:flex;align-items:center;justify-content:center;border-style:dashed;background:rgba(201,168,106,.04);}
+.gframe.ig .ph{text-align:center;color:var(--muted);padding:10px;}
+.gframe.ig .ph b{display:block;color:var(--gold);font-size:11px;letter-spacing:.08em;margin-bottom:5px;}
+.gframe.ig .ph small{font-size:9.5px;line-height:1.4;display:block;}
+
+/* 맺음 */
+.close{text-align:center;}
+.close .msg{color:var(--ivory);font-size:clamp(15px,1.8vw,17px);font-weight:300;line-height:1.95;max-width:28em;margin:0 auto;}
+.sign{margin-top:48px;text-align:center;}
+.sign .date{font-size:12px;letter-spacing:.2em;color:var(--muted);}
+.sign .org{font-size:13px;color:var(--ivory-dim);margin-top:12px;letter-spacing:.1em;}
+.sign .from{font-size:clamp(26px,4vw,34px);color:var(--ivory);margin-top:12px;font-weight:700;}
+.sign .from .d{font-size:15px;color:var(--muted);font-weight:400;margin-left:9px;}
+
+footer{padding:46px 26px 62px;text-align:center;}
+footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transform:uppercase;}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.gate{display:none;}.scrollcue:after{animation:none;}}
+</style>
+</head>
+<body>
+
+<div class="gate" aria-hidden="true">
+  <div class="half l"></div>
+  <div class="half r"></div>
+  <div class="seal">
+    <div class="ring"><span class="eng">WF</span></div>
+    <div class="wm">위닝 펠로우십</div>
+    <div class="iv">Invitation</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="wordmark">Winning Fellowship</div>
+    <div class="tagline serif">다음 세대에게 잇다</div>
+    <h1 class="serif">다음 세대의 자립을,<br>함께 세우는 길에</h1>
+    <div class="when">2026. 6. 19 FRI &middot; 강남 역삼</div>
+  </div>
+  <div class="scrollcue"></div>
+</header>
+
+<!-- 여는 글 + 왜 이걸 하는지 -->
+<section>
+  <div class="wrap reveal">
+    <div class="to serif"><span class="u">초대에 앞서</span></div>
+    <div class="body">
+      <p>위닝 펠로우십은 수능 그 다음의 시간을, 학생이 스스로 설계하도록 돕는 일입니다. 큰 목표가 사라진 20대 초중반, 취업마저 쉽지 않은 지금 — 방향을 잃기 쉬운 그 시기를 혼자 두지 않으려 합니다.</p>
+    </div>
+    <div class="why">
+      <p>저는 이 일을 한 번의 행사가 아니라, <b>오래 이어갈 일</b>이라고 생각합니다. 그 다음 장을 함께 열 분들을 모시려 합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 우리가 걸어온 길 (기수별) -->
+<section>
+  <div class="wrap reveal">
+    <div class="label">우리가 걸어온 길</div>
+    <div class="hairline"></div>
+
+    <div class="era">
+      <div class="etag"><span class="n eng">Ride Your Own Waves</span></div>
+      <h3>자신만의 파도를 타라</h3>
+      <p>제가 늘 학생들에게 하는 말입니다. 사람은 누구나 자신만의 파도가 있습니다. 지금까지는 ‘수능’이라는 하나의 파도를 타는 데 온 힘을 쏟아 왔지만, 정작 그 이후에 밀려오는 파도들을 잘 타도록 도와주는 곳은 없었습니다. 위닝 펠로우십은 그 다음 파도를, 학생이 스스로 타낼 수 있도록 곁에서 함께하려 시작했습니다.</p>
+    </div>
+
+    <div class="era">
+      <div class="etag"><span class="n">1기</span><span class="yr">2025.12 ~ 2026.02 · 6주</span></div>
+      <h3>발견과 시작</h3>
+      <p>세 갈래 길(커리어·글로벌·라이프)을 여러 팀이 자율로 운영한 첫 기수입니다. 학과 브랜딩, 게임 개발, 영문 칼럼, 영상 콘텐츠 — 팀마다 자기 결과물을 만들었고, 시작한 펠로우 대부분이 끝까지 함께했습니다. 2월 수료식에서 직접 발표하고 시상했습니다.</p>
+      <div class="carou">
+        <div class="it ph-candid"><img src="photos/g1_graduation.jpg" alt="수료식"><div class="cap">수료식</div></div>
+        <div class="it ph-candid"><img src="photos/g1_sudadi_group.jpg" alt="인적 네트워킹"><div class="cap">인적 네트워킹</div></div>
+        <div class="it ph-candid"><img src="photos/g1_band.jpg" alt="밴드 합주"><div class="cap">밴드 합주</div></div>
+        <div class="it ph-ig"><img src="photos/ig/hl_0.jpg" alt="1기 하이라이트"><div class="cap">하이라이트 · 인스타그램</div></div>
+        <div class="it ph-ig"><img src="photos/ig/hl_1.jpg" alt="1기 하이라이트"></div>
+        <div class="it ph-ig"><img src="photos/ig/hl_2.jpg" alt="1기 하이라이트"></div>
+        <div class="it ph-ig"><img src="photos/ig/hl_3.jpg" alt="1기 하이라이트"></div>
+      </div>
+      <div class="swipe">← 옆으로 넘겨보세요 →</div>
+      <p class="voice">“막연한 꿈만 가지고 있었는데, 무에서 유를 만들어내며 성취감과 자신감을 얻었습니다.” — 최**</p>
+    </div>
+
+    <div class="era">
+      <div class="etag"><span class="n">2기</span><span class="yr">2026.03 ~ 06 · 12주 · 진행 중</span></div>
+      <h3>깊이와 확장</h3>
+      <p>소규모로 더 깊이 들어간 기수입니다. 운영을 AI로 자동화했고, AI 활용을 정규 세션으로 들였습니다. 함께 모여 운동하다 보니 자연스레 자선 마라톤까지 같이 뛰게 됐고, 4월에는 AI 살롱을 외부에 공개해 함께 실습했습니다. 지금 6월 수료를 앞두고 있습니다.</p>
+      <div class="carou">
+        <div class="it ph-candid"><img src="photos/p1_event_group.jpg" alt="함께 뛴 마라톤"><div class="cap">함께 모여, 같이 뛴 마라톤</div></div>
+        <div class="it ph-ig"><img src="photos/ig/lumen_0.jpg" alt="팀 결과물 루멘"><div class="cap">팀 결과물 · 루멘</div></div>
+        <div class="it ph-ig"><img src="photos/ig/lumen_1.jpg" alt="팀 결과물"></div>
+        <div class="it ph-ig"><img src="photos/ig/lumen_2.jpg" alt="팀 결과물"></div>
+        <div class="it ph-ig"><img src="photos/ig/lumen_3.jpg" alt="팀 결과물"></div>
+        <div class="it ph-ig"><img src="photos/ig/lumen_4.jpg" alt="팀 결과물"></div>
+        <div class="it ph-ig"><img src="photos/ig/lumen_5.jpg" alt="팀 결과물"></div>
+        <div class="it ph-candid"><img src="photos/ai1_session_wide.jpg" alt="AI 살롱"><div class="cap">AI 살롱 · 외부 공개</div></div>
+        <div class="it ph-candid"><img src="photos/ai3_handson.jpg" alt="AI 살롱 실습"><div class="cap">노트북 핸즈온</div></div>
+      </div>
+      <div class="swipe">← 옆으로 넘겨보세요 →</div>
+      <p class="voice">“혼자였다면 엄두도 못 냈을 일을, 여럿이서 함께라 즐겁게 해냈습니다.” — 강**</p>
+    </div>
+
+    <div class="era future">
+      <div class="etag"><span class="n">3기</span><span class="yr">2026 하반기 · 6개월 · 준비 중</span></div>
+      <h3>AI로, 그리고 그 다음</h3>
+      <p>3기에는 AI를 모든 길이 함께 쓰는 공통 환경으로 둡니다. 유행이라서가 아니라, 학생이 AI를 <b>스스로를 키우는 도구</b>로 익히도록 — 세 가지 이유에서입니다.</p>
+      <p style="margin-top:12px;"><b>하나, 자신만의 파도를 타려면 이제 AI는 필수입니다.</b> 지금의 세상에서 자기 길을 찾고 만들어 가는 데, AI를 빼놓을 수 없습니다.</p>
+      <p style="margin-top:10px;"><b>둘, AI를 다루는 힘이 곧 자립의 도구입니다.</b> 그 힘은 앞으로 다가올 어떤 파도든 스스로 잘 다룰 수 있게 하는 능력이 됩니다.</p>
+      <p style="margin-top:10px;"><b>셋, 그런데 그 힘을 길러 줄 곳이 마땅치 않습니다.</b> 세상은 너무 빨리 바뀌어, 학생 혼자 그 속도를 따라가기엔 벅찹니다. 그래서 그 환경을, 펠로우십이 만들어 주려 합니다.</p>
+      <p style="margin-top:12px;">그 위에 운동과 언어로 사람과 세계를 넓히는 길을 잇습니다.</p>
+      <div class="box">
+        <p>자기주도 · 동료 · 성장이라는 처음의 뜻은 그대로입니다. 어떤 길을 가든 스스로 서는 힘을 기르는 일 — 저희가 이 길을 오래 이어가려는 이유입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 왜 이 자리에 (정점) -->
+<section class="peak">
+  <div class="wrap reveal">
+    <p class="beat serif">학생을, 그리고 다음 세대를 끝까지 아껴 오신 분이기에, 그 마음이 다음으로 이어지는 자리에 가장 먼저 떠올렸습니다.</p>
+    <p class="beat serif">그저 저희가 어떤 일을 하고 있는지, 그 이야기를 편한 마음으로 한번 들어봐 주시면 좋겠습니다. 그 이후의 일은, 그때 편하게 정하셔도 늦지 않습니다.</p>
+    <p class="beat serif">오래 이어질 약속의 첫 장을 함께 여는 일은, 지금 이 시점에만 가능하다고 생각합니다. 이미 같은 뜻으로 이 길에 함께하기로 한 분도 계십니다.</p>
+  </div>
+</section>
+
+<!-- 초대 -->
+<section>
+  <div class="bgphoto"><img src="photos/g1_graduation2.jpg" alt=""></div>
+  <div class="wrap reveal">
+    <p class="scene">뜻을 함께하는 분들과, 저녁 한 자리를 마련했습니다. 편한 마음으로 오셔서, 그 자리에 함께해 주시면 좋겠습니다.</p>
+    <div class="card">
+      <div class="row"><span class="k">일 시</span><span class="v serif">2026년 6월 19일 (금)</span></div>
+      <div class="divs"></div>
+      <div class="row"><span class="k">장 소</span><span class="v serif">서울 강남구 역삼동 629-1, 지하 1층<small>2호선 역삼역 인근</small></span></div>
+      <div class="divs"></div>
+      <div class="row"><span class="k">시 간</span><span class="v serif">오후 6:30 ~ 8:30</span></div>
+      <div class="mapwrap">
+        <iframe title="오시는 길" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EC%97%AD%EC%82%BC%EB%8F%99%20629-1&z=16&output=embed"></iframe>
+      </div>
+      <a class="maplink" href="https://maps.google.com/?q=%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EC%97%AD%EC%82%BC%EB%8F%99%20629-1" target="_blank" rel="noopener">지도에서 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 맺음 -->
+<section>
+  <div class="wrap reveal close">
+    <p class="msg">그날 저녁, 직접 뵙고 이 뜻을 나눌 수 있기를 바랍니다.</p>
+    <div class="sign">
+      <div class="date">2026년 6월</div>
+      <div class="org">위닝 펠로우십 &middot; 피니토</div>
+      <div class="from serif">고연승<span class="d">드림</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.14});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
+</body>
+</html>
