@@ -32,7 +32,9 @@ body{
   color:var(--ivory-dim);
   background:radial-gradient(135% 80% at 50% -10%, #271f16 0%, var(--card-a) 32%, var(--bg) 76%), var(--bg);
   line-height:1.85; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  word-break:keep-all; overflow-wrap:break-word;
 }
+p,h1,h2,h3,.scene,.beat,.body p,.why p,.voice,.msg{text-wrap:pretty;}
 .serif{font-family:'Nanum Myeongjo','AppleMyungjo',serif;}
 .eng{font-family:'Cormorant Garamond',serif;}
 
@@ -157,6 +159,10 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;}
 .reveal.in{opacity:1;transform:none;}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.gate{display:none;}.scrollcue:after{animation:none;}}
+/* 스크롤 진행 바 (우측) */
+.progress{position:fixed;top:0;right:0;width:3px;height:100vh;background:rgba(201,168,106,.10);z-index:80;}
+.progress .fill{position:absolute;top:0;right:0;width:100%;height:0;background:linear-gradient(var(--gold-br),var(--gold));box-shadow:0 0 8px rgba(201,168,106,.4);transition:height .08s linear;}
+@media(max-width:560px){.progress{width:2px;}}
 /* RSVP */
 .rsvp-wrap{text-align:center;margin-top:34px;}
 .rsvp-btn{display:inline-block;font-family:inherit;font-size:15px;letter-spacing:.04em;color:var(--bg);background:linear-gradient(180deg,var(--gold-br),var(--gold));border:0;border-radius:4px;padding:15px 40px;cursor:pointer;font-weight:700;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 6px 22px rgba(201,168,106,.18);}
@@ -184,6 +190,8 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 </style>
 </head>
 <body>
+
+<div class="progress" aria-hidden="true"><div class="fill" id="progFill"></div></div>
 
 <div class="gate" aria-hidden="true">
   <div class="half l"></div>
@@ -375,6 +383,9 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
   els.forEach(function(e){io.observe(e);});
 })();
 
+/* 스크롤 진행 바 */
+(function(){var pf=document.getElementById('progFill');if(!pf)return;function upd(){var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;var y=h.scrollTop||document.body.scrollTop||0;var p=max>0?y/max:0;pf.style.height=(Math.max(0,Math.min(1,p))*100)+'%';}window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();})();
+
 /* RSVP 참가 신청 */
 var RSVP_ENDPOINT = "https://fellowship-rsvp.vercel.app/api/rsvp";
 function openRsvp(){document.getElementById('rsvpOv').classList.add('open');}
@@ -383,13 +394,12 @@ function closeRsvp(){document.getElementById('rsvpOv').classList.remove('open');
 function submitRsvp(){
   var name=document.getElementById('rsvpName').value.trim();
   var contact=document.getElementById('rsvpContact').value.trim();
-  var note=document.getElementById('rsvpNote').value.trim();
   var company=document.getElementById('rsvpCompany').value.trim();
   var st=document.getElementById('rsvpStatus');
   var btn=document.getElementById('rsvpSubmit');
   if(!name||!contact){st.className='mstatus err';st.textContent='성함과 연락처를 입력해 주세요.';return;}
   btn.disabled=true;st.className='mstatus';st.textContent='보내는 중…';
-  fetch(RSVP_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,note:note,company:company})})
+  fetch(RSVP_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,company:company})})
     .then(function(r){return r.json().catch(function(){return {ok:r.ok};});})
     .then(function(d){
       if(d&&d.ok){document.getElementById('rsvpForm').style.display='none';document.getElementById('rsvpDone').style.display='block';}
@@ -410,8 +420,6 @@ function submitRsvp(){
       <input id="rsvpName" type="text" maxlength="40" autocomplete="name" placeholder="성함을 입력해 주세요">
       <label for="rsvpContact">연락처</label>
       <input id="rsvpContact" type="text" maxlength="80" placeholder="휴대폰 번호 또는 이메일">
-      <label for="rsvpNote">한 말씀 (선택)</label>
-      <textarea id="rsvpNote" maxlength="200" placeholder="전하실 말씀이 있다면 적어 주세요"></textarea>
       <input class="hp" id="rsvpCompany" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="button" class="msubmit" id="rsvpSubmit" onclick="submitRsvp()">신청 보내기</button>
       <div class="mstatus" id="rsvpStatus"></div>
