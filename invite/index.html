@@ -43,11 +43,11 @@ p,h1,h2,h3,.scene,.beat,.body p,.why p,.voice,.msg{text-wrap:pretty;}
 /* 문 열림 entrance */
 .gate{position:fixed;inset:0;z-index:200;pointer-events:none;}
 .gate .half{position:absolute;top:0;bottom:0;width:50.5%;background:linear-gradient(135deg,#1c1810,#100e0a);}
-.gate .l{left:0;border-right:1px solid var(--gold-dim);animation:openL 3.2s cubic-bezier(.76,0,.24,1) .55s forwards;}
-.gate .r{right:0;border-left:1px solid var(--gold-dim);animation:openR 3.2s cubic-bezier(.76,0,.24,1) .55s forwards;}
+.gate .l{left:0;border-right:1px solid var(--gold-dim);animation:openL 3.2s cubic-bezier(.76,0,.24,1) 2s forwards;}
+.gate .r{right:0;border-left:1px solid var(--gold-dim);animation:openR 3.2s cubic-bezier(.76,0,.24,1) 2s forwards;}
 @keyframes openL{to{transform:translateX(-101%);}}
 @keyframes openR{to{transform:translateX(101%);}}
-.gate .seal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;text-align:center;animation:sealOut .85s ease 2.65s forwards;}
+.gate .seal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;text-align:center;animation:sealOut .85s ease 2s forwards;}
 .gate .seal .ring{width:96px;height:96px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 0 0 6px rgba(201,168,106,.08);}
 .gate .seal .ring span{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold-br);}
 .gate .seal .wm{font-family:'Nanum Myeongjo',serif;color:var(--gold);font-size:15px;letter-spacing:.3em;}
