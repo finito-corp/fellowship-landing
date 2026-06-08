@@ -160,7 +160,13 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;}
 .reveal.in{opacity:1;transform:none;}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.gate{display:none;}.scrollcue:after{animation:none;}}
+.reveal.stagger{opacity:1;transform:none;}
+.reveal.stagger > *{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.stagger.in > *{opacity:1;transform:none;}
+.stats{display:flex;justify-content:center;gap:clamp(20px,7vw,60px);margin:14px 0 26px;flex-wrap:wrap;text-align:center;}
+.stats .st .num{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,10vw,68px);font-weight:600;color:var(--gold-br);line-height:1;letter-spacing:.01em;}
+.stats .st .lab{margin-top:8px;font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}.reveal.stagger > *{opacity:1;transform:none;transition:none;}.gate{display:none;}.scrollcue:after{animation:none;}}
 /* 스크롤 진행 바 (우측) */
 .progress{position:fixed;top:0;right:0;width:3px;height:100vh;background:rgba(201,168,106,.10);z-index:80;}
 .progress .fill{position:absolute;top:0;right:0;width:100%;height:0;background:linear-gradient(var(--gold-br),var(--gold));box-shadow:0 0 8px rgba(201,168,106,.4);transition:height .08s linear;}
@@ -220,11 +226,12 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 
 <!-- 여는 글 + 왜 이걸 하는지 -->
 <section>
-  <div class="wrap reveal">
+  <div class="wrap reveal stagger">
     <div class="to serif"><span class="u">초대에 앞서</span></div>
     <div class="body">
       <p>위닝 펠로우십은 수능 그 다음의 시간을, 학생이 스스로 설계하도록 돕는 일입니다.</p>
-      <p>큰 목표가 사라진 20대 초중반, 취업마저 쉽지 않은 지금 — 방향을 잃기 쉬운 그 시기를 혼자 두지 않으려 합니다.</p>
+      <p>큰 목표가 사라진 20대 초중반, 취업마저 쉽지 않은 지금입니다.</p>
+      <p>방향을 잃기 쉬운 그 시기를, 혼자 두지 않으려 합니다.</p>
     </div>
     <div class="why">
       <p>저는 이 일을 한 번의 행사가 아니라, <b>오래 이어갈 일</b>이라고 생각합니다.</p>
@@ -235,7 +242,7 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 
 <!-- 왜 지금, 왜 우리가 (문제의식) -->
 <section>
-  <div class="wrap reveal">
+  <div class="wrap reveal stagger">
     <div class="label">왜 지금, 왜 우리가</div>
     <div class="hairline"></div>
     <div class="body">
@@ -254,7 +261,7 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 
 <!-- 우리가 걸어온 길 (기수별) -->
 <section>
-  <div class="wrap reveal">
+  <div class="wrap reveal stagger">
     <div class="label">우리가 걸어온 길</div>
     <div class="hairline"></div>
 
@@ -271,13 +278,14 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
       <div class="etag"><span class="n">1기</span><span class="yr">2025.12 ~ 2026.02 · 6주</span></div>
       <h3>발견과 시작</h3>
       <p>세 갈래 길(커리어·글로벌·라이프)을 여러 팀이 자율로 운영한 첫 기수입니다.</p>
-      <p>학과 브랜딩, 게임 개발, 영문 칼럼, 영상 콘텐츠 — 팀마다 자기 결과물을 만들었고, 시작한 펠로우 대부분이 끝까지 함께했습니다.</p>
+      <p>학과 브랜딩, 게임 개발, 영문 칼럼, 영상 콘텐츠.</p>
+      <p>팀마다 자기 결과물을 만들었고, 시작한 펠로우 대부분이 끝까지 함께했습니다.</p>
       <p>2월 수료식에서 직접 발표하고 시상했습니다.</p>
       <div class="carou">
         <div class="it ph-candid"><img src="photos/g1_graduation.jpg" alt="수료식"><div class="cap">수료식</div></div>
         <div class="it ph-candid"><img src="photos/g1_sudadi_group.jpg" alt="인적 네트워킹"><div class="cap">인적 네트워킹</div></div>
         <div class="it ph-candid"><img src="photos/g1_band.jpg" alt="밴드 합주"><div class="cap">밴드 합주</div></div>
-        <div class="it ph-candid"><img src="photos/g1_act_baseball.jpg" alt="단체 활동"><div class="cap">함께한 현장</div></div>
+        <div class="it ph-candid"><img src="photos/g1_act_baseball.jpg" alt="단체 체육활동"><div class="cap">단체 체육활동</div></div>
         <div class="it ph-candid"><img src="photos/g1_act_mountain.jpg" alt="설산 등반"><div class="cap">설산 등반</div></div>
         <div class="it ph-candid"><img src="photos/g1_act_award.jpg" alt="최우수팀 시상"><div class="cap">최우수팀 시상</div></div>
         <div class="it ph-candid"><img src="photos/g1_act_volunteer.jpg" alt="봉사 활동"><div class="cap">봉사 활동</div></div>
@@ -314,48 +322,66 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
       <div class="swipe">← 옆으로 넘겨보세요 →</div>
       <p class="voice">“혼자였다면 엄두도 못 냈을 일을, 여럿이서 함께라 즐겁게 해냈습니다.” — 강**</p>
     </div>
+  </div>
+</section>
 
+<!-- 두 기수를 운영하며 (증명) -->
+<section>
+  <div class="wrap reveal stagger">
+    <div class="label">두 기수를 운영하며</div>
+    <div class="hairline"></div>
+    <div class="body">
+      <p>두 기수를 함께 보내며, 우리는 이 방향이 틀리지 않았다고 느꼈습니다.</p>
+    </div>
+    <div class="stats">
+      <div class="st"><div class="num" data-to="52">0</div><div class="lab">명 시작</div></div>
+      <div class="st"><div class="num" data-to="49">0</div><div class="lab">명 완주</div></div>
+      <div class="st"><div class="num" data-to="94" data-suffix="%">0</div><div class="lab">완주율</div></div>
+    </div>
+    <div class="body">
+      <p>1기는 참가비도, 강제도 없는 자율 프로그램이었습니다.</p>
+      <p>수능 직후의 공백기를, 펠로우들이 서로를 붙잡아 가며 끝까지 채운 결과였습니다.</p>
+      <p>무엇보다, 펠로우들이 직접 남긴 말이 이 일을 계속할 이유가 되었습니다.</p>
+    </div>
+    <div class="proof-voices">
+      <p class="voice">“정말 좋은 언니, 오빠를 만났고, 팀 분위기가 펠로우십에서도 정말 최상위권이라고 생각합니다.” — 전** · 1기</p>
+      <p class="voice">“인생에서 처음으로 해보는 밴드였고, 성인이 된 후 처음으로 해보는 리더 자리였습니다. 맡은 역할에 최선을 다하자는 책임감 하나만으로 활동을 마무리할 수 있었습니다.” — 김** · 1기</p>
+      <p class="voice">“좋은 인연을 만들고 다양한 경험을 쌓을 수 있었던, 소중한 시간이었어요.” — 양** · 1기</p>
+      <p class="voice">“평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다.” — 최** · 1기</p>
+      <p class="voice">“펠로우십하길 잘했다고 생각이 들 정도로 재미있게 활동했습니다. 팀원들과의 결속력이 단단했기에 지금까지 달려올 수 있었습니다.” — 김** · 1기</p>
+      <p class="voice">“경제 흐름에 전혀 무지했던 제가 매일 뉴스를 접하고 시장을 파악하는 훈련을 통해 투자에 대한 막연한 심리적 장벽을 허무는 결정적인 계기가 되었습니다.” — 전** · 1기</p>
+    </div>
+    <div class="why">
+      <p>펠로우십이 없었다면 그냥 흘려보냈을 시간이었다는 말.<br>그 말을 듣고, 우리는 이 길을 계속 가기로 했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 앞으로의 방향 (3기 / AI) -->
+<section>
+  <div class="wrap reveal stagger">
+    <div class="label">앞으로의 방향</div>
+    <div class="hairline"></div>
     <div class="era future">
       <div class="etag"><span class="n">3기</span><span class="yr">2026 하반기 · 6개월 · 준비 중</span></div>
       <h3>AI로, 그리고 그 다음</h3>
       <p>3기에는 AI를 모든 길이 함께 쓰는 공통 환경으로 둡니다.</p>
-      <p>유행이라서가 아니라, 학생이 AI를 <b>스스로를 키우는 도구</b>로 익히도록 — 세 가지 이유에서입니다.</p>
+      <p>유행이라서가 아니라, 학생이 AI를 <b>스스로를 키우는 도구</b>로 익히도록 하기 위해서입니다.</p>
+      <p>그 이유는 세 가지입니다.</p>
       <p style="margin-top:14px;"><b style="display:block;margin-bottom:5px;color:var(--gold-br);">하나, 자신만의 파도를 타려면 이제 AI는 필수입니다.</b>지금의 세상에서 자기 길을 찾고 만들어 가는 데, AI를 빼놓을 수 없습니다.</p>
       <p style="margin-top:14px;"><b style="display:block;margin-bottom:5px;color:var(--gold-br);">둘, AI를 다루는 힘이 곧 자립의 도구입니다.</b>그 힘은 앞으로 다가올 어떤 파도든 스스로 잘 다룰 수 있게 하는 능력이 됩니다.</p>
       <p style="margin-top:14px;"><b style="display:block;margin-bottom:5px;color:var(--gold-br);">셋, 그런데 그 힘을 길러 줄 곳이 마땅치 않습니다.</b>세상은 너무 빨리 바뀌어, 학생 혼자 그 속도를 따라가기엔 벅찹니다.<br>그래서 그 환경을, 펠로우십이 만들어 주려 합니다.</p>
       <p style="margin-top:12px;">그 위에 운동과 언어로 사람과 세계를 넓히는 길을 잇습니다.</p>
       <div class="box">
-        <p>자기주도 · 동료 · 성장이라는 처음의 뜻은 그대로입니다.<br>어떤 길을 가든 스스로 서는 힘을 기르는 일 — 저희가 이 길을 오래 이어가려는 이유입니다.</p>
+        <p>자기주도 · 동료 · 성장이라는 처음의 뜻은 그대로입니다.<br>어떤 길을 가든 스스로 서는 힘을 기르는 일.<br>그것이 저희가 이 길을 오래 이어가려는 이유입니다.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 1년이 증명한 것 (증명) -->
-<section>
-  <div class="wrap reveal">
-    <div class="label">1년이 증명한 것</div>
-    <div class="hairline"></div>
-    <div class="body">
-      <p>1기는 <b>52명으로 시작해 49명이 끝까지 함께</b>했습니다.</p>
-      <p>참가비도, 강제도 없는 자율 프로그램에서 나온 완주율 94%입니다.</p>
-      <p>수능 직후의 공백기를, 펠로우들이 서로를 붙잡아 가며 끝까지 채운 결과였습니다.</p>
-      <p>무엇보다, 펠로우들이 직접 남긴 말이 이 일을 계속할 이유가 되었습니다.</p>
-    </div>
-    <div class="proof-voices">
-      <p class="voice">“인생에서 처음으로 해보는 밴드였고, 성인이 된 후 처음으로 해보는 리더 자리였습니다. 맡은 역할에 최선을 다하자는 책임감 하나만으로 활동을 마무리할 수 있었습니다.” — 김** · 1기</p>
-      <p class="voice">“평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다.” — 최** · 1기</p>
-      <p class="voice">“경제 흐름에 전혀 무지했던 제가 매일 뉴스를 접하고 시장을 파악하는 훈련을 통해 투자에 대한 막연한 심리적 장벽을 허무는 결정적인 계기가 되었습니다.” — 전** · 1기</p>
-    </div>
-    <div class="why">
-      <p>펠로우십이 없었다면 그냥 흘려보냈을 시간 — 이 말을 듣고, 우리는 이 길을 계속 가기로 했습니다.</p>
     </div>
   </div>
 </section>
 
 <!-- 왜 이 자리에 (정점) -->
 <section class="peak">
-  <div class="wrap reveal">
+  <div class="wrap reveal stagger">
     <p class="beat serif">학생을, 그리고 다음 세대를 끝까지 아껴 오신 분이기에, 그 마음이 다음으로 이어지는 자리에 가장 먼저 떠올렸습니다.</p>
     <p class="beat serif">그저 저희가 어떤 일을 하고 있는지, 그 이야기를 편한 마음으로 한번 들어봐 주시면 좋겠습니다.<br>그 이후의 일은, 그때 편하게 정하셔도 늦지 않습니다.</p>
     <p class="beat serif">오래 이어질 약속의 첫 장을 함께 여는 일은, 지금 이 시점에만 가능하다고 생각합니다.<br>이미 여러 분이, 같은 뜻으로 이 길에 함께하기로 해 주셨습니다.</p>
@@ -365,7 +391,7 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 <!-- 초대 -->
 <section>
   <div class="bgphoto"><img src="photos/g1_graduation2.jpg" alt=""></div>
-  <div class="wrap reveal">
+  <div class="wrap reveal stagger">
     <div class="label" style="text-align:center;margin-bottom:14px;">Heritage Night</div>
     <h2 class="serif" style="text-align:center;font-size:clamp(26px,5vw,38px);color:var(--gold-br);letter-spacing:.02em;line-height:1.3;margin:0 0 18px;">헤리티지 나이트</h2>
     <p class="scene" style="text-align:center;">헤리티지 나이트는, 지금까지 이어온 것을 다음 세대로 잇기 위해 마련한 저녁 자리입니다.<br>뜻을 함께하는 분들과 둘러앉아, 이 길이 걸어온 이야기와 앞으로의 이야기를 나누려 합니다.<br>편한 마음으로 오셔서 함께해 주시면 좋겠습니다.</p>
@@ -389,7 +415,7 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 
 <!-- 맺음 -->
 <section>
-  <div class="wrap reveal close">
+  <div class="wrap reveal stagger close">
     <p class="msg">그날 저녁, 직접 뵙고 이 뜻을 나눌 수 있기를 바랍니다.</p>
     <div class="sign">
       <div class="date">2026년 6월</div>
@@ -401,10 +427,27 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
 
 <script>
 (function(){
+  function countUp(el){
+    var to=parseInt(el.getAttribute('data-to'),10); if(isNaN(to))return;
+    var suf=el.getAttribute('data-suffix')||''; var dur=1100, t0=null;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur);
+      var v=Math.round(to*(1-Math.pow(1-p,3))); el.textContent=v+suf;
+      if(p<1){requestAnimationFrame(step);} else {el.textContent=to+suf;} }
+    requestAnimationFrame(step);
+  }
+  function activate(t){
+    t.classList.add('in');
+    if(t.classList.contains('stagger')){
+      var kids=t.children, i;
+      for(i=0;i<kids.length;i++){kids[i].style.transitionDelay=(i*0.09)+'s';}
+    }
+    var nums=t.querySelectorAll('.num[data-to]'), j;
+    for(j=0;j<nums.length;j++){countUp(nums[j]);}
+  }
   var els=document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+  if(!('IntersectionObserver' in window)){els.forEach(activate);return;}
   var io=new IntersectionObserver(function(en){
-    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    en.forEach(function(e){if(e.isIntersecting){activate(e.target);io.unobserve(e.target);}});
   },{threshold:.14});
   els.forEach(function(e){io.observe(e);});
 })();
