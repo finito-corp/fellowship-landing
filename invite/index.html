@@ -129,6 +129,14 @@ b,strong{color:var(--ivory);font-weight:500;}
 .peak .beat{color:var(--ivory);font-size:clamp(16px,1.9vw,18px);font-weight:400;margin-bottom:22px;line-height:1.9;}
 .peak .beat:last-child{margin-bottom:0;color:var(--gold-br);}
 
+/* 함께하는 분들 박스 */
+.with-box{margin-top:34px;border:1px solid var(--gold-dim);border-radius:10px;padding:26px 28px 24px;background:linear-gradient(180deg,rgba(201,168,106,.07),transparent);text-align:center;}
+.with-box .wb-label{font-size:11px;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;font-weight:500;margin-bottom:6px;}
+.with-box ul{list-style:none;margin:0;padding:0;}
+.with-box li{color:var(--ivory);font-size:clamp(15px,1.8vw,16.5px);padding:9px 0;}
+.with-box li:not(:last-child){border-bottom:1px solid rgba(201,168,106,.14);}
+.with-box .wb-close{margin-top:13px;font-size:clamp(13px,1.5vw,14px);color:var(--gold-br);}
+
 /* 초대 + 약도 */
 .scene{color:var(--ivory-dim);font-size:clamp(15px,1.7vw,16.5px);font-weight:300;margin-bottom:34px;}
 .card{border:1px solid var(--gold-dim);padding:32px clamp(22px,5vw,40px);text-align:center;background:linear-gradient(180deg,rgba(201,168,106,.06),transparent);border-radius:4px;}
@@ -386,6 +394,16 @@ footer .fm{font-size:11px;letter-spacing:.32em;color:var(--gold-dim);text-transf
     <p class="beat serif">학생을, 그리고 다음 세대를 끝까지 아껴 오신 분이기에,<br>그 마음이 다음으로 이어지는 자리에 가장 먼저 떠올렸습니다.</p>
     <p class="beat serif">그저 저희가 어떤 일을 하고 있는지,<br>그 이야기를 편한 마음으로 한번 들어봐 주시면 좋겠습니다.<br>그 이후의 일은, 그때 편하게 정하셔도 늦지 않습니다.</p>
     <p class="beat serif">오래 이어질 약속의 첫 장을 함께 여는 일은,<br>지금 이 시점에만 가능하다고 생각합니다.<br>이미 여러 분이, 같은 뜻으로 이 길에 함께하기로 해 주셨습니다.</p>
+    <div class="with-box">
+      <div class="wb-label">함께하는 분들</div>
+      <ul>
+        <li class="serif">주요 학원 원장님들</li>
+        <li class="serif">교육업계 대표님들</li>
+        <li class="serif">연세대학교 교수님</li>
+        <li class="serif">현직 강사분들</li>
+      </ul>
+      <p class="wb-close serif">같은 뜻으로, 한 자리에 모입니다.</p>
+    </div>
   </div>
 </section>
 
