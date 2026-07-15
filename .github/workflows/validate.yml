@@ -1,0 +1,27 @@
+name: Validate landing page
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate publishable files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s index.html
+          test -s lime-light.html
+          test -s privacy.html
+          test -s terms.html
+          cmp index.html lime-light.html
+          grep -q '2기 합류 신청' index.html
+          grep -q 'forms.fillout.com' index.html
+          grep -q 'winning_fellowship' index.html
+          grep -q 'mailto:' index.html
