@@ -1,0 +1,99 @@
+name: Deploy approved Pages artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Exact main commit SHA to deploy
+        required: true
+        type: string
+      preview_pr:
+        description: Optional open pull request number to publish below /previews/
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  pull-requests: read
+
+concurrency:
+  group: fellowship-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate requested ref
+        env:
+          DEPLOY_REF: ${{ inputs.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "${DEPLOY_REF}" =~ ^[a-f0-9]{40}$ ]]
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          path: main
+          persist-credentials: false
+      - name: Require exact main head
+        env:
+          DEPLOY_REF: ${{ inputs.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C main rev-parse HEAD)" = "${DEPLOY_REF}"
+          git -C main fetch --no-tags origin main
+          test "$(git -C main rev-parse origin/main)" = "${DEPLOY_REF}"
+      - name: Build production artifact
+        env:
+          DEPLOY_REF: ${{ inputs.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site/.well-known
+          cp main/index.html main/lime-light.html main/privacy.html main/terms.html _site/
+          cp -R main/invite _site/invite
+          printf '{"repository":"finito-corp/fellowship-landing","commit_sha":"%s"}\n' "${DEPLOY_REF}" > _site/.well-known/deployment.json
+      - name: Validate preview request
+        if: ${{ inputs.preview_pr != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIEW_PR: ${{ inputs.preview_pr }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "${PREVIEW_PR}" =~ ^[1-9][0-9]*$ ]]
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PREVIEW_PR}" --jq .state)" = open
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PREVIEW_PR}" --jq .head.repo.full_name)" = "${GITHUB_REPOSITORY}"
+      - uses: actions/checkout@v4
+        if: ${{ inputs.preview_pr != '' }}
+        with:
+          ref: refs/pull/${{ inputs.preview_pr }}/head
+          path: preview
+          persist-credentials: false
+      - name: Add isolated preview
+        if: ${{ inputs.preview_pr != '' }}
+        env:
+          PREVIEW_PR: ${{ inputs.preview_pr }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="_site/previews/pr-${PREVIEW_PR}"
+          mkdir -p "${target}/.well-known"
+          cp preview/index.html preview/lime-light.html preview/privacy.html preview/terms.html "${target}/"
+          cp -R preview/invite "${target}/invite"
+          preview_sha="$(git -C preview rev-parse HEAD)"
+          printf '{"repository":"finito-corp/fellowship-landing","pr_number":%s,"commit_sha":"%s"}\n' "${PREVIEW_PR}" "${preview_sha}" > "${target}/.well-known/deployment.json"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
