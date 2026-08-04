@@ -1,43 +1,33 @@
-# Fellowship Landing - CLAUDE.md
+# Fellowship Landing
 
-위닝 펠로우십 랜딩 페이지 프로젝트.
+위닝 펠로우십 공개 랜딩 페이지입니다.
 
-## 배포
+## 현재 공개 상태
 
 - **호스팅**: GitHub Pages
 - **URL**: https://finito-corp.github.io/fellowship-landing/
-- **배포 방식**: `main` 브랜치 push → 자동 배포 (1~2분 소요)
-- **서빙 파일**: `index.html` (루트)
+- **서빙 파일**: 루트 `index.html`
+- **동일 사본**: `lime-light.html`은 `index.html`과 바이트 단위로 같아야 합니다.
+- **현재 상태**: 위닝 펠로우십 3기 지원 경로 준비중의 **비수집 안내 페이지**입니다.
+  - 지원서·사전등록·수요조사·문의 입력란을 만들거나 외부 폼으로 연결하지 않습니다.
+  - 이름, 연락처, 계정·결제 정보 등 지원 정보를 받지 않습니다.
+  - 실제 3기 지원 CTA는 서버 검증, 최소 데이터 보관 기준, 운영자 모집함이 검증된 뒤에만 별도 release로 연결합니다.
 
-## 주요 파일
+## 배포
 
-- **메인**: `index.html` (배포 대상) + `lime-light.html` (동일 내용 유지)
-- 구버전: `gold.html`, `neon.html`, `lime.html` — 참고용
-- **편집 후**: `index.html`과 `lime-light.html` 양쪽 모두 동일하게 유지할 것
+- GitHub Pages는 exact `main` SHA를 지정한 `Deploy approved Pages artifact` workflow로 배포합니다.
+- 일반 절차: PR 검증 → exact SHA merge → Pages workflow 성공 → public URL 및 `deployment.json` SHA read-back.
+- `main`에 push했다고 Production이 자동 전환되었다고 판단하지 않습니다.
+- `index.html`과 `lime-light.html`의 불일치, legacy 외부 수집 링크, 또는 비수집 계약 위반은 release blocker입니다.
 
-## 디자인 시스템
+## 공개 파일 범위
 
-- **액센트 컬러**: 노란색(#fbbf24) 단일 사용 — 파란색은 브랜드 색이지만 웹에서는 제외
-- **레이아웃**: 다크/라이트 교차 섹션
-- **밝은 섹션**: `bg-surface` 통일
-- **히어로**: 다크 배경 + 수치 카드(`border-accent/20 bg-accent/5`)
-- **섹션 순서**: Hero(DARK) → About(LIGHT) → Career(DARK) → Global(LIGHT) → Life(DARK) → Your Own(LIGHT) → Fellow's Role(LIGHT) → CTA(DARK)
+- `index.html`, `lime-light.html`: 현재 공개 랜딩
+- `privacy.html`, `terms.html`: 현 비수집 상태를 설명하는 안내 문서
+- `invite/`: 과거 초대 아카이브이며 현재 모집 경로에서 링크하지 않습니다.
 
-## 디자인 선호도
+## 디자인 기준
 
-- 단색 액센트 통일 (색이 섞이면 이질감)
-- 밝은 배경은 `bg-surface`로 통일
-- 히어로는 다크 배경 (경계감 있는 첫인상)
-
-## Google Form 주의사항
-
-- Google Forms API(addFormQuestion)는 질문을 **맨 위(position 0)**에 삽입함
-- 따라서 원하는 순서대로 나오게 하려면 **역순으로 추가**해야 함
-- 예: Q1→Q2→Q3 순서를 원하면, Q3→Q2→Q1 순서로 addFormQuestion 호출
-
-## TODO
-
-- [ ] 3기 지원하기 버튼에 실제 지원 링크 연결
-- [ ] 인스타그램 보기 버튼에 실제 인스타 링크 연결
-- [ ] 문의하기 버튼 링크 연결
-- [ ] 최종 확정 후 `lime-light.html` → `index.html`로 복사
+- 노란색 `#fbbf24` 액센트와 다크 기반의 간결한 화면을 유지합니다.
+- 모바일 320px 이상에서 한 줄의 안내와 비수집 상태가 먼저 읽혀야 합니다.
+- 실제 모집 랜딩으로 바꾸는 작업은 3기 모집 패킷과 intake runtime contract를 함께 충족해야 합니다.
