@@ -32,7 +32,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
 
         self.assertEqual(index, alternate)
         self.assertIn('data-collection-state="none"', index)
-        self.assertIn("현재는 지원 정보를 받지 않습니다", index)
+        self.assertIn("대기 명단 등록을 이 자리에서 엽니다.", index)
         self.assertNotIn("<form", index.lower())
         for retired_path_or_promise in (
             "forms.fillout.com",
@@ -61,6 +61,24 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("python -m unittest tests.test_static_release -v", workflow)
         for retired_assertion in ("2기 합류 신청", "forms.fillout.com", "winning_fellowship", "mailto:"):
             self.assertNotIn(retired_assertion, workflow)
+
+    def test_hold_page_uses_human_opening_copy_without_opening_intake(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        primary = (root / "index.html").read_text(encoding="utf-8")
+
+        self.assertIn("인생의 다음 파도를 탈", primary)
+        self.assertIn("3기를 기다립니다.", primary)
+        self.assertIn("8/4 OPEN 예정", primary)
+        self.assertIn("대기 명단 등록하기", primary)
+        self.assertIn('aria-disabled="true"', primary)
+        self.assertIn("2주 동안 직접 해 봅니다.", primary)
+        self.assertIn("맞으면 12주를 더 갑니다.", primary)
+        self.assertIn("3기에서 시작하는 일", primary)
+        self.assertIn("함께할 사람", primary)
+        self.assertIn("8/4 OPEN 예정</small>", primary)
+        self.assertNotIn("HOW WE START", primary)
+        self.assertNotIn("AI를 잘 쓰는 사람보다", primary)
+        self.assertNotIn("공개 지원폼과 운영 경로", primary)
 
 
 if __name__ == "__main__":
