@@ -46,11 +46,11 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
 
     def test_mobile_internal_menu_reveals_the_destination_below_the_fixed_header(self) -> None:
         self.page.locator(".menu-button").click()
-        self.page.locator('.mobile-menu a[href="#reviews"]').click()
+        self.page.locator('.mobile-menu a[href="#history"]').click()
         self.page.wait_for_function("""() => {
-            const heading = document.querySelector('#reviews-title').getBoundingClientRect();
+            const heading = document.querySelector('#history-title').getBoundingClientRect();
             const header = document.querySelector('.site-header').getBoundingClientRect();
-            return location.hash === '#reviews' && heading.top >= header.bottom && heading.top < innerHeight;
+            return location.hash === '#history' && heading.top >= header.bottom && heading.top < innerHeight;
         }""")
         self.assertEqual(self.page.locator(".menu-button").get_attribute("aria-expanded"), "false")
 

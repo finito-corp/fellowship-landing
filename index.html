@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="미뤄 둔 일을 이번에는 진짜 해보는 14주. 대학 3학년 이상·졸업생을 위한 위닝 펠로우십 3기 모집.">
-  <meta property="og:title" content="위닝 펠로우십 3기 | 미뤄 둔 일을, 이번에는 진짜">
-  <meta property="og:description" content="AI를 배우는 데서 끝내지 않고, 내 삶의 한 장면을 실제로 움직이는 14주.">
-  <title>위닝 펠로우십 3기 | 미뤄 둔 일을, 이번에는 진짜</title>
+  <meta name="description" content="정답이 사라진 20대, 내 다음 선택을 직접 만들어 보는 약 3개월. 대학 3학년 이상·졸업생을 위한 위닝 펠로우십 3기 모집.">
+  <meta property="og:title" content="위닝 펠로우십 3기 | 내 다음 선택을 만드는 약 3개월">
+  <meta property="og:description" content="지금 내게 중요한 장면 하나를 정하고, AI와 동료 속에서 직접 시도하고 수정해 봅니다.">
+  <title>위닝 펠로우십 3기 | 내 다음 선택을 만드는 약 3개월</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23f2bd3f'/%3E%3C/svg%3E">
   <style>
     @font-face { font-family: "Pretendard Variable"; font-style: normal; font-weight: 45 920; font-display: swap; src: url("assets/PretendardVariable.woff2") format("woff2-variations"); }
@@ -234,6 +234,10 @@
     .story-row p { margin: 0; color: var(--muted-dark); }
     .plain-note { max-width: var(--measure-note); margin-top: var(--space-10); padding: var(--space-lg) 0 0; border-top: var(--rule-strong-width) solid var(--ink); color: var(--muted-dark); }
     .plain-note strong { color: var(--ink); }
+    .history-transition { max-width: var(--measure-note); margin-top: var(--space-10); padding: var(--space-lg); border-left: var(--rule-strong-width) solid var(--gold); background: var(--nav-state-bg); color: var(--muted-light); }
+    .history-transition strong { color: var(--text-light); }
+    .philosophy-note { max-width: var(--measure-note); margin-top: var(--space-10); padding: var(--space-xl) 0 0; border-top: var(--rule-strong-width) solid var(--gold); color: var(--muted-dark); font-size: var(--font-lead); }
+    .philosophy-note strong { color: var(--ink); }
 
     .program-layout { display: grid; grid-template-columns: minmax(var(--measure-program-min),.74fr) minmax(0,1.26fr); gap: var(--program-gap); align-items: start; }
     .sticky-copy { position: sticky; top: calc(var(--announcement-height) + var(--nav-height) + var(--space-xl)); }
@@ -277,6 +281,8 @@
     .review-card blockquote { margin: var(--space-lg) 0 0; font-size: var(--font-body); letter-spacing: -.025em; }
     .review-card footer { margin-top: var(--space-lg); color: var(--gold); font-size: var(--font-small); font-weight: var(--weight-label); letter-spacing: .05em; }
     .review-note { width: min(100% - var(--shell-gutter), var(--content-max)); margin: var(--space-lg) auto 0; color: var(--muted-dark); font-size: var(--font-label); }
+    .reviews-continuation { padding-top: 0; }
+    .dark .review-note { color: var(--muted-light); }
 
     .schedule { max-width: var(--measure-final); margin-top: var(--space-2xl); border-top: var(--rule-width) solid var(--rule-dark); }
     .schedule-item { display: grid; grid-template-columns: var(--grid-lesson-index) 1fr; gap: var(--space-8); padding: var(--space-xl) 0; border-bottom: var(--rule-width) solid var(--rule-dark); }
@@ -363,7 +369,7 @@
 </head>
 <body data-collection-state="server-verified" data-opening-state="open">
   <div class="announcement">
-    <div class="shell announcement-inner" aria-label="3기 지원 접수 중 · 8/4–8/10 · 2주 베타 초대 검토"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" aria-hidden="true">3기 지원 접수 중 · 8/4–8/10 · 2주 베타 초대 검토</span><a href="https://product-omrpipeline-production.up.railway.app/fellowship/3">지원하기 ↗</a></div>
+    <div class="shell announcement-inner" aria-label="3기 지원 접수 중 · 8/4–8/10"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" aria-hidden="true">3기 지원 접수 중 · 8/4–8/10</span><a href="https://product-omrpipeline-production.up.railway.app/fellowship/3">지원하기 ↗</a></div>
   </div>
 
   <header class="site-header">
@@ -371,86 +377,61 @@
       <a class="brand" href="#top">Winning <span>Fellowship</span></a>
       <div class="desktop-nav" aria-label="페이지 안내">
         <span class="nav-indicator" aria-hidden="true"></span>
-        <a href="#about" data-nav="about">소개</a><a href="#beta" data-nav="beta">2주 베타</a><a href="#core" data-nav="core">12주 코어</a><a href="#reviews" data-nav="reviews">후기</a><a href="#schedule" data-nav="schedule">일정</a><a href="#faq" data-nav="faq">FAQ</a>
+        <a href="#about" data-nav="about">시작</a><a href="#history" data-nav="history">걸어온 길</a><a href="#fit" data-nav="fit">3기 대상</a><a href="#beta" data-nav="beta">운영</a><a href="#schedule" data-nav="schedule">일정</a><a href="#faq" data-nav="faq">FAQ</a>
         <a class="nav-cta" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">3기 지원</a>
       </div>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="메뉴 열기"><span></span></button>
     </nav>
     <div class="mobile-menu" id="mobile-menu" data-open="false">
-      <nav class="shell mobile-menu-inner" aria-label="모바일 메뉴"><a href="#about">소개 <span>01</span></a><a href="#beta">2주 베타 <span>02</span></a><a href="#core">12주 코어 <span>03</span></a><a href="#reviews">후기 <span>04</span></a><a href="#schedule">일정 <span>05</span></a><a href="#faq">FAQ <span>06</span></a><a href="https://product-omrpipeline-production.up.railway.app/fellowship/3">3기 지원하기 ↗</a></nav>
+      <nav class="shell mobile-menu-inner" aria-label="모바일 메뉴"><a href="#about">시작 <span>01</span></a><a href="#history">걸어온 길 <span>02</span></a><a href="#fit">3기 대상 <span>03</span></a><a href="#beta">운영 방식 <span>04</span></a><a href="#schedule">일정 <span>05</span></a><a href="#faq">FAQ <span>06</span></a><a href="https://product-omrpipeline-production.up.railway.app/fellowship/3">3기 지원하기 ↗</a></nav>
     </div>
   </header>
 
   <aside class="side-guide" aria-label="페이지 내부 안내" aria-hidden="true" inert>
     <button class="side-top" type="button" aria-label="맨 위로">↑</button>
-    <button class="side-link" type="button" data-target="about"><span>소개</span></button><button class="side-link" type="button" data-target="beta"><span>베타</span></button><button class="side-link" type="button" data-target="core"><span>코어</span></button><button class="side-link" type="button" data-target="reviews"><span>후기</span></button><button class="side-link" type="button" data-target="schedule"><span>일정</span></button><button class="side-link" type="button" data-target="faq"><span>FAQ</span></button><button class="side-link" type="button" data-target="apply"><span>지원</span></button>
+    <button class="side-link" type="button" data-target="about"><span>시작</span></button><button class="side-link" type="button" data-target="history"><span>여정</span></button><button class="side-link" type="button" data-target="fit"><span>대상</span></button><button class="side-link" type="button" data-target="beta"><span>운영</span></button><button class="side-link" type="button" data-target="schedule"><span>일정</span></button><button class="side-link" type="button" data-target="faq"><span>FAQ</span></button><button class="side-link" type="button" data-target="apply"><span>지원</span></button>
   </aside>
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
       <div class="shell">
         <p class="hero-overline reveal">Winning Fellowship 3 · 2026 Autumn</p>
-        <h1 class="reveal" id="hero-title">미뤄 둔 일을,<br><em>이번에는 진짜 해보는 14주.</em></h1>
-        <p class="hero-copy reveal">AI를 잘하는 사람을 찾는 게 아닙니다. <span class="keep">학교·일·일상에서</span> 계속 미뤄 둔 장면 하나를 가져와, 2주 동안 직접 움직여 볼 사람을 찾습니다.</p>
-        <div class="hero-actions reveal"><a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">2주 베타 지원하기 <span aria-hidden="true">↗</span></a><a class="button secondary" href="#about">어떤 14주인지 보기</a></div>
-        <p class="hero-boundary reveal">대학 3학년 이상·졸업생 대상 · 참가비 없음. 정식 지원서로 3기 대기 명단을 받습니다. 이번 지원은 코어 확정이 아닌 2주 베타 초대 검토입니다.</p>
+        <h1 class="reveal" id="hero-title">정답이 사라진 20대,<br><em>내 다음 선택을 만드는 약 3개월.</em></h1>
+        <p class="hero-copy reveal">대학 3학년부터 취업을 준비하는 시기까지. 지금 내게 중요한 장면 하나를 정하고, AI와 동료 속에서 직접 시도하고 수정해 봅니다.</p>
+        <div class="hero-actions reveal"><a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">3기 지원하기 <span aria-hidden="true">↗</span></a><a class="button secondary" href="#history">위닝 펠로우십이 걸어온 길</a></div>
+        <p class="hero-boundary reveal">대학 3학년 이상·졸업생 대상 · 참가비 없음. 정식 지원서로 받고, 먼저 2주 베타 초대 여부를 검토합니다.</p>
         <div class="facts reveal" aria-label="3기 핵심 정보">
-          <div class="fact"><strong data-count="14">14</strong><span>2주 베타 + 12주 코어</span></div><div class="fact"><strong data-count="90">90</strong><span>격주 온라인 모임 · 분</span></div><div class="fact"><strong><span data-count="12">12</span>–<span data-count="15">15</span>명</strong><span>코어 기준 인원</span></div><div class="fact"><strong data-count="0">0</strong><span>참가비 · 원</span></div>
+          <div class="fact"><strong>대상</strong><span>대학 3학년 이상·졸업생</span></div><div class="fact"><strong>모집</strong><span>8/4–8/10</span></div><div class="fact"><strong>방식</strong><span>온라인 중심</span></div><div class="fact"><strong>비용</strong><span>참가비 없음</span></div>
         </div>
       </div>
     </section>
 
     <section class="chapter light" id="about" aria-labelledby="about-title">
       <div class="shell">
-        <p class="chapter-label reveal">Why this fellowship</p><h2 class="reveal" id="about-title">할 수 있는데,<br>자꾸 미뤄지는 일이 있나요?</h2><p class="lead reveal">새 도구를 하나 더 배우는 일보다 어려운 건, 내 삶의 문제를 정하고 실제 첫 행동을 만드는 일입니다. 3기는 그 한 장면에서 시작합니다.</p>
+        <p class="chapter-label reveal">시작한 이유</p><h2 class="reveal" id="about-title">수능 다음에서 시작한 질문은,<br>이제 20대의 선택으로 이어집니다.</h2><p class="lead reveal">위닝 펠로우십은 AI 프로그램으로 시작하지 않았습니다. 입시라는 큰 목표가 사라진 뒤에도 삶을 혼자 흘려보내지 않고, 동료와 함께 자기 방향을 찾도록 돕기 위해 시작했습니다.</p>
         <div class="story-list">
-          <article class="story-row reveal"><span class="story-index">01</span><h3>내 문제에서 시작합니다.</h3><p>누가 정해 준 공통 과제를 하지 않습니다. 학교, 일, 취업 준비, 사이드 프로젝트, 생활 루틴 중 지금의 나에게 정말 중요한 장면 하나를 고릅니다.</p></article>
-          <article class="story-row reveal"><span class="story-index">02</span><h3>AI로 첫 행동을 작게 만듭니다.</h3><p>AI가 답을 대신 내게 두지 않습니다. 조사 시간을 줄이거나, 초안을 만들거나, 반복을 덜어 오늘 한 번 해볼 수 있는 크기로 바꿉니다.</p></article>
-          <article class="story-row reveal"><span class="story-index">03</span><h3>혼자 끊기는 지점에 리듬을 둡니다.</h3><p>결과를 자랑하는 모임이 아닙니다. 해본 것, 실제 반응, 막힌 지점, 다음에 바꿀 한 가지를 동료와 나누며 다시 움직입니다.</p></article>
+          <article class="story-row reveal"><span class="story-index">01</span><h3>정해진 목표 다음의 삶</h3><p>수능이 끝나면 모두에게 같은 정답은 사라집니다. 전공, 진로, 관계, 생활에서 무엇에 시간을 쓸지 스스로 선택해야 합니다.</p></article>
+          <article class="story-row reveal"><span class="story-index">02</span><h3>혼자 찾지 않는 방향</h3><p>단순한 강의나 수업이 아니라, 함께 움직이는 동료를 만나고 자기 삶의 방향을 실제 경험 속에서 찾아가는 여정을 만들었습니다.</p></article>
+          <article class="story-row reveal"><span class="story-index">03</span><h3>지금 더 구체적인 선택</h3><p>대학 3학년 이후에는 선택의 결과가 삶에 쌓이기 시작합니다. 무엇을 준비하고 어디에 시간을 걸지, 이제 내 다음 장면을 직접 정할 때입니다.</p></article>
         </div>
-        <p class="plain-note reveal"><strong>AI 기능 강의나 결과물 제작반은 아닙니다.</strong> 취업, 수익, 성과를 보장하지도 않습니다. 대신 내 문제를 직접 정하고, 해보고, 다음 시도를 바꾸는 과정을 함께 만듭니다.</p>
+        <p class="plain-note reveal"><strong>Ride Your Own Waves.</strong> 하나의 파도가 지나간 뒤에도, 각자에게 오는 다음 파도를 스스로 읽고 타도록 돕는다는 출발점은 지금도 같습니다.</p>
       </div>
     </section>
 
-    <section class="chapter dark" id="beta" aria-labelledby="beta-title">
-      <div class="shell program-layout">
-        <div class="sticky-copy reveal"><p class="chapter-label">First, 2-week beta</p><h2 id="beta-title">지원서보다,<br>먼저 해봅니다.</h2><p class="lead">서류만으로 서로를 판단하지 않습니다. 실제 생활 속에서 시간을 내고 작은 행동을 만든 뒤, 12주를 함께 갈 수 있을지 확인합니다.</p></div>
-        <div class="program-steps" id="beta-timeline">
-          <div class="program-line" aria-hidden="true"><div class="program-progress"></div></div>
-          <article class="program-step reveal"><p class="step-meta">WEEK 01 · 장면 정하기</p><h3>미뤄 둔 일 하나와<br>실제로 낼 시간을 정합니다.</h3><p>막연한 목표 대신 지금 바꾸고 싶은 장면, AI가 도울 수 있는 지점, 이번 주에 가능한 시간을 구체적으로 적습니다.</p></article>
-          <article class="program-step reveal"><p class="step-meta">WEEK 01 · 작게 해보기</p><h3>완성보다 첫 반응을 만듭니다.</h3><p>잘 만든 계획서를 기다리지 않습니다. 오늘 할 수 있는 크기로 줄여 한 번 실행하고, 현실에서 어떤 반응이 생겼는지 봅니다.</p></article>
-          <article class="program-step reveal"><p class="step-meta">WEEK 02 · 다음 수정</p><h3>잘된 것보다,<br>다음에 바꿀 것을 남깁니다.</h3><p>성공한 척하지 않습니다. 막힌 지점까지 솔직하게 공유하고 다음 행동에서 바꿀 한 가지를 정합니다.</p><div class="action-loop" aria-label="베타 실행 흐름"><span>해본 것</span><span>실제 반응</span><span>막힌 지점</span><span>다음 수정</span></div></article>
-          <article class="program-step reveal"><p class="step-meta">8/30 · 서로 확인하기</p><h3>맞으면, 12주를 더 갑니다.</h3><p>베타의 시간 약속과 실행 방식을 바탕으로 코어 합류를 결정합니다. 지원 또는 베타 참여가 코어 합류를 보장하지 않습니다.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter light" id="core" aria-labelledby="core-title">
-      <div class="shell"><p class="chapter-label reveal">Then, 12-week core</p><h2 class="reveal" id="core-title">각자의 장면을,<br>끝까지 움직이게 하는 12주.</h2>
-        <div class="core-grid">
-          <div class="core-statement reveal"><h3>같은 결과물을 만들지 않아도,<br>같은 리듬으로 갈 수 있습니다.</h3><p>12–15명의 코어 펠로우가 격주 90분 온라인에서 지난 행동과 실제 반응을 확인합니다. 고정된 팀 과제보다 각자의 삶에 남는 변화를 우선합니다.</p><div class="boundary-box"><strong>바쁜 시기에는 범위를 줄이거나 잠시 멈출 수 있습니다.</strong><br>대신 잠수하지 않고 현재 상태와 다음 선택을 알리는 것을 서로의 약속으로 둡니다.</div></div>
-          <div class="support-list reveal">
-            <article class="support-item"><b>01</b><div><h3>격주 실행 리듬</h3><p>지난 행동, 현실의 반응, 다음 수정, 지금 필요한 지원을 90분 안에 짚습니다.</p></div></article>
-            <article class="support-item"><b>02</b><div><h3>개인 유료 AI 1종 지원</h3><p>코어 합류 후 각자의 실행에 필요한 개인 유료 AI 구독 한 가지를 지원합니다.</p></div></article>
-            <article class="support-item"><b>03</b><div><h3>필요할 때만 작은 실험 조</h3><p>공통 관심이나 병목이 생길 때 2–4주짜리 작은 실험 조를 선택적으로 만듭니다.</p></div></article>
-            <article class="support-item"><b>04</b><div><h3>다음 행동을 넓히는 지원</h3><p>이미 해본 행동의 다음 단계를 넓히는 데 무엇이 필요한지 함께 검토합니다.</p></div></article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter dark" id="lessons" aria-labelledby="lessons-title">
-      <div class="shell"><p class="chapter-label reveal">What we learned</p><h2 class="reveal" id="lessons-title">1·2기에서 배워,<br>3기는 이렇게 바꿨습니다.</h2><p class="lead reveal">지난 기수를 좋은 기억으로만 포장하지 않았습니다. 함께일 때 움직였던 이유와 흐려졌던 지점을 이번 운영에 반영했습니다.</p>
+    <section class="chapter dark" id="history" aria-labelledby="history-title">
+      <div class="shell"><p class="chapter-label reveal">걸어온 길</p><h2 class="reveal" id="history-title">함께 가능성을 열어 본 시간에서,<br>각자의 다음 선택으로.</h2><p class="lead reveal">1·2기의 후기는 서로 다른 팀 활동 안에서 나왔습니다. 3기는 그 경험을 같은 형태로 반복하지 않고, 지금의 20대가 자기 삶에 직접 선택을 남기는 방식으로 이어갑니다.</p>
         <div class="lesson-rows">
-          <article class="lesson-row reveal"><span class="from">지원서만 보던 방식에서</span><h3>2주 먼저 해보기</h3><p>잘 쓴 말보다 실제로 시간을 내고 행동을 만드는 과정을 함께 확인합니다.</p></article>
-          <article class="lesson-row reveal"><span class="from">큰 팀 결과물에서</span><h3>각자의 실제 장면으로</h3><p>모두가 같은 것을 만들기보다, 각자에게 중요한 문제를 끝까지 다룹니다.</p></article>
-          <article class="lesson-row reveal"><span class="from">의욕에 기대던 운영에서</span><h3>고정된 짧은 리듬으로</h3><p>격주 90분과 상태 공유 약속으로 조용히 흐름이 끊기는 일을 줄입니다.</p></article>
+          <article class="lesson-row reveal"><span class="from">1기 · 발견과 시작</span><h3>여러 삶의 가능성을 함께 열었습니다.</h3><p>커리어·글로벌·라이프의 여러 팀에서 학과 브랜딩, 코딩, 투자 학습, 언어 교류, 영화·음악, 밴드, 영상 제작, 러닝과 스포츠를 직접 시도했습니다.</p></article>
+          <article class="lesson-row reveal"><span class="from">2기 · 집중과 확장</span><h3>작은 팀과 정기적인 만남으로 경험을 이어갔습니다.</h3><p>브랜딩과 코딩, 주식 학습, 영어 회화, 운동, 취미 공유처럼 각 팀이 고른 주제를 온·오프라인 모임과 활동으로 이어갔습니다.</p></article>
+          <article class="lesson-row reveal"><span class="from">3기 · 다음 장</span><h3>이제 각자의 삶에서 중요한 장면을 움직입니다.</h3><p>공통 팀 결과물보다 각자의 실제 장면에서 시작합니다. AI는 배우는 목적이 아니라, 선택을 행동으로 줄이고 현실의 반응을 보며 수정하는 도구로 씁니다.</p></article>
         </div>
+        <p class="history-transition reveal"><strong>3기는 1·2기의 실패를 고친 상품이 아닙니다.</strong><br>여러 가능성을 열고 동료와 함께 움직여 본 경험을, 현재 20대의 자기 선택으로 이어 가는 다음 장입니다.</p>
       </div>
     </section>
 
-    <section class="chapter light" id="reviews" aria-labelledby="reviews-title">
-      <div class="shell reviews-heading"><div><p class="chapter-label reveal">Words from cohort 1</p><h2 class="reveal" id="reviews-title">혼자였다면<br>시작하지 못했을 일들.</h2></div><p class="lead reveal">3기의 방식은 달라졌지만, 함께라서 한 번 더 움직였다는 경험은 이어갑니다. 아래 문장은 1기 홈페이지에 공개된 익명 후기 원문입니다.</p></div>
+    <section class="chapter dark reviews-continuation" id="reviews" aria-labelledby="reviews-title">
+      <div class="shell reviews-heading"><div><p class="chapter-label reveal">1기 익명 후기</p><h2 class="reveal" id="reviews-title">이 활동 속에서,<br>이런 말이 남았습니다.</h2></div><p class="lead reveal">아래 문장은 1기 홈페이지에 공개된 익명 후기 원문입니다. 3기의 결과가 아니라, 1기의 팀 활동에서 참가자가 직접 남긴 경험입니다.</p></div>
+
       <div class="review-marquee reveal" aria-label="지난 기수 익명 후기">
         <div class="review-track" tabindex="0">
           <article class="review-card"><span class="review-mark">“</span><blockquote>체력뿐 아니라 마음까지 단단해진 시간이었습니다. 다양한 러닝 코스를 뛰어보고 마지막에는 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정 자체가 오래 기억에 남을 것 같아요.</blockquote><footer>1기 익명 후기 · 김○○ · Flow Crew</footer></article>
@@ -474,28 +455,68 @@
       <p class="review-note">마우스를 올리거나 키보드로 초점을 두면 후기가 멈춥니다.</p>
     </section>
 
+    <section class="chapter light" id="fit" aria-labelledby="fit-title">
+      <div class="shell">
+        <p class="chapter-label reveal">이런 분께 맞습니다</p><h2 class="reveal" id="fit-title">지금, 이런 선택 앞에 있다면.</h2><p class="lead reveal">AI를 잘하는 사람보다, 자기 삶의 다음 선택을 직접 해보고 그 경험을 다음 행동으로 이어가려는 사람을 찾습니다.</p>
+        <div class="story-list">
+          <article class="story-row reveal"><span class="story-index">01</span><h3>진로와 취업이 구체적인 선택이 된 사람</h3><p>대학 3학년 이후, 무엇을 준비하고 무엇을 포기할지 더 이상 미룰 수 없다고 느끼는 사람.</p></article>
+          <article class="story-row reveal"><span class="story-index">02</span><h3>하고 싶은 일을 첫 행동으로 옮기고 싶은 사람</h3><p>취업 준비, 공부, 개인 프로젝트, 생활 리듬 중 하나를 계획이 아닌 실제 시도로 바꾸고 싶은 사람.</p></article>
+          <article class="story-row reveal"><span class="story-index">03</span><h3>AI를 내 삶의 선택에 써보고 싶은 사람</h3><p>정보 탐색이나 과제를 넘어, 조사와 초안과 반복을 줄여 현실의 행동을 만드는 데 AI를 써보고 싶은 사람.</p></article>
+        </div>
+        <p class="plain-note reveal"><strong>취업을 보장하거나 모두에게 같은 결과물을 요구하는 프로그램은 아닙니다.</strong> 각자가 자기 다음 선택을 실제로 해보고, 수정하며 이어갈 수 있는 시간을 만듭니다.</p>
+        <p class="philosophy-note reveal"><strong>30년 뒤를 약속하지는 않습니다.</strong><br>다만 스스로 선택하고 움직여 본 몇 달은, 이후의 선택을 대하는 기준으로 오래 남을 수 있습니다.</p>
+      </div>
+    </section>
+
+    <section class="chapter dark" id="beta" aria-labelledby="beta-title">
+      <div class="shell program-layout">
+        <div class="sticky-copy reveal"><p class="chapter-label">3기 운영 방식</p><h2 id="beta-title">먼저 2주를 해보고,<br>맞으면 12주를 이어갑니다.</h2><p class="lead">잘 쓴 지원서만으로 서로를 판단하지 않습니다. 실제 생활 속에서 시간을 내고 작은 행동을 만든 뒤, 함께 이어갈 수 있을지 확인합니다.</p></div>
+        <div class="program-steps" id="beta-timeline">
+          <div class="program-line" aria-hidden="true"><div class="program-progress"></div></div>
+          <article class="program-step reveal"><p class="step-meta">WEEK 01 · 장면 정하기</p><h3>미뤄 둔 일 하나와<br>실제로 낼 시간을 정합니다.</h3><p>막연한 목표 대신 지금 바꾸고 싶은 장면, AI가 도울 수 있는 지점, 이번 주에 가능한 시간을 구체적으로 적습니다.</p></article>
+          <article class="program-step reveal"><p class="step-meta">WEEK 01 · 작게 해보기</p><h3>완성보다 첫 반응을 만듭니다.</h3><p>잘 만든 계획서를 기다리지 않습니다. 오늘 할 수 있는 크기로 줄여 한 번 실행하고, 현실에서 어떤 반응이 생겼는지 봅니다.</p></article>
+          <article class="program-step reveal"><p class="step-meta">WEEK 02 · 다음 수정</p><h3>잘된 것보다,<br>다음에 바꿀 것을 남깁니다.</h3><p>성공한 척하지 않습니다. 막힌 지점까지 솔직하게 공유하고 다음 행동에서 바꿀 한 가지를 정합니다.</p><div class="action-loop" aria-label="베타 실행 흐름"><span>해본 것</span><span>실제 반응</span><span>막힌 지점</span><span>다음 수정</span></div></article>
+          <article class="program-step reveal"><p class="step-meta">8/30 · 서로 확인하기</p><h3>맞으면, 12주를 더 갑니다.</h3><p>베타의 시간 약속과 실행 방식을 바탕으로 코어 합류를 결정합니다. 지원 또는 베타 참여가 코어 합류를 보장하지 않습니다.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter light" id="core" aria-labelledby="core-title">
+      <div class="shell"><p class="chapter-label reveal">이어가는 12주</p><h2 class="reveal" id="core-title">각자의 장면을,<br>끝까지 움직이게 하는 12주.</h2>
+        <div class="core-grid">
+          <div class="core-statement reveal"><h3>같은 결과물을 만들지 않아도,<br>같은 리듬으로 갈 수 있습니다.</h3><p>12–15명의 코어 펠로우가 격주 90분 온라인에서 지난 행동과 실제 반응을 확인합니다. 고정된 팀 과제보다 각자의 삶에 남는 변화를 우선합니다.</p><div class="boundary-box"><strong>바쁜 시기에는 범위를 줄이거나 잠시 멈출 수 있습니다.</strong><br>대신 잠수하지 않고 현재 상태와 다음 선택을 알리는 것을 서로의 약속으로 둡니다.</div></div>
+          <div class="support-list reveal">
+            <article class="support-item"><b>01</b><div><h3>격주 실행 리듬</h3><p>지난 행동, 현실의 반응, 다음 수정, 지금 필요한 지원을 90분 안에 짚습니다.</p></div></article>
+            <article class="support-item"><b>02</b><div><h3>개인 유료 AI 1종 지원</h3><p>코어 합류 후 각자의 실행에 필요한 개인 유료 AI 구독 한 가지를 지원합니다.</p></div></article>
+            <article class="support-item"><b>03</b><div><h3>필요할 때만 작은 실험 조</h3><p>공통 관심이나 병목이 생길 때 2–4주짜리 작은 실험 조를 선택적으로 만듭니다.</p></div></article>
+            <article class="support-item"><b>04</b><div><h3>다음 행동을 넓히는 지원</h3><p>이미 해본 행동의 다음 단계를 넓히는 데 무엇이 필요한지 함께 검토합니다.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="chapter dark" id="schedule" aria-labelledby="schedule-title">
-      <div class="shell"><p class="chapter-label reveal">Schedule</p><h2 class="reveal" id="schedule-title">이번 가을,<br>14주의 흐름.</h2><div class="schedule">
+      <div class="shell"><p class="chapter-label reveal">일정</p><h2 class="reveal" id="schedule-title">이번 가을,<br>함께 움직이는 흐름.</h2><div class="schedule">
         <article class="schedule-item reveal"><time datetime="2026-08-04">8/4–8/10</time><div><h3>3기 모집</h3><p>정식 지원서를 바탕으로 2주 베타 초대 여부를 검토합니다.</p></div></article>
         <article class="schedule-item reveal"><time datetime="2026-08-13">8/13</time><div><h3>베타 초대·시간 확인</h3><p>초대 가능 여부와 베타 안내를 전달하고 실제 가능한 모임 시간을 확인합니다.</p></div></article>
-        <article class="schedule-item reveal"><time datetime="2026-08-17">8/17–8/30</time><div><h3>2주 베타</h3><p>장면을 정하고, 작게 실행하고, 다음에 바꿀 한 가지까지 남깁니다.</p></div></article>
-        <article class="schedule-item reveal"><time datetime="2026-08-31">8/31–11/22</time><div><h3>12주 코어</h3><p>12–15명이 격주 90분 온라인 리듬으로 각자의 실제 행동을 이어갑니다.</p></div></article>
+        <article class="schedule-item reveal"><time datetime="2026-08-17">8/17–8/30</time><div><h3>먼저 함께 해보기</h3><p>장면을 정하고, 작게 실행하고, 다음에 바꿀 한 가지까지 남깁니다.</p></div></article>
+        <article class="schedule-item reveal"><time datetime="2026-08-31">8/31–11/22</time><div><h3>각자의 장면 이어가기</h3><p>코어 펠로우가 격주 온라인 리듬으로 각자의 실제 행동을 이어갑니다.</p></div></article>
       </div></div>
     </section>
 
     <section class="chapter light" id="faq" aria-labelledby="faq-title">
-      <div class="shell"><p class="chapter-label reveal">FAQ</p><h2 class="reveal" id="faq-title">지원 전에,<br>이것만은 확인해주세요.</h2><div class="faq-list reveal">
+      <div class="shell"><p class="chapter-label reveal">자주 묻는 질문</p><h2 class="reveal" id="faq-title">지원 전에,<br>이것만은 확인해주세요.</h2><div class="faq-list reveal">
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1"><span>AI를 잘 다루지 못해도 <span class="keep">지원할 수 있나요?</span></span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a1" role="region" aria-hidden="true"><div><p>네. 기능 숙련도보다 내 문제에 직접 써보고 다음 시도를 바꿀 의지가 더 중요합니다. 무료 계정만 있어도 베타에 참여할 수 있습니다.</p></div></div></div>
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2"><span>이미 개인 유료 AI 계정을 쓰고 있으면 유리한가요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a2" role="region" aria-hidden="true"><div><p>꾸준히 사용해온 습관을 보여주는 참고 신호일 수는 있지만 자동 선발 조건은 아닙니다. 기존 계정은 베타에서 그대로 사용하면 됩니다.</p></div></div></div>
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3"><span>참가비나 별도 계정 비용이 있나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a3" role="region" aria-hidden="true"><div><p>참가비는 없습니다. 베타에는 프로그램 계정을 제공하지 않아 개인 무료 또는 기존 유료 AI를 사용합니다. 코어 합류 후에는 개인 유료 AI 구독 한 가지를 지원합니다.</p></div></div></div>
-        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4"><span>지원하면 바로 코어 펠로우가 되나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a4" role="region" aria-hidden="true"><div><p>아닙니다. 이번 지원은 2주 베타 초대 검토를 위한 정식 지원입니다. 베타에서 서로의 시간 약속과 실행 방식을 확인한 뒤 코어 합류를 결정합니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4"><span>지원하면 바로 코어 펠로우가 되나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a4" role="region" aria-hidden="true"><div><p>아닙니다. 이번 지원은 2주 베타 초대 검토를 위한 정식 지원입니다. 지원서 화면은 ‘3기 대기 명단’으로 안내되지만, 정식 모집과 같은 항목으로 받고 같은 기준으로 검토합니다. 베타에서 서로의 시간 약속과 실행 방식을 확인한 뒤 코어 합류를 결정합니다.</p></div></div></div>
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5"><span>모임은 언제, 어디에서 하나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a5" role="region" aria-hidden="true"><div><p>공식 모임은 격주 90분 온라인입니다. 가능한 시간은 베타 초대 후 확인하고 코어 시작 전에 최종 안내합니다.</p></div></div></div>
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a6"><span>지원서에 쓰면 안 되는 정보가 있나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a6" role="region" aria-hidden="true"><div><p>비밀번호, OTP, 카드번호, API 키, AI 대화나 프롬프트 원문 같은 민감 정보는 제출하지 마세요. 지원에 필요한 최소 정보만 받습니다.</p></div></div></div>
       </div></div>
     </section>
 
     <section class="chapter final" id="apply" aria-labelledby="apply-title">
-      <div class="shell reveal"><p class="chapter-label">Apply for cohort 3</p><h2 id="apply-title">바꾸고 싶은 장면 하나가 있다면,<br>먼저 2주를 함께해요.</h2><p>완성된 결과물은 필요 없습니다. 지금 바꾸고 싶은 것, 실제로 내어볼 시간, 해보다 막혔던 지점을 솔직하게 들려주세요.</p><a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">정식 지원서 작성 <span aria-hidden="true">↗</span></a><small>모집 8/4–8/10 · 베타 초대 가능 여부 안내 8/13 · 2주 베타 시작 8/17</small></div>
+      <div class="shell reveal"><p class="chapter-label">3기 지원</p><h2 id="apply-title">바꾸고 싶은 장면 하나가 있다면,<br>먼저 2주를 함께해요.</h2><p>완성된 결과물은 필요 없습니다. 지금 바꾸고 싶은 것, 실제로 내어볼 시간, 해보다 막혔던 지점을 솔직하게 들려주세요.</p><a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">정식 지원서 작성 <span aria-hidden="true">↗</span></a><small>모집 8/4–8/10 · 베타 초대 가능 여부 안내 8/13 · 2주 베타 시작 8/17</small></div>
     </section>
   </main>
 
@@ -518,11 +539,7 @@
         revealItems.forEach((item, index) => { if (item.closest('.hero')) item.style.transitionDelay = `${Math.min(index, 5) * 85}ms`; revealObserver.observe(item); });
       }
 
-      const counters = document.querySelectorAll('[data-count]');
-      const runCounter = el => { const end = Number(el.dataset.count); if (reducedMotion || end === 0) { el.textContent = String(end); return; } const start = performance.now(); const duration = 850; const step = now => { const progress = Math.min((now - start) / duration, 1); el.textContent = String(Math.round(end * (1 - Math.pow(1 - progress, 3)))); if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
-      if ('IntersectionObserver' in window && !reducedMotion) { const counterObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { runCounter(entry.target); counterObserver.unobserve(entry.target); } }), { threshold: .7 }); counters.forEach(counter => { counter.textContent = '0'; counterObserver.observe(counter); }); } else counters.forEach(runCounter);
-
-      const sectionIds = ['about','beta','core','reviews','schedule','faq','apply'];
+      const sectionIds = ['about','history','fit','beta','schedule','faq','apply'];
       const sections = sectionIds.map(id => document.getElementById(id));
       const navLinks = document.querySelectorAll('[data-nav]');
       const sideLinks = document.querySelectorAll('.side-link');
