@@ -3,393 +3,551 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI로 내 삶의 실제 장면을 움직이는 14주. 대학 3학년 이상·졸업생을 위한 위닝 펠로우십 3기 지원 접수 중.">
-  <meta property="og:title" content="위닝 펠로우십 3기 | 지원 접수 중">
-  <meta property="og:description" content="AI를 잘 쓰는 사람보다, AI로 내 삶을 한 번 바꿔 볼 사람을 찾습니다.">
-  <meta property="og:image" content="invite/photos/og-card.jpg">
-  <title>위닝 펠로우십 3기 | 지원 접수 중</title>
+  <meta name="description" content="미뤄 둔 일을 이번에는 진짜 해보는 14주. 대학 3학년 이상·졸업생을 위한 위닝 펠로우십 3기 모집.">
+  <meta property="og:title" content="위닝 펠로우십 3기 | 미뤄 둔 일을, 이번에는 진짜">
+  <meta property="og:description" content="AI를 배우는 데서 끝내지 않고, 내 삶의 한 장면을 실제로 움직이는 14주.">
+  <title>위닝 펠로우십 3기 | 미뤄 둔 일을, 이번에는 진짜</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23f2bd3f'/%3E%3C/svg%3E">
   <style>
+    @font-face { font-family: "Pretendard Variable"; font-style: normal; font-weight: 45 920; font-display: swap; src: url("assets/PretendardVariable.woff2") format("woff2-variations"); }
     :root {
-      color-scheme: dark;
-      --bg: #0c1018;
-      --surface: #161d29;
-      --surface-2: #202a39;
-      --line: rgba(255,255,255,.13);
-      --text: #f8f7f1;
-      --muted: #bdc3ce;
-      --yellow: #f7c84b;
-      --yellow-deep: #dca225;
-      --blue: #87adff;
-      --blue-soft: rgba(135,173,255,.14);
-      --radius: 24px;
+      color-scheme: light dark;
+      --ink: #171717;
+      --paper: #f7f5ef;
+      --night-soft: #232323;
+      --gold: #f2bd3f;
+      --gold-deep: #8f5f00;
+      --text-light: #faf8f2;
+      --muted-light: #aaa79f;
+      --muted-dark: #68645d;
+      --text-subtle-light: #8c8982;
+      --text-on-gold: #241803;
+      --announcement-ink: #2a1d05;
+      --text-boundary: #8c8982;
+      --inactive-dot: #4b4b49;
+      --gold-dot: #6c4600;
+      --gold-copy: #654712;
+      --gold-meta: #654712;
+      --gold-hover: #ffd268;
+      --ink-hover: #2b2b2b;
+      --guide-bg: rgba(23,23,23,.92);
+      --header-bg: rgba(23,23,23,.86);
+      --mobile-menu-bg: rgba(23,23,23,.98);
+      --nav-state-bg: rgba(255,255,255,.08);
+      --nav-state-border: rgba(255,255,255,.09);
+      --surface-hover: rgba(255,255,255,.07);
+      --menu-rule: rgba(255,255,255,.06);
+      --step-ring: rgba(255,255,255,.22);
+      --gold-pulse: rgba(108,70,0,.12);
+      --gold-pulse-clear: rgba(108,70,0,0);
+      --gold-shadow: rgba(242,189,63,.18);
+      --gold-ring: rgba(242,189,63,.12);
+      --gold-rule: rgba(242,189,63,.45);
+      --loop-copy: #ddd8ce;
+      --mask-solid: #000;
+      --rule-dark: rgba(23,23,23,.15);
+      --rule-light: rgba(255,255,255,.13);
+      --ease: cubic-bezier(.22,1,.36,1);
+      --motion-fast: .18s;
+      --motion-fade: .22s;
+      --motion-standard: .28s;
+      --motion-reveal: .65s;
+      --space-1: .25rem;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 3rem;
+      --space-14: 3.75rem;
+      --space-hero-top: 5rem;
+      --measure-title: 59.375rem;
+      --measure-section-title: 53.125rem;
+      --measure-hero-copy: 47.5rem;
+      --measure-boundary: 40.625rem;
+      --measure-story: 57.5rem;
+      --measure-wide: 62.5rem;
+      --measure-final: 56.25rem;
+      --font-hero-copy: clamp(1.12rem, 2.2vw, 1.4rem);
+      --font-fact: clamp(1.55rem, 3vw, 2.4rem);
+      --font-quote-mark: 3.6rem;
+      --font-body-strong: 1.08rem;
+      --font-body-final: 1.06rem;
+      --font-body: 1rem;
+      --font-brand: .95rem;
+      --font-nav: .82rem;
+      --font-compact: .8rem;
+      --font-meta: .78rem;
+      --font-small: .72rem;
+      --font-micro: .68rem;
+      --button-height: 3.125rem;
+      --nav-indicator-height: 2.25rem;
+      --review-card-width: 23.75rem;
+      --review-card-height: 18.75rem;
+      --faq-target-height: 5.125rem;
+      --shell-gutter: 3rem;
+      --shell-gutter-compact: 2rem;
+      --side-guide-inset: 1.5rem;
+      --measure-note: 54.5rem;
+      --measure-program-copy: 38.75rem;
+      --measure-core-copy: 37rem;
+      --measure-final-copy: 43rem;
+      --grid-story-index: 6.25rem;
+      --grid-story-copy-min: 13rem;
+      --grid-support-index: 3.5rem;
+      --grid-lesson-index: 11.25rem;
+      --grid-lesson-copy-min: 14.5rem;
+      --font-overline: .75rem;
+      --font-support: .9375rem;
+      --font-lesson: 1.375rem;
+      --font-icon: 1.5rem;
+      --rule-width: 1px;
+      --timeline-width: 2px;
+      --dot-small: .5rem;
+      --dot-step: .75rem;
+      --icon-line-width: 1.5rem;
+      --icon-line-height: .125rem;
+      --rule-strong-width: 3px;
+      --facts-space: clamp(4rem, 9vw, 6.25rem);
+      --measure-program-min: 17.5rem;
+      --program-gap: clamp(var(--space-14), 10vw, 8rem);
+      --program-step-height: 15.625rem;
+      --core-copy-min: 20rem;
+      --core-gap: clamp(3.25rem, 9vw, 7rem);
+      --hero-top-compact: 4.25rem;
+      --timeline-indent-compact: 2.75rem;
+      --timeline-dot-inset-compact: -2.25rem;
+      --weight-label: 800;
+      --weight-body-strong: 760;
+      --weight-cta: 880;
+      --weight-bold: 900;
+      --weight-nav: 700;
+      --motion-status: 2.2s;
+      --motion-marquee: 85s;
+      --space-md: 1rem;
+      --space-lg: 1.75rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4.5rem;
+      --content-max: 70rem;
+      --copy-max: 45rem;
+      --section-space: clamp(92px, 12vw, 152px);
+      --font-display: clamp(3.15rem, 8.4vw, 7rem);
+      --font-section: clamp(2.25rem, 5.6vw, 4.65rem);
+      --font-heading: clamp(1.35rem, 2.4vw, 2rem);
+      --font-lead: clamp(1.05rem, 2vw, 1.28rem);
+      --font-label: .76rem;
+      --weight-display: 820;
+      --weight-section: 790;
+      --weight-heading: 760;
+      --radius-pill: 999px;
+      --radius-small: 4px;
+      --target-min: 44px;
+      --control-target: 3rem;
+      --announcement-height: 44px;
+      --nav-height: 68px;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; background: var(--bg); }
-    body {
-      min-width: 320px;
-      margin: 0;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at 85% 5%, rgba(70,112,211,.22), transparent 28rem),
-        radial-gradient(circle at 4% 35%, rgba(247,200,75,.1), transparent 30rem),
-        var(--bg);
-      color: var(--text);
-      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.62;
-      word-break: keep-all;
-    }
-    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--announcement-height) + var(--nav-height) + var(--space-md)); background: var(--ink); }
+    body { margin: 0; overflow-x: hidden; background: var(--ink); color: var(--text-light); font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; word-break: keep-all; }
+    body.menu-open { overflow: hidden; }
     a { color: inherit; text-underline-offset: 4px; }
-    a:hover { color: var(--yellow); }
-    .shell { width: min(100% - 40px, 1120px); margin: 0 auto; }
-    .section { padding: clamp(74px, 10vw, 124px) 0; }
-    .section + .section { border-top: 1px solid var(--line); }
-    .section-head { max-width: 720px; }
-    .kicker {
-      margin: 0 0 10px;
-      color: var(--yellow);
-      font-size: .78rem;
-      font-weight: 850;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    :focus-visible { outline: var(--rule-strong-width) solid var(--gold); outline-offset: 4px; }
+    .shell { width: min(100% - var(--shell-gutter), var(--content-max)); margin-inline: auto; }
+    .chapter { position: relative; padding: var(--section-space) 0; overflow: clip; }
+    .chapter.light { background: var(--paper); color: var(--ink); }
+    .chapter.dark { background: var(--ink); color: var(--text-light); }
+    .chapter-label { margin: 0 0 var(--space-4); color: var(--gold-deep); font-size: var(--font-label); font-weight: var(--weight-label); letter-spacing: .14em; text-transform: uppercase; }
+    .dark .chapter-label { color: var(--gold); }
     h1, h2, h3, p { overflow-wrap: anywhere; }
-    h1, h2, h3 { line-height: 1.14; letter-spacing: -.055em; }
-    h1 { margin: 0; font-size: clamp(2.8rem, 7.6vw, 6.4rem); }
-    h2 { margin: 0; font-size: clamp(2rem, 4.8vw, 3.65rem); }
-    h3 { margin: 0; font-size: 1.28rem; }
-    .section-lead { margin: 20px 0 0; color: var(--muted); font-size: clamp(1rem, 2vw, 1.18rem); }
+    .keep { white-space: nowrap; }
+    h1, h2, h3 { margin: 0; line-height: 1.08; letter-spacing: -.055em; }
+    h1 { max-width: var(--measure-title); font-size: var(--font-display); font-weight: var(--weight-display); }
+    h2 { max-width: var(--measure-section-title); font-size: var(--font-section); font-weight: var(--weight-section); }
+    h3 { font-size: var(--font-heading); font-weight: var(--weight-heading); }
+    .lead { max-width: var(--copy-max); margin: var(--space-lg) 0 0; color: var(--muted-dark); font-size: var(--font-lead); }
+    .dark .lead { color: var(--muted-light); }
+    .reveal { opacity: 0; transform: translateY(var(--space-lg)); transition: opacity var(--motion-reveal) var(--ease), transform var(--motion-reveal) var(--ease); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1px solid var(--line);
-      background: rgba(12,16,24,.86);
-      backdrop-filter: blur(18px);
+    .announcement { position: fixed; inset: 0 0 auto; z-index: 60; height: var(--announcement-height); background: var(--gold); color: var(--announcement-ink); font-size: var(--font-label); font-weight: var(--weight-body-strong); }
+    .announcement-inner { display: flex; height: 100%; align-items: center; justify-content: center; gap: var(--space-3); text-align: center; }
+    .status-dot { width: var(--dot-small); height: var(--dot-small); border-radius: 50%; background: var(--gold-dot); box-shadow: 0 0 0 var(--space-1) var(--gold-pulse); animation: status-pulse var(--motion-status) ease-in-out infinite; }
+    .announcement a { display: inline-flex; min-height: var(--target-min); align-items: center; font-weight: var(--weight-bold); }
+    @keyframes status-pulse { 50% { box-shadow: 0 0 0 var(--space-2) var(--gold-pulse-clear); } }
+
+    .site-header { position: fixed; top: var(--announcement-height); right: 0; left: 0; z-index: 50; border-bottom: var(--rule-width) solid var(--rule-light); background: var(--header-bg); backdrop-filter: blur(var(--space-md)); }
+    .main-nav { display: flex; min-height: var(--nav-height); align-items: center; justify-content: space-between; gap: var(--space-lg); }
+    .brand { position: relative; z-index: 2; display: inline-flex; min-height: var(--target-min); align-items: center; font-size: var(--font-brand); font-weight: var(--weight-bold); letter-spacing: -.035em; text-decoration: none; }
+    .brand span { color: var(--gold); }
+    .desktop-nav { position: relative; display: flex; align-items: center; gap: var(--space-1); }
+    .desktop-nav a:not(.nav-cta) { position: relative; z-index: 1; display: inline-flex; min-height: var(--target-min); padding: 0 var(--space-3); align-items: center; color: var(--muted-light); font-size: var(--font-nav); font-weight: var(--weight-nav); text-decoration: none; transition: color var(--motion-fast) ease; }
+    .desktop-nav a.is-active:not(.nav-cta), .desktop-nav a:hover:not(.nav-cta) { color: var(--text-light); }
+    .nav-indicator { position: absolute; z-index: 0; height: var(--nav-indicator-height); border: var(--rule-width) solid var(--nav-state-border); border-radius: var(--radius-pill); background: var(--nav-state-bg); opacity: 0; transform: translate3d(0,0,0); transition: width var(--motion-standard) var(--ease), transform var(--motion-standard) var(--ease), opacity var(--motion-fast) ease; pointer-events: none; }
+    .nav-cta, .button { display: inline-flex; min-height: var(--button-height); padding: 0 var(--space-6); align-items: center; justify-content: center; gap: var(--space-2); border: var(--rule-width) solid transparent; border-radius: var(--radius-pill); background: var(--gold); color: var(--text-on-gold); font-weight: var(--weight-cta); text-decoration: none; transition: transform var(--motion-fast) ease, background var(--motion-fast) ease, box-shadow var(--motion-fast) ease; }
+    .nav-cta { min-height: var(--target-min); margin-left: var(--space-2); padding-inline: var(--space-md); font-size: var(--font-compact); }
+    .nav-cta:hover, .button:hover { background: var(--gold-hover); color: var(--text-on-gold); transform: translateY(-2px); box-shadow: 0 var(--space-3) var(--space-8) var(--gold-shadow); }
+    .nav-cta:active, .button:active { transform: translateY(0) scale(.98); }
+    .menu-button { display: none; width: var(--target-min); height: var(--target-min); padding: 0; border: 0; background: transparent; color: var(--text-light); cursor: pointer; }
+    .menu-button span, .menu-button::before, .menu-button::after { display: block; width: var(--icon-line-width); height: var(--icon-line-height); margin: var(--space-1) auto; background: currentColor; content: ""; transition: transform var(--motion-standard) var(--ease), opacity var(--motion-fast) ease; }
+    .menu-button[aria-expanded="true"] span { opacity: 0; }
+    .menu-button[aria-expanded="true"]::before { transform: translateY(var(--space-2)) rotate(45deg); }
+    .menu-button[aria-expanded="true"]::after { transform: translateY(calc(-1 * var(--space-2))) rotate(-45deg); }
+    .mobile-menu { display: none; border-top: var(--rule-width) solid var(--rule-light); background: var(--mobile-menu-bg); }
+    .mobile-menu-inner { display: grid; gap: var(--space-1); padding-block: var(--space-md) var(--space-6); }
+    .mobile-menu a { display: flex; min-height: var(--space-10); align-items: center; justify-content: space-between; border-bottom: var(--rule-width) solid var(--menu-rule); color: var(--text-light); font-weight: var(--weight-body-strong); text-decoration: none; }
+    .mobile-menu a:last-child { margin-top: var(--space-3); justify-content: center; border: 0; border-radius: var(--radius-pill); background: var(--gold); color: var(--text-on-gold); }
+
+    .side-guide { position: fixed; top: 50%; right: var(--side-guide-inset); z-index: 40; display: grid; padding: var(--space-2); justify-items: end; gap: var(--space-2); border: var(--rule-width) solid var(--rule-light); border-radius: var(--radius-pill); background: var(--guide-bg); opacity: 0; transform: translateY(-45%); transition: opacity var(--motion-standard) ease, transform var(--motion-standard) var(--ease); pointer-events: none; }
+    .side-guide.is-visible { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
+    .side-top, .side-link { border: 0; background: transparent; color: var(--muted-light); cursor: pointer; }
+    .side-top { display: grid; width: var(--control-target); height: var(--control-target); padding: 0; place-items: center; border: var(--rule-width) solid var(--rule-light); border-radius: 50%; }
+    .side-link { position: relative; display: flex; min-height: var(--target-min); padding: 0; align-items: center; gap: var(--space-3); }
+    .side-link::after { width: var(--dot-small); height: var(--dot-small); border: var(--rule-width) solid currentColor; border-radius: 50%; content: ""; transition: transform var(--motion-fast) ease, background var(--motion-fast) ease, color var(--motion-fast) ease; }
+    .side-link span { padding: var(--space-1) var(--space-2); border-radius: var(--radius-small); background: var(--guide-bg); font-size: var(--font-micro); font-weight: var(--weight-body-strong); opacity: 0; transform: translateX(var(--space-2)); transition: opacity var(--motion-fast) ease, transform var(--motion-fast) ease; }
+    .side-link:hover span, .side-link:focus-visible span, .side-link.is-active span { opacity: 1; transform: translateX(0); }
+    .side-link.is-active { color: var(--gold); }
+    .side-link.is-active::after { background: var(--gold); transform: scale(1.35); }
+
+    .hero { display: flex; min-height: 100svh; padding: calc(var(--announcement-height) + var(--nav-height) + var(--space-hero-top)) 0 var(--space-2xl); align-items: center; background: var(--ink); }
+    .hero .shell { position: relative; }
+    .hero-overline { display: flex; margin: 0 0 var(--space-lg); align-items: center; gap: var(--space-3); color: var(--gold); font-size: var(--font-overline); font-weight: var(--weight-label); letter-spacing: .14em; text-transform: uppercase; }
+    .hero-overline::before { width: var(--space-xl); height: 1px; background: var(--gold); content: ""; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-copy { max-width: var(--measure-hero-copy); margin: var(--space-8) 0 0; color: var(--muted-light); font-size: var(--font-hero-copy); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-xl); }
+    .button.secondary { border-color: var(--rule-light); background: transparent; color: var(--text-light); }
+    .button.secondary:hover { background: var(--surface-hover); color: var(--text-light); box-shadow: none; }
+    .hero-boundary { max-width: var(--measure-boundary); margin: var(--space-4) 0 0; color: var(--text-boundary); font-size: var(--font-meta); }
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: var(--facts-space); border-block: var(--rule-width) solid var(--rule-light); }
+    .fact { padding: var(--space-6) var(--space-5) var(--space-lg) 0; }
+    .fact + .fact { padding-left: var(--space-6); border-left: var(--rule-width) solid var(--rule-light); }
+    .fact strong { display: block; color: var(--text-light); font-size: var(--font-fact); letter-spacing: -.05em; line-height: 1; }
+    .fact > span { display: block; margin-top: var(--space-2); color: var(--muted-light); font-size: var(--font-label); }
+
+    .story-list { max-width: var(--measure-story); margin-top: var(--space-2xl); border-top: var(--rule-width) solid var(--rule-dark); }
+    .story-row { display: grid; grid-template-columns: var(--grid-story-index) minmax(var(--grid-story-copy-min),.8fr) minmax(0,1.2fr); gap: var(--space-lg); padding: var(--target-min) 0; border-bottom: var(--rule-width) solid var(--rule-dark); align-items: start; }
+    .story-index { color: var(--gold-deep); font-size: var(--font-meta); font-weight: var(--weight-bold); letter-spacing: .14em; }
+    .story-row p { margin: 0; color: var(--muted-dark); }
+    .plain-note { max-width: var(--measure-note); margin-top: var(--space-10); padding: var(--space-lg) 0 0; border-top: var(--rule-strong-width) solid var(--ink); color: var(--muted-dark); }
+    .plain-note strong { color: var(--ink); }
+
+    .program-layout { display: grid; grid-template-columns: minmax(var(--measure-program-min),.74fr) minmax(0,1.26fr); gap: var(--program-gap); align-items: start; }
+    .sticky-copy { position: sticky; top: calc(var(--announcement-height) + var(--nav-height) + var(--space-xl)); }
+    .program-steps { position: relative; padding-left: var(--grid-support-index); }
+    .program-line { position: absolute; top: var(--space-2); bottom: var(--space-2); left: var(--space-3); width: var(--timeline-width); background: var(--rule-light); }
+    .program-progress { width: 100%; height: 0; background: var(--gold); transform-origin: top; }
+    .program-step { position: relative; min-height: var(--program-step-height); padding: 0 0 var(--space-2xl); }
+    .program-step:last-child { min-height: 0; padding-bottom: 0; }
+    .program-step::before { position: absolute; top: var(--space-2); left: calc(-1 * var(--space-10)); width: var(--dot-step); height: var(--dot-step); border: var(--space-1) solid var(--ink); border-radius: 50%; background: var(--inactive-dot); box-shadow: 0 0 0 1px var(--step-ring); content: ""; transition: background var(--motion-standard) ease, box-shadow var(--motion-standard) ease; }
+    .program-step.is-active::before { background: var(--gold); box-shadow: 0 0 0 var(--space-1) var(--gold-ring); }
+    .step-meta { margin: 0 0 var(--space-4); color: var(--gold); font-size: var(--font-label); font-weight: var(--weight-label); letter-spacing: .12em; }
+    .program-step p { max-width: var(--measure-program-copy); margin: var(--space-4) 0 0; color: var(--muted-light); }
+    .action-loop { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); }
+    .action-loop span { padding: var(--space-2) var(--space-3); border-bottom: var(--rule-width) solid var(--gold-rule); color: var(--loop-copy); font-size: var(--font-overline); font-weight: var(--weight-body-strong); }
+
+    .core-grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(var(--core-copy-min),.95fr); gap: var(--core-gap); margin-top: var(--space-2xl); }
+    .core-statement { align-self: end; }
+    .core-statement p { max-width: var(--measure-core-copy); margin: var(--space-lg) 0 0; color: var(--muted-dark); font-size: var(--font-body-strong); }
+    .support-list { border-top: var(--rule-width) solid var(--rule-dark); }
+    .support-item { display: grid; grid-template-columns: var(--grid-support-index) 1fr; gap: var(--space-md); padding: var(--space-lg) 0; border-bottom: var(--rule-width) solid var(--rule-dark); }
+    .support-item b { color: var(--gold-deep); font-size: var(--font-label); letter-spacing: .1em; }
+    .support-item p { margin: var(--space-2) 0 0; color: var(--muted-dark); font-size: var(--font-support); }
+    .boundary-box { margin-top: var(--target-min); padding: var(--space-lg) 0; border-block: var(--rule-width) solid var(--rule-dark); color: var(--muted-dark); }
+    .boundary-box strong { color: var(--ink); }
+
+    .lesson-rows { max-width: var(--measure-wide); margin-top: var(--space-2xl); }
+    .lesson-row { display: grid; grid-template-columns: var(--grid-lesson-index) minmax(var(--grid-lesson-copy-min),.8fr) minmax(0,1.2fr); gap: var(--space-8); padding: var(--space-xl) 0; border-top: var(--rule-width) solid var(--rule-light); }
+    .lesson-row:last-child { border-bottom: var(--rule-width) solid var(--rule-light); }
+    .lesson-row .from { color: var(--text-subtle-light); font-size: var(--font-meta); font-weight: var(--weight-body-strong); }
+    .lesson-row h3 { font-size: var(--font-lesson); }
+    .lesson-row p { margin: 0; color: var(--muted-light); }
+
+    .reviews-heading { display: grid; grid-template-columns: 1fr .78fr; gap: var(--space-14); align-items: end; }
+    .reviews-heading .lead { margin: 0; }
+    .review-marquee { width: 100%; margin-top: var(--space-2xl); overflow: hidden; mask-image: linear-gradient(90deg, transparent, var(--mask-solid) 6%, var(--mask-solid) 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, var(--mask-solid) 6%, var(--mask-solid) 94%, transparent); }
+    .review-track { display: flex; width: max-content; gap: var(--space-md); animation: marquee var(--motion-marquee) linear infinite; }
+    .review-track:hover, .review-track:focus-within { animation-play-state: paused; }
+    @keyframes marquee { to { transform: translateX(calc(-50% - 9px)); } }
+    .review-card { width: min(var(--review-card-width), calc(100vw - var(--shell-gutter))); min-height: var(--review-card-height); padding: var(--space-lg); border: var(--rule-width) solid var(--rule-light); background: var(--night-soft); color: var(--text-light); }
+    .review-mark { color: var(--gold); font-family: Georgia, serif; font-size: var(--font-quote-mark); line-height: .75; }
+    .review-card blockquote { margin: var(--space-lg) 0 0; font-size: var(--font-body); letter-spacing: -.025em; }
+    .review-card footer { margin-top: var(--space-lg); color: var(--gold); font-size: var(--font-small); font-weight: var(--weight-label); letter-spacing: .05em; }
+    .review-note { width: min(100% - var(--shell-gutter), var(--content-max)); margin: var(--space-lg) auto 0; color: var(--muted-dark); font-size: var(--font-label); }
+
+    .schedule { max-width: var(--measure-final); margin-top: var(--space-2xl); border-top: var(--rule-width) solid var(--rule-dark); }
+    .schedule-item { display: grid; grid-template-columns: var(--grid-lesson-index) 1fr; gap: var(--space-8); padding: var(--space-xl) 0; border-bottom: var(--rule-width) solid var(--rule-dark); }
+    .schedule-item time { color: var(--gold-deep); font-weight: var(--weight-label); }
+    .schedule-item p { margin: var(--space-2) 0 0; color: var(--muted-dark); }
+    .dark .schedule { border-color: var(--rule-light); }
+    .dark .schedule-item { border-color: var(--rule-light); }
+    .dark .schedule-item time { color: var(--gold); }
+    .dark .schedule-item p { color: var(--muted-light); }
+
+    .faq-list { max-width: var(--measure-final); margin-top: var(--space-2xl); border-top: var(--rule-width) solid var(--rule-light); }
+    .faq-item { border-bottom: var(--rule-width) solid var(--rule-light); }
+    .faq-question { display: flex; width: 100%; min-height: var(--faq-target-height); padding: var(--space-md) 0; align-items: center; justify-content: space-between; gap: var(--space-6); border: 0; background: transparent; color: var(--text-light); text-align: left; cursor: pointer; font-weight: var(--weight-body-strong); }
+    .faq-icon { flex: 0 0 auto; color: var(--gold); font-size: var(--font-icon); transition: transform var(--motion-standard) var(--ease); }
+    .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+    .faq-answer { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--motion-standard) var(--ease), opacity var(--motion-fade) ease; }
+    .faq-answer > div { overflow: hidden; }
+    .faq-answer p { max-width: var(--copy-max); margin: 0 0 var(--space-lg); color: var(--muted-light); }
+    .faq-question[aria-expanded="true"] + .faq-answer { grid-template-rows: 1fr; opacity: 1; }
+    .light .faq-list, .light .faq-item { border-color: var(--rule-dark); }
+    .light .faq-question { color: var(--ink); }
+    .light .faq-icon { color: var(--gold-deep); }
+    .light .faq-answer p { color: var(--muted-dark); }
+
+    .final { min-height: 84svh; display: flex; align-items: center; background: var(--gold); color: var(--text-on-gold); }
+    .final h2 { max-width: var(--measure-final); }
+    .final p { max-width: var(--measure-final-copy); margin: var(--space-lg) 0 0; color: var(--gold-copy); font-size: var(--font-body-final); }
+    .final .button { margin-top: var(--space-xl); background: var(--ink); color: var(--text-light); }
+    .final .button:hover { background: var(--ink-hover); color: var(--text-light); }
+    .final small { display: block; margin-top: var(--space-4); color: var(--gold-meta); }
+    .site-footer { padding: var(--space-8) 0; border-top: var(--rule-width) solid var(--rule-light); background: var(--ink); color: var(--text-subtle-light); font-size: var(--font-compact); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); }
+    .footer-links { display: flex; gap: var(--space-md); }
+    .footer-links a { display: inline-flex; min-height: var(--target-min); align-items: center; }
+
+    @media (max-width: 1100px) { .side-guide { display: none; } }
+    @media (max-width: 900px) {
+      .program-layout, .core-grid, .reviews-heading { grid-template-columns: 1fr; }
+      .sticky-copy { position: static; }
+      .program-steps { margin-top: var(--space-14); }
+      .reviews-heading .lead { margin-top: var(--space-6); }
+      .lesson-row { grid-template-columns: 7rem 1fr; }
+      .lesson-row p { grid-column: 2; }
     }
-    .nav { display: flex; min-height: 68px; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { font-size: 1rem; font-weight: 850; letter-spacing: -.04em; text-decoration: none; }
-    .brand span { color: var(--yellow); }
-    .nav-links { display: flex; align-items: center; gap: 22px; font-size: .86rem; color: var(--muted); }
-    .nav-links a { text-decoration: none; }
-    .nav-cta, .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #171309;
-      font-weight: 850;
-      text-decoration: none;
-      transition: transform .2s ease, background .2s ease;
+    @media (max-width: 760px) {
+      :root { --announcement-height: 44px; --nav-height: 62px; }
+      .shell { width: min(100% - var(--shell-gutter-compact), var(--content-max)); }
+      .announcement-inner { gap: var(--space-2); font-size: var(--font-small); white-space: nowrap; }
+      .announcement-copy { font-size: 0; }
+      .announcement-copy::after { font-size: var(--font-small); content: "3기 모집 · 8/4–8/10"; }
+      .announcement a { flex: 0 0 auto; }
+      .desktop-nav { display: none; }
+      .menu-button { display: block; }
+      .mobile-menu[data-open="true"] { display: block; min-height: calc(100dvh - var(--announcement-height) - var(--nav-height)); }
+      .hero { padding-top: calc(var(--announcement-height) + var(--nav-height) + var(--hero-top-compact)); }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .fact:nth-child(3) { border-left: 0; }
+      .fact:nth-child(n+3) { border-top: var(--rule-width) solid var(--rule-light); }
+      .story-row { grid-template-columns: var(--grid-support-index) 1fr; gap: var(--space-md); }
+      .story-row p { grid-column: 2; }
+      .lesson-row { grid-template-columns: 1fr; gap: var(--space-3); }
+      .lesson-row p { grid-column: auto; }
+      .schedule-item { grid-template-columns: 1fr; gap: var(--space-2); }
+      .review-marquee { mask-image: none; -webkit-mask-image: none; }
     }
-    .nav-cta { padding: 10px 16px; font-size: .82rem; }
-    .nav-cta:hover, .button:hover { color: #171309; background: #ffda6b; transform: translateY(-1px); }
-
-    .hero { padding: clamp(68px, 10vw, 118px) 0 62px; }
-    .hero-grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(360px,.95fr); gap: clamp(34px,6vw,82px); align-items: center; }
-    .hero-copy { max-width: 700px; }
-    .hero h1 span { display: block; color: var(--yellow); }
-    .hero-lead { max-width: 610px; margin: 28px 0 0; color: var(--muted); font-size: clamp(1.08rem,2vw,1.3rem); }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin: 28px 0 0; }
-    .pill { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.045); color: #dfe3e9; font-size: .82rem; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-    .button { min-height: 54px; padding: 0 23px; }
-    .button.secondary { border: 1px solid var(--line); background: transparent; color: var(--text); }
-    .button.secondary:hover { background: rgba(255,255,255,.06); color: var(--text); }
-    .hero-note { margin: 13px 0 0; color: var(--muted); font-size: .8rem; }
-    .collage { position: relative; min-height: 530px; }
-    .photo { position: absolute; overflow: hidden; border: 1px solid var(--line); border-radius: 26px; background: var(--surface); box-shadow: 0 24px 70px rgba(0,0,0,.32); }
-    .photo-main { inset: 0 13% 16% 0; }
-    .photo-small { right: 0; bottom: 0; width: 47%; height: 39%; border: 5px solid var(--bg); }
-    .photo-label { position: absolute; left: 18px; bottom: 18px; z-index: 2; margin: 0; padding: 8px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(7,10,16,.72); font-size: .76rem; backdrop-filter: blur(10px); }
-
-    .trust { border-block: 1px solid var(--line); background: rgba(255,255,255,.025); }
-    .trust-grid { display: grid; grid-template-columns: repeat(4,1fr); }
-    .trust-item { padding: 27px 22px; border-right: 1px solid var(--line); }
-    .trust-item:last-child { border-right: 0; }
-    .trust-item strong { display: block; font-size: 1.03rem; letter-spacing: -.03em; }
-    .trust-item span { color: var(--muted); font-size: .78rem; }
-
-    .fit-grid, .beta-grid, .support-grid, .lesson-grid { display: grid; gap: 16px; margin-top: 38px; }
-    .fit-grid { grid-template-columns: repeat(3,1fr); }
-    .card { padding: 27px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(32,42,57,.88), rgba(22,29,41,.88)); }
-    .card-index { display: block; margin-bottom: 50px; color: var(--yellow); font-size: .74rem; font-weight: 850; letter-spacing: .12em; }
-    .card p { margin: 13px 0 0; color: var(--muted); font-size: .94rem; }
-    .not-for { margin-top: 18px; padding: 20px 24px; border-left: 3px solid var(--blue); background: var(--blue-soft); color: var(--muted); }
-    .not-for strong { color: var(--text); }
-
-    .beta-grid { grid-template-columns: repeat(2,1fr); }
-    .week { position: relative; overflow: hidden; min-height: 310px; }
-    .week::after { position: absolute; right: -20px; bottom: -60px; color: rgba(255,255,255,.035); font-size: 12rem; font-weight: 900; line-height: 1; content: attr(data-week); }
-    .week .card-index { margin-bottom: 62px; }
-    .loop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; }
-    .loop span { position: relative; z-index: 1; padding: 7px 10px; border-radius: 8px; background: rgba(247,200,75,.11); color: #ffe293; font-size: .78rem; font-weight: 760; }
-    .beta-note { margin-top: 18px; color: var(--muted); font-size: .88rem; }
-
-    .core-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 46px; align-items: start; }
-    .support-grid { grid-template-columns: repeat(2,1fr); margin-top: 0; }
-    .support-card { min-height: 210px; }
-    .support-card .icon { display: grid; width: 42px; height: 42px; margin-bottom: 34px; place-items: center; border-radius: 12px; background: var(--yellow); color: #181209; font-weight: 900; }
-    .boundary { grid-column: 1 / -1; min-height: auto; background: transparent; }
-
-    .timeline { position: relative; display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 46px; }
-    .timeline::before { position: absolute; top: 9px; right: 12.5%; left: 12.5%; height: 1px; content: ""; background: var(--line); }
-    .time-item { position: relative; padding: 36px 21px 0; }
-    .time-item::before { position: absolute; top: 3px; left: 21px; width: 13px; height: 13px; border: 3px solid var(--bg); border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 1px var(--yellow); content: ""; }
-    .time-item time { color: var(--yellow); font-size: .84rem; font-weight: 850; }
-    .time-item h3 { margin-top: 8px; }
-    .time-item p { margin: 9px 0 0; color: var(--muted); font-size: .84rem; }
-
-    .lesson-grid { grid-template-columns: repeat(4,1fr); }
-    .lesson { padding: 24px 20px; border-top: 2px solid var(--yellow); background: rgba(255,255,255,.035); }
-    .lesson strong { display: block; margin-bottom: 9px; letter-spacing: -.035em; }
-    .lesson span { color: var(--muted); font-size: .88rem; }
-    .archive-note { margin-top: 20px; color: var(--muted); font-size: .84rem; }
-
-    .story-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: 18px; margin-top: 40px; }
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 250px 250px; gap: 12px; }
-    .gallery figure { position: relative; min-width: 0; margin: 0; overflow: hidden; border-radius: 20px; }
-    .gallery figure:first-child { grid-row: 1 / 3; }
-    .gallery figcaption { position: absolute; right: 12px; bottom: 12px; padding: 6px 9px; border-radius: 999px; background: rgba(7,10,16,.72); color: #fff; font-size: .7rem; }
-    .quotes { display: grid; gap: 12px; }
-    blockquote { margin: 0; padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
-    blockquote p { margin: 0; font-size: .98rem; letter-spacing: -.02em; }
-    blockquote footer { margin-top: 14px; padding: 0; border: 0; color: var(--yellow); font-size: .74rem; font-weight: 800; }
-
-    .faq-list { max-width: 860px; margin-top: 38px; border-top: 1px solid var(--line); }
-    details { border-bottom: 1px solid var(--line); }
-    summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 2px; cursor: pointer; font-weight: 800; letter-spacing: -.025em; list-style: none; }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { color: var(--yellow); font-size: 1.35rem; content: "+"; }
-    details[open] summary::after { content: "−"; }
-    details p { max-width: 740px; margin: -5px 0 24px; color: var(--muted); }
-
-    .final-cta { padding: clamp(72px,10vw,114px) 0; background: linear-gradient(135deg, rgba(247,200,75,.17), rgba(135,173,255,.13)); }
-    .final-box { display: grid; grid-template-columns: 1fr auto; gap: 34px; align-items: end; }
-    .final-box h2 { max-width: 790px; }
-    .final-box p { max-width: 660px; margin: 18px 0 0; color: var(--muted); }
-    .deadline { display: block; margin-top: 12px; color: var(--yellow); font-size: .84rem; font-weight: 850; }
-
-    .site-footer { padding: 34px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
-    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
-
-    @media (max-width: 920px) {
-      .hero-grid, .core-layout, .story-grid { grid-template-columns: 1fr; }
-      .collage { min-height: 440px; max-width: 620px; }
-      .fit-grid, .lesson-grid { grid-template-columns: repeat(2,1fr); }
-      .timeline { grid-template-columns: repeat(2,1fr); gap: 28px 0; }
-      .timeline::before { display: none; }
-      .gallery { grid-template-rows: 220px 220px; }
-      .final-box { grid-template-columns: 1fr; align-items: start; }
-    }
-    @media (max-width: 680px) {
-      .shell { width: min(100% - 32px,1120px); }
-      .nav-links a:not(.nav-cta) { display: none; }
-      .nav { gap: 12px; }
-      .hero { padding-top: 58px; }
-      .hero-grid { gap: 40px; }
-      .collage { min-height: 360px; }
-      .photo-main { inset: 0 10% 14% 0; }
-      .photo-small { width: 52%; height: 40%; }
-      .trust-grid, .beta-grid, .support-grid { grid-template-columns: 1fr 1fr; }
-      .trust-item:nth-child(2) { border-right: 0; }
-      .trust-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .fit-grid, .lesson-grid { grid-template-columns: 1fr; }
-      .timeline { grid-template-columns: 1fr; gap: 0; }
-      .time-item { padding-bottom: 24px; border-left: 1px solid var(--line); }
-      .time-item:last-child { padding-bottom: 0; }
-      .gallery { grid-template-rows: 180px 180px; }
-    }
-    @media (max-width: 430px) {
-      h1 { font-size: clamp(2.55rem,13vw,3.35rem); }
+    @media (max-width: 520px) {
       .hero-actions { flex-direction: column; }
-      .button { width: 100%; }
-      .collage { min-height: 300px; }
-      .trust-grid, .beta-grid, .support-grid { grid-template-columns: 1fr; }
-      .trust-item { border-right: 0; border-bottom: 1px solid var(--line); }
-      .trust-item:last-child { border-bottom: 0; }
-      .boundary { grid-column: auto; }
-      .gallery { grid-template-columns: 1fr; grid-template-rows: repeat(3,210px); }
-      .gallery figure:first-child { grid-row: auto; }
+      .hero-actions .button, .final .button { width: 100%; }
+      .fact { padding-right: var(--space-3); }
+      .fact + .fact { padding-left: var(--space-3); }
+      .program-steps { padding-left: var(--timeline-indent-compact); }
+      .program-step::before { left: var(--timeline-dot-inset-compact); }
+      .support-item { grid-template-columns: var(--target-min) 1fr; }
       .footer-row { align-items: flex-start; flex-direction: column; }
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      .review-track { width: auto; overflow-x: auto; animation: none; }
+      .review-card[aria-hidden="true"] { display: none; }
+    }
   </style>
 </head>
 <body data-collection-state="server-verified" data-opening-state="open">
+  <div class="announcement">
+    <div class="shell announcement-inner" aria-label="3기 지원 접수 중 · 8/4–8/10 · 2주 베타 초대 검토"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" aria-hidden="true">3기 지원 접수 중 · 8/4–8/10 · 2주 베타 초대 검토</span><a href="https://product-omrpipeline-production.up.railway.app/fellowship/3">지원하기 ↗</a></div>
+  </div>
+
   <header class="site-header">
-    <nav class="shell nav" aria-label="주요 메뉴">
+    <nav class="shell main-nav" aria-label="주요 메뉴">
       <a class="brand" href="#top">Winning <span>Fellowship</span></a>
-      <div class="nav-links">
-        <a href="#program">프로그램</a>
-        <a href="#stories">지난 이야기</a>
-        <a href="#faq">FAQ</a>
-        <a class="nav-cta" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">3기 지원하기</a>
+      <div class="desktop-nav" aria-label="페이지 안내">
+        <span class="nav-indicator" aria-hidden="true"></span>
+        <a href="#about" data-nav="about">소개</a><a href="#beta" data-nav="beta">2주 베타</a><a href="#core" data-nav="core">12주 코어</a><a href="#reviews" data-nav="reviews">후기</a><a href="#schedule" data-nav="schedule">일정</a><a href="#faq" data-nav="faq">FAQ</a>
+        <a class="nav-cta" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">3기 지원</a>
       </div>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="메뉴 열기"><span></span></button>
     </nav>
+    <div class="mobile-menu" id="mobile-menu" data-open="false">
+      <nav class="shell mobile-menu-inner" aria-label="모바일 메뉴"><a href="#about">소개 <span>01</span></a><a href="#beta">2주 베타 <span>02</span></a><a href="#core">12주 코어 <span>03</span></a><a href="#reviews">후기 <span>04</span></a><a href="#schedule">일정 <span>05</span></a><a href="#faq">FAQ <span>06</span></a><a href="https://product-omrpipeline-production.up.railway.app/fellowship/3">3기 지원하기 ↗</a></nav>
+    </div>
   </header>
 
+  <aside class="side-guide" aria-label="페이지 내부 안내" aria-hidden="true" inert>
+    <button class="side-top" type="button" aria-label="맨 위로">↑</button>
+    <button class="side-link" type="button" data-target="about"><span>소개</span></button><button class="side-link" type="button" data-target="beta"><span>베타</span></button><button class="side-link" type="button" data-target="core"><span>코어</span></button><button class="side-link" type="button" data-target="reviews"><span>후기</span></button><button class="side-link" type="button" data-target="schedule"><span>일정</span></button><button class="side-link" type="button" data-target="faq"><span>FAQ</span></button><button class="side-link" type="button" data-target="apply"><span>지원</span></button>
+  </aside>
+
   <main id="top">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div class="hero-copy">
-          <p class="kicker">Winning Fellowship 3</p>
-          <h1>AI로 내 삶을 움직일 <span>3기 지원 접수 중.</span></h1>
-          <p class="hero-lead">AI를 잘 쓰는 사람보다, AI로 내 삶을 한 번 바꿔 볼 사람을 찾습니다. 학교, 일, 일상에서 미뤄 둔 장면 하나를 2주 동안 직접 움직여 보세요.</p>
-          <div class="hero-meta" aria-label="3기 핵심 정보">
-            <span class="pill">대학 3학년 이상·졸업생</span>
-            <span class="pill">참가비 없음</span>
-            <span class="pill">2주 베타 + 12주 코어</span>
-            <span class="pill">격주 90분 온라인</span>
-          </div>
-          <div class="hero-actions">
-            <a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">대기 명단 지원하기 <span aria-hidden="true">↗</span></a>
-            <a class="button secondary" href="#program">프로그램 먼저 보기</a>
-          </div>
-          <p class="hero-note">정식 지원서로 3기 대기 명단을 받습니다. 모집 8/4–8/10 · 지원은 코어 확정이 아닌 2주 베타 초대 검토입니다.</p>
-        </div>
-        <div class="collage" aria-label="지난 펠로우십 현장">
-          <figure class="photo photo-main">
-            <img src="invite/photos/g2_kickoff.jpg" alt="위닝 펠로우십 2기 킥오프 현장" width="720" height="900">
-            <figcaption class="photo-label">함께 시작했던 1·2기의 장면</figcaption>
-          </figure>
-          <figure class="photo photo-small">
-            <img src="invite/photos/ai3_handson.jpg" alt="참가자들이 함께 AI를 실습하는 모습" width="560" height="420">
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <aside class="trust" aria-label="모집 요약">
-      <div class="shell trust-grid">
-        <div class="trust-item"><strong>8/4–8/10</strong><span>3기 모집</span></div>
-        <div class="trust-item"><strong>8/17–8/30</strong><span>2주 베타</span></div>
-        <div class="trust-item"><strong>8/31–11/22</strong><span>12주 코어</span></div>
-        <div class="trust-item"><strong>12–15명</strong><span>코어 기준 인원</span></div>
-      </div>
-    </aside>
-
-    <section class="section" aria-labelledby="fit-title">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="shell">
-        <div class="section-head">
-          <p class="kicker">Who it is for</p>
-          <h2 id="fit-title">완성된 답보다, 움직여 볼 장면이 있는 사람</h2>
-          <p class="section-lead">AI 경험의 많고 적음보다 실제 행동을 시작하고, 반응을 보고, 다음 시도를 바꿀 의지를 봅니다.</p>
+        <p class="hero-overline reveal">Winning Fellowship 3 · 2026 Autumn</p>
+        <h1 class="reveal" id="hero-title">미뤄 둔 일을,<br><em>이번에는 진짜 해보는 14주.</em></h1>
+        <p class="hero-copy reveal">AI를 잘하는 사람을 찾는 게 아닙니다. <span class="keep">학교·일·일상에서</span> 계속 미뤄 둔 장면 하나를 가져와, 2주 동안 직접 움직여 볼 사람을 찾습니다.</p>
+        <div class="hero-actions reveal"><a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">2주 베타 지원하기 <span aria-hidden="true">↗</span></a><a class="button secondary" href="#about">어떤 14주인지 보기</a></div>
+        <p class="hero-boundary reveal">대학 3학년 이상·졸업생 대상 · 참가비 없음. 정식 지원서로 3기 대기 명단을 받습니다. 이번 지원은 코어 확정이 아닌 2주 베타 초대 검토입니다.</p>
+        <div class="facts reveal" aria-label="3기 핵심 정보">
+          <div class="fact"><strong data-count="14">14</strong><span>2주 베타 + 12주 코어</span></div><div class="fact"><strong data-count="90">90</strong><span>격주 온라인 모임 · 분</span></div><div class="fact"><strong><span data-count="12">12</span>–<span data-count="15">15</span>명</strong><span>코어 기준 인원</span></div><div class="fact"><strong data-count="0">0</strong><span>참가비 · 원</span></div>
         </div>
-        <div class="fit-grid">
-          <article class="card"><span class="card-index">01</span><h3>계속 미뤄 둔 일이 있는 사람</h3><p>학교, 취업 준비, 사이드 프로젝트, 일상 루틴처럼 지금의 나에게 실제로 중요한 장면을 가져옵니다.</p></article>
-          <article class="card"><span class="card-index">02</span><h3>작게라도 직접 해 볼 사람</h3><p>거창한 기획서보다 오늘 해 본 한 번의 시도와 그 뒤에 생긴 반응을 더 중요하게 여깁니다.</p></article>
-          <article class="card"><span class="card-index">03</span><h3>과정을 솔직하게 나눌 사람</h3><p>성공한 결과만 보여 주지 않습니다. 막힌 지점과 다음에 바꿀 한 가지까지 동료와 공유합니다.</p></article>
-        </div>
-        <p class="not-for"><strong>이런 프로그램은 아닙니다.</strong> AI 기능을 순서대로 배우는 강의, 결과물을 대신 만들어 주는 제작반, 취업·수익·성과를 보장하는 과정이 아닙니다.</p>
       </div>
     </section>
 
-    <section class="section" id="program" aria-labelledby="beta-title">
+    <section class="chapter light" id="about" aria-labelledby="about-title">
       <div class="shell">
-        <div class="section-head">
-          <p class="kicker">First, 2-week beta</p>
-          <h2 id="beta-title">먼저 2주 동안 직접 해 봅니다.</h2>
-          <p class="section-lead">지원서만으로 서로를 판단하지 않습니다. 실제 생활 리듬 안에서 시간을 내고, 작은 행동을 해 보고, 수정하는 과정을 함께 확인합니다.</p>
+        <p class="chapter-label reveal">Why this fellowship</p><h2 class="reveal" id="about-title">할 수 있는데,<br>자꾸 미뤄지는 일이 있나요?</h2><p class="lead reveal">새 도구를 하나 더 배우는 일보다 어려운 건, 내 삶의 문제를 정하고 실제 첫 행동을 만드는 일입니다. 3기는 그 한 장면에서 시작합니다.</p>
+        <div class="story-list">
+          <article class="story-row reveal"><span class="story-index">01</span><h3>내 문제에서 시작합니다.</h3><p>누가 정해 준 공통 과제를 하지 않습니다. 학교, 일, 취업 준비, 사이드 프로젝트, 생활 루틴 중 지금의 나에게 정말 중요한 장면 하나를 고릅니다.</p></article>
+          <article class="story-row reveal"><span class="story-index">02</span><h3>AI로 첫 행동을 작게 만듭니다.</h3><p>AI가 답을 대신 내게 두지 않습니다. 조사 시간을 줄이거나, 초안을 만들거나, 반복을 덜어 오늘 한 번 해볼 수 있는 크기로 바꿉니다.</p></article>
+          <article class="story-row reveal"><span class="story-index">03</span><h3>혼자 끊기는 지점에 리듬을 둡니다.</h3><p>결과를 자랑하는 모임이 아닙니다. 해본 것, 실제 반응, 막힌 지점, 다음에 바꿀 한 가지를 동료와 나누며 다시 움직입니다.</p></article>
         </div>
-        <div class="beta-grid">
-          <article class="card week" data-week="1"><span class="card-index">WEEK 01</span><h3>내 장면과 가능한 시간을 정합니다.</h3><p>바꾸고 싶은 삶·학교·일의 장면 하나와 AI가 도울 지점, 실제 가능한 시간을 구체적으로 잡습니다.</p></article>
-          <article class="card week" data-week="2"><span class="card-index">WEEK 02</span><h3>해 보고, 반응을 보고, 하나를 바꿉니다.</h3><p>작게 실행한 뒤 잘된 것과 막힌 것을 숨기지 않고, 다음 시도에서 바꿀 한 가지를 남깁니다.</p><div class="loop"><span>해 본 것</span><span>→</span><span>실제 반응</span><span>→</span><span>다음 수정</span></div></article>
-        </div>
-        <p class="beta-note">베타 기간에는 프로그램 계정을 제공하지 않습니다. 무료 계정으로 시작해도 되고, 이미 쓰는 개인 유료 AI 계정이 있어도 괜찮습니다.</p>
+        <p class="plain-note reveal"><strong>AI 기능 강의나 결과물 제작반은 아닙니다.</strong> 취업, 수익, 성과를 보장하지도 않습니다. 대신 내 문제를 직접 정하고, 해보고, 다음 시도를 바꾸는 과정을 함께 만듭니다.</p>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="core-title">
-      <div class="shell core-layout">
-        <div class="section-head">
-          <p class="kicker">Then, 12-week core</p>
-          <h2 id="core-title">맞으면 12주를 더 갑니다.</h2>
-          <p class="section-lead">베타에서 서로의 시간 약속과 실행 방식을 확인한 뒤 코어를 시작합니다. 고정된 팀 과제 대신, 각자의 실제 장면을 꾸준히 움직입니다.</p>
-        </div>
-        <div class="support-grid">
-          <article class="card support-card"><span class="icon" aria-hidden="true">↻</span><h3>격주 실행 리듬</h3><p>격주 90분 온라인에서 지난 행동, 실제 반응, 다음 수정, 필요한 지원을 짚습니다.</p></article>
-          <article class="card support-card"><span class="icon" aria-hidden="true">AI</span><h3>개인 AI 구독 지원</h3><p>코어 합류 후, 각자의 실행을 이어 갈 개인 유료 AI 구독 1개를 지원합니다.</p></article>
-          <article class="card support-card"><span class="icon" aria-hidden="true">+</span><h3>다음 행동을 넓히는 지원</h3><p>이미 해 본 행동의 다음 단계를 넓히는 데 필요한 지원을 함께 검토합니다.</p></article>
-          <article class="card support-card"><span class="icon" aria-hidden="true">◇</span><h3>필요할 때만 작은 실험 조</h3><p>공통 관심이나 병목이 생기면 2–4주짜리 작은 실험 조를 선택적으로 만듭니다.</p></article>
-          <article class="card boundary"><h3>잠수보다, 상태를 알리는 약속</h3><p>바쁜 시기에는 범위를 줄이거나 잠시 멈출 수 있습니다. 대신 현재 상태와 다음 선택을 책임 있게 알립니다.</p></article>
+    <section class="chapter dark" id="beta" aria-labelledby="beta-title">
+      <div class="shell program-layout">
+        <div class="sticky-copy reveal"><p class="chapter-label">First, 2-week beta</p><h2 id="beta-title">지원서보다,<br>먼저 해봅니다.</h2><p class="lead">서류만으로 서로를 판단하지 않습니다. 실제 생활 속에서 시간을 내고 작은 행동을 만든 뒤, 12주를 함께 갈 수 있을지 확인합니다.</p></div>
+        <div class="program-steps" id="beta-timeline">
+          <div class="program-line" aria-hidden="true"><div class="program-progress"></div></div>
+          <article class="program-step reveal"><p class="step-meta">WEEK 01 · 장면 정하기</p><h3>미뤄 둔 일 하나와<br>실제로 낼 시간을 정합니다.</h3><p>막연한 목표 대신 지금 바꾸고 싶은 장면, AI가 도울 수 있는 지점, 이번 주에 가능한 시간을 구체적으로 적습니다.</p></article>
+          <article class="program-step reveal"><p class="step-meta">WEEK 01 · 작게 해보기</p><h3>완성보다 첫 반응을 만듭니다.</h3><p>잘 만든 계획서를 기다리지 않습니다. 오늘 할 수 있는 크기로 줄여 한 번 실행하고, 현실에서 어떤 반응이 생겼는지 봅니다.</p></article>
+          <article class="program-step reveal"><p class="step-meta">WEEK 02 · 다음 수정</p><h3>잘된 것보다,<br>다음에 바꿀 것을 남깁니다.</h3><p>성공한 척하지 않습니다. 막힌 지점까지 솔직하게 공유하고 다음 행동에서 바꿀 한 가지를 정합니다.</p><div class="action-loop" aria-label="베타 실행 흐름"><span>해본 것</span><span>실제 반응</span><span>막힌 지점</span><span>다음 수정</span></div></article>
+          <article class="program-step reveal"><p class="step-meta">8/30 · 서로 확인하기</p><h3>맞으면, 12주를 더 갑니다.</h3><p>베타의 시간 약속과 실행 방식을 바탕으로 코어 합류를 결정합니다. 지원 또는 베타 참여가 코어 합류를 보장하지 않습니다.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="schedule-title">
-      <div class="shell">
-        <div class="section-head"><p class="kicker">Schedule</p><h2 id="schedule-title">이번 가을, 14주의 흐름</h2><p class="section-lead">베타 초대 후 가능한 모임 시간을 함께 확인하고, 코어 시작 전에 최종 일정을 안내합니다.</p></div>
-        <div class="timeline">
-          <article class="time-item"><time datetime="2026-08-04">8/4–8/10</time><h3>모집</h3><p>정식 지원서를 바탕으로 2주 베타 초대 검토</p></article>
-          <article class="time-item"><time datetime="2026-08-13">8/13</time><h3>초대·시간 확인</h3><p>베타 안내와 실제 가능한 모임 시간 수집</p></article>
-          <article class="time-item"><time datetime="2026-08-17">8/17–8/30</time><h3>2주 베타</h3><p>장면을 정하고 작게 실행한 뒤 다음 수정까지</p></article>
-          <article class="time-item"><time datetime="2026-08-31">8/31–11/22</time><h3>12주 코어</h3><p>격주 리듬으로 각자의 실제 행동을 반복</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="lessons-title">
-      <div class="shell">
-        <div class="section-head"><p class="kicker">What we learned</p><h2 id="lessons-title">1·2기에서 배워, 3기는 이렇게 바꿨습니다.</h2><p class="section-lead">지난 기수를 성공담으로만 포장하지 않았습니다. 끝까지 움직이게 한 조건과 흐려졌던 지점을 모두 운영에 반영했습니다.</p></div>
-        <div class="lesson-grid">
-          <div class="lesson"><strong>지원서보다 먼저 해 보기</strong><span>서로 맞는지 2주 베타에서 실제 행동으로 확인합니다.</span></div>
-          <div class="lesson"><strong>큰 팀보다 개인 장면</strong><span>공동 결과물 의무 없이 각자에게 중요한 문제를 다룹니다.</span></div>
-          <div class="lesson"><strong>고정된 짧은 리듬</strong><span>격주 90분으로 흐름을 놓치지 않고 다음 행동을 정합니다.</span></div>
-          <div class="lesson"><strong>조용한 이탈을 줄이는 약속</strong><span>잠수하지 않고 범위 축소·일시멈춤도 책임 있게 알립니다.</span></div>
-        </div>
-        <p class="archive-note">과거 기수의 인원 수는 기록 간 차이가 있어 홍보 숫자로 사용하지 않았습니다. 아래 후기는 기존 1기 홈페이지에 공개된 익명 원문입니다.</p>
-      </div>
-    </section>
-
-    <section class="section" id="stories" aria-labelledby="stories-title">
-      <div class="shell">
-        <div class="section-head"><p class="kicker">Stories from cohort 1</p><h2 id="stories-title">함께여서, 한 번 더 움직였던 사람들</h2><p class="section-lead">분야는 달라도 변화가 시작된 방식은 비슷했습니다. 혼자라면 미뤘을 일을 함께 정하고, 실제로 해 보고, 다음 장면으로 이어 갔습니다.</p></div>
-        <div class="story-grid">
-          <div class="gallery" aria-label="지난 기수 활동 사진">
-            <figure><img src="invite/photos/g1_act_mountain.jpg" alt="지난 펠로우십에서 함께 산을 오른 참가자들" width="620" height="980"><figcaption>Flow Crew</figcaption></figure>
-            <figure><img src="invite/photos/g1_sudadi_group.jpg" alt="지난 펠로우십 소모임 참가자들" width="620" height="420"><figcaption>Sudadi</figcaption></figure>
-            <figure><img src="invite/photos/g1_graduation2.jpg" alt="지난 펠로우십 수료 현장" width="620" height="420"><figcaption>Cohort 1</figcaption></figure>
-          </div>
-          <div class="quotes">
-            <blockquote><p>“혼자 할 때는 오래 하기 힘들었던 러닝을, 펠로우들과 같이 뛰니 힘들어도 어떻게든 뛰게 되고 매우 즐거웠습니다.”</p><footer>1기 익명 후기 · Flow Crew</footer></blockquote>
-            <blockquote><p>“평소 일본어 공부를 해야겠다고 다짐만 하던 제가 어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다.”</p><footer>1기 익명 후기 · Mallang</footer></blockquote>
-            <blockquote><p>“마케팅에 대한 막연한 꿈만 가지고 있었는데, 무에서 유를 만들어내며 성취감과 자신감을 얻었습니다.”</p><footer>1기 익명 후기 · Lumen</footer></blockquote>
-            <blockquote><p>“계획을 하나하나 실현해 보는 경험이 좋았고, 정말 좋은 언니, 오빠를 만났습니다.”</p><footer>1기 익명 후기 · Sudadi</footer></blockquote>
+    <section class="chapter light" id="core" aria-labelledby="core-title">
+      <div class="shell"><p class="chapter-label reveal">Then, 12-week core</p><h2 class="reveal" id="core-title">각자의 장면을,<br>끝까지 움직이게 하는 12주.</h2>
+        <div class="core-grid">
+          <div class="core-statement reveal"><h3>같은 결과물을 만들지 않아도,<br>같은 리듬으로 갈 수 있습니다.</h3><p>12–15명의 코어 펠로우가 격주 90분 온라인에서 지난 행동과 실제 반응을 확인합니다. 고정된 팀 과제보다 각자의 삶에 남는 변화를 우선합니다.</p><div class="boundary-box"><strong>바쁜 시기에는 범위를 줄이거나 잠시 멈출 수 있습니다.</strong><br>대신 잠수하지 않고 현재 상태와 다음 선택을 알리는 것을 서로의 약속으로 둡니다.</div></div>
+          <div class="support-list reveal">
+            <article class="support-item"><b>01</b><div><h3>격주 실행 리듬</h3><p>지난 행동, 현실의 반응, 다음 수정, 지금 필요한 지원을 90분 안에 짚습니다.</p></div></article>
+            <article class="support-item"><b>02</b><div><h3>개인 유료 AI 1종 지원</h3><p>코어 합류 후 각자의 실행에 필요한 개인 유료 AI 구독 한 가지를 지원합니다.</p></div></article>
+            <article class="support-item"><b>03</b><div><h3>필요할 때만 작은 실험 조</h3><p>공통 관심이나 병목이 생길 때 2–4주짜리 작은 실험 조를 선택적으로 만듭니다.</p></div></article>
+            <article class="support-item"><b>04</b><div><h3>다음 행동을 넓히는 지원</h3><p>이미 해본 행동의 다음 단계를 넓히는 데 무엇이 필요한지 함께 검토합니다.</p></div></article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="faq" aria-labelledby="faq-title">
-      <div class="shell">
-        <div class="section-head"><p class="kicker">FAQ</p><h2 id="faq-title">지원 전에 궁금할 만한 것</h2></div>
-        <div class="faq-list">
-          <details><summary>AI를 잘 다루지 못해도 지원할 수 있나요?</summary><p>네. 기능 숙련도보다 내 문제에 직접 써 보고 수정할 의지가 더 중요합니다. 무료 계정만 있어도 베타에 참여할 수 있습니다.</p></details>
-          <details><summary>이미 개인 유료 AI 계정을 쓰고 있으면 유리한가요?</summary><p>꾸준히 써 온 습관을 보여 주는 참고 신호일 수는 있지만 자동 선발 조건은 아닙니다. 기존 계정은 베타에서 그대로 사용하면 됩니다.</p></details>
-          <details><summary>참가비가 있나요?</summary><p>없습니다. 베타에는 프로그램 계정을 별도로 제공하지 않으며, 코어 합류 후에는 개인 유료 AI 구독 1개를 지원합니다.</p></details>
-          <details><summary>지원하면 바로 코어 멤버가 되나요?</summary><p>아닙니다. 이번 지원은 2주 베타 초대 검토를 위한 정식 지원입니다. 베타에서 서로의 시간 약속과 실행 방식을 확인한 뒤 코어 합류를 결정합니다.</p></details>
-          <details><summary>모임은 언제, 어디에서 하나요?</summary><p>공식 모임은 격주 90분 온라인입니다. 가능한 시간을 베타 초대 후 수집하고 코어 시작 전에 최종 안내합니다.</p></details>
-          <details><summary>지원서에 어떤 정보를 쓰면 안 되나요?</summary><p>비밀번호, 일회용 비밀번호(OTP), 카드번호, API 키, AI 대화나 프롬프트 원문 같은 민감 정보는 제출하지 마세요. 지원에 필요한 최소 정보만 받습니다.</p></details>
+    <section class="chapter dark" id="lessons" aria-labelledby="lessons-title">
+      <div class="shell"><p class="chapter-label reveal">What we learned</p><h2 class="reveal" id="lessons-title">1·2기에서 배워,<br>3기는 이렇게 바꿨습니다.</h2><p class="lead reveal">지난 기수를 좋은 기억으로만 포장하지 않았습니다. 함께일 때 움직였던 이유와 흐려졌던 지점을 이번 운영에 반영했습니다.</p>
+        <div class="lesson-rows">
+          <article class="lesson-row reveal"><span class="from">지원서만 보던 방식에서</span><h3>2주 먼저 해보기</h3><p>잘 쓴 말보다 실제로 시간을 내고 행동을 만드는 과정을 함께 확인합니다.</p></article>
+          <article class="lesson-row reveal"><span class="from">큰 팀 결과물에서</span><h3>각자의 실제 장면으로</h3><p>모두가 같은 것을 만들기보다, 각자에게 중요한 문제를 끝까지 다룹니다.</p></article>
+          <article class="lesson-row reveal"><span class="from">의욕에 기대던 운영에서</span><h3>고정된 짧은 리듬으로</h3><p>격주 90분과 상태 공유 약속으로 조용히 흐름이 끊기는 일을 줄입니다.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="final-cta" aria-labelledby="apply-title">
-      <div class="shell final-box">
-        <div><p class="kicker">Apply for cohort 3</p><h2 id="apply-title">바꾸고 싶은 장면 하나가 있다면, 먼저 2주를 함께해요.</h2><p>완성된 결과물은 필요 없습니다. 지금 바꾸고 싶은 것과 실제로 내어 볼 시간을 솔직하게 들려주세요.</p><span class="deadline">모집 8/4–8/10 · 2주 베타 시작 8/17</span></div>
-        <a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">정식 지원서 작성 <span aria-hidden="true">↗</span></a>
+    <section class="chapter light" id="reviews" aria-labelledby="reviews-title">
+      <div class="shell reviews-heading"><div><p class="chapter-label reveal">Words from cohort 1</p><h2 class="reveal" id="reviews-title">혼자였다면<br>시작하지 못했을 일들.</h2></div><p class="lead reveal">3기의 방식은 달라졌지만, 함께라서 한 번 더 움직였다는 경험은 이어갑니다. 아래 문장은 1기 홈페이지에 공개된 익명 후기 원문입니다.</p></div>
+      <div class="review-marquee reveal" aria-label="지난 기수 익명 후기">
+        <div class="review-track" tabindex="0">
+          <article class="review-card"><span class="review-mark">“</span><blockquote>체력뿐 아니라 마음까지 단단해진 시간이었습니다. 다양한 러닝 코스를 뛰어보고 마지막에는 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정 자체가 오래 기억에 남을 것 같아요.</blockquote><footer>1기 익명 후기 · 김○○ · Flow Crew</footer></article>
+          <article class="review-card"><span class="review-mark">“</span><blockquote>혼자 할 때는 흥미 없고 오래 하기 힘들었던 러닝을, 펠로우들과 다 같이 뛰니 힘들어도 어떻게든 뛰게 되고 시간도 빨리 가서 매우 즐거웠습니다.</blockquote><footer>1기 익명 후기 · 오○○ · Flow Crew</footer></article>
+          <article class="review-card"><span class="review-mark">“</span><blockquote>혼자였다면 겨울에 산 정상까지 오르는 걸 엄두도 내지 못했을 텐데, 여럿이서 으쌰으쌰 하는 분위기 덕분에 등산을 재밌게 할 수 있었어요! 운동 생활에 새로운 패러다임을 제시해준 활동이었습니다.</blockquote><footer>1기 익명 후기 · 강○○ · Flow Crew</footer></article>
+          <article class="review-card"><span class="review-mark">“</span><blockquote>정말 좋은 언니, 오빠를 만났고 팀 분위기가 펠로우십에서도 정말 최상위권이라고 생각합니다. 계획을 하나하나 실현해보는 경험이 좋았고, 연락도 빨리 보고 의견 반영도 잘 되어서 수다디 최고였습니다!</blockquote><footer>1기 익명 후기 · 전○○ · 수다디</footer></article>
+          <article class="review-card"><span class="review-mark">“</span><blockquote>평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다. 팀원들이 매주 공유를 해줬기에 그 믿음을 져버릴 수 없어서 끝까지 달릴 수 있었습니다.</blockquote><footer>1기 익명 후기 · 최○○ · 말랑말랑</footer></article>
+          <article class="review-card"><span class="review-mark">“</span><blockquote>마케팅에 대한 막연한 꿈만 가지고 있었는데, 무에서 유(팔로워 100명)를 만들어내며 성취감과 자신감을 얻었습니다. 루멘은 정말 가족 같은 분위기였고, 서로 매일 응원하며 힘을 얻었던 유일한 크루였습니다. 어떻게 표현해야 사람들의 관심을 끌 수 있는지 고민하는 시간이 되었어요.</blockquote><footer>1기 익명 후기 · 최○○ · 루멘</footer></article>
+          <article class="review-card"><span class="review-mark">“</span><blockquote>펠로우십하길 잘했다고 생각이 들 정도로 정말 재미있게 활동했습니다. 팀원들과의 결속력이 단단했기 때문에 지금까지 달려올 수 있었다고 생각합니다. 좋은 사람들과 재미있고 다양한 콘텐츠를 만들 수 있음에 감사하고 뿌듯합니다.</blockquote><footer>1기 익명 후기 · 김○○ · 노이즈</footer></article>
+          <article class="review-card"><span class="review-mark">“</span><blockquote>팀원들의 조언과 레퍼런스 공유를 통해 각자의 제작 능력을 강화하고, 함께 성장을 이루어낸 모습이 눈에 보이면서 너무나도 기특했습니다. 브랜딩이라는 낯선 주제에서 좋은 동료들과 PA로 활동한 것은 어디서도 쉽게 얻지 못할 소중한 기회였습니다.</blockquote><footer>1기 익명 후기 · 김○○ · 루멘</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>체력뿐 아니라 마음까지 단단해진 시간이었습니다. 다양한 러닝 코스를 뛰어보고 마지막에는 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정 자체가 오래 기억에 남을 것 같아요.</blockquote><footer>1기 익명 후기 · 김○○ · Flow Crew</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>혼자 할 때는 흥미 없고 오래 하기 힘들었던 러닝을, 펠로우들과 다 같이 뛰니 힘들어도 어떻게든 뛰게 되고 시간도 빨리 가서 매우 즐거웠습니다.</blockquote><footer>1기 익명 후기 · 오○○ · Flow Crew</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>혼자였다면 겨울에 산 정상까지 오르는 걸 엄두도 내지 못했을 텐데, 여럿이서 으쌰으쌰 하는 분위기 덕분에 등산을 재밌게 할 수 있었어요! 운동 생활에 새로운 패러다임을 제시해준 활동이었습니다.</blockquote><footer>1기 익명 후기 · 강○○ · Flow Crew</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>정말 좋은 언니, 오빠를 만났고 팀 분위기가 펠로우십에서도 정말 최상위권이라고 생각합니다. 계획을 하나하나 실현해보는 경험이 좋았고, 연락도 빨리 보고 의견 반영도 잘 되어서 수다디 최고였습니다!</blockquote><footer>1기 익명 후기 · 전○○ · 수다디</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다. 팀원들이 매주 공유를 해줬기에 그 믿음을 져버릴 수 없어서 끝까지 달릴 수 있었습니다.</blockquote><footer>1기 익명 후기 · 최○○ · 말랑말랑</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>마케팅에 대한 막연한 꿈만 가지고 있었는데, 무에서 유(팔로워 100명)를 만들어내며 성취감과 자신감을 얻었습니다. 루멘은 정말 가족 같은 분위기였고, 서로 매일 응원하며 힘을 얻었던 유일한 크루였습니다. 어떻게 표현해야 사람들의 관심을 끌 수 있는지 고민하는 시간이 되었어요.</blockquote><footer>1기 익명 후기 · 최○○ · 루멘</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>펠로우십하길 잘했다고 생각이 들 정도로 정말 재미있게 활동했습니다. 팀원들과의 결속력이 단단했기 때문에 지금까지 달려올 수 있었다고 생각합니다. 좋은 사람들과 재미있고 다양한 콘텐츠를 만들 수 있음에 감사하고 뿌듯합니다.</blockquote><footer>1기 익명 후기 · 김○○ · 노이즈</footer></article>
+          <article class="review-card" aria-hidden="true"><span class="review-mark">“</span><blockquote>팀원들의 조언과 레퍼런스 공유를 통해 각자의 제작 능력을 강화하고, 함께 성장을 이루어낸 모습이 눈에 보이면서 너무나도 기특했습니다. 브랜딩이라는 낯선 주제에서 좋은 동료들과 PA로 활동한 것은 어디서도 쉽게 얻지 못할 소중한 기회였습니다.</blockquote><footer>1기 익명 후기 · 김○○ · 루멘</footer></article>
+        </div>
       </div>
+      <p class="review-note">마우스를 올리거나 키보드로 초점을 두면 후기가 멈춥니다.</p>
+    </section>
+
+    <section class="chapter dark" id="schedule" aria-labelledby="schedule-title">
+      <div class="shell"><p class="chapter-label reveal">Schedule</p><h2 class="reveal" id="schedule-title">이번 가을,<br>14주의 흐름.</h2><div class="schedule">
+        <article class="schedule-item reveal"><time datetime="2026-08-04">8/4–8/10</time><div><h3>3기 모집</h3><p>정식 지원서를 바탕으로 2주 베타 초대 여부를 검토합니다.</p></div></article>
+        <article class="schedule-item reveal"><time datetime="2026-08-13">8/13</time><div><h3>베타 초대·시간 확인</h3><p>초대 가능 여부와 베타 안내를 전달하고 실제 가능한 모임 시간을 확인합니다.</p></div></article>
+        <article class="schedule-item reveal"><time datetime="2026-08-17">8/17–8/30</time><div><h3>2주 베타</h3><p>장면을 정하고, 작게 실행하고, 다음에 바꿀 한 가지까지 남깁니다.</p></div></article>
+        <article class="schedule-item reveal"><time datetime="2026-08-31">8/31–11/22</time><div><h3>12주 코어</h3><p>12–15명이 격주 90분 온라인 리듬으로 각자의 실제 행동을 이어갑니다.</p></div></article>
+      </div></div>
+    </section>
+
+    <section class="chapter light" id="faq" aria-labelledby="faq-title">
+      <div class="shell"><p class="chapter-label reveal">FAQ</p><h2 class="reveal" id="faq-title">지원 전에,<br>이것만은 확인해주세요.</h2><div class="faq-list reveal">
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1"><span>AI를 잘 다루지 못해도 <span class="keep">지원할 수 있나요?</span></span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a1" role="region" aria-hidden="true"><div><p>네. 기능 숙련도보다 내 문제에 직접 써보고 다음 시도를 바꿀 의지가 더 중요합니다. 무료 계정만 있어도 베타에 참여할 수 있습니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2"><span>이미 개인 유료 AI 계정을 쓰고 있으면 유리한가요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a2" role="region" aria-hidden="true"><div><p>꾸준히 사용해온 습관을 보여주는 참고 신호일 수는 있지만 자동 선발 조건은 아닙니다. 기존 계정은 베타에서 그대로 사용하면 됩니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3"><span>참가비나 별도 계정 비용이 있나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a3" role="region" aria-hidden="true"><div><p>참가비는 없습니다. 베타에는 프로그램 계정을 제공하지 않아 개인 무료 또는 기존 유료 AI를 사용합니다. 코어 합류 후에는 개인 유료 AI 구독 한 가지를 지원합니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4"><span>지원하면 바로 코어 펠로우가 되나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a4" role="region" aria-hidden="true"><div><p>아닙니다. 이번 지원은 2주 베타 초대 검토를 위한 정식 지원입니다. 베타에서 서로의 시간 약속과 실행 방식을 확인한 뒤 코어 합류를 결정합니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5"><span>모임은 언제, 어디에서 하나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a5" role="region" aria-hidden="true"><div><p>공식 모임은 격주 90분 온라인입니다. 가능한 시간은 베타 초대 후 확인하고 코어 시작 전에 최종 안내합니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a6"><span>지원서에 쓰면 안 되는 정보가 있나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a6" role="region" aria-hidden="true"><div><p>비밀번호, OTP, 카드번호, API 키, AI 대화나 프롬프트 원문 같은 민감 정보는 제출하지 마세요. 지원에 필요한 최소 정보만 받습니다.</p></div></div></div>
+      </div></div>
+    </section>
+
+    <section class="chapter final" id="apply" aria-labelledby="apply-title">
+      <div class="shell reveal"><p class="chapter-label">Apply for cohort 3</p><h2 id="apply-title">바꾸고 싶은 장면 하나가 있다면,<br>먼저 2주를 함께해요.</h2><p>완성된 결과물은 필요 없습니다. 지금 바꾸고 싶은 것, 실제로 내어볼 시간, 해보다 막혔던 지점을 솔직하게 들려주세요.</p><a class="button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3">정식 지원서 작성 <span aria-hidden="true">↗</span></a><small>모집 8/4–8/10 · 베타 초대 가능 여부 안내 8/13 · 2주 베타 시작 8/17</small></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="shell footer-row"><span>© 2026 피니토 주식회사</span><nav class="footer-links" aria-label="안내 문서"><a href="privacy.html">개인정보 안내</a><a href="terms.html">이용 안내</a></nav></div>
-  </footer>
+  <footer class="site-footer"><div class="shell footer-row"><span>© 2026 피니토 주식회사</span><nav class="footer-links" aria-label="안내 문서"><a href="privacy.html">개인정보 안내</a><a href="terms.html">이용 안내</a></nav></div></footer>
+
+  <script>
+    (() => {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.body.dataset.motion = reducedMotion ? 'reduced' : 'normal';
+      const menuButton = document.querySelector('.menu-button');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const closeMenu = () => { menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', '메뉴 열기'); mobileMenu.dataset.open = 'false'; document.body.classList.remove('menu-open'); };
+      menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') !== 'true'; menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기'); mobileMenu.dataset.open = String(open); document.body.classList.toggle('menu-open', open); });
+      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if (reducedMotion || !('IntersectionObserver' in window)) revealItems.forEach(item => item.classList.add('is-visible'));
+      else {
+        const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); } }), { threshold: .12 });
+        revealItems.forEach((item, index) => { if (item.closest('.hero')) item.style.transitionDelay = `${Math.min(index, 5) * 85}ms`; revealObserver.observe(item); });
+      }
+
+      const counters = document.querySelectorAll('[data-count]');
+      const runCounter = el => { const end = Number(el.dataset.count); if (reducedMotion || end === 0) { el.textContent = String(end); return; } const start = performance.now(); const duration = 850; const step = now => { const progress = Math.min((now - start) / duration, 1); el.textContent = String(Math.round(end * (1 - Math.pow(1 - progress, 3)))); if (progress < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+      if ('IntersectionObserver' in window && !reducedMotion) { const counterObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { runCounter(entry.target); counterObserver.unobserve(entry.target); } }), { threshold: .7 }); counters.forEach(counter => { counter.textContent = '0'; counterObserver.observe(counter); }); } else counters.forEach(runCounter);
+
+      const sectionIds = ['about','beta','core','reviews','schedule','faq','apply'];
+      const sections = sectionIds.map(id => document.getElementById(id));
+      const navLinks = document.querySelectorAll('[data-nav]');
+      const sideLinks = document.querySelectorAll('.side-link');
+      const sideGuide = document.querySelector('.side-guide');
+      const indicator = document.querySelector('.nav-indicator');
+      const moveIndicator = active => { if (!active || !indicator) return; const nav = active.parentElement.getBoundingClientRect(); const rect = active.getBoundingClientRect(); indicator.style.width = `${rect.width}px`; indicator.style.transform = `translate3d(${rect.left - nav.left}px,0,0)`; indicator.style.opacity = '1'; };
+      const setActive = id => { navLinks.forEach(link => link.classList.toggle('is-active', link.dataset.nav === id)); sideLinks.forEach(link => link.classList.toggle('is-active', link.dataset.target === id)); moveIndicator(document.querySelector(`[data-nav="${id}"]`)); };
+      if ('IntersectionObserver' in window) { const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); }), { rootMargin: '-34% 0px -55%', threshold: 0 }); sections.forEach(section => sectionObserver.observe(section)); }
+      const syncSideGuide = () => { const visible = window.innerWidth > 1100 && window.scrollY > window.innerHeight * .55; sideGuide.classList.toggle('is-visible', visible); sideGuide.toggleAttribute('inert', !visible); sideGuide.setAttribute('aria-hidden', String(!visible)); };
+      syncSideGuide();
+      window.addEventListener('scroll', syncSideGuide, { passive: true });
+      window.addEventListener('resize', () => { if (window.innerWidth > 760 && menuButton.getAttribute('aria-expanded') === 'true') closeMenu(); syncSideGuide(); moveIndicator(document.querySelector('.desktop-nav a.is-active')); });
+      sideLinks.forEach(link => link.addEventListener('click', () => document.getElementById(link.dataset.target).scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })));
+      document.querySelector('.side-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' }));
+
+      const timeline = document.getElementById('beta-timeline');
+      const timelineProgress = timeline.querySelector('.program-progress');
+      const timelineSteps = timeline.querySelectorAll('.program-step');
+      const updateTimeline = () => { const rect = timeline.getBoundingClientRect(); const viewportMarker = window.innerHeight * .58; const progress = Math.max(0, Math.min(1, (viewportMarker - rect.top) / rect.height)); timelineProgress.style.height = `${progress * 100}%`; timelineSteps.forEach(step => step.classList.toggle('is-active', step.getBoundingClientRect().top < viewportMarker)); };
+      if (!reducedMotion) { updateTimeline(); window.addEventListener('scroll', updateTimeline, { passive: true }); }
+      else { timelineProgress.style.height = '100%'; timelineSteps.forEach(step => step.classList.add('is-active')); }
+
+      const faqButtons = document.querySelectorAll('.faq-question');
+      faqButtons.forEach(button => button.addEventListener('click', () => { const willOpen = button.getAttribute('aria-expanded') !== 'true'; faqButtons.forEach(other => { const open = other === button && willOpen; other.setAttribute('aria-expanded', String(open)); document.getElementById(other.getAttribute('aria-controls')).setAttribute('aria-hidden', String(!open)); }); }));
+    })();
+  </script>
 </body>
 </html>
