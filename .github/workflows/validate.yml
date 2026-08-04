@@ -20,6 +20,8 @@ jobs:
           test -s lime-light.html
           test -s privacy.html
           test -s terms.html
+          test -s apply/index.html
+          test -s apply/complete/index.html
           cmp index.html lime-light.html
           python -m unittest tests.test_static_release -v
           python scripts/validate_static_release.py .

@@ -9,8 +9,9 @@
 - **서빙 파일**: 루트 `index.html`
 - **동일 사본**: `lime-light.html`은 `index.html`과 바이트 단위로 같아야 합니다.
 - **현재 상태**: 위닝 펠로우십 3기 **지원 접수 페이지**입니다.
-  - CTA는 서버 검증을 마친 정식 지원 경로 `https://product-omrpipeline-production.up.railway.app/fellowship/3`만 사용합니다.
-  - 랜딩 내부에는 정적 `<form>`을 두지 않으며, Fillout·Google Form·메일 수집 경로를 만들지 않습니다.
+  - 공개 CTA는 같은 GitHub Pages 사이트의 `apply/` 경로만 사용합니다.
+  - 지원서는 `apply/`의 정적 UI에서 작성하고, 제출 API만 Railway 백엔드를 사용합니다. Fillout·Google Form·메일 수집 경로를 만들지 않습니다.
+  - 과거 Railway 지원 URL은 공개 `apply/` 경로로 리디렉션해 기존 링크를 유지합니다.
   - 지원은 코어 합류 확정이 아니라 2주 베타 초대 검토입니다.
 
 ## 배포
@@ -23,6 +24,7 @@
 ## 공개 파일 범위
 
 - `index.html`, `lime-light.html`: 현재 공개 랜딩
+- `apply/`: 3기 지원서와 접수 완료 화면
 - `privacy.html`, `terms.html`: 현재 지원 정보 수집 범위와 이용 조건을 설명하는 안내 문서
 - `invite/`: 과거 초대 아카이브이며 현재 모집 경로에서 링크하지 않습니다.
 

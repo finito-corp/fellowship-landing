@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="위닝 펠로우십 3기 2주 베타 참여 지원서">
+  <title>위닝 펠로우십 3기 지원서</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23d9aa45'/%3E%3C/svg%3E">
+  <style>
+    @font-face { font-family: Pretendard; src: url("../assets/PretendardVariable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+    :root { color-scheme:light; --ink:#171717; --paper:#f7f5ef; --gold:#f2bd3f; --gold-deep:#8f5f00; --text-light:#faf8f2; --muted-light:#aaa79f; --muted-dark:#68645d; --surface:#fffdf8; --line:#d8d4c9; --field-line:#aaa79f; --danger:#a52b2b; --notice-bg:#fff4d6; --notice-text:#514326; }
+    * { box-sizing: border-box; }
+    html { word-break: keep-all; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif; line-height:1.62; }
+    a { color:inherit; }
+    .keep { white-space:nowrap; }
+    :focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+    .top { background:var(--ink); color:var(--text-light); }
+    .top-inner, main { width:min(100% - 32px, 760px); margin:0 auto; }
+    .top-inner { padding:18px 0; }
+    .back { display:inline-flex; min-height:44px; align-items:center; color:var(--muted-light); font-size:.88rem; font-weight:700; text-decoration:none; }
+    .hero { padding:56px 0 62px; }
+    .eyebrow { margin:0 0 14px; color:var(--gold); font-size:.76rem; font-weight:800; letter-spacing:.12em; }
+    h1 { margin:0; max-width:680px; font-size:clamp(2.35rem,7vw,4.2rem); line-height:1.12; letter-spacing:-.035em; }
+    .lead { max-width:620px; margin:22px 0 0; color:var(--muted-light); font-size:clamp(1.02rem,2vw,1.18rem); }
+    main { padding:30px 0 72px; }
+    .process, form { border:1px solid var(--line); border-radius:20px; background:var(--surface); }
+    .process { padding:22px; }
+    h2 { margin:0 0 14px; font-size:1.15rem; letter-spacing:-.02em; }
+    .steps { display:grid; gap:10px; margin:0; padding:0; list-style:none; counter-reset:step; }
+    .steps li { display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start; color:var(--muted-dark); font-size:.94rem; }
+    .steps li::before { counter-increment:step; content:counter(step); display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--ink); color:var(--text-light); font-size:.76rem; font-weight:800; }
+    .notice { margin:16px 0 0; border-left:3px solid var(--gold); padding:10px 13px; background:var(--notice-bg); color:var(--notice-text); font-size:.9rem; }
+    form { margin-top:22px; padding:8px 24px 26px; }
+    fieldset { margin:0; border:0; padding:0; }
+    legend { width:100%; margin:0; border-top:1px solid var(--line); padding:28px 0 2px; font-size:1.2rem; font-weight:800; letter-spacing:-.02em; }
+    fieldset:first-child legend { border-top:0; }
+    label { display:block; margin:18px 0 7px; font-size:.93rem; font-weight:750; }
+    .required { color:var(--danger); }
+    input, select, textarea { display:block; width:100%; border:1px solid var(--field-line); border-radius:11px; padding:12px 13px; background:var(--surface); color:var(--ink); font:inherit; font-size:1rem; }
+    textarea { min-height:132px; resize:vertical; }
+    input:focus-visible, select:focus-visible, textarea:focus-visible { outline:3px solid var(--gold); outline-offset:3px; border-color:var(--gold-deep); }
+    .help { margin:6px 0 0; color:var(--muted-dark); font-size:.82rem; }
+    .choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+    .choice { display:flex; align-items:center; gap:9px; margin:0; border:1px solid var(--line); border-radius:11px; padding:11px; background:var(--surface); font-size:.9rem; font-weight:650; }
+    .choice input { width:18px; height:18px; margin:0; accent-color:var(--gold-deep); flex:none; }
+    .check { display:flex; align-items:flex-start; gap:10px; margin:17px 0 0; border-radius:11px; padding:14px; background:var(--paper); font-size:.9rem; font-weight:650; }
+    .check input { width:19px; height:19px; margin:2px 0 0; accent-color:var(--gold-deep); flex:none; }
+    .honeypot { position:absolute !important; left:-10000px !important; width:1px !important; height:1px !important; overflow:hidden !important; }
+    button { width:100%; margin-top:26px; border:0; border-radius:12px; padding:16px; background:var(--gold); color:var(--ink); font:inherit; font-size:1rem; font-weight:850; cursor:pointer; transition:filter .18s ease,transform .18s ease; }
+    button:hover { filter:brightness(1.04); }
+    button:active { transform:translateY(1px); }
+    button:disabled { cursor:wait; opacity:.65; }
+    #result { display:none; margin-top:14px; border-radius:11px; padding:13px; font-size:.9rem; }
+    #result.error { display:block; border:1px solid color-mix(in srgb,var(--danger) 30%,transparent); background:color-mix(in srgb,var(--danger) 8%,var(--surface)); color:var(--danger); }
+    #result.pending { display:block; border:1px solid var(--line); background:var(--notice-bg); color:var(--notice-text); }
+    footer { padding:22px 2px 0; color:var(--muted-dark); font-size:.78rem; }
+    footer a { display:inline-flex; min-height:44px; align-items:center; font-weight:700; }
+    @media (max-width:520px) { .top-inner, main { width:min(100% - 24px,760px); } .hero { padding:42px 0 48px; } form { padding:5px 15px 22px; } .process { padding:18px 15px; } .choice-grid { grid-template-columns:1fr; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="back" href="../">← 3기 소개로 돌아가기</a>
+      <div class="hero">
+        <p class="eyebrow">WINNING FELLOWSHIP · 3기</p>
+        <h1>위닝 펠로우십<br>3기 지원서</h1>
+        <p class="lead">대학 3학년 이상·졸업생이 2주 베타 참여를 신청하는 지원서입니다. 작성 내용을 바탕으로 베타 초대 여부를 검토합니다.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="process" aria-labelledby="process-title">
+      <h2 id="process-title">지원 절차</h2>
+      <ol class="steps">
+        <li>8월 10일까지 지원서를 제출합니다.</li>
+        <li>작성 내용을 검토해 8월 13일까지 베타 초대 여부를 안내합니다.</li>
+        <li>8월 17일부터 2주 베타에 참여한 뒤, 12주 코어 합류 여부를 함께 결정합니다.</li>
+      </ol>
+      <p class="notice">지원서 제출만으로 베타 초대나 코어 합류가 확정되지는 않습니다. 지원 내용과 실제 참여 가능성을 함께 검토합니다.</p>
+    </section>
+
+    <form id="application-form" novalidate>
+      <fieldset>
+        <legend>1. 지원자 정보</legend>
+        <label for="name">이름 <span class="required">*</span></label>
+        <input id="name" name="name" autocomplete="name" minlength="2" maxlength="40" required placeholder="이름을 입력해주세요">
+
+        <label for="contact_channel">연락받을 방법 <span class="required">*</span></label>
+        <select id="contact_channel" name="contact_channel" required>
+          <option value="phone">휴대전화</option>
+          <option value="email">이메일</option>
+        </select>
+        <label id="contact_label" for="contact_value">휴대전화 번호 <span class="required">*</span></label>
+        <input id="contact_value" name="contact_value" type="tel" inputmode="tel" autocomplete="tel" required placeholder="01012345678">
+        <p class="help" id="contact_help">공백·하이픈 없이 입력해주세요.</p>
+
+        <label for="eligibility_stage">현재 상태 <span class="required">*</span></label>
+        <select id="eligibility_stage" name="eligibility_stage" required>
+          <option value="">선택해주세요</option>
+          <option value="대학3학년">대학 3학년</option>
+          <option value="대학4학년이상">대학 4학년 이상</option>
+          <option value="졸업생">졸업생</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. 이번 3기에서 해볼 일</legend>
+        <label for="why_now">3기에서 해결하거나 바꾸고 싶은 <span class="keep">구체적인 문제</span> <span class="required">*</span></label>
+        <textarea id="why_now" name="why_now" minlength="10" maxlength="700" required placeholder="예: 취업 포트폴리오를 완성하지 못하고 있습니다. 2주 동안 AI로 자료 조사와 초안 작성을 반복해 첫 결과물을 만들고 싶습니다."></textarea>
+        <p class="help">계정 비밀번호나 인증번호, 카드 정보는 적지 말아주세요.</p>
+
+        <label for="prior_ai_use_summary">현재 AI 활용 경험 또는 이번에 시도할 방법 <span class="required">*</span></label>
+        <textarea id="prior_ai_use_summary" name="prior_ai_use_summary" minlength="10" maxlength="700" required placeholder="이미 사용 중이라면 실제 활용 사례를, 처음이라면 위 문제에 AI를 어떻게 써 보고 싶은지 적어주세요."></textarea>
+
+        <label>개인 유료 AI 구독 사용 여부 <span class="required">*</span></label>
+        <div class="choice-grid" role="radiogroup" aria-label="개인 유료 AI 구독 사용 여부">
+          <label class="choice"><input type="radio" name="personal_paid_ai_signal" value="yes" required> 사용 중이에요</label>
+          <label class="choice"><input type="radio" name="personal_paid_ai_signal" value="no"> 사용하지 않아요</label>
+          <label class="choice"><input type="radio" name="personal_paid_ai_signal" value="prefer_not_to_say"> 답하고 싶지 않아요</label>
+        </div>
+        <p class="help">유료 구독 사용 여부만으로 합류 여부를 정하지 않습니다.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. 2주 베타 참여 가능 여부</legend>
+        <p class="help">격주 90분 온라인 모임입니다. 정확한 시간은 베타 첫 주 참여자의 가능 시간을 바탕으로 정합니다.</p>
+        <label>가능한 시간 두 개 이상 <span class="required">*</span></label>
+        <div class="choice-grid" id="available-windows">
+          <label class="choice"><input type="checkbox" name="available_windows" value="weekday_morning"> 평일 오전</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="weekday_afternoon"> 평일 오후</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="weekday_evening"> 평일 저녁</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="saturday_morning"> 토요일 오전</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="saturday_afternoon"> 토요일 오후</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="saturday_evening"> 토요일 저녁</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="sunday_morning"> 일요일 오전</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="sunday_afternoon"> 일요일 오후</label>
+          <label class="choice"><input type="checkbox" name="available_windows" value="sunday_evening"> 일요일 저녁</label>
+        </div>
+
+        <label for="actual_term_or_regular_rhythm_starts_on">학기 또는 정규 일정이 시작되는 날 <span class="required">*</span></label>
+        <input id="actual_term_or_regular_rhythm_starts_on" name="actual_term_or_regular_rhythm_starts_on" type="date" required>
+
+        <label class="check"><input name="beta_commitment_confirmed" type="checkbox" required><span>8/17~8/30, 2주 베타에 직접 참여할 수 있습니다.</span></label>
+        <label class="check"><input name="contact_consent_confirmed" type="checkbox" required><span>베타 초대 검토와 3기 운영 안내 연락을 받겠습니다. 개인정보 안내를 확인했습니다.</span></label>
+        <div class="honeypot" aria-hidden="true"><label for="website">웹사이트</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      </fieldset>
+
+      <button id="submit-button" type="submit">위닝 펠로우십 3기 지원서 제출하기</button>
+      <div id="result" role="status" aria-live="polite"></div>
+    </form>
+
+    <footer>제출한 내용은 3기 베타 초대 검토와 운영 안내에만 사용됩니다. <a href="../privacy.html">개인정보 안내</a>를 확인해주세요.</footer>
+  </main>
+
+  <script>
+    (() => {
+      const endpoint = 'https://product-omrpipeline-production.up.railway.app/api/fellowship/3/applications';
+      const form = document.getElementById('application-form');
+      const channel = document.getElementById('contact_channel');
+      const contact = document.getElementById('contact_value');
+      const contactLabel = document.getElementById('contact_label');
+      const contactHelp = document.getElementById('contact_help');
+      const button = document.getElementById('submit-button');
+      const result = document.getElementById('result');
+      const syncContact = () => {
+        const email = channel.value === 'email';
+        contact.type = email ? 'email' : 'tel';
+        contact.inputMode = email ? 'email' : 'tel';
+        contact.autocomplete = email ? 'email' : 'tel';
+        contact.placeholder = email ? 'name@example.com' : '01012345678';
+        contactLabel.innerHTML = (email ? '이메일' : '휴대전화 번호') + ' <span class="required">*</span>';
+        contactHelp.textContent = email ? '베타 초대 여부를 안내받을 이메일입니다.' : '공백·하이픈 없이 입력해주세요.';
+      };
+      const show = (message, kind) => { result.className = kind; result.textContent = message; };
+      channel.addEventListener('change', syncContact);
+      syncContact();
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const windows = [...form.querySelectorAll('input[name="available_windows"]:checked')].map((input) => input.value);
+        if (windows.length < 2) { show('가능한 시간을 두 개 이상 선택해주세요.', 'error'); return; }
+        if (!form.reportValidity()) { show('필수 항목을 확인해주세요.', 'error'); return; }
+        const payload = {
+          name: form.name.value.trim(), contact_channel: channel.value, contact_value: contact.value.trim(),
+          eligibility_stage: form.eligibility_stage.value, why_now: form.why_now.value.trim(),
+          prior_ai_use_summary: form.prior_ai_use_summary.value.trim(),
+          personal_paid_ai_signal: form.querySelector('input[name="personal_paid_ai_signal"]:checked')?.value || '',
+          available_windows: windows, actual_term_or_regular_rhythm_starts_on: form.actual_term_or_regular_rhythm_starts_on.value,
+          beta_commitment_confirmed: form.beta_commitment_confirmed.checked,
+          contact_consent_confirmed: form.contact_consent_confirmed.checked, website: form.website.value,
+        };
+        button.disabled = true;
+        show('지원서를 제출하고 있습니다.', 'pending');
+        try {
+          const response = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'omit', body:JSON.stringify(payload) });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.detail || '제출 중 문제가 생겼습니다. 잠시 후 다시 시도해주세요.');
+          const completeUrl = new URL('complete/', window.location.href);
+          completeUrl.searchParams.set('code', data.application_code);
+          window.location.assign(completeUrl);
+        } catch (error) {
+          show(error instanceof Error ? error.message : '제출 중 문제가 생겼습니다. 잠시 후 다시 시도해주세요.', 'error');
+          button.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

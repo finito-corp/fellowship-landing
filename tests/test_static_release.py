@@ -9,7 +9,7 @@ from pathlib import Path
 from scripts.validate_static_release import validate_site
 
 
-APPLICATION_URL = "https://product-omrpipeline-production.up.railway.app/fellowship/3"
+APPLICATION_URL = "apply/"
 VERIFIED_REVIEW_EXCERPTS = (
     "체력뿐 아니라 마음까지 단단해진 시간이었습니다. 다양한 러닝 코스를 뛰어보고 마지막에는 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정 자체가 오래 기억에 남을 것 같아요.",
     "혼자 할 때는 흥미 없고 오래 하기 힘들었던 러닝을, 펠로우들과 다 같이 뛰니 힘들어도 어떻게든 뛰게 되고 시간도 빨리 가서 매우 즐거웠습니다.",
@@ -96,7 +96,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
 
         self.assertEqual(index, alternate)
         self.assertIn('data-collection-state="server-verified"', index)
-        self.assertIn('href="https://product-omrpipeline-production.up.railway.app/fellowship/3"', index)
+        self.assertIn('href="apply/"', index)
+        self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', index)
         self.assertIn("정식 지원서로 받고, 먼저 2주 베타 초대 여부를 검토합니다.", index)
         self.assertNotIn("<form", index.lower())
         self.assertNotIn('aria-disabled="true"', index)
@@ -127,8 +128,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
         self.assertIn('data-collection-state="server-verified"', terms)
         self.assertIn("지원이 곧 합류 확정은 아닙니다", terms)
-        self.assertIn("이번 모집은 정식 지원서로 받습니다", terms)
-        self.assertIn("정식 모집과 같은 항목으로 받고 같은 기준으로 검토합니다", terms)
+        self.assertIn("이번 모집은 2주 베타 참여를 신청하는 정식 지원서로 받습니다", terms)
+        self.assertIn("작성한 지원 내용과 실제 참여 가능성을 검토해", terms)
         self.assertNotIn("조기 제출", terms)
         for text in (privacy, terms):
             self.assertNotIn("Fillout", text)
@@ -145,6 +146,18 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('cp -R preview/assets "${target}/assets"', pages_workflow)
         self.assertNotIn("main/invite", pages_workflow)
         self.assertNotIn("preview/invite", pages_workflow)
+
+    def test_public_application_page_is_direct_and_keeps_backend_internal(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        application = (root / "apply" / "index.html").read_text(encoding="utf-8")
+
+        self.assertIn('id="application-form"', application)
+        self.assertIn('name="why_now"', application)
+        self.assertIn('name="prior_ai_use_summary"', application)
+        self.assertIn('name="available_windows"', application)
+        self.assertIn('id="submit-button"', application)
+        self.assertNotIn("대기 명단", application)
+        self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', application)
 
     def test_landing_uses_human_opening_copy_and_a_live_cta(self) -> None:
         root = Path(__file__).resolve().parents[1]
@@ -193,12 +206,11 @@ class StaticReleaseValidationTests(unittest.TestCase):
         ordered_ids = ('id="about"', 'id="history"', 'id="reviews"', 'id="fit"', 'id="beta"', 'id="core"', 'id="schedule"', 'id="faq"', 'id="apply"')
         positions = [primary.index(section_id) for section_id in ordered_ids]
         self.assertEqual(positions, sorted(positions))
-        self.assertEqual(primary.count("대기 명단"), 1)
-        self.assertNotIn("대기 명단", hero)
+        self.assertNotIn("대기 명단", primary)
         self.assertNotIn("14주", hero)
         self.assertNotIn("12주", hero)
         self.assertEqual(hero.count("약 3개월"), 1)
-        self.assertIn("지원서 화면은 ‘3기 대기 명단’으로 안내되지만", primary)
+        self.assertIn("이번 지원서는 2주 베타 참여를 신청하는 정식 지원서입니다.", primary)
 
     def test_small_accent_text_meets_aa_contrast_on_light_sections(self) -> None:
         root = Path(__file__).resolve().parents[1]

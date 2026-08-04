@@ -130,6 +130,49 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
             self.assertIsNotNone(second)
             self.assertGreater(second["y"], first["y"] + first["height"])
 
+    def test_application_link_stays_on_the_public_fellowship_site(self) -> None:
+        self.page.locator('.hero-actions a[href="apply/"]').click()
+
+        self.assertEqual(self.page.url, f"http://127.0.0.1:{self.server.server_port}/apply/")
+        self.assertEqual(self.page.locator("h1").inner_text(), "위닝 펠로우십\n3기 지원서")
+        self.assertEqual(self.page.locator("form").count(), 1)
+
+    def test_application_form_fits_supported_viewports(self) -> None:
+        self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/")
+        for width in (320, 390, 1280):
+            self.page.set_viewport_size({"width": width, "height": 844})
+            self.assertEqual(
+                self.page.evaluate("document.documentElement.scrollWidth"),
+                self.page.evaluate("document.documentElement.clientWidth"),
+            )
+            self.assertGreaterEqual(
+                self.page.locator("#submit-button").evaluate(
+                    "element => element.getBoundingClientRect().height"
+                ),
+                44,
+            )
+
+    def test_application_controls_have_accessible_focus_and_touch_targets(self) -> None:
+        for path in ("apply/", "apply/complete/"):
+            self.page.goto(f"http://127.0.0.1:{self.server.server_port}/{path}")
+            undersized = self.page.locator("a, button").evaluate_all("""elements => elements
+                .filter(element => {
+                    const style = getComputedStyle(element);
+                    const rect = element.getBoundingClientRect();
+                    return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+                })
+                .filter(element => element.getBoundingClientRect().height < 44)
+                .map(element => ({text: element.textContent.trim(), height: element.getBoundingClientRect().height}))""")
+            self.assertEqual(undersized, [])
+
+        self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/")
+        self.page.locator("#name").focus()
+        focus_style = self.page.locator("#name").evaluate("""element => {
+            const style = getComputedStyle(element);
+            return {color: style.outlineColor, style: style.outlineStyle, width: style.outlineWidth};
+        }""")
+        self.assertEqual(focus_style, {"color": "rgb(242, 189, 63)", "style": "solid", "width": "3px"})
+
 
 if __name__ == "__main__":
     unittest.main()
