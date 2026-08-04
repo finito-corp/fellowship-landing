@@ -3,115 +3,297 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="위닝 펠로우십 3기 지원 경로를 준비하고 있습니다. 현재 이 페이지에서는 지원 정보를 받지 않습니다.">
-  <title>위닝 펠로우십 3기 | 지원 경로 준비 중</title>
+  <meta name="description" content="인생의 다음 파도를 탈 위닝 펠로우십 3기. 8/4 OPEN 예정.">
+  <title>위닝 펠로우십 3기 | 8/4 OPEN 예정</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #121212;
-      --surface: #1d1d1d;
+      --bg: #10131a;
+      --surface: #191e28;
+      --surface-soft: #222a38;
       --line: rgba(255, 255, 255, 0.14);
-      --text: #f8f8f4;
-      --muted: #b9b9b2;
-      --accent: #fbbf24;
-      --accent-soft: rgba(251, 191, 36, 0.12);
+      --text: #fbfbf7;
+      --muted: #c3c6ce;
+      --accent: #f5c54d;
+      --accent-deep: #d99e20;
+      --accent-soft: rgba(245, 197, 77, 0.13);
+      --blue: #73a7ff;
     }
+
     * { box-sizing: border-box; }
     html { background: var(--bg); }
     body {
-      margin: 0;
       min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
       background:
-        radial-gradient(circle at 78% 12%, rgba(251, 191, 36, 0.11), transparent 25rem),
+        radial-gradient(circle at 88% 8%, rgba(115, 167, 255, 0.16), transparent 23rem),
+        radial-gradient(circle at 8% 38%, rgba(245, 197, 77, 0.1), transparent 27rem),
         var(--bg);
       color: var(--text);
       font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
+      line-height: 1.58;
+      word-break: keep-all;
     }
-    .shell { width: min(100% - 40px, 720px); margin: 0 auto; }
-    header { padding: 24px 0; border-bottom: 1px solid var(--line); }
-    .brand { margin: 0; font-size: 1rem; font-weight: 750; letter-spacing: -0.02em; }
+
+    .shell { width: min(100% - 40px, 980px); margin: 0 auto; }
+    header { border-bottom: 1px solid var(--line); }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+    }
+    .brand { margin: 0; font-size: 1.03rem; font-weight: 780; letter-spacing: -0.04em; }
     .brand span { color: var(--accent); }
-    main { padding: clamp(72px, 15vw, 140px) 0 64px; }
+    .header-opening {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(245, 197, 77, 0.5);
+    }
+
+    main { padding: clamp(66px, 11vw, 122px) 0 68px; }
+    .hero { max-width: 720px; }
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       margin: 0 0 20px;
-      padding: 7px 12px;
-      border: 1px solid rgba(251, 191, 36, 0.35);
-      border-radius: 999px;
-      background: var(--accent-soft);
       color: var(--accent);
       font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.08em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
     }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; }
     h1 {
+      max-width: 790px;
       margin: 0;
-      font-size: clamp(2.25rem, 8.5vw, 4.6rem);
-      line-height: 1.13;
-      letter-spacing: -0.07em;
+      font-size: clamp(2.55rem, 8.3vw, 5.45rem);
+      line-height: 1.06;
+      letter-spacing: -0.075em;
     }
     h1 span { color: var(--accent); }
-    .lead { max-width: 37rem; margin: 28px 0 0; color: var(--muted); font-size: clamp(1.04rem, 3.9vw, 1.25rem); }
-    .notice {
-      margin: 40px 0 0;
-      padding: 24px;
-      border: 1px solid rgba(251, 191, 36, 0.45);
-      border-radius: 18px;
-      background: var(--accent-soft);
+    .lead {
+      max-width: 585px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 3.75vw, 1.25rem);
+      letter-spacing: -0.025em;
     }
-    .notice h2, .details h2 { margin: 0; font-size: 1.18rem; letter-spacing: -0.03em; }
-    .notice p { margin: 8px 0 0; color: var(--muted); }
-    .details { margin-top: 24px; padding: 26px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
-    dl { display: grid; grid-template-columns: minmax(5.5rem, 8rem) 1fr; gap: 13px 16px; margin: 22px 0 0; }
-    dt { color: var(--accent); font-weight: 700; }
-    dd { margin: 0; color: var(--muted); }
-    .footnote { margin: 24px 0 0; color: var(--muted); font-size: 0.93rem; }
-    footer { padding: 28px 0 34px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.86rem; }
+
+    .opening-card {
+      position: relative;
+      overflow: hidden;
+      margin-top: 42px;
+      padding: clamp(24px, 5vw, 34px);
+      border: 1px solid rgba(245, 197, 77, 0.5);
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(245, 197, 77, 0.17), rgba(115, 167, 255, 0.09));
+    }
+    .opening-card::before {
+      position: absolute;
+      top: -80%;
+      left: -25%;
+      width: 32%;
+      height: 240%;
+      content: "";
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      transform: rotate(17deg);
+    }
+    .opening-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+    }
+    .opening-card h2 { margin: 10px 0 0; font-size: clamp(1.45rem, 5vw, 2rem); letter-spacing: -0.055em; }
+    .opening-card p { max-width: 530px; margin: 8px 0 0; color: var(--muted); }
+    .waitlist-button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: min(100%, 430px);
+      margin-top: 24px;
+      padding: 16px 18px;
+      overflow: hidden;
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      background: var(--accent);
+      color: #17130a;
+      font: inherit;
+      font-weight: 800;
+      text-align: left;
+      opacity: 1;
+      cursor: not-allowed;
+    }
+    .waitlist-button small { font-size: 0.68rem; letter-spacing: 0.08em; }
+    .waitlist-button::after {
+      position: absolute;
+      inset: 0 auto 0 -45%;
+      width: 35%;
+      content: "";
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.62), transparent);
+      transform: skewX(-20deg);
+    }
+
+    .start { margin-top: clamp(62px, 11vw, 108px); }
+    .section-kicker { margin: 0; color: var(--accent); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; }
+    h2 { margin: 8px 0 0; font-size: clamp(1.8rem, 5.5vw, 2.85rem); letter-spacing: -0.06em; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .step {
+      min-height: 230px;
+      padding: 25px 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(25, 30, 40, 0.84);
+    }
+    .step-number { display: block; color: var(--accent); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; }
+    .step h3 { margin: 36px 0 0; font-size: 1.26rem; line-height: 1.32; letter-spacing: -0.045em; }
+    .step p { margin: 12px 0 0; color: var(--muted); font-size: 0.96rem; }
+
+    .at-a-glance {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 16px;
+      margin-top: 24px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+    .at-a-glance h2 { margin-top: 0; font-size: clamp(1.45rem, 4.5vw, 1.85rem); }
+    .at-a-glance > p { margin: 10px 0 0; color: var(--muted); }
+    .facts { display: grid; gap: 10px; margin: 0; }
+    .fact { padding: 13px 14px; border-radius: 12px; background: var(--surface-soft); }
+    .fact dt { color: var(--accent); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.07em; }
+    .fact dd { margin: 3px 0 0; color: var(--text); font-weight: 690; letter-spacing: -0.025em; }
+
+    footer { padding: 30px 0 36px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.86rem; }
     .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .links { display: flex; flex-wrap: wrap; gap: 16px; }
     a { color: var(--text); text-underline-offset: 4px; }
     a:hover { color: var(--accent); }
-    @media (max-width: 480px) {
-      .shell { width: min(100% - 32px, 720px); }
-      header { padding: 20px 0; }
-      main { padding-top: 72px; }
-      .notice, .details { padding: 21px 18px; }
-      dl { grid-template-columns: 1fr; gap: 3px; }
-      dd { margin-bottom: 12px; }
-      .footer-row { align-items: flex-start; flex-direction: column; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .pulse-dot { animation: pulse 1.9s ease-out infinite; }
+      .opening-card::before { animation: card-light 4.8s ease-in-out infinite; }
+      .waitlist-button::after { animation: button-light 3.6s ease-in-out infinite; }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 197, 77, 0.45); }
+      55% { box-shadow: 0 0 0 10px rgba(245, 197, 77, 0); }
+    }
+    @keyframes card-light { 0%, 35% { left: -40%; } 70%, 100% { left: 120%; } }
+    @keyframes button-light { 0%, 45% { left: -45%; } 75%, 100% { left: 125%; } }
+
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 32px, 980px); }
+      .header-row { align-items: flex-start; flex-direction: column; gap: 7px; }
+      main { padding-top: 70px; }
+      .steps, .at-a-glance { grid-template-columns: 1fr; }
+      .step { min-height: 0; }
+      .step h3 { margin-top: 28px; }
+    }
+    @media (max-width: 390px) {
+      .opening-card, .step, .at-a-glance { padding: 21px 18px; }
+      .waitlist-button { align-items: flex-start; flex-direction: column; gap: 5px; }
     }
   </style>
 </head>
-<body data-collection-state="none">
+<body data-collection-state="none" data-opening-state="scheduled">
   <header>
-    <div class="shell">
+    <div class="shell header-row">
       <p class="brand">Winning <span>Fellowship</span></p>
+      <p class="header-opening"><span class="pulse-dot" aria-hidden="true"></span>8/4 OPEN 예정</p>
     </div>
   </header>
 
   <main>
     <div class="shell">
-      <p class="eyebrow">WINNING FELLOWSHIP 3</p>
-      <h1>위닝 펠로우십 3기<br><span>지원 경로를 준비하고 있습니다.</span></h1>
-      <p class="lead">AI를 잘 쓰는 사람보다, AI로 내 삶·학교·일의 실제 장면을 한 번 움직여 보고 다음 행동을 고쳐 갈 분을 위한 프로그램을 준비하고 있습니다.</p>
-
-      <section class="notice" aria-labelledby="collection-status">
-        <h2 id="collection-status">현재는 지원 정보를 받지 않습니다.</h2>
-        <p>이 페이지에는 지원서·사전등록·수요조사·문의 입력란이 없습니다. 검증된 지원 경로가 준비되기 전에는 이름, 연락처, 계정 정보 등 어떤 지원 정보도 보내지 말아 주세요.</p>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">WINNING FELLOWSHIP 3</p>
+        <h1 id="page-title">인생의 다음 파도를 탈<br><span>3기를 기다립니다.</span></h1>
+        <p class="lead">AI를 처음 써 보는 사람도 괜찮습니다. 내 삶, 학교, 일에서 바꾸고 싶은 장면 하나가 있다면, 그 장면부터 직접 해 봅니다.</p>
       </section>
 
-      <section class="details" aria-labelledby="program-direction">
-        <h2 id="program-direction">3기 준비 방향</h2>
-        <dl>
-          <dt>대상</dt>
-          <dd>대학 3학년 이상·졸업생</dd>
-          <dt>방식</dt>
-          <dd>2주 베타에서 실제 장면을 시도하고, 이후 코어에서 각자의 다음 행동을 이어 갑니다.</dd>
-          <dt>운영</dt>
-          <dd>참가비 없이 시작하며, 코어 합류 여부는 베타의 시간·행동·수정·연락을 확인한 뒤 안내합니다.</dd>
+      <section class="opening-card" aria-labelledby="opening-title">
+        <p class="opening-label"><span class="pulse-dot" aria-hidden="true"></span>8/4 OPEN 예정</p>
+        <h2 id="opening-title">대기 명단 등록을 이 자리에서 엽니다.</h2>
+        <p id="opening-note">3기를 맞을 준비를 하고 있습니다. 열리는 순간, 이 버튼에서 바로 대기 명단 등록을 시작합니다.</p>
+        <button class="waitlist-button" type="button" disabled aria-disabled="true" aria-describedby="opening-note" title="8월 4일 오픈 예정">
+          <span>대기 명단 등록하기</span>
+          <small>8/4 OPEN 예정</small>
+        </button>
+      </section>
+
+      <section class="start" aria-labelledby="start-title">
+        <p class="section-kicker">3기에서 시작하는 일</p>
+        <h2 id="start-title">3기는 이렇게 시작합니다.</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-number">01</span>
+            <h3>내 장면 하나를 고릅니다.</h3>
+            <p>학교, 일, 일상에서 계속 미뤄 둔 일이어도 좋습니다. 지금 나한테 필요한 장면 하나를 가져옵니다.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">02</span>
+            <h3>2주 동안 직접 해 봅니다.</h3>
+            <p>AI를 도구로 써 보고, 어디까지 됐는지 보고, 다음에는 무엇을 바꿀지 정합니다.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">03</span>
+            <h3>맞으면 12주를 더 갑니다.</h3>
+            <p>베타를 같이 해 본 뒤, 서로 이 시간을 더 이어 가기로 하면 코어를 시작합니다.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="at-a-glance" aria-labelledby="who-title">
+        <div>
+          <p class="section-kicker">함께할 사람</p>
+          <h2 id="who-title">혼자서는 자꾸 미뤄지는 일을, 같이 해 보는 시간입니다.</h2>
+          <p>완성된 결과물보다, 내 삶에서 실제로 달라지는 한 장면을 더 중요하게 봅니다.</p>
+        </div>
+        <dl class="facts">
+          <div class="fact">
+            <dt>대상</dt>
+            <dd>대학 3학년 이상·졸업생</dd>
+          </div>
+          <div class="fact">
+            <dt>시작</dt>
+            <dd>2주 베타 + 12주 코어</dd>
+          </div>
+          <div class="fact">
+            <dt>함께하는 방식</dt>
+            <dd>참가비 없이, 격주 90분 온라인</dd>
+          </div>
         </dl>
-        <p class="footnote">공개 지원폼과 운영 경로는 모바일 입력, 서버 검증, 최소 데이터 보관 기준, 운영자 처리 화면을 함께 확인한 뒤에만 열립니다.</p>
       </section>
     </div>
   </main>
