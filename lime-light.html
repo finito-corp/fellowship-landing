@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="인생의 다음 파도를 탈 위닝 펠로우십 3기. 8/4 OPEN 예정.">
-  <title>위닝 펠로우십 3기 | 8/4 OPEN 예정</title>
+  <meta name="description" content="인생의 다음 파도를 탈 위닝 펠로우십 3기. 정식 지원서로 대기 명단을 받습니다.">
+  <title>위닝 펠로우십 3기 | 지원 접수 중</title>
   <style>
     :root {
       color-scheme: dark;
@@ -142,8 +142,9 @@
       font: inherit;
       font-weight: 800;
       text-align: left;
+      text-decoration: none;
       opacity: 1;
-      cursor: not-allowed;
+      cursor: pointer;
     }
     .waitlist-button small { font-size: 0.68rem; letter-spacing: 0.08em; }
     .waitlist-button::after {
@@ -226,11 +227,11 @@
     }
   </style>
 </head>
-<body data-collection-state="none" data-opening-state="scheduled">
+<body data-collection-state="server-verified" data-opening-state="open">
   <header>
     <div class="shell header-row">
       <p class="brand">Winning <span>Fellowship</span></p>
-      <p class="header-opening"><span class="pulse-dot" aria-hidden="true"></span>8/4 OPEN 예정</p>
+      <p class="header-opening"><span class="pulse-dot" aria-hidden="true"></span>3기 지원 접수 중</p>
     </div>
   </header>
 
@@ -243,13 +244,13 @@
       </section>
 
       <section class="opening-card" aria-labelledby="opening-title">
-        <p class="opening-label"><span class="pulse-dot" aria-hidden="true"></span>8/4 OPEN 예정</p>
-        <h2 id="opening-title">대기 명단 등록을 이 자리에서 엽니다.</h2>
-        <p id="opening-note">3기를 맞을 준비를 하고 있습니다. 열리는 순간, 이 버튼에서 바로 대기 명단 등록을 시작합니다.</p>
-        <button class="waitlist-button" type="button" disabled aria-disabled="true" aria-describedby="opening-note" title="8월 4일 오픈 예정">
-          <span>대기 명단 등록하기</span>
-          <small>8/4 OPEN 예정</small>
-        </button>
+        <p class="opening-label"><span class="pulse-dot" aria-hidden="true"></span>3기 지원 접수 중</p>
+        <h2 id="opening-title">정식 지원서로 3기 대기 명단을 받습니다.</h2>
+        <p id="opening-note">먼저 지원했다는 마음은 참고합니다. 다만 지원만으로 합류가 정해지지는 않습니다. 2주 베타를 함께할 분을 검토해 안내드릴게요.</p>
+        <a class="waitlist-button" href="https://product-omrpipeline-production.up.railway.app/fellowship/3" aria-describedby="opening-note">
+          <span>대기 명단 지원하기</span>
+          <small>정식 지원서 작성</small>
+        </a>
       </section>
 
       <section class="start" aria-labelledby="start-title">

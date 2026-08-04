@@ -25,15 +25,17 @@ class StaticReleaseValidationTests(unittest.TestCase):
             (root / "privacy.html").write_text("privacy", encoding="utf-8")
             self.assertEqual(validate_site(root), [])
 
-    def test_publishable_landing_is_a_non_collecting_hold(self) -> None:
+    def test_publishable_landing_uses_only_the_server_verified_application_route(self) -> None:
         root = Path(__file__).resolve().parents[1]
         index = (root / "index.html").read_text(encoding="utf-8")
         alternate = (root / "lime-light.html").read_text(encoding="utf-8")
 
         self.assertEqual(index, alternate)
-        self.assertIn('data-collection-state="none"', index)
-        self.assertIn("대기 명단 등록을 이 자리에서 엽니다.", index)
+        self.assertIn('data-collection-state="server-verified"', index)
+        self.assertIn('href="https://product-omrpipeline-production.up.railway.app/fellowship/3"', index)
+        self.assertIn("정식 지원서로 3기 대기 명단을 받습니다.", index)
         self.assertNotIn("<form", index.lower())
+        self.assertNotIn('aria-disabled="true"', index)
         for retired_path_or_promise in (
             "forms.fillout.com",
             "docs.google.com/forms",
@@ -46,36 +48,43 @@ class StaticReleaseValidationTests(unittest.TestCase):
         ):
             self.assertNotIn(retired_path_or_promise, index)
 
-    def test_policy_pages_state_that_the_hold_page_collects_no_applications(self) -> None:
+    def test_policy_pages_describe_the_live_application_scope_without_promising_selection(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        for filename in ("privacy.html", "terms.html"):
-            text = (root / filename).read_text(encoding="utf-8")
-            self.assertIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", text)
+        privacy = (root / "privacy.html").read_text(encoding="utf-8")
+        terms = (root / "terms.html").read_text(encoding="utf-8")
+
+        self.assertIn('data-collection-state="server-verified"', privacy)
+        self.assertIn("3기 지원서에 필요한 정보만 받습니다", privacy)
+        self.assertIn("2026-11-30", privacy)
+        self.assertIn("송일현", privacy)
+        self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
+        self.assertIn('data-collection-state="server-verified"', terms)
+        self.assertIn("지원이 곧 합류 확정은 아닙니다", terms)
+        self.assertIn("조기 제출만으로 자동 선발하지 않습니다", terms)
+        for text in (privacy, terms):
             self.assertNotIn("Fillout", text)
             self.assertNotIn("Career, Global, Life", text)
 
-    def test_pull_request_validation_uses_the_non_collecting_contract(self) -> None:
+    def test_pull_request_validation_covers_the_live_route_contract(self) -> None:
         root = Path(__file__).resolve().parents[1]
         workflow = (root / ".github/workflows/validate.yml").read_text(encoding="utf-8")
 
         self.assertIn("python -m unittest tests.test_static_release -v", workflow)
-        for retired_assertion in ("2기 합류 신청", "forms.fillout.com", "winning_fellowship", "mailto:"):
-            self.assertNotIn(retired_assertion, workflow)
+        self.assertIn("cmp index.html lime-light.html", workflow)
 
-    def test_hold_page_uses_human_opening_copy_without_opening_intake(self) -> None:
+    def test_landing_uses_human_opening_copy_and_a_live_cta(self) -> None:
         root = Path(__file__).resolve().parents[1]
         primary = (root / "index.html").read_text(encoding="utf-8")
 
         self.assertIn("인생의 다음 파도를 탈", primary)
         self.assertIn("3기를 기다립니다.", primary)
-        self.assertIn("8/4 OPEN 예정", primary)
-        self.assertIn("대기 명단 등록하기", primary)
-        self.assertIn('aria-disabled="true"', primary)
+        self.assertIn("3기 지원 접수 중", primary)
+        self.assertIn("대기 명단 지원하기", primary)
         self.assertIn("2주 동안 직접 해 봅니다.", primary)
         self.assertIn("맞으면 12주를 더 갑니다.", primary)
         self.assertIn("3기에서 시작하는 일", primary)
         self.assertIn("함께할 사람", primary)
-        self.assertIn("8/4 OPEN 예정</small>", primary)
+        self.assertNotIn("8/4 OPEN 예정", primary)
         self.assertNotIn("HOW WE START", primary)
         self.assertNotIn("AI를 잘 쓰는 사람보다", primary)
         self.assertNotIn("공개 지원폼과 운영 경로", primary)
