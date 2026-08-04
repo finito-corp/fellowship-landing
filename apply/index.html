@@ -91,6 +91,9 @@
         <label for="name">이름 <span class="required">*</span></label>
         <input id="name" name="name" autocomplete="name" minlength="2" maxlength="40" required placeholder="이름을 입력해주세요">
 
+        <label for="age">나이 (만 나이) <span class="required">*</span></label>
+        <input id="age" name="age" type="number" inputmode="numeric" min="18" max="99" required placeholder="예: 24">
+
         <label for="contact_channel">합격 연락을 받을 방법 <span class="required">*</span></label>
         <select id="contact_channel" name="contact_channel" required>
           <option value="phone">휴대전화</option>
@@ -110,7 +113,14 @@
       </fieldset>
 
       <fieldset>
-        <legend>2. 2주 동안 해결할 문제</legend>
+        <legend>2. 도전 경험과 자기소개</legend>
+        <label for="challenge_self_intro">지금까지 해본 도전과 그 경험을 통한 자기소개 <span class="required">*</span></label>
+        <textarea id="challenge_self_intro" name="challenge_self_intro" minlength="30" maxlength="1000" required placeholder="어떤 일에 도전했고, 왜 시작했으며, 어려움에 어떻게 대응했는지 적어주세요. 그 경험이 본인을 어떤 사람으로 보여주는지도 함께 소개해주세요."></textarea>
+        <p class="help">성과의 크기보다 도전 과정에서 내린 선택과 배운 점을 구체적으로 적어주세요.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. 2주 동안 해결할 문제</legend>
         <label for="why_now">2주 베타 동안 해결할 <span class="keep">구체적인 문제</span> <span class="required">*</span></label>
         <textarea id="why_now" name="why_now" minlength="10" maxlength="700" required placeholder="예: 취업 포트폴리오를 완성하지 못하고 있습니다. 2주 동안 AI로 자료 조사와 초안 작성을 반복해 첫 결과물을 만들고 싶습니다."></textarea>
         <p class="help">계정 비밀번호나 인증번호, 카드 정보는 적지 말아주세요.</p>
@@ -128,7 +138,7 @@
       </fieldset>
 
       <fieldset>
-        <legend>3. 2주 베타 일정 확인</legend>
+        <legend>4. 2주 베타 일정 확인</legend>
         <p class="help">2주 베타는 8/17~8/30에 진행합니다. 공식 모임은 온라인 90분이며, 선택한 시간대를 기준으로 일정을 확정합니다.</p>
         <label>참여 가능한 시간대 두 개 이상 <span class="required">*</span></label>
         <div class="choice-grid" id="available-windows">
@@ -186,8 +196,9 @@
         if (windows.length < 2) { show('가능한 시간을 두 개 이상 선택해주세요.', 'error'); return; }
         if (!form.reportValidity()) { show('필수 항목을 확인해주세요.', 'error'); return; }
         const payload = {
-          name: form.name.value.trim(), contact_channel: channel.value, contact_value: contact.value.trim(),
+          name: form.name.value.trim(), age: Number(form.age.value), contact_channel: channel.value, contact_value: contact.value.trim(),
           eligibility_stage: form.eligibility_stage.value, why_now: form.why_now.value.trim(),
+          challenge_self_intro: form.challenge_self_intro.value.trim(),
           prior_ai_use_summary: form.prior_ai_use_summary.value.trim(),
           personal_paid_ai_signal: form.querySelector('input[name="personal_paid_ai_signal"]:checked')?.value || '',
           available_windows: windows, actual_term_or_regular_rhythm_starts_on: form.actual_term_or_regular_rhythm_starts_on.value,

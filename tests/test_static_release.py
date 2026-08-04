@@ -155,6 +155,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         completion = (root / "apply" / "complete" / "index.html").read_text(encoding="utf-8")
 
         self.assertIn('id="application-form"', application)
+        self.assertIn('name="age"', application)
+        self.assertIn('name="challenge_self_intro"', application)
         self.assertIn('name="why_now"', application)
         self.assertIn('name="prior_ai_use_summary"', application)
         self.assertIn('name="available_windows"', application)
