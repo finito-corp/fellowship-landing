@@ -55,7 +55,7 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Final CTA: direct invitation plus exact recruitment boundary.
 - Application page: a dark editorial header followed by one process summary and one numbered form. Labels name the requested information directly; examples show the expected level of specificity without implying a preferred life choice or AI skill level.
 - Form controls: 44px+ targets, persistent labels, visible required markers, gold focus rings, inline validation, pending state, and a single unambiguous submit action.
-- Completion page: confirms submission, states the response date, shows a non-identifying receipt code, and provides a route back to the 3기 introduction.
+- Completion page: confirms submission, states that only successful applicants are contacted by the response date, and provides a route back to the 3기 introduction. It does not expose internal receipt identifiers.
 
 ## 6. Motion
 

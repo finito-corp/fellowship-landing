@@ -98,7 +98,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('data-collection-state="server-verified"', index)
         self.assertIn('href="apply/"', index)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', index)
-        self.assertIn("정식 지원서로 받고, 먼저 2주 베타 초대 여부를 검토합니다.", index)
+        self.assertIn("지원서 제출 후 내부 심의를 진행하며", index)
+        self.assertIn("2주 베타 합격자에게만 8월 13일까지 연락드립니다", index)
         self.assertNotIn("<form", index.lower())
         self.assertNotIn('aria-disabled="true"', index)
         for retired_path_or_promise in (
@@ -123,13 +124,14 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("2026-11-30", privacy)
         self.assertIn("2027-02-28", privacy)
         self.assertIn("송일현", privacy)
-        self.assertIn("동의하지 않으면 3기 지원서를 제출하거나 검토받을 수 없습니다", privacy)
+        self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
+        self.assertIn("내부 심의 후 2주 베타 합격자에게만", privacy)
         self.assertIn("winningfellowship25@gmail.com", privacy)
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
         self.assertIn('data-collection-state="server-verified"', terms)
-        self.assertIn("지원이 곧 합류 확정은 아닙니다", terms)
-        self.assertIn("이번 모집은 2주 베타 참여를 신청하는 정식 지원서로 받습니다", terms)
-        self.assertIn("작성한 지원 내용과 실제 참여 가능성을 검토해", terms)
+        self.assertIn("지원서 제출 후 내부 심의를 진행합니다", terms)
+        self.assertIn("2주 베타 합격자에게만 8월 13일까지 개별 연락드립니다", terms)
+        self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", terms)
         self.assertNotIn("조기 제출", terms)
         for text in (privacy, terms):
             self.assertNotIn("Fillout", text)
@@ -150,14 +152,21 @@ class StaticReleaseValidationTests(unittest.TestCase):
     def test_public_application_page_is_direct_and_keeps_backend_internal(self) -> None:
         root = Path(__file__).resolve().parents[1]
         application = (root / "apply" / "index.html").read_text(encoding="utf-8")
+        completion = (root / "apply" / "complete" / "index.html").read_text(encoding="utf-8")
 
         self.assertIn('id="application-form"', application)
         self.assertIn('name="why_now"', application)
         self.assertIn('name="prior_ai_use_summary"', application)
         self.assertIn('name="available_windows"', application)
         self.assertIn('id="submit-button"', application)
+        self.assertIn("내부 심의를 거쳐 합격자에게만 연락드립니다", application)
+        self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", application)
         self.assertNotIn("대기 명단", application)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', application)
+        self.assertNotIn("application_code", application)
+        self.assertNotIn("접수 확인 코드", completion)
+        self.assertNotIn("URLSearchParams", completion)
+        self.assertIn("지원서 제출이 완료되었습니다", completion)
 
     def test_landing_uses_human_opening_copy_and_a_live_cta(self) -> None:
         root = Path(__file__).resolve().parents[1]
@@ -210,7 +219,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("14주", hero)
         self.assertNotIn("12주", hero)
         self.assertEqual(hero.count("약 3개월"), 1)
-        self.assertIn("이번 지원서는 2주 베타 참여를 신청하는 정식 지원서입니다.", primary)
+        self.assertIn("내부 심의를 거쳐 2주 베타 참가자를 먼저 선발하며", primary)
+        self.assertIn("2주 베타 종료 후 운영진이 12주 코어 참가자를 최종 선발합니다", primary)
 
     def test_small_accent_text_meets_aa_contrast_on_light_sections(self) -> None:
         root = Path(__file__).resolve().parents[1]
