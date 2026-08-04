@@ -19,11 +19,12 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 ## 3. Typography
 
 - Font stack: Pretendard Variable, system sans-serif fallback.
-- Display: `--font-display: clamp(3.15rem, 8.4vw, 7rem)`, 820 weight, tight tracking, compact line height.
-- Section title: `--font-section: clamp(2.25rem, 5.6vw, 4.65rem)`, 790 weight.
+- Display: `--font-display: clamp(2.75rem, 5.2vw, 4.2rem)`, 820 weight, restrained Korean tracking, readable line height.
+- Section title: `--font-section: clamp(1.95rem, 4.4vw, 3.65rem)`, 790 weight.
 - Body lead: `--font-lead: clamp(1.05rem, 2vw, 1.28rem)`, relaxed line height.
 - Labels: 0.72–0.78rem, 800 weight, wide tracking.
 - Korean copy uses `word-break: keep-all`; line length stays near 36–48 Korean characters for narrative sections.
+- Hero support copy is split into sentence-level blocks. A full sentence owns its line before the next thought begins.
 - Type roles are centralized as `--font-display`, `--font-section`, `--font-heading`, `--font-lead`, `--font-hero-copy`, `--font-fact`, `--font-body*`, `--font-label`, `--font-meta`, `--font-small`, and `--font-micro`; components do not define their own type scale.
 
 ## 4. Spacing and Layout
@@ -45,6 +46,7 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Origin story: the Fellowship's post-exam roots and `Ride Your Own Waves` philosophy, connected to the current late-college decision stage.
 - Cohort journey: a text-only 1기 → 2기 → 3기 sequence. Historical activity descriptions stay at the format/rhythm level and verified anonymous quotes remain visually separate from operator narration.
 - Audience fit: concrete self-selection scenes before operating details, plus a restrained long-horizon statement that promises no outcome.
+- AI proficiency is never a sorting criterion. Public copy explicitly welcomes both first-time and experienced AI users, then selects for applying AI to a real-life scene and iterating on the result.
 - Chapter header: small gold label, large title, restrained lead copy.
 - Numbered story row: editorial divider, large index, short human narrative; never a generic equal card grid.
 - Program timeline: vertical gold progress line, numbered steps, factual boundaries.
