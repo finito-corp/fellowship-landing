@@ -76,17 +76,28 @@ class StaticReleaseValidationTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         primary = (root / "index.html").read_text(encoding="utf-8")
 
-        self.assertIn("인생의 다음 파도를 탈", primary)
-        self.assertIn("3기를 기다립니다.", primary)
+        self.assertIn("AI로 내 삶을 움직일", primary)
+        self.assertNotIn("3기를 기다립니다.", primary)
         self.assertIn("3기 지원 접수 중", primary)
         self.assertIn("대기 명단 지원하기", primary)
         self.assertIn("2주 동안 직접 해 봅니다.", primary)
         self.assertIn("맞으면 12주를 더 갑니다.", primary)
-        self.assertIn("3기에서 시작하는 일", primary)
-        self.assertIn("함께할 사람", primary)
+        self.assertIn("AI를 잘 쓰는 사람보다", primary)
+        self.assertIn("1·2기에서 배워, 3기는 이렇게 바꿨습니다.", primary)
+        self.assertIn("1기 익명 후기", primary)
+        self.assertIn("지원 전에 궁금할 만한 것", primary)
+        self.assertIn("8/31–11/22", primary)
+        self.assertEqual(primary.count("https://product-omrpipeline-production.up.railway.app/fellowship/3"), 3)
+        for archive_asset in (
+            "invite/photos/g2_kickoff.jpg",
+            "invite/photos/ai3_handson.jpg",
+            "invite/photos/g1_act_mountain.jpg",
+            "invite/photos/g1_sudadi_group.jpg",
+            "invite/photos/g1_graduation2.jpg",
+        ):
+            self.assertIn(archive_asset, primary)
         self.assertNotIn("8/4 OPEN 예정", primary)
         self.assertNotIn("HOW WE START", primary)
-        self.assertNotIn("AI를 잘 쓰는 사람보다", primary)
         self.assertNotIn("공개 지원폼과 운영 경로", primary)
 
 
