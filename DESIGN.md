@@ -24,12 +24,15 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Body lead: `--font-lead: clamp(1.05rem, 2vw, 1.28rem)`, relaxed line height.
 - Labels: 0.72–0.78rem, 800 weight, wide tracking.
 - Korean copy uses `word-break: keep-all`; line length stays near 36–48 Korean characters for narrative sections.
+- Type roles are centralized as `--font-display`, `--font-section`, `--font-heading`, `--font-lead`, `--font-hero-copy`, `--font-fact`, `--font-body*`, `--font-label`, `--font-meta`, `--font-small`, and `--font-micro`; components do not define their own type scale.
 
 ## 4. Spacing and Layout
 
 - Base spacing unit: 4px.
 - Content width: `--content-max: 70rem` (1120px); narrative copy width: `--copy-max: 45rem` (720px).
 - Section padding: `--section-space: clamp(92px, 12vw, 152px)`.
+- Spacing primitives are `--space-1` through `--space-14` plus the named `--space-md`, `--space-lg`, `--space-xl`, and `--space-2xl`. Layout measures use `--measure-*`; recurring component geometry uses `--grid-*`, `--*-height`, `--dot-*`, and `--shell-gutter*` tokens.
+- The 4px grid governs layout spacing and component geometry. One-pixel rules, the 2px timeline, optical letter spacing, fluid `clamp()` values, and the 44px accessibility target are intentional exceptions.
 - Desktop uses asymmetric two-column layouts for explanations; mobile collapses to one column.
 - Breakpoints: 1100px for the side guide, 900px for asymmetric layouts, 760px for main navigation, and 520px for compact CTA stacks.
 
