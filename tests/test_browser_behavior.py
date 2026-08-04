@@ -114,6 +114,22 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
                 self.page.evaluate("document.documentElement.clientWidth"),
             )
 
+    def test_hero_type_scale_and_sentence_rhythm_are_restrained(self) -> None:
+        for width, max_heading_size in ((320, 44), (390, 44), (1280, 68)):
+            self.page.set_viewport_size({"width": width, "height": 844})
+            heading_size = self.page.locator("#hero-title").evaluate(
+                "el => parseFloat(getComputedStyle(el).fontSize)"
+            )
+            self.assertLessEqual(heading_size, max_heading_size)
+
+            lines = self.page.locator(".hero-copy > span")
+            self.assertEqual(lines.count(), 2)
+            first = lines.nth(0).bounding_box()
+            second = lines.nth(1).bounding_box()
+            self.assertIsNotNone(first)
+            self.assertIsNotNone(second)
+            self.assertGreater(second["y"], first["y"] + first["height"])
+
 
 if __name__ == "__main__":
     unittest.main()
