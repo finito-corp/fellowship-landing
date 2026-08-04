@@ -97,7 +97,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertEqual(index, alternate)
         self.assertIn('data-collection-state="server-verified"', index)
         self.assertIn('href="https://product-omrpipeline-production.up.railway.app/fellowship/3"', index)
-        self.assertIn("정식 지원서로 3기 대기 명단을 받습니다.", index)
+        self.assertIn("정식 지원서로 받고, 먼저 2주 베타 초대 여부를 검토합니다.", index)
         self.assertNotIn("<form", index.lower())
         self.assertNotIn('aria-disabled="true"', index)
         for retired_path_or_promise in (
@@ -127,7 +127,9 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
         self.assertIn('data-collection-state="server-verified"', terms)
         self.assertIn("지원이 곧 합류 확정은 아닙니다", terms)
-        self.assertIn("조기 제출만으로 자동 선발하지 않습니다", terms)
+        self.assertIn("이번 모집은 정식 지원서로 받습니다", terms)
+        self.assertIn("정식 모집과 같은 항목으로 받고 같은 기준으로 검토합니다", terms)
+        self.assertNotIn("조기 제출", terms)
         for text in (privacy, terms):
             self.assertNotIn("Fillout", text)
             self.assertNotIn("Career, Global, Life", text)
@@ -150,14 +152,17 @@ class StaticReleaseValidationTests(unittest.TestCase):
         contract = LandingContractParser()
         contract.feed(primary)
 
-        self.assertIn("미뤄 둔 일을,", primary)
-        self.assertIn("이번에는 진짜 해보는 14주.", primary)
+        self.assertIn("정답이 사라진 20대,", primary)
+        self.assertIn("내 다음 선택을 만드는 약 3개월.", primary)
         self.assertNotIn("3기를 기다립니다.", primary)
-        self.assertIn("지원서보다,", primary)
+        self.assertIn("먼저 2주를 해보고,", primary)
         self.assertIn("맞으면, 12주를 더 갑니다.", primary)
-        self.assertIn("AI를 잘하는 사람을 찾는 게 아닙니다.", primary)
-        self.assertIn("1·2기에서 배워,", primary)
-        self.assertIn("3기는 이렇게 바꿨습니다.", primary)
+        self.assertIn("수능 다음에서 시작한 질문은,", primary)
+        self.assertIn("1기 · 발견과 시작", primary)
+        self.assertIn("2기 · 집중과 확장", primary)
+        self.assertIn("3기 · 다음 장", primary)
+        self.assertIn("지금, 이런 선택 앞에 있다면.", primary)
+        self.assertIn("30년 뒤를 약속하지는 않습니다.", primary)
         self.assertIn("1기 익명 후기", primary)
         self.assertIn("8/31–11/22", primary)
         self.assertGreaterEqual(len(contract.application_hrefs), 4)
@@ -178,6 +183,21 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("8/4 OPEN 예정", primary)
         self.assertNotIn("HOW WE START", primary)
         self.assertNotIn("공개 지원폼과 운영 경로", primary)
+
+    def test_story_order_and_intake_language_match_the_public_contract(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        primary = (root / "index.html").read_text(encoding="utf-8")
+        hero = primary[primary.index('<section class="hero"') : primary.index('</section>', primary.index('<section class="hero"'))]
+
+        ordered_ids = ('id="about"', 'id="history"', 'id="reviews"', 'id="fit"', 'id="beta"', 'id="core"', 'id="schedule"', 'id="faq"', 'id="apply"')
+        positions = [primary.index(section_id) for section_id in ordered_ids]
+        self.assertEqual(positions, sorted(positions))
+        self.assertEqual(primary.count("대기 명단"), 1)
+        self.assertNotIn("대기 명단", hero)
+        self.assertNotIn("14주", hero)
+        self.assertNotIn("12주", hero)
+        self.assertEqual(hero.count("약 3개월"), 1)
+        self.assertIn("지원서 화면은 ‘3기 대기 명단’으로 안내되지만", primary)
 
     def test_small_accent_text_meets_aa_contrast_on_light_sections(self) -> None:
         root = Path(__file__).resolve().parents[1]

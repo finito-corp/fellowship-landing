@@ -41,11 +41,14 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Announcement bar: recruitment dates, beta-review status, one direct CTA.
 - Site navigation: fixed below announcement; desktop links, mobile disclosure menu, visible application CTA.
 - Side guide: desktop-only chapter dots with labels, active state, and back-to-top control.
-- Hero: full-height editorial opening, two CTAs, factual footnote, four count-up facts. No photography.
+- Hero: full-height editorial opening, two CTAs, a plain-language intake boundary, and four scannable facts. The emotional time scale is `약 3개월`; detailed week counts belong to the operating chapter. No photography.
+- Origin story: the Fellowship's post-exam roots and `Ride Your Own Waves` philosophy, connected to the current late-college decision stage.
+- Cohort journey: a text-only 1기 → 2기 → 3기 sequence. Historical activity descriptions stay at the format/rhythm level and verified anonymous quotes remain visually separate from operator narration.
+- Audience fit: concrete self-selection scenes before operating details, plus a restrained long-horizon statement that promises no outcome.
 - Chapter header: small gold label, large title, restrained lead copy.
 - Numbered story row: editorial divider, large index, short human narrative; never a generic equal card grid.
 - Program timeline: vertical gold progress line, numbered steps, factual boundaries.
-- Review marquee: verified anonymous cohort-one quotes, duplicated track, pause on hover/focus.
+- Review marquee: verified anonymous cohort-one quotes, duplicated track, pause on hover/focus, and explicit context that the quotes describe cohort-one team activities rather than cohort-three outcomes.
 - FAQ: single-open accordion with explicit button state and accessible regions.
 - Final CTA: direct invitation plus exact recruitment boundary.
 
@@ -53,9 +56,9 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 
 - Sources adapted from beui.dev patterns: shared-layout-bg for active navigation, marquee for social proof, bouncy-accordion for single-open disclosure, scroll-animation for progress feedback.
 - Motion tokens: fast 180ms, standard 280ms, reveal 650ms; ease `cubic-bezier(.22,1,.36,1)`.
-- Purposeful motion only: hero stagger, scroll reveal, count-up facts, active navigation, timeline progress, review marquee, FAQ disclosure.
+- Purposeful motion only: hero stagger, scroll reveal, active navigation, timeline progress, review marquee, FAQ disclosure.
 - Hover uses small translate/opacity/color changes. No decorative continuous motion except the review marquee and a restrained recruitment-status pulse.
-- `prefers-reduced-motion: reduce` disables smooth scrolling, transforms, counting, progress interpolation, and marquee animation while keeping all content visible.
+- `prefers-reduced-motion: reduce` disables smooth scrolling, transforms, progress interpolation, and marquee animation while keeping all content visible.
 
 ## 7. Depth
 
