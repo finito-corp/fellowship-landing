@@ -58,6 +58,7 @@ jobs:
           set -euo pipefail
           mkdir -p _site
           cp main/index.html main/lime-light.html main/privacy.html main/terms.html _site/
+          cp -R main/apply _site/apply
           cp -R main/assets _site/assets
           printf '{"repository":"finito-corp/fellowship-landing","commit_sha":"%s"}\n' "${DEPLOY_REF}" > _site/deployment.json
       - name: Validate preview request
@@ -87,6 +88,7 @@ jobs:
           target="_site/previews/pr-${PREVIEW_PR}"
           mkdir -p "${target}"
           cp preview/index.html preview/lime-light.html preview/privacy.html preview/terms.html "${target}/"
+          cp -R preview/apply "${target}/apply"
           cp -R preview/assets "${target}/assets"
           preview_sha="$(git -C preview rev-parse HEAD)"
           printf '{"repository":"finito-corp/fellowship-landing","pr_number":%s,"commit_sha":"%s"}\n' "${PREVIEW_PR}" "${preview_sha}" > "${target}/deployment.json"

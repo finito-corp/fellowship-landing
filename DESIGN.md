@@ -53,6 +53,9 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Review marquee: verified anonymous cohort-one quotes, duplicated track, pause on hover/focus, and explicit context that the quotes describe cohort-one team activities rather than cohort-three outcomes.
 - FAQ: single-open accordion with explicit button state and accessible regions.
 - Final CTA: direct invitation plus exact recruitment boundary.
+- Application page: a dark editorial header followed by one process summary and one numbered form. Labels name the requested information directly; examples show the expected level of specificity without implying a preferred life choice or AI skill level.
+- Form controls: 44px+ targets, persistent labels, visible required markers, gold focus rings, inline validation, pending state, and a single unambiguous submit action.
+- Completion page: confirms submission, states the response date, shows a non-identifying receipt code, and provides a route back to the 3기 introduction.
 
 ## 6. Motion
 
@@ -77,4 +80,6 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Navigation and side-guide active state uses text/shape as well as color.
 - The page contains no visible images; social proof is textual and attribution remains anonymous.
 - Exact dates and selection boundaries remain text, not animation-dependent.
-- Debt: the static single-file architecture keeps CSS and JavaScript together; split only when the site gains more than one public landing template.
+- Primary applicant: a late-college student or graduate completing the form on mobile, possibly under time pressure. The first screen must answer what this is, who can apply, what happens after submission, and the decision date.
+- The application remains usable with keyboard-only navigation, browser zoom, reduced motion, and 320px-wide screens. Examples supplement labels but never replace them.
+- Accepted debt through the 3기 recruitment window: the static application and completion pages keep CSS and JavaScript inline and repeat the same documented tokens so they can deploy as self-contained pages. Consolidate shared assets after recruitment rather than changing asset loading during the live intake period.
