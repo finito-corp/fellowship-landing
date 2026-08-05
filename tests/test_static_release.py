@@ -172,6 +172,14 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", application)
         self.assertNotIn("대기 명단", application)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', application)
+        self.assertNotIn(
+            "https://product-omrpipeline-production.up.railway.app/api/fellowship/3/applications",
+            application,
+        )
+        self.assertIn(
+            "https://winning-fellowship-production.up.railway.app/api/fellowship/3/applications",
+            application,
+        )
         self.assertNotIn("application_code", application)
         self.assertNotIn("접수 확인 코드", completion)
         self.assertNotIn("URLSearchParams", completion)
