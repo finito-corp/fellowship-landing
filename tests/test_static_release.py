@@ -162,6 +162,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('name="available_windows"', application)
         self.assertIn('id="submit-button"', application)
         self.assertIn('name="eligibility_stage"', application)
+        self.assertNotIn("actual_term_or_regular_rhythm_starts_on", application)
+        self.assertNotIn("학기 또는 정규 일정 시작일", application)
         for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생"):
             self.assertIn(f'<option value="{stage}">', application)
         self.assertIn("내부 심의를 거쳐 합격자에게만 연락드립니다", application)
@@ -194,6 +196,21 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("30년 뒤를 약속하지는 않습니다.", primary)
         self.assertNotIn("3학년 이상", primary)
         self.assertNotIn("대학 3학년 이후", primary)
+        for retired_hedge in (
+            "3기는 1·2기의 실패를 고친 상품이 아닙니다.",
+            "아래 문장은 1기 홈페이지에 공개된 익명 후기 원문입니다",
+            "취업을 보장하거나",
+            "잘 쓴 지원서만으로 서로를 판단하지 않습니다.",
+            "성공한 척하지 않습니다.",
+            "바쁜 시기에는 범위를 줄이거나 잠시 멈출 수 있습니다.",
+            "잠수하지 않고",
+            "주식 학습",
+            "지원서에 쓰면 안 되는 정보가 있나요?",
+        ):
+            self.assertNotIn(retired_hedge, primary)
+        self.assertIn("먼저 합류한 사람들이,", primary)
+        self.assertIn("교육 관련 AI를 직접 만들었습니다", primary)
+        self.assertIn("온라인으로도, 직접 만나서도 진행합니다", primary)
         self.assertIn("1기 익명 후기", primary)
         self.assertIn("8/31–11/22", primary)
         self.assertGreaterEqual(len(contract.application_hrefs), 4)
@@ -245,7 +262,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         contract = LandingContractParser()
         contract.feed(primary)
 
-        self.assertEqual(len(contract.faq_controls), 6)
+        self.assertEqual(len(contract.faq_controls), 5)
         self.assertEqual(set(contract.faq_controls), set(contract.faq_regions))
         self.assertTrue(all(contract.faq_regions[control] == "true" for control in contract.faq_controls))
 

@@ -57,7 +57,12 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
     def test_faq_accordion_keeps_visual_and_accessibility_state_in_sync(self) -> None:
         questions = self.page.locator(".faq-question")
         answers = self.page.locator(".faq-answer")
-        self.assertEqual(answers.evaluate_all("els => els.map(el => el.getAttribute('aria-hidden'))"), ["true"] * 6)
+        # FAQ 항목 수는 카피 변경에 따라 바뀐다. 정확한 개수는 test_static_release 가 고정하고,
+        # 여기서는 "질문과 답변이 짝이 맞고 전부 접힌 채로 시작한다"만 확인한다.
+        states = answers.evaluate_all("els => els.map(el => el.getAttribute('aria-hidden'))")
+        self.assertEqual(len(states), questions.count())
+        self.assertGreaterEqual(len(states), 2)
+        self.assertEqual(states, ["true"] * len(states))
 
         questions.nth(0).click()
         self.assertEqual(questions.nth(0).get_attribute("aria-expanded"), "true")
