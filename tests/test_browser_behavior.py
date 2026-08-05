@@ -209,7 +209,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
             captured.update(route.request.post_data_json)
             route.fulfill(status=201, content_type="application/json", body='{"message":"ok"}')
 
-        endpoint = "https://product-omrpipeline-production.up.railway.app/api/fellowship/3/applications"
+        endpoint = "https://winning-fellowship-production.up.railway.app/api/fellowship/3/applications"
         self.page.route(endpoint, capture_submission)
         self.page.goto(
             f"http://127.0.0.1:{self.server.server_port}/apply/"
