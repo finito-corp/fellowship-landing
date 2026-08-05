@@ -99,7 +99,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('href="apply/"', index)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', index)
         self.assertIn("지원서 제출 후 내부 심의를 진행하며", index)
-        self.assertIn("2주 베타 합격자에게만 8월 13일까지 연락드립니다", index)
+        self.assertIn("2주 프리과정 합격자에게만 8월 13일까지 연락드립니다", index)
         self.assertNotIn("<form", index.lower())
         self.assertNotIn('aria-disabled="true"', index)
         for retired_path_or_promise in (
@@ -125,12 +125,12 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("2027-02-28", privacy)
         self.assertIn("송일현", privacy)
         self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
-        self.assertIn("내부 심의 후 2주 베타 합격자에게만", privacy)
+        self.assertIn("내부 심의 후 2주 프리과정 합격자에게만", privacy)
         self.assertIn("winningfellowship25@gmail.com", privacy)
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
         self.assertIn('data-collection-state="server-verified"', terms)
         self.assertIn("지원서 제출 후 내부 심의를 진행합니다", terms)
-        self.assertIn("2주 베타 합격자에게만 8월 13일까지 개별 연락드립니다", terms)
+        self.assertIn("2주 프리과정 합격자에게만 8월 13일까지 개별 연락드립니다", terms)
         self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", terms)
         self.assertNotIn("조기 제출", terms)
         for text in (privacy, terms):
@@ -158,7 +158,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('name="age"', application)
         self.assertIn('name="challenge_self_intro"', application)
         self.assertIn('name="why_now"', application)
-        self.assertIn('name="prior_ai_use_summary"', application)
+        self.assertIn('name="precourse_rhythm_plan"', application)
         self.assertIn('name="available_windows"', application)
         self.assertIn('id="submit-button"', application)
         self.assertIn('name="eligibility_stage"', application)
@@ -176,6 +176,12 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("접수 확인 코드", completion)
         self.assertNotIn("URLSearchParams", completion)
         self.assertIn("지원서 제출이 완료되었습니다", completion)
+        self.assertNotIn('name="prior_ai_use_summary"', application)
+        self.assertNotIn('name="personal_paid_ai_signal"', application)
+        self.assertIn("2주 프리과정", application)
+        self.assertIn("3개월 본과정", application)
+        for attribution_field in ("utm_source", "utm_medium", "utm_campaign", "utm_content"):
+            self.assertIn(attribution_field, application)
 
     def test_landing_uses_human_opening_copy_and_a_live_cta(self) -> None:
         root = Path(__file__).resolve().parents[1]
@@ -183,11 +189,12 @@ class StaticReleaseValidationTests(unittest.TestCase):
         contract = LandingContractParser()
         contract.feed(primary)
 
-        self.assertIn("정답이 사라진 20대,", primary)
-        self.assertIn("내 다음 선택을 만드는 약 3개월.", primary)
+        self.assertIn("미뤄 둔 일 하나를,", primary)
+        self.assertIn("2주 안에 먼저 움직여 봅니다.", primary)
         self.assertNotIn("3기를 기다립니다.", primary)
-        self.assertIn("먼저 2주를 해보고,", primary)
-        self.assertIn("맞으면, 12주를 더 갑니다.", primary)
+        self.assertIn("2주 프리과정", primary)
+        self.assertIn("3개월 본과정", primary)
+        self.assertNotIn("2주 베타", primary)
         self.assertIn("수능 다음에서 시작한 질문은,", primary)
         self.assertIn("1기 · 발견과 시작", primary)
         self.assertIn("2기 · 집중과 확장", primary)
@@ -261,9 +268,10 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("대기 명단", primary)
         self.assertNotIn("14주", hero)
         self.assertNotIn("12주", hero)
-        self.assertEqual(hero.count("약 3개월"), 1)
-        self.assertIn("내부 심의를 거쳐 2주 베타 참가자를 먼저 선발하며", primary)
-        self.assertIn("2주 베타 종료 후 운영진이 12주 코어 참가자를 최종 선발합니다", primary)
+        self.assertNotIn("약 3개월", hero)
+        self.assertIn("내부 심의를 거쳐 2주 프리과정 참가자를 먼저 선발하며", primary)
+        self.assertIn("2주 프리과정 종료 후 운영진이 3개월 본과정 참가자를 최종 선발합니다", primary)
+        self.assertIn("const ATTRIBUTION_KEYS", primary)
 
     def test_small_accent_text_meets_aa_contrast_on_light_sections(self) -> None:
         root = Path(__file__).resolve().parents[1]
