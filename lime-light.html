@@ -178,6 +178,8 @@
     .announcement { position: fixed; inset: 0 0 auto; z-index: 60; height: var(--announcement-height); background: var(--gold); color: var(--announcement-ink); font-size: var(--font-label); font-weight: var(--weight-body-strong); }
     .announcement-inner { display: flex; height: 100%; align-items: center; justify-content: center; gap: var(--space-3); text-align: center; }
     .status-dot { width: var(--dot-small); height: var(--dot-small); border-radius: 50%; background: var(--gold-dot); box-shadow: 0 0 0 var(--space-1) var(--gold-pulse); animation: status-pulse var(--motion-status) ease-in-out infinite; }
+    .announcement[data-state="closed"] .status-dot { box-shadow: none; animation: none; opacity: .45; }
+    .announcement[data-state="closed"] .announcement-inner a { display: none; }
     .announcement a { display: inline-flex; min-height: var(--target-min); align-items: center; font-weight: var(--weight-bold); }
     @keyframes status-pulse { 50% { box-shadow: 0 0 0 var(--space-2) var(--gold-pulse-clear); } }
 
@@ -237,6 +239,8 @@
     body[data-motion="normal"] .hero h1 .word { opacity: 0; transform: translateY(.42em); animation: word-rise var(--motion-reveal) var(--ease) forwards; animation-delay: calc(var(--word-index) * 60ms); }
     @keyframes word-rise { to { opacity: 1; transform: none; } }
     .facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: var(--facts-space); border-block: var(--rule-width) solid var(--rule-light); }
+    .facts-stats { grid-template-columns: repeat(2, 1fr); margin-top: var(--space-10); }
+    .stat-note { max-width: var(--measure-note); margin: var(--space-4) 0 0; color: var(--muted-light); font-size: var(--font-label); }
     .fact { padding: var(--space-6) var(--space-5) var(--space-lg) 0; }
     .fact + .fact { padding-left: var(--space-6); border-left: var(--rule-width) solid var(--rule-light); }
     .fact strong { display: block; color: var(--text-light); font-size: var(--font-fact); letter-spacing: -.05em; line-height: 1; }
@@ -346,7 +350,8 @@
       .shell { width: min(100% - var(--shell-gutter-compact), var(--content-max)); }
       .announcement-inner { gap: var(--space-2); font-size: var(--font-small); white-space: nowrap; }
       .announcement-copy { font-size: 0; }
-      .announcement-copy::after { font-size: var(--font-small); content: "3기 모집 · 8/4–8/10"; }
+      /* 좁은 화면 문구는 data-short 에서 읽는다. 마감 상태를 JS 가 갈아끼울 수 있어야 한다. */
+      .announcement-copy::after { font-size: var(--font-small); content: attr(data-short); }
       .announcement a { flex: 0 0 auto; }
       .desktop-nav { display: none; }
       .menu-button { display: block; }
@@ -387,7 +392,7 @@
 </head>
 <body data-collection-state="server-verified" data-opening-state="open">
   <div class="announcement">
-    <div class="shell announcement-inner" aria-label="3기 지원 접수 중 · 8/4–8/10"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" aria-hidden="true">3기 지원 접수 중 · 8/4–8/10</span><a href="apply/">지원하기 ↗</a></div>
+    <div class="shell announcement-inner" aria-label="3기 지원 접수 중 · 8/4–8/10"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" data-short="3기 모집 · 8/4–8/10" aria-hidden="true">3기 지원 접수 중 · 8/4–8/10</span><a href="apply/">지원하기 ↗</a></div>
   </div>
 
   <header class="site-header">
@@ -439,6 +444,10 @@
 
     <section class="chapter dark" id="history" aria-labelledby="history-title">
       <div class="shell"><p class="chapter-label reveal">걸어온 길</p><h2 class="reveal" id="history-title">함께 가능성을 열어 본 시간에서,<br>각자의 다음 선택으로.</h2><p class="lead reveal">1·2기의 후기는 서로 다른 팀 활동 안에서 나왔습니다. 3기는 그 경험을 같은 형태로 반복하지 않고, 지금의 20대가 자기 삶에 직접 선택을 남기는 방식으로 이어갑니다.</p>
+        <div class="facts facts-stats reveal" aria-label="지난 두 기수 규모">
+          <div class="fact"><strong><span data-count-to="70">70</span>명</strong><span>1·2기를 거쳐 간 펠로우</span></div><div class="fact"><strong><span data-count-to="3">3</span>개월</strong><span>기수별 활동 기간</span></div>
+        </div>
+        <p class="stat-note reveal">1기 50명, 2기 20명이 함께했습니다.</p>
         <div class="lesson-rows">
           <article class="lesson-row reveal"><span class="from">1기 · 발견과 시작</span><h3>여러 삶의 가능성을 함께 열었습니다.</h3><p>커리어·글로벌·라이프의 여러 팀에서 학과 브랜딩, 코딩, 투자 학습, 언어 교류, 영화·음악, 밴드, 영상 제작, 러닝과 스포츠를 직접 시도했습니다.</p></article>
           <article class="lesson-row reveal"><span class="from">2기 · 집중과 확장</span><h3>작은 팀과 정기적인 만남으로 경험을 이어갔습니다.</h3><p>브랜딩과 코딩, 영어 회화, 운동, 취미 공유처럼 각 팀이 고른 주제를 온·오프라인 모임과 활동으로 이어갔습니다. 교육업을 희망하는 펠로우들은 한 팀을 이뤄 교육 관련 AI를 직접 만들었습니다.</p></article>
@@ -545,34 +554,69 @@
     (() => {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       document.body.dataset.motion = reducedMotion ? 'reduced' : 'normal';
-      // 지원 마감까지 남은 시간. 마감이 지나면 스스로 마감 상태로 바뀐다.
+      // 지원 마감까지 남은 시간. 히어로와 상단 공지가 같은 시각 하나를 보고 함께 움직인다.
       const deadlineBox = document.querySelector('.hero-deadline');
       if (deadlineBox) {
         const deadline = new Date(deadlineBox.dataset.deadline);
         const countEl = deadlineBox.querySelector('.deadline-count');
         const dateEl = deadlineBox.querySelector('.deadline-date');
+        const banner = document.querySelector('.announcement');
+        const bannerInner = banner && banner.querySelector('.announcement-inner');
+        const bannerCopy = banner && banner.querySelector('.announcement-copy');
+        const CLOSED_COPY = '3기 지원 접수가 마감되었습니다';
+        const setBanner = (long, short) => {
+          if (!bannerCopy) return;
+          bannerCopy.textContent = long;
+          bannerCopy.dataset.short = short;
+          bannerInner.setAttribute('aria-label', long);
+        };
+        const closeAll = () => {
+          deadlineBox.dataset.state = 'closed';
+          countEl.hidden = true;
+          dateEl.textContent = CLOSED_COPY + '.';
+          if (banner) banner.dataset.state = 'closed';
+          setBanner(CLOSED_COPY, CLOSED_COPY);
+          return false;
+        };
         const syncDeadline = () => {
           const left = deadline.getTime() - Date.now();
-          // 날짜 속성이 깨졌으면 조용히 마감 문구만 남긴다. 틀린 숫자를 띄우지 않는다.
+          // 날짜 속성이 깨졌으면 숫자를 감추고 원래 문구를 그대로 둔다. 틀린 숫자를 띄우지 않는다.
           if (!Number.isFinite(left)) { countEl.hidden = true; return false; }
-          if (left <= 0) {
-            deadlineBox.dataset.state = 'closed';
-            countEl.hidden = true;
-            dateEl.textContent = '3기 지원 접수가 마감되었습니다.';
-            return false;
-          }
+          if (left <= 0) return closeAll();
           const minutes = Math.floor(left / 60000);
           const days = Math.floor(minutes / 1440);
           const hours = Math.floor((minutes % 1440) / 60);
-          countEl.textContent = days > 0
-            ? `마감까지 ${days}일 ${hours}시간`
-            : `마감까지 ${hours}시간 ${minutes % 60}분`;
+          const left_text = days > 0 ? `${days}일 ${hours}시간` : `${hours}시간 ${minutes % 60}분`;
+          countEl.textContent = `마감까지 ${left_text}`;
           countEl.hidden = false;
+          setBanner(`3기 지원 접수 중 · 마감까지 ${left_text}`, `3기 모집 · 마감까지 ${left_text}`);
           return true;
         };
         if (syncDeadline() !== false) {
           const deadlineTimer = setInterval(() => { if (syncDeadline() === false) clearInterval(deadlineTimer); }, 30000);
         }
+      }
+
+      // 지난 기수 규모는 화면에 들어올 때 0부터 올라간다. 값은 마크업에 이미 적혀 있다.
+      const counters = document.querySelectorAll('[data-count-to]');
+      if (counters.length && !reducedMotion && 'IntersectionObserver' in window) {
+        const countObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          countObserver.unobserve(entry.target);
+          const target = Number(entry.target.dataset.countTo);
+          if (!Number.isFinite(target)) return;
+          const startedAt = performance.now();
+          const step = now => {
+            const progress = Math.min(1, (now - startedAt) / 900);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            entry.target.textContent = String(Math.round(target * eased));
+            if (progress < 1) requestAnimationFrame(step);
+            else entry.target.textContent = String(target);
+          };
+          entry.target.textContent = '0';
+          requestAnimationFrame(step);
+        }), { threshold: .6 });
+        counters.forEach(counter => countObserver.observe(counter));
       }
 
       // 히어로 제목을 단어 단위로 띄운다. 마크업의 텍스트는 그대로 두고 여기서만 감싼다.

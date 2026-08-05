@@ -79,6 +79,22 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.assertIn("마감까지", count.inner_text())
         self.assertIn("8/10", self.page.locator(".deadline-date").inner_text())
 
+    def test_announcement_follows_the_same_deadline_as_the_hero(self) -> None:
+        copy = self.page.locator(".announcement-copy")
+        self.page.wait_for_function(
+            "() => document.querySelector('.announcement-copy').textContent.includes('마감까지')"
+        )
+        self.assertIn("마감까지", copy.get_attribute("data-short"))
+        self.assertIn("마감까지", self.page.locator(".announcement-inner").get_attribute("aria-label"))
+
+    def test_past_cohort_numbers_settle_on_their_written_values(self) -> None:
+        self.page.locator("#history").scroll_into_view_if_needed()
+        self.page.wait_for_function(
+            "() => [...document.querySelectorAll('[data-count-to]')]"
+            ".every(el => el.textContent === el.dataset.countTo)"
+        )
+        self.assertIn("1기 50명, 2기 20명", self.page.locator(".stat-note").inner_text())
+
     def test_hero_title_splits_into_words_without_changing_its_text(self) -> None:
         title = self.page.locator("#hero-title")
         self.assertGreaterEqual(title.locator(".word").count(), 6)

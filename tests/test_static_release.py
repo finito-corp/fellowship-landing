@@ -215,6 +215,14 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('data-deadline="2026-08-10T23:59:59+09:00"', primary)
         self.assertIn("8/10(월) 23:59 지원 마감", primary)
         # 후기와 3기 사이의 인지 단절을 메우는 문단
+        # 상단 공지도 같은 마감 시각을 따라간다. 좁은 화면 문구는 CSS 하드코딩이 아니라 속성에서 읽는다.
+        self.assertIn("content: attr(data-short)", primary)
+        self.assertIn('data-short="3기 모집 · 8/4–8/10"', primary)
+        # 지난 두 기수 규모. 값은 마크업에 적혀 있고 JS 는 0부터 올리기만 한다.
+        self.assertIn('data-count-to="70"', primary)
+        self.assertIn('data-count-to="3"', primary)
+        self.assertIn("1·2기를 거쳐 간 펠로우", primary)
+        self.assertIn("1기 50명, 2기 20명이 함께했습니다.", primary)
         self.assertIn("이 소감들에 AI 이야기는 없습니다.", primary)
         self.assertIn("바뀌는 것은 도구지 방식이 아닙니다.", primary)
         # 제목 텍스트는 마크업에 그대로 있어야 한다. 단어 분리는 런타임에만 일어난다.
