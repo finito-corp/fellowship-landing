@@ -21,14 +21,14 @@ VERIFIED_REVIEW_EXCERPTS = (
     "팀원들의 조언과 레퍼런스 공유를 통해 각자의 제작 능력을 강화하고, 함께 성장을 이루어낸 모습이 눈에 보이면서 너무나도 기특했습니다. 브랜딩이라는 낯선 주제에서 좋은 동료들과 PA로 활동한 것은 어디서도 쉽게 얻지 못할 소중한 기회였습니다.",
 )
 VERIFIED_REVIEW_ATTRIBUTIONS = (
-    "1기 익명 후기 · 김○○ · Flow Crew",
-    "1기 익명 후기 · 오○○ · Flow Crew",
-    "1기 익명 후기 · 강○○ · Flow Crew",
-    "1기 익명 후기 · 전○○ · 수다디",
-    "1기 익명 후기 · 최○○ · 말랑말랑",
-    "1기 익명 후기 · 최○○ · 루멘",
-    "1기 익명 후기 · 김○○ · 노이즈",
-    "1기 익명 후기 · 김○○ · 루멘",
+    "김○○ · Flow Crew",
+    "오○○ · Flow Crew",
+    "강○○ · Flow Crew",
+    "전○○ · 수다디",
+    "최○○ · 말랑말랑",
+    "최○○ · 루멘",
+    "김○○ · 노이즈",
+    "김○○ · 루멘",
 )
 
 
@@ -164,6 +164,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('name="eligibility_stage"', application)
         self.assertNotIn("actual_term_or_regular_rhythm_starts_on", application)
         self.assertNotIn("학기 또는 정규 일정 시작일", application)
+        self.assertIn('min="20"', application)
+        self.assertNotIn("만 나이) ", application)
         for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생"):
             self.assertIn(f'<option value="{stage}">', application)
         self.assertIn("내부 심의를 거쳐 합격자에게만 연락드립니다", application)
@@ -211,7 +213,6 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("먼저 합류한 사람들이,", primary)
         self.assertIn("교육 관련 AI를 직접 만들었습니다", primary)
         self.assertIn("온라인으로도, 직접 만나서도 진행합니다", primary)
-        self.assertIn("1기 익명 후기", primary)
         self.assertIn("8/31–11/22", primary)
         self.assertGreaterEqual(len(contract.application_hrefs), 4)
         self.assertEqual(contract.image_count, 0)
@@ -222,7 +223,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('url("assets/PretendardVariable.woff2")', primary)
         self.assertTrue((root / "assets" / "PretendardVariable.woff2").is_file())
         self.assertTrue((root / "assets" / "Pretendard-LICENSE.txt").is_file())
-        self.assertGreaterEqual(primary.count("1기 익명 후기"), 16)
+        self.assertNotIn("1기 익명 후기", primary)
+        self.assertEqual(primary.count("<footer>"), 2 * len(VERIFIED_REVIEW_ATTRIBUTIONS))
         for review in VERIFIED_REVIEW_EXCERPTS:
             self.assertEqual(primary.count(review), 2)
         for attribution in VERIFIED_REVIEW_ATTRIBUTIONS:
