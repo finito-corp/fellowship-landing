@@ -98,7 +98,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
     def test_hero_title_splits_into_words_without_changing_its_text(self) -> None:
         title = self.page.locator("#hero-title")
         self.assertGreaterEqual(title.locator(".word").count(), 6)
-        self.assertIn("정답이 사라진 20대,", title.inner_text())
+        self.assertIn("미뤄 둔 일 하나를,", title.inner_text())
         # 단어는 순차로 올라오므로 마지막 단어까지 끝난 뒤에 본다. 끝내 1이 안 되면 여기서 실패한다.
         self.page.wait_for_function(
             "() => [...document.querySelectorAll('#hero-title .word')]"
@@ -174,6 +174,19 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.assertEqual(self.page.locator("h1").inner_text(), "위닝 펠로우십\n3기 지원서")
         self.assertEqual(self.page.locator("form").count(), 1)
 
+    def test_application_link_preserves_supported_outreach_attribution(self) -> None:
+        self.page.goto(
+            f"http://127.0.0.1:{self.server.server_port}/index.html"
+            "?utm_source=linkedin&utm_medium=organic_post&utm_campaign=wf3_202608&utm_content=main"
+        )
+
+        self.page.locator('.hero-actions a.button:not(.secondary)').click()
+
+        self.assertIn("utm_source=linkedin", self.page.url)
+        self.assertIn("utm_medium=organic_post", self.page.url)
+        self.assertIn("utm_campaign=wf3_202608", self.page.url)
+        self.assertIn("utm_content=main", self.page.url)
+
     def test_application_form_fits_supported_viewports(self) -> None:
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/")
         for width in (320, 390, 1280):
@@ -188,6 +201,49 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
                 ),
                 44,
             )
+
+    def test_application_submission_carries_outreach_attribution(self) -> None:
+        captured = {}
+
+        def capture_submission(route) -> None:
+            captured.update(route.request.post_data_json)
+            route.fulfill(status=201, content_type="application/json", body='{"message":"ok"}')
+
+        endpoint = "https://product-omrpipeline-production.up.railway.app/api/fellowship/3/applications"
+        self.page.route(endpoint, capture_submission)
+        self.page.goto(
+            f"http://127.0.0.1:{self.server.server_port}/apply/"
+            "?utm_source=linkedin&utm_medium=organic_post&utm_campaign=wf3_202608&utm_content=main"
+        )
+        self.page.locator("#name").fill("테스트 지원자")
+        self.page.locator("#age").fill("24")
+        self.page.locator("#contact_channel").select_option("email")
+        self.page.locator("#contact_value").fill("candidate@example.com")
+        self.page.locator("#eligibility_stage").select_option("대학4학년이상")
+        self.page.locator("#challenge_self_intro").fill(
+            "먼저 작은 프로젝트를 공개했고 반응이 예상과 달라 설명 순서와 다음 행동을 바꿨습니다."
+        )
+        self.page.locator("#why_now").fill(
+            "미뤄 둔 포트폴리오 첫 페이지를 AI로 만들고 한 사람의 반응을 확인하겠습니다."
+        )
+        self.page.locator("#precourse_rhythm_plan").fill(
+            "화요일과 목요일 저녁을 비우고 일정이 겹치면 토요일 오후로 옮기겠습니다."
+        )
+        self.page.locator('input[name="available_windows"]').nth(0).check()
+        self.page.locator('input[name="available_windows"]').nth(1).check()
+        self.page.locator('input[name="beta_commitment_confirmed"]').check()
+        self.page.locator('input[name="contact_consent_confirmed"]').check()
+        self.page.locator("#submit-button").click()
+        self.page.wait_for_url("**/apply/complete/")
+
+        self.assertEqual(captured["precourse_rhythm_plan"], "화요일과 목요일 저녁을 비우고 일정이 겹치면 토요일 오후로 옮기겠습니다.")
+        self.assertEqual(captured["utm_source"], "linkedin")
+        self.assertEqual(captured["utm_medium"], "organic_post")
+        self.assertEqual(captured["utm_campaign"], "wf3_202608")
+        self.assertEqual(captured["utm_content"], "main")
+        self.assertNotIn("prior_ai_use_summary", captured)
+        self.assertNotIn("personal_paid_ai_signal", captured)
+        self.page.unroute(endpoint)
 
     def test_application_controls_have_accessible_focus_and_touch_targets(self) -> None:
         for path in ("apply/", "apply/complete/"):
