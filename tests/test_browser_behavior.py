@@ -83,11 +83,10 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         title = self.page.locator("#hero-title")
         self.assertGreaterEqual(title.locator(".word").count(), 6)
         self.assertIn("정답이 사라진 20대,", title.inner_text())
-        self.assertEqual(
-            self.page.evaluate(
-                "getComputedStyle(document.querySelector('#hero-title .word')).opacity"
-            ),
-            "1",
+        # 단어는 순차로 올라오므로 마지막 단어까지 끝난 뒤에 본다. 끝내 1이 안 되면 여기서 실패한다.
+        self.page.wait_for_function(
+            "() => [...document.querySelectorAll('#hero-title .word')]"
+            ".every(el => getComputedStyle(el).opacity === '1')"
         )
 
     def test_side_guide_is_focusable_only_while_visibly_available(self) -> None:
