@@ -211,6 +211,14 @@ class StaticReleaseValidationTests(unittest.TestCase):
         ):
             self.assertNotIn(retired_hedge, primary)
         self.assertIn("먼저 합류한 사람들이,", primary)
+        # 마감 카운트다운은 JS 가 채우고, 스크립트가 없어도 마감 시각은 글로 남아야 한다.
+        self.assertIn('data-deadline="2026-08-10T23:59:59+09:00"', primary)
+        self.assertIn("8/10(월) 23:59 지원 마감", primary)
+        # 후기와 3기 사이의 인지 단절을 메우는 문단
+        self.assertIn("이 소감들에 AI 이야기는 없습니다.", primary)
+        self.assertIn("바뀌는 것은 도구지 방식이 아닙니다.", primary)
+        # 제목 텍스트는 마크업에 그대로 있어야 한다. 단어 분리는 런타임에만 일어난다.
+        self.assertNotIn('class="word"', primary)
         self.assertIn("교육 관련 AI를 직접 만들었습니다", primary)
         self.assertIn("온라인으로도, 직접 만나서도 진행합니다", primary)
         self.assertIn("8/31–11/22", primary)

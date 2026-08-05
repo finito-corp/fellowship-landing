@@ -73,6 +73,23 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.assertEqual(questions.nth(1).get_attribute("aria-expanded"), "true")
         self.assertEqual(answers.nth(1).get_attribute("aria-hidden"), "false")
 
+    def test_deadline_countdown_fills_in_and_keeps_the_written_deadline(self) -> None:
+        count = self.page.locator(".deadline-count")
+        self.assertTrue(count.is_visible())
+        self.assertIn("마감까지", count.inner_text())
+        self.assertIn("8/10", self.page.locator(".deadline-date").inner_text())
+
+    def test_hero_title_splits_into_words_without_changing_its_text(self) -> None:
+        title = self.page.locator("#hero-title")
+        self.assertGreaterEqual(title.locator(".word").count(), 6)
+        self.assertIn("정답이 사라진 20대,", title.inner_text())
+        self.assertEqual(
+            self.page.evaluate(
+                "getComputedStyle(document.querySelector('#hero-title .word')).opacity"
+            ),
+            "1",
+        )
+
     def test_side_guide_is_focusable_only_while_visibly_available(self) -> None:
         self.page.set_viewport_size({"width": 1280, "height": 800})
         guide = self.page.locator(".side-guide")

@@ -226,6 +226,16 @@
     .button.secondary { border-color: var(--rule-light); background: transparent; color: var(--text-light); }
     .button.secondary:hover { background: var(--surface-hover); color: var(--text-light); box-shadow: none; }
     .hero-boundary { max-width: var(--measure-boundary); margin: var(--space-4) 0 0; color: var(--text-boundary); font-size: var(--font-meta); }
+    .hero-deadline { display: flex; margin: var(--space-6) 0 0; align-items: center; gap: var(--space-3); color: var(--muted-light); font-size: var(--font-label); }
+    .hero-deadline .deadline-dot { flex: none; width: var(--space-2); height: var(--space-2); border-radius: 50%; background: var(--gold); animation: deadline-pulse 2.6s var(--ease) infinite; }
+    .hero-deadline .deadline-count { color: var(--gold); font-weight: var(--weight-label); letter-spacing: .08em; }
+    .hero-deadline[data-state="closed"] .deadline-dot { background: var(--muted-light); animation: none; }
+    @keyframes deadline-pulse { 0% { box-shadow: 0 0 0 0 var(--gold-shadow); } 70%, 100% { box-shadow: 0 0 0 var(--space-3) var(--gold-pulse-clear); } }
+    body[data-motion="reduced"] .hero-deadline .deadline-dot { animation: none; }
+    /* 히어로 제목 단어 등장. .word 는 JS 가 붙이며, 감축 모션에서는 아예 붙이지 않는다. */
+    .hero h1 .word { display: inline-block; }
+    body[data-motion="normal"] .hero h1 .word { opacity: 0; transform: translateY(.42em); animation: word-rise var(--motion-reveal) var(--ease) forwards; animation-delay: calc(var(--word-index) * 60ms); }
+    @keyframes word-rise { to { opacity: 1; transform: none; } }
     .facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: var(--facts-space); border-block: var(--rule-width) solid var(--rule-light); }
     .fact { padding: var(--space-6) var(--space-5) var(--space-lg) 0; }
     .fact + .fact { padding-left: var(--space-6); border-left: var(--rule-width) solid var(--rule-light); }
@@ -407,6 +417,7 @@
         <h1 class="reveal" id="hero-title">정답이 사라진 20대,<br><em>내 다음 선택을 만드는 약 3개월.</em></h1>
         <p class="hero-copy reveal"><span>대학에 들어선 순간부터 졸업 이후까지.</span><span>지금 내게 중요한 장면 하나를 정하고, <span class="keep">AI와 동료 속에서</span> <span class="keep">직접 시도하고 수정해 봅니다.</span></span></p>
         <div class="hero-actions reveal"><a class="button" href="apply/">3기 지원하기 <span aria-hidden="true">↗</span></a><a class="button secondary" href="#history">위닝 펠로우십이 걸어온 길</a></div>
+        <p class="hero-deadline reveal" data-deadline="2026-08-10T23:59:59+09:00"><span class="deadline-dot" aria-hidden="true"></span><span class="deadline-count" aria-hidden="true" hidden></span><span class="deadline-date">8/10(월) 23:59 지원 마감</span></p>
         <p class="hero-boundary reveal">대학 재학생·졸업생 대상 · 참가비 없음. 지원서 제출 후 내부 심의를 진행하며, 2주 베타 합격자에게만 8월 13일까지 연락드립니다.</p>
         <div class="facts reveal" aria-label="3기 핵심 정보">
           <div class="fact"><strong>대상</strong><span>대학 재학생·졸업생</span></div><div class="fact"><strong>모집</strong><span>8/4–8/10</span></div><div class="fact"><strong>방식</strong><span>온라인 중심</span></div><div class="fact"><strong>비용</strong><span>참가비 없음</span></div>
@@ -461,6 +472,7 @@
         </div>
       </div>
       <p class="review-note">마우스를 올리거나 키보드로 초점을 두면 후기가 멈춥니다.</p>
+      <div class="shell"><p class="history-transition reveal"><strong>이 소감들에 AI 이야기는 없습니다.</strong><br>그때의 도구가 AI가 아니었으니 당연합니다. 다만 2기에서 교육업을 희망한 팀은 이미 교육 관련 AI를 직접 만들었고, 3기는 그 도구를 앞에 놓습니다. 바뀌는 것은 도구지 방식이 아닙니다. 혼자 하지 않고, 실제로 해보고, 동료에게 공유하는 구조는 그대로입니다.</p></div>
     </section>
 
     <section class="chapter light" id="fit" aria-labelledby="fit-title">
@@ -533,6 +545,59 @@
     (() => {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       document.body.dataset.motion = reducedMotion ? 'reduced' : 'normal';
+      // 지원 마감까지 남은 시간. 마감이 지나면 스스로 마감 상태로 바뀐다.
+      const deadlineBox = document.querySelector('.hero-deadline');
+      if (deadlineBox) {
+        const deadline = new Date(deadlineBox.dataset.deadline);
+        const countEl = deadlineBox.querySelector('.deadline-count');
+        const dateEl = deadlineBox.querySelector('.deadline-date');
+        const syncDeadline = () => {
+          const left = deadline.getTime() - Date.now();
+          // 날짜 속성이 깨졌으면 조용히 마감 문구만 남긴다. 틀린 숫자를 띄우지 않는다.
+          if (!Number.isFinite(left)) { countEl.hidden = true; return false; }
+          if (left <= 0) {
+            deadlineBox.dataset.state = 'closed';
+            countEl.hidden = true;
+            dateEl.textContent = '3기 지원 접수가 마감되었습니다.';
+            return false;
+          }
+          const minutes = Math.floor(left / 60000);
+          const days = Math.floor(minutes / 1440);
+          const hours = Math.floor((minutes % 1440) / 60);
+          countEl.textContent = days > 0
+            ? `마감까지 ${days}일 ${hours}시간`
+            : `마감까지 ${hours}시간 ${minutes % 60}분`;
+          countEl.hidden = false;
+          return true;
+        };
+        if (syncDeadline() !== false) {
+          const deadlineTimer = setInterval(() => { if (syncDeadline() === false) clearInterval(deadlineTimer); }, 30000);
+        }
+      }
+
+      // 히어로 제목을 단어 단위로 띄운다. 마크업의 텍스트는 그대로 두고 여기서만 감싼다.
+      const heroTitle = document.querySelector('#hero-title');
+      if (heroTitle && !reducedMotion) {
+        let wordIndex = 0;
+        const wrapWords = node => {
+          [...node.childNodes].forEach(child => {
+            if (child.nodeType === Node.ELEMENT_NODE) { wrapWords(child); return; }
+            if (child.nodeType !== Node.TEXT_NODE || !child.textContent.trim()) return;
+            const fragment = document.createDocumentFragment();
+            child.textContent.split(/(\s+)/).forEach(chunk => {
+              if (!chunk.trim()) { fragment.append(chunk); return; }
+              const word = document.createElement('span');
+              word.className = 'word';
+              word.style.setProperty('--word-index', String(wordIndex++));
+              word.textContent = chunk;
+              fragment.append(word);
+            });
+            child.replaceWith(fragment);
+          });
+        };
+        wrapWords(heroTitle);
+      }
+
       const menuButton = document.querySelector('.menu-button');
       const mobileMenu = document.querySelector('.mobile-menu');
       const closeMenu = () => { menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', '메뉴 열기'); mobileMenu.dataset.open = 'false'; document.body.classList.remove('menu-open'); };
