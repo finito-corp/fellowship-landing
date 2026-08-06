@@ -166,8 +166,11 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("학기 또는 정규 일정 시작일", application)
         self.assertIn('min="20"', application)
         self.assertNotIn("만 나이) ", application)
-        for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생"):
+        for stage in ("대학3학년", "대학4학년이상", "졸업생"):
             self.assertIn(f'<option value="{stage}">', application)
+        for ineligible_stage in ("대학1학년", "대학2학년"):
+            self.assertNotIn(f'<option value="{ineligible_stage}">', application)
+        self.assertIn("대학 3학년 이상·졸업생", application)
         self.assertIn("내부 심의를 거쳐 합격자에게만 연락드립니다", application)
         self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", application)
         self.assertNotIn("대기 명단", application)
@@ -211,7 +214,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("선택 앞에 있다면.", primary)
         self.assertIn("스스로 선택하고 움직여 본 몇 달은,", primary)
         self.assertNotIn("30년 뒤를 약속하지는 않습니다.", primary)
-        self.assertNotIn("3학년 이상", primary)
+        self.assertIn("대학 3학년 이상·졸업생", primary)
+        self.assertNotIn("대학 재학생·졸업생", primary)
         self.assertNotIn("대학 3학년 이후", primary)
         for retired_hedge in (
             "3기는 1·2기의 실패를 고친 상품이 아닙니다.",
