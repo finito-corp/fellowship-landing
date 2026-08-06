@@ -2,7 +2,7 @@
 
 ## 1. Atmosphere
 
-Quiet, determined, human. The page should feel like a well-edited invitation from people who have already tried difficult things together, not an AI product launch. Its signature is a sequence of warm light and deep charcoal chapters connected by a single gold progress line. Copy is specific, conversational, and action-led.
+Quiet, determined, human. The page should feel like a well-edited invitation from people who have already explored difficult choices together, not an AI product launch. Its signature is a sequence of warm light and deep charcoal chapters connected by a single gold progress line. Copy is specific, conversational, and possibility-led: AI expands the field of view, peers add perspective, and repeated action turns possibility into evidence.
 
 ## 2. Color
 
@@ -42,14 +42,16 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Announcement bar: recruitment dates, pre-course review status, one direct CTA.
 - Site navigation: fixed below announcement; desktop links, mobile disclosure menu, visible application CTA.
 - Side guide: desktop-only chapter dots with labels, active state, and back-to-top control.
-- Hero: full-height editorial opening, two CTAs, a plain-language intake boundary, and four scannable facts. It must state `2주 프리과정 → 통과 후 3개월 본과정` without implying that application confirms the main program. No photography.
+- Hero: full-height editorial opening, two CTAs, a plain-language intake boundary, and four scannable facts. The 3-month core is the product and must be named first; the 2-week pre-course is its selection doorway and never the apparent destination. On mobile, the deadline row also carries a compact review, contact, selection, and non-guarantee summary before the detailed boundary. No photography.
 - Origin story: the Fellowship's post-exam roots and `Ride Your Own Waves` philosophy, connected to the current late-college decision stage.
 - Cohort journey: a text-only 1기 → 2기 → 3기 sequence. Historical activity descriptions stay at the format/rhythm level and verified anonymous quotes remain visually separate from operator narration.
-- Audience fit: concrete self-selection scenes before operating details, plus a restrained long-horizon statement that promises no outcome.
-- AI proficiency is never a sorting criterion. Public copy explicitly welcomes both first-time and experienced AI users, then selects for applying AI to a real-life scene and iterating on the result.
+- Audience fit: concrete self-selection scenes centered on strengths, options, and self-directed direction before operating details, plus a restrained long-horizon statement that promises no outcome.
+- AI proficiency is never a sorting criterion. Public copy explicitly welcomes both first-time and experienced AI users, then selects for exploring a possibility with AI, testing it in a real-life scene, and revising direction from evidence.
 - Chapter header: small gold label, large title, restrained lead copy.
 - Numbered story row: editorial divider, large index, short human narrative; never a generic equal card grid.
 - Program timeline: vertical gold progress line, numbered steps, factual boundaries.
+- Story order: emotional recognition → possibility-and-direction reframe → 3-month exploration and validation rhythm → 2-week selection doorway → exact schedule → prior-cohort evidence. History supports the offer; it does not delay the current program explanation.
+- Social share card: a text-only 1200×630 PNG using the same ink, paper, and gold tokens. The share promise names the 3-month core rather than the pre-course.
 - Review marquee: verified anonymous cohort-one quotes, duplicated track, pause on hover/focus, and explicit context that the quotes describe cohort-one team activities rather than cohort-three outcomes.
 - FAQ: single-open accordion with explicit button state and accessible regions.
 - Final CTA: direct invitation plus exact recruitment boundary.

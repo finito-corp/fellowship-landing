@@ -120,13 +120,15 @@ class StaticReleaseValidationTests(unittest.TestCase):
         terms = (root / "terms.html").read_text(encoding="utf-8")
 
         self.assertIn('data-collection-state="server-verified"', privacy)
-        self.assertIn("3기 프리과정 지원서에 필요한 정보만 받습니다", privacy)
+        self.assertIn("3기 지원서에 필요한 정보만 받습니다", privacy)
         self.assertIn("2026-11-30", privacy)
         self.assertIn("2027-02-28", privacy)
         self.assertIn("송일현", privacy)
-        self.assertIn("동의하지 않으면 3기 프리과정 지원서를 제출할 수 없습니다", privacy)
+        self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
         self.assertIn("내부 심의 후 2주 프리과정 합격자에게만", privacy)
         self.assertIn("winningfellowship25@gmail.com", privacy)
+        self.assertIn("도전 경험과 자기소개, 3개월 동안 탐색할 가능성과 현실에서 확인하고 싶은 변화", privacy)
+        self.assertNotIn("3개월 동안 다룰 문제", privacy)
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
         self.assertIn('data-collection-state="server-verified"', terms)
         self.assertIn("지원서 제출 후 내부 심의를 진행합니다", terms)
@@ -159,6 +161,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('name="challenge_self_intro"', application)
         self.assertIn('name="why_now"', application)
         self.assertIn('name="precourse_rhythm_plan"', application)
+        self.assertIn('name="core_commitment_confirmed"', application)
         self.assertIn('name="available_windows"', application)
         self.assertIn('id="submit-button"', application)
         self.assertIn('name="eligibility_stage"', application)
@@ -166,11 +169,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("학기 또는 정규 일정 시작일", application)
         self.assertIn('min="20"', application)
         self.assertNotIn("만 나이) ", application)
-        for stage in ("대학3학년", "대학4학년이상", "졸업생"):
+        for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생"):
             self.assertIn(f'<option value="{stage}">', application)
-        for ineligible_stage in ("대학1학년", "대학2학년"):
-            self.assertNotIn(f'<option value="{ineligible_stage}">', application)
-        self.assertIn("대학 3학년 이상·졸업생", application)
         self.assertIn("내부 심의를 거쳐 합격자에게만 연락드립니다", application)
         self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", application)
         self.assertNotIn("대기 명단", application)
@@ -186,11 +186,16 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("application_code", application)
         self.assertNotIn("접수 확인 코드", completion)
         self.assertNotIn("URLSearchParams", completion)
-        self.assertIn("프리과정 지원서 제출이 완료되었습니다", completion)
+        self.assertIn("지원서 제출이 완료되었습니다", completion)
         self.assertNotIn('name="prior_ai_use_summary"', application)
         self.assertNotIn('name="personal_paid_ai_signal"', application)
         self.assertIn("2주 프리과정", application)
         self.assertIn("3개월 본과정", application)
+        self.assertIn('<meta name="description" content="AI와 함께 가능성과 방향을 탐색하고 검증하는 위닝 펠로우십 3기 3개월 본과정 지원서">', application)
+        self.assertIn('<span class="keep">3개월 본과정에</span>', application)
+        self.assertIn('<span class="keep">8월 31일부터</span>', application)
+        self.assertIn('<span class="keep">조정 계획</span>', application)
+        self.assertIn('8/31~11/22, <span class="keep">3개월 본과정에</span>', application)
         for attribution_field in ("utm_source", "utm_medium", "utm_campaign", "utm_content"):
             self.assertIn(attribution_field, application)
 
@@ -200,8 +205,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         contract = LandingContractParser()
         contract.feed(primary)
 
-        self.assertIn("미뤄 둔 일 하나를,", primary)
-        self.assertIn("2주 안에 먼저 움직여 봅니다.", primary)
+        self.assertIn('data-program-focus="core"', primary)
+        self.assertIn('data-core-window="2026-08-31/2026-11-22"', primary)
         self.assertNotIn("3기를 기다립니다.", primary)
         self.assertIn("2주 프리과정", primary)
         self.assertIn("3개월 본과정", primary)
@@ -210,12 +215,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("1기 · 발견과 시작", primary)
         self.assertIn("2기 · 집중과 확장", primary)
         self.assertIn("3기 · 다음 장", primary)
-        self.assertIn("지금, 이런 ", primary)
-        self.assertIn("선택 앞에 있다면.", primary)
-        self.assertIn("스스로 선택하고 움직여 본 몇 달은,", primary)
         self.assertNotIn("30년 뒤를 약속하지는 않습니다.", primary)
-        self.assertIn("대학 3학년 이상·졸업생", primary)
-        self.assertNotIn("대학 재학생·졸업생", primary)
+        self.assertNotIn("3학년 이상", primary)
         self.assertNotIn("대학 3학년 이후", primary)
         for retired_hedge in (
             "3기는 1·2기의 실패를 고친 상품이 아닙니다.",
@@ -236,23 +237,36 @@ class StaticReleaseValidationTests(unittest.TestCase):
         # 후기와 3기 사이의 인지 단절을 메우는 문단
         # 상단 공지도 같은 마감 시각을 따라간다. 좁은 화면 문구는 CSS 하드코딩이 아니라 속성에서 읽는다.
         self.assertIn("content: attr(data-short)", primary)
-        self.assertIn('data-short="프리과정 모집 · 8/4–8/10"', primary)
+        self.assertIn('data-short="3기 모집 · 8/4–8/10"', primary)
         # 지난 두 기수 규모. 값은 마크업에 적혀 있고 JS 는 0부터 올리기만 한다.
         self.assertIn('data-count-to="70"', primary)
         self.assertIn('data-count-to="3"', primary)
         self.assertIn("1·2기를 거쳐 간 펠로우", primary)
         self.assertIn("1기 50명, 2기 20명이 함께했습니다.", primary)
         self.assertIn("이 소감들에 AI 이야기는 없습니다.", primary)
-        self.assertIn("바뀌는 것은 도구지 방식이 아닙니다.", primary)
+        self.assertIn("달라지는 것은 도구와 탐색의 범위이고", primary)
         # 제목 텍스트는 마크업에 그대로 있어야 한다. 단어 분리는 런타임에만 일어난다.
         self.assertNotIn('class="word"', primary)
         self.assertIn("교육 관련 AI를 직접 만들었습니다", primary)
-        self.assertIn("온라인으로도, 직접 만나서도 진행합니다", primary)
+        self.assertIn("격주 90분", primary)
         self.assertIn("8/31–11/22", primary)
+        self.assertIn("내 가능성과 방향을 현실에서 탐색하고 검증하는", primary)
+        self.assertIn("AI는 선택지를 넓히고", primary)
+        self.assertIn("내 방향을 검증합니다", primary)
+        for retired_task_frame in (
+            "미뤄 둔 일",
+            "미뤄 둔 그 일",
+            "정답을 알려주는 강의가 아닙니다",
+            "첫 시도를 다음 행동으로 이어갑니다",
+            "그동안 미뤄진 이유",
+        ):
+            self.assertNotIn(retired_task_frame, primary)
         self.assertGreaterEqual(len(contract.application_hrefs), 4)
         self.assertEqual(contract.image_count, 0)
         self.assertEqual(contract.form_count, 0)
-        self.assertNotIn("og:image", primary.lower())
+        self.assertIn('property="og:image"', primary.lower())
+        self.assertIn("assets/winning-fellowship-3-og.png", primary)
+        self.assertTrue((root / "assets" / "winning-fellowship-3-og.png").is_file())
         self.assertNotIn("invite/photos", primary)
         self.assertNotIn("cdn.jsdelivr.net", primary)
         self.assertIn('url("assets/PretendardVariable.woff2")', primary)
@@ -269,20 +283,23 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("HOW WE START", primary)
         self.assertNotIn("공개 지원폼과 운영 경로", primary)
 
+        share_source = (root / "assets" / "winning-fellowship-3-og.svg").read_text(encoding="utf-8")
+        self.assertIn("내 가능성과 방향을", share_source)
+        self.assertNotIn("미뤄 둔", share_source)
+
     def test_story_order_and_intake_language_match_the_public_contract(self) -> None:
         root = Path(__file__).resolve().parents[1]
         primary = (root / "index.html").read_text(encoding="utf-8")
         hero = primary[primary.index('<section class="hero"') : primary.index('</section>', primary.index('<section class="hero"'))]
 
-        ordered_ids = ('id="about"', 'id="history"', 'id="reviews"', 'id="fit"', 'id="beta"', 'id="core"', 'id="schedule"', 'id="faq"', 'id="apply"')
+        ordered_ids = ('id="about"', 'id="fit"', 'id="core"', 'id="beta"', 'id="schedule"', 'id="history"', 'id="reviews"', 'id="faq"', 'id="apply"')
         positions = [primary.index(section_id) for section_id in ordered_ids]
         self.assertEqual(positions, sorted(positions))
         self.assertNotIn("대기 명단", primary)
         self.assertNotIn("14주", hero)
         self.assertNotIn("12주", hero)
-        self.assertNotIn("약 3개월", hero)
-        self.assertIn("내부 심의를 거쳐 2주 프리과정 참가자를 먼저 선발하며", primary)
-        self.assertIn("2주 프리과정 종료 후 운영진이 3개월 본과정 참가자를 최종 선발합니다", primary)
+        self.assertIn('data-entry-gate="precourse-selection"', hero)
+        self.assertIn('data-core-admission="not-guaranteed"', hero)
         self.assertIn("const ATTRIBUTION_KEYS", primary)
 
     def test_small_accent_text_meets_aa_contrast_on_light_sections(self) -> None:
