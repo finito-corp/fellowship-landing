@@ -99,7 +99,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('href="apply/"', index)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', index)
         self.assertIn("지원서 제출 후 내부 심의를 진행하며", index)
-        self.assertIn("2주 프리과정 합격자에게만 8월 13일까지 연락드립니다", index)
+        self.assertIn("2주 사전 실행·선발 과정(프리과정) 합격자에게만 8월 13일까지 연락드립니다", index)
         self.assertNotIn("<form", index.lower())
         self.assertNotIn('aria-disabled="true"', index)
         for retired_path_or_promise in (
@@ -127,7 +127,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
         self.assertIn("내부 심의 후 2주 프리과정 합격자에게만", privacy)
         self.assertIn("winningfellowship25@gmail.com", privacy)
-        self.assertIn("도전 경험과 자기소개, 3개월 동안 탐색할 가능성과 현실에서 확인하고 싶은 변화", privacy)
+        self.assertIn("도전 경험과 자기소개, 3개월 안에 현실에서 확인할 가능성과 첫 실행 장면", privacy)
         self.assertNotIn("3개월 동안 다룰 문제", privacy)
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
         self.assertIn('data-collection-state="server-verified"', terms)
@@ -168,6 +168,10 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("actual_term_or_regular_rhythm_starts_on", application)
         self.assertNotIn("학기 또는 정규 일정 시작일", application)
         self.assertIn('min="20"', application)
+        self.assertIn("20대 대학 재학생·졸업생을 중심으로 모집", application)
+        self.assertIn("3개월 안에 현실에서 확인할 가능성", application)
+        self.assertIn("3개월 안에 현실에서 확인할 첫 장면", application)
+        self.assertIn('minlength="30"', application)
         self.assertNotIn("만 나이) ", application)
         for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생"):
             self.assertIn(f'<option value="{stage}">', application)
@@ -230,7 +234,9 @@ class StaticReleaseValidationTests(unittest.TestCase):
             "지원서에 쓰면 안 되는 정보가 있나요?",
         ):
             self.assertNotIn(retired_hedge, primary)
-        self.assertIn("먼저 합류한 사람들이,", primary)
+        self.assertIn("20대 대학 재학생·졸업생", primary)
+        self.assertIn("1·2기에서 확인한,", primary)
+        self.assertIn("동료와 함께 움직이는 힘입니다.", primary)
         # 마감 카운트다운은 JS 가 채우고, 스크립트가 없어도 마감 시각은 글로 남아야 한다.
         self.assertIn('data-deadline="2026-08-10T23:59:59+09:00"', primary)
         self.assertIn("8/10(월) 23:59 지원 마감", primary)
@@ -253,6 +259,9 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("내 가능성과 방향을 현실에서 탐색하고 검증하는", primary)
         self.assertIn("AI는 선택지를 넓히고", primary)
         self.assertIn("내 방향을 검증합니다", primary)
+        self.assertNotIn("자격증과 대외활동", primary)
+        self.assertNotIn("취업의 문은 좁아지고", primary)
+        self.assertIn("작은 실행을 반복하며", primary)
         for retired_task_frame in (
             "미뤄 둔 일",
             "미뤄 둔 그 일",
