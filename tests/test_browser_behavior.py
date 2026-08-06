@@ -173,6 +173,14 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
             self.assertGreater(boxes[1]["y"], boxes[0]["y"] + boxes[0]["height"])
             self.assertGreater(boxes[2]["y"], boxes[1]["y"] + boxes[1]["height"])
 
+    def test_primary_hero_cta_is_fully_visible_on_a_short_desktop_viewport(self) -> None:
+        self.page.set_viewport_size({"width": 1280, "height": 577})
+        button = self.page.locator('.hero-actions a[href="apply/"]').first
+        box = button.bounding_box()
+        self.assertIsNotNone(box)
+        self.assertGreaterEqual(box["y"], 0)
+        self.assertLessEqual(box["y"] + box["height"], 577)
+
     def test_application_link_stays_on_the_public_fellowship_site(self) -> None:
         self.page.locator('.hero-actions a[href="apply/"]').click()
 
