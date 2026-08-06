@@ -171,7 +171,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.page.locator('.hero-actions a[href="apply/"]').click()
 
         self.assertEqual(self.page.url, f"http://127.0.0.1:{self.server.server_port}/apply/")
-        self.assertEqual(self.page.locator("h1").inner_text(), "위닝 펠로우십\n3기 지원서")
+        self.assertEqual(self.page.locator("h1").inner_text(), "위닝 펠로우십 3기\n프리과정 지원서")
         self.assertEqual(self.page.locator("form").count(), 1)
 
     def test_application_link_preserves_supported_outreach_attribution(self) -> None:
@@ -259,7 +259,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
             self.assertEqual(undersized, [])
 
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/complete/?code=WF3-ABCDEF1234")
-        self.assertEqual(self.page.locator("h1").inner_text(), "지원서 제출이 완료되었습니다.")
+        self.assertEqual(self.page.locator("h1").inner_text(), "프리과정 지원서 제출이 완료되었습니다.")
         self.assertEqual(self.page.get_by_text("접수 확인 코드").count(), 0)
         self.assertIn("합격자에게만", self.page.locator(".card p").inner_text())
 

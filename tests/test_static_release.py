@@ -120,11 +120,11 @@ class StaticReleaseValidationTests(unittest.TestCase):
         terms = (root / "terms.html").read_text(encoding="utf-8")
 
         self.assertIn('data-collection-state="server-verified"', privacy)
-        self.assertIn("3기 지원서에 필요한 정보만 받습니다", privacy)
+        self.assertIn("3기 프리과정 지원서에 필요한 정보만 받습니다", privacy)
         self.assertIn("2026-11-30", privacy)
         self.assertIn("2027-02-28", privacy)
         self.assertIn("송일현", privacy)
-        self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
+        self.assertIn("동의하지 않으면 3기 프리과정 지원서를 제출할 수 없습니다", privacy)
         self.assertIn("내부 심의 후 2주 프리과정 합격자에게만", privacy)
         self.assertIn("winningfellowship25@gmail.com", privacy)
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
@@ -186,7 +186,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("application_code", application)
         self.assertNotIn("접수 확인 코드", completion)
         self.assertNotIn("URLSearchParams", completion)
-        self.assertIn("지원서 제출이 완료되었습니다", completion)
+        self.assertIn("프리과정 지원서 제출이 완료되었습니다", completion)
         self.assertNotIn('name="prior_ai_use_summary"', application)
         self.assertNotIn('name="personal_paid_ai_signal"', application)
         self.assertIn("2주 프리과정", application)
@@ -236,7 +236,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         # 후기와 3기 사이의 인지 단절을 메우는 문단
         # 상단 공지도 같은 마감 시각을 따라간다. 좁은 화면 문구는 CSS 하드코딩이 아니라 속성에서 읽는다.
         self.assertIn("content: attr(data-short)", primary)
-        self.assertIn('data-short="3기 모집 · 8/4–8/10"', primary)
+        self.assertIn('data-short="프리과정 모집 · 8/4–8/10"', primary)
         # 지난 두 기수 규모. 값은 마크업에 적혀 있고 JS 는 0부터 올리기만 한다.
         self.assertIn('data-count-to="70"', primary)
         self.assertIn('data-count-to="3"', primary)
