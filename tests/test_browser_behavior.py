@@ -75,9 +75,16 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
 
     def test_deadline_countdown_fills_in_and_keeps_the_written_deadline(self) -> None:
         count = self.page.locator(".deadline-count")
+        self.page.set_viewport_size({"width": 1280, "height": 844})
         self.assertTrue(count.is_visible())
         self.assertIn("마감까지", count.inner_text())
-        self.assertIn("8/10", self.page.locator(".deadline-date").inner_text())
+        deadline = self.page.locator(".deadline-date")
+        self.assertIn("8/10", deadline.inner_text())
+
+        self.page.set_viewport_size({"width": 390, "height": 844})
+        self.assertFalse(count.is_visible())
+        self.assertIn("8/13 합격자 연락", deadline.inner_text())
+        self.assertIn("본과정 합류 미보장", deadline.inner_text())
 
     def test_announcement_follows_the_same_deadline_as_the_hero(self) -> None:
         copy = self.page.locator(".announcement-copy")
@@ -98,7 +105,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
     def test_hero_title_splits_into_words_without_changing_its_text(self) -> None:
         title = self.page.locator("#hero-title")
         self.assertGreaterEqual(title.locator(".word").count(), 6)
-        self.assertIn("미뤄 둔 일 하나를,", title.inner_text())
+        self.assertIn("계속 뭔가 하고 있는데,", title.inner_text())
         # 단어는 순차로 올라오므로 마지막 단어까지 끝난 뒤에 본다. 끝내 1이 안 되면 여기서 실패한다.
         self.page.wait_for_function(
             "() => [...document.querySelectorAll('#hero-title .word')]"
@@ -160,18 +167,17 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
             self.assertLessEqual(heading_size, max_heading_size)
 
             lines = self.page.locator(".hero-copy > span")
-            self.assertEqual(lines.count(), 2)
-            first = lines.nth(0).bounding_box()
-            second = lines.nth(1).bounding_box()
-            self.assertIsNotNone(first)
-            self.assertIsNotNone(second)
-            self.assertGreater(second["y"], first["y"] + first["height"])
+            self.assertEqual(lines.count(), 3)
+            boxes = [lines.nth(index).bounding_box() for index in range(3)]
+            self.assertTrue(all(box is not None for box in boxes))
+            self.assertGreater(boxes[1]["y"], boxes[0]["y"] + boxes[0]["height"])
+            self.assertGreater(boxes[2]["y"], boxes[1]["y"] + boxes[1]["height"])
 
     def test_application_link_stays_on_the_public_fellowship_site(self) -> None:
         self.page.locator('.hero-actions a[href="apply/"]').click()
 
         self.assertEqual(self.page.url, f"http://127.0.0.1:{self.server.server_port}/apply/")
-        self.assertEqual(self.page.locator("h1").inner_text(), "위닝 펠로우십 3기\n프리과정 지원서")
+        self.assertEqual(self.page.locator("h1").inner_text(), "위닝 펠로우십\n3기 지원서")
         self.assertEqual(self.page.locator("form").count(), 1)
 
     def test_application_link_preserves_supported_outreach_attribution(self) -> None:
@@ -189,6 +195,11 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
 
     def test_application_form_fits_supported_viewports(self) -> None:
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/")
+        self.assertEqual(self.page.locator('input[type="hidden"][name="contact_channel"][value="phone"]').count(), 1)
+        self.assertEqual(self.page.locator('option[value="email"]').count(), 0)
+        self.assertEqual(self.page.locator("fieldset").nth(1).locator("legend").inner_text(), "2. 도전 경험과 자기소개")
+        self.assertIn("본과정 선발 전", self.page.locator(".lead").inner_text())
+        self.assertIn("그 경험이 보여주는 나의 모습", self.page.locator("#challenge_self_intro").get_attribute("placeholder"))
         for width in (320, 390, 1280):
             self.page.set_viewport_size({"width": width, "height": 844})
             self.assertEqual(
@@ -217,8 +228,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         )
         self.page.locator("#name").fill("테스트 지원자")
         self.page.locator("#age").fill("24")
-        self.page.locator("#contact_channel").select_option("email")
-        self.page.locator("#contact_value").fill("candidate@example.com")
+        self.page.locator("#contact_value").fill("01012345678")
         self.page.locator("#eligibility_stage").select_option("대학4학년이상")
         self.page.locator("#challenge_self_intro").fill(
             "먼저 작은 프로젝트를 공개했고 반응이 예상과 달라 설명 순서와 다음 행동을 바꿨습니다."
@@ -232,11 +242,15 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.page.locator('input[name="available_windows"]').nth(0).check()
         self.page.locator('input[name="available_windows"]').nth(1).check()
         self.page.locator('input[name="beta_commitment_confirmed"]').check()
+        self.page.locator('input[name="core_commitment_confirmed"]').check()
         self.page.locator('input[name="contact_consent_confirmed"]').check()
         self.page.locator("#submit-button").click()
         self.page.wait_for_url("**/apply/complete/")
 
         self.assertEqual(captured["precourse_rhythm_plan"], "화요일과 목요일 저녁을 비우고 일정이 겹치면 토요일 오후로 옮기겠습니다.")
+        self.assertEqual(captured["contact_channel"], "phone")
+        self.assertEqual(captured["contact_value"], "01012345678")
+        self.assertTrue(captured["core_commitment_confirmed"])
         self.assertEqual(captured["utm_source"], "linkedin")
         self.assertEqual(captured["utm_medium"], "organic_post")
         self.assertEqual(captured["utm_campaign"], "wf3_202608")
@@ -259,7 +273,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
             self.assertEqual(undersized, [])
 
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/complete/?code=WF3-ABCDEF1234")
-        self.assertEqual(self.page.locator("h1").inner_text(), "프리과정 지원서 제출이 완료되었습니다.")
+        self.assertEqual(self.page.locator("h1").inner_text(), "지원서 제출이 완료되었습니다.")
         self.assertEqual(self.page.get_by_text("접수 확인 코드").count(), 0)
         self.assertIn("합격자에게만", self.page.locator(".card p").inner_text())
 
