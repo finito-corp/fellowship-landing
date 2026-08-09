@@ -99,7 +99,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('href="apply/"', index)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', index)
         self.assertIn("지원서 제출 후 내부 심의를 진행하며", index)
-        self.assertIn("2주 사전 실행·선발 과정(프리과정) 합격자에게만 8월 13일까지 연락드립니다", index)
+        self.assertIn("2주 사전 실행·선발 과정(프리과정) 참여 안내 대상자에게만 8월 15일까지 연락드립니다", index)
         self.assertNotIn("<form", index.lower())
         self.assertNotIn('aria-disabled="true"', index)
         for retired_path_or_promise in (
@@ -125,15 +125,15 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("2027-02-28", privacy)
         self.assertIn("송일현", privacy)
         self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
-        self.assertIn("내부 심의 후 2주 프리과정 합격자에게만", privacy)
+        self.assertIn("내부 심의 후 참여 안내 대상자에게만", privacy)
         self.assertIn("winningfellowship25@gmail.com", privacy)
         self.assertIn("도전 경험과 자기소개, 3개월 안에 현실에서 확인할 가능성과 첫 실행 장면", privacy)
         self.assertNotIn("3개월 동안 다룰 문제", privacy)
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
         self.assertIn('data-collection-state="server-verified"', terms)
         self.assertIn("지원서 제출 후 내부 심의를 진행합니다", terms)
-        self.assertIn("2주 프리과정 합격자에게만 8월 13일까지 개별 연락드립니다", terms)
-        self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", terms)
+        self.assertIn("사전 선발과정 참여 안내 대상자에게만 8월 15일까지 개별 연락드립니다", terms)
+        self.assertIn("미선정자에게는 별도 연락을 드리지 않습니다", terms)
         self.assertNotIn("조기 제출", terms)
         for text in (privacy, terms):
             self.assertNotIn("Fillout", text)
@@ -175,8 +175,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("만 나이) ", application)
         for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생"):
             self.assertIn(f'<option value="{stage}">', application)
-        self.assertIn("내부 심의를 거쳐 합격자에게만 연락드립니다", application)
-        self.assertIn("불합격자에게는 별도 연락을 드리지 않습니다", application)
+        self.assertIn("내부 심의를 거쳐 사전 선발과정 참여 안내 대상자에게만 연락드립니다", application)
+        self.assertIn("미선정자에게는 별도 연락을 드리지 않습니다", application)
         self.assertNotIn("대기 명단", application)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', application)
         self.assertNotIn(
@@ -238,12 +238,12 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("1·2기에서 확인한,", primary)
         self.assertIn("동료와 함께 움직이는 힘입니다.", primary)
         # 마감 카운트다운은 JS 가 채우고, 스크립트가 없어도 마감 시각은 글로 남아야 한다.
-        self.assertIn('data-deadline="2026-08-10T23:59:59+09:00"', primary)
-        self.assertIn("8/10(월) 23:59 지원 마감", primary)
+        self.assertIn('data-deadline="2026-08-14T23:59:59+09:00"', primary)
+        self.assertIn("8/14(금) 23:59 지원 마감", primary)
         # 후기와 3기 사이의 인지 단절을 메우는 문단
         # 상단 공지도 같은 마감 시각을 따라간다. 좁은 화면 문구는 CSS 하드코딩이 아니라 속성에서 읽는다.
         self.assertIn("content: attr(data-short)", primary)
-        self.assertIn('data-short="3기 모집 · 8/4–8/10"', primary)
+        self.assertIn('data-short="3기 모집 · 8/4–8/14"', primary)
         # 지난 두 기수 규모. 값은 마크업에 적혀 있고 JS 는 0부터 올리기만 한다.
         self.assertIn('data-count-to="70"', primary)
         self.assertIn('data-count-to="3"', primary)
