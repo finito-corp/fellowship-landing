@@ -79,11 +79,11 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.assertTrue(count.is_visible())
         self.assertIn("마감까지", count.inner_text())
         deadline = self.page.locator(".deadline-date")
-        self.assertIn("8/10", deadline.inner_text())
+        self.assertIn("8/14", deadline.inner_text())
 
         self.page.set_viewport_size({"width": 390, "height": 844})
         self.assertFalse(count.is_visible())
-        self.assertIn("8/13 합격자 연락", deadline.inner_text())
+        self.assertIn("8/15 사전 선발과정 참여 안내", deadline.inner_text())
         self.assertIn("본과정 합류 미보장", deadline.inner_text())
 
     def test_announcement_follows_the_same_deadline_as_the_hero(self) -> None:
@@ -283,7 +283,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/complete/?code=WF3-ABCDEF1234")
         self.assertEqual(self.page.locator("h1").inner_text(), "지원서 제출이 완료되었습니다.")
         self.assertEqual(self.page.get_by_text("접수 확인 코드").count(), 0)
-        self.assertIn("합격자에게만", self.page.locator(".card p").inner_text())
+        self.assertIn("사전 선발과정 참여 안내 대상자에게만", self.page.locator(".card p").inner_text())
 
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/")
         self.page.locator("#name").focus()
