@@ -11,9 +11,12 @@
     @font-face { font-family: Pretendard; src: url("../assets/PretendardVariable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
     :root { color-scheme:light; --ink:#171717; --paper:#f7f5ef; --gold:#f2bd3f; --gold-deep:#8f5f00; --text-light:#faf8f2; --muted-light:#aaa79f; --muted-dark:#68645d; --surface:#fffdf8; --line:#d8d4c9; --field-line:#aaa79f; --danger:#a52b2b; --notice-bg:#fff4d6; --notice-text:#514326; }
     * { box-sizing: border-box; }
+    [hidden] { display:none !important; }
     html { word-break: keep-all; }
     body { margin:0; background:var(--paper); color:var(--ink); font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif; line-height:1.62; }
     a { color:inherit; }
+    .skip-link { position:fixed; z-index:20; top:8px; left:8px; min-height:44px; padding:10px 14px; background:var(--paper); color:var(--ink); font-weight:800; transform:translateY(-150%); transition:transform .18s ease; }
+    .skip-link:focus { transform:translateY(0); }
     .keep { white-space:nowrap; }
     :focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
     .top { background:var(--ink); color:var(--text-light); }
@@ -25,7 +28,7 @@
     h1 { margin:0; max-width:680px; font-size:clamp(2.35rem,7vw,4.2rem); line-height:1.12; letter-spacing:-.035em; }
     .lead { max-width:620px; margin:22px 0 0; color:var(--muted-light); font-size:clamp(1.02rem,2vw,1.18rem); }
     main { padding:30px 0 72px; }
-    .process, form { border:1px solid var(--line); border-radius:20px; background:var(--surface); }
+    .process, form, .review-panel { border:1px solid var(--line); border-radius:20px; background:var(--surface); }
     .process { padding:22px; }
     h2 { margin:0 0 14px; font-size:1.15rem; letter-spacing:-.02em; }
     .steps { display:grid; gap:10px; margin:0; padding:0; list-style:none; counter-reset:step; }
@@ -41,10 +44,17 @@
     input, select, textarea { display:block; width:100%; border:1px solid var(--field-line); border-radius:11px; padding:12px 13px; background:var(--surface); color:var(--ink); font:inherit; font-size:1rem; }
     textarea { min-height:132px; resize:vertical; }
     input:focus-visible, select:focus-visible, textarea:focus-visible { outline:3px solid var(--gold); outline-offset:3px; border-color:var(--gold-deep); }
+    input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border-color:var(--danger); }
     .help { margin:6px 0 0; color:var(--muted-dark); font-size:.82rem; }
+    .field-error { margin:7px 0 0; color:var(--danger); font-size:.84rem; font-weight:750; }
+    .error-summary { margin:18px 0 0; border-left:4px solid var(--danger); padding:15px 16px; background:color-mix(in srgb,var(--danger) 7%,var(--surface)); }
+    .error-summary h2 { margin:0; color:var(--danger); }
+    .error-summary ul { margin:10px 0 0; padding-left:20px; }
+    .error-summary a { display:inline-flex; min-height:44px; align-items:center; color:var(--danger); font-weight:750; }
     .choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
     .choice { display:flex; align-items:center; gap:9px; margin:0; border:1px solid var(--line); border-radius:11px; padding:11px; background:var(--surface); font-size:.9rem; font-weight:650; }
     .choice input { width:18px; height:18px; margin:0; accent-color:var(--gold-deep); flex:none; }
+    .choice-grid[aria-invalid="true"] .choice { border-color:var(--danger); }
     .check { display:flex; align-items:flex-start; gap:10px; margin:17px 0 0; border-radius:11px; padding:14px; background:var(--paper); font-size:.9rem; font-weight:650; }
     .check input { width:19px; height:19px; margin:2px 0 0; accent-color:var(--gold-deep); flex:none; }
     .honeypot { position:absolute !important; left:-10000px !important; width:1px !important; height:1px !important; overflow:hidden !important; }
@@ -55,13 +65,23 @@
     #result { display:none; margin-top:14px; border-radius:11px; padding:13px; font-size:.9rem; }
     #result.error { display:block; border:1px solid color-mix(in srgb,var(--danger) 30%,transparent); background:color-mix(in srgb,var(--danger) 8%,var(--surface)); color:var(--danger); }
     #result.pending { display:block; border:1px solid var(--line); background:var(--notice-bg); color:var(--notice-text); }
+    .review-panel { margin-top:22px; padding:26px 24px; }
+    .review-panel > p { margin:8px 0 0; color:var(--muted-dark); }
+    .review-list { margin:24px 0 0; }
+    .review-item { border-top:1px solid var(--line); padding:18px 0; }
+    .review-item dt { color:var(--muted-dark); font-size:.78rem; font-weight:800; letter-spacing:.04em; }
+    .review-item dd { margin:7px 0 0; white-space:pre-wrap; font-size:.96rem; }
+    .review-actions { display:grid; grid-template-columns:1fr 1.35fr; gap:10px; }
+    .review-actions button { margin-top:12px; }
+    .secondary-action { border:1px solid var(--ink); background:transparent; }
     footer { padding:22px 2px 0; color:var(--muted-dark); font-size:.78rem; }
     footer a { display:inline-flex; min-height:44px; align-items:center; font-weight:700; }
-    @media (max-width:520px) { .top-inner, main { width:min(100% - 24px,760px); } .hero { padding:42px 0 48px; } form { padding:5px 15px 22px; } .process { padding:18px 15px; } .choice-grid { grid-template-columns:1fr; } }
+    @media (max-width:520px) { .top-inner, main { width:min(100% - 24px,760px); } .hero { padding:42px 0 48px; } form { padding:5px 15px 22px; } .process { padding:18px 15px; } .choice-grid, .review-actions { grid-template-columns:1fr; } .review-panel { padding:22px 15px; } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">본문 바로가기</a>
   <header class="top">
     <div class="top-inner">
       <a class="back" href="../">← 3기 소개로 돌아가기</a>
@@ -73,7 +93,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="process" aria-labelledby="process-title">
       <h2 id="process-title">지원 절차</h2>
       <ol class="steps">
@@ -86,22 +106,30 @@
     </section>
 
     <form id="application-form" novalidate>
+      <section class="error-summary" id="error-summary" role="alert" tabindex="-1" aria-labelledby="error-summary-title" hidden>
+        <h2 id="error-summary-title">입력 내용을 확인해주세요.</h2>
+        <ul id="error-list"></ul>
+      </section>
+      <div id="form-fields">
       <fieldset>
         <legend>1. 지원자 정보</legend>
         <label for="name">이름 <span class="required">*</span></label>
-        <input id="name" name="name" autocomplete="name" minlength="2" maxlength="40" required placeholder="이름을 입력해주세요">
+        <input id="name" name="name" autocomplete="name" minlength="2" maxlength="40" required placeholder="이름을 입력해주세요" aria-describedby="name-error">
+        <p class="field-error" id="name-error" hidden></p>
 
         <label for="age">나이 <span class="required">*</span></label>
-        <input id="age" name="age" type="number" inputmode="numeric" min="20" max="99" required placeholder="예: 24">
-        <p class="help">만 나이가 아니라 평소 쓰는 나이로 적어주세요. 20살 이상 성인이라면 현재 대학에 다니지 않아도 지원할 수 있습니다.</p>
+        <input id="age" name="age" type="number" inputmode="numeric" min="20" max="99" required placeholder="예: 24" aria-describedby="age-help age-error">
+        <p class="help" id="age-help">만 나이가 아니라 평소 쓰는 나이로 적어주세요. 20살 이상 성인이라면 현재 대학에 다니지 않아도 지원할 수 있습니다.</p>
+        <p class="field-error" id="age-error" hidden></p>
 
         <input name="contact_channel" type="hidden" value="phone">
         <label for="contact_value">휴대전화 번호 <span class="required">*</span></label>
-        <input id="contact_value" name="contact_value" type="tel" inputmode="tel" autocomplete="tel" required placeholder="01012345678">
-        <p class="help">합격 연락을 받을 번호를 공백·하이픈 없이 입력해주세요.</p>
+        <input id="contact_value" name="contact_value" type="tel" inputmode="tel" autocomplete="tel" pattern="[0-9]{10,11}" required placeholder="01012345678" aria-describedby="contact-help contact-error">
+        <p class="help" id="contact-help">합격 연락을 받을 번호를 공백·하이픈 없이 입력해주세요.</p>
+        <p class="field-error" id="contact-error" hidden></p>
 
         <label for="eligibility_stage">현재 상태 <span class="required">*</span></label>
-        <select id="eligibility_stage" name="eligibility_stage" required>
+        <select id="eligibility_stage" name="eligibility_stage" required aria-describedby="eligibility-error">
           <option value="">선택해주세요</option>
           <option value="대학1학년">대학 1학년</option>
           <option value="대학2학년">대학 2학년</option>
@@ -110,29 +138,33 @@
           <option value="졸업생">졸업생</option>
           <option value="기타">기타</option>
         </select>
+        <p class="field-error" id="eligibility-error" hidden></p>
       </fieldset>
 
       <fieldset>
         <legend>2. 도전 경험과 자기소개</legend>
         <label for="challenge_self_intro">지금까지 해본 도전과 그 경험을 통한 자기소개 <span class="required">*</span></label>
-        <textarea id="challenge_self_intro" name="challenge_self_intro" minlength="30" maxlength="1000" required placeholder="도전한 일, 시작한 이유, 어려움에 대응한 방식, 그 경험이 보여주는 나의 모습을 적어주세요."></textarea>
-        <p class="help">성과의 크기보다 도전 과정에서 내린 선택과 배운 점을 구체적으로 적어주세요.</p>
+        <textarea id="challenge_self_intro" name="challenge_self_intro" minlength="30" maxlength="1000" required placeholder="도전한 일, 시작한 이유, 어려움에 대응한 방식, 그 경험이 보여주는 나의 모습을 적어주세요." aria-describedby="challenge-help challenge-error"></textarea>
+        <p class="help" id="challenge-help">성과의 크기보다 도전 과정에서 내린 선택과 배운 점을 구체적으로 적어주세요.</p>
+        <p class="field-error" id="challenge-error" hidden></p>
       </fieldset>
 
       <fieldset>
         <legend>3. 3개월 안에 현실에서 확인할 가능성</legend>
         <label for="why_now">AI와 함께 탐색할 가능성과, 3개월 안에 현실에서 확인할 첫 장면 <span class="required">*</span></label>
-        <textarea id="why_now" name="why_now" minlength="30" maxlength="700" required placeholder="더 넓혀 보고 싶은 가능성, 실제로 해볼 첫 행동(누구에게·어디에서), 어떤 반응을 보면 다음 방향을 바꿀지 적어주세요."></textarea>
-        <p class="help">완성된 계획을 기대하지 않습니다. 지금의 가설을 현실에서 어떻게 확인해 볼지 구체적으로 적어주세요. 계정 비밀번호나 인증번호, 카드 정보는 적지 말아주세요.</p>
+        <textarea id="why_now" name="why_now" minlength="30" maxlength="700" required placeholder="더 넓혀 보고 싶은 가능성, 실제로 해볼 첫 행동(누구에게·어디에서), 어떤 반응을 보면 다음 방향을 바꿀지 적어주세요." aria-describedby="why-help why-error"></textarea>
+        <p class="help" id="why-help">완성된 계획을 기대하지 않습니다. 지금의 가설을 현실에서 어떻게 확인해 볼지 구체적으로 적어주세요. 계정 비밀번호나 인증번호, 카드 정보는 적지 말아주세요.</p>
+        <p class="field-error" id="why-error" hidden></p>
       </fieldset>
 
       <fieldset>
         <legend>4. 3개월 현실 참여 계획</legend>
         <label for="precourse_rhythm_plan">8/31~11/22 동안 시간을 낼 방법과 일정 충돌 시 <span class="keep">조정 계획</span> <span class="required">*</span></label>
-        <textarea id="precourse_rhythm_plan" name="precourse_rhythm_plan" minlength="20" maxlength="700" required placeholder="예: 격주 공식 모임 외에도 화·목 저녁에 실행 시간을 냅니다. 시험이나 야근이 겹치면 토요일 오후로 옮기고, 다음 모임 전까지 기록을 남기겠습니다."></textarea>
-        <p class="help">본과정 공식 모임은 격주 90분입니다. 실제로 낼 수 있는 시간과 충돌 대응 방법을 솔직하게 적어주세요.</p>
-        <label>참여 가능한 시간대 두 개 이상 <span class="required">*</span></label>
-        <div class="choice-grid" id="available-windows">
+        <textarea id="precourse_rhythm_plan" name="precourse_rhythm_plan" minlength="20" maxlength="700" required placeholder="예: 격주 공식 모임 외에도 화·목 저녁에 실행 시간을 냅니다. 시험이나 야근이 겹치면 토요일 오후로 옮기고, 다음 모임 전까지 기록을 남기겠습니다." aria-describedby="rhythm-help rhythm-error"></textarea>
+        <p class="help" id="rhythm-help">본과정 공식 모임은 격주 90분입니다. 실제로 낼 수 있는 시간과 충돌 대응 방법을 솔직하게 적어주세요.</p>
+        <p class="field-error" id="rhythm-error" hidden></p>
+        <p id="available-windows-label"><strong>참여 가능한 시간대 두 개 이상 <span class="required">*</span></strong></p>
+        <div class="choice-grid" id="available-windows" role="group" aria-labelledby="available-windows-label" aria-describedby="available-windows-help available-windows-error">
           <label class="choice"><input type="checkbox" name="available_windows" value="weekday_morning"> 평일 오전</label>
           <label class="choice"><input type="checkbox" name="available_windows" value="weekday_afternoon"> 평일 오후</label>
           <label class="choice"><input type="checkbox" name="available_windows" value="weekday_evening"> 평일 저녁</label>
@@ -143,16 +175,42 @@
           <label class="choice"><input type="checkbox" name="available_windows" value="sunday_afternoon"> 일요일 오후</label>
           <label class="choice"><input type="checkbox" name="available_windows" value="sunday_evening"> 일요일 저녁</label>
         </div>
+        <p class="help" id="available-windows-help">실제로 참여할 수 있는 시간대를 두 개 이상 선택해주세요.</p>
+        <p class="field-error" id="available-windows-error" hidden></p>
 
-        <label class="check"><input name="beta_commitment_confirmed" type="checkbox" required><span>8/17~8/30, 2주 프리과정에 직접 참여할 수 있습니다.</span></label>
-        <label class="check"><input name="core_commitment_confirmed" type="checkbox" required><span>프리과정 통과 시 8/31~11/22, <span class="keep">3개월 본과정에</span> 참여할 의향과 현실적인 시간이 있으며, 이를 전제로 지원합니다.</span></label>
-        <label class="check"><input name="contact_consent_confirmed" type="checkbox" required><span>사전 선발과정 참여 안내를 받는 데 동의합니다. 개인정보 안내를 확인했습니다.</span></label>
+        <label class="check"><input id="beta_commitment_confirmed" name="beta_commitment_confirmed" type="checkbox" required aria-describedby="beta-error"><span>8/17~8/30, 2주 프리과정에 직접 참여할 수 있습니다.</span></label>
+        <p class="field-error" id="beta-error" hidden></p>
+        <label class="check"><input id="core_commitment_confirmed" name="core_commitment_confirmed" type="checkbox" required aria-describedby="core-error"><span>프리과정 통과 시 8/31~11/22, <span class="keep">3개월 본과정에</span> 참여할 의향과 현실적인 시간이 있으며, 이를 전제로 지원합니다.</span></label>
+        <p class="field-error" id="core-error" hidden></p>
+        <label class="check"><input id="contact_consent_confirmed" name="contact_consent_confirmed" type="checkbox" required aria-describedby="consent-error"><span>사전 선발과정 참여 안내를 받는 데 동의합니다. 개인정보 안내를 확인했습니다.</span></label>
+        <p class="field-error" id="consent-error" hidden></p>
         <div class="honeypot" aria-hidden="true"><label for="website">웹사이트</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
       </fieldset>
+      </div>
 
-      <button id="submit-button" type="submit">위닝 펠로우십 3기 지원서 제출하기</button>
-      <div id="result" role="status" aria-live="polite"></div>
+      <button id="submit-button" type="submit">작성한 답변 확인하기</button>
     </form>
+
+    <section class="review-panel" id="review-panel" aria-labelledby="review-title" hidden>
+      <h2 id="review-title" tabindex="-1">제출 전 확인</h2>
+      <p>아래 내용이 맞는지 확인해주세요. 최종 제출 전까지 <span class="keep">답변을 수정할 수 있습니다.</span></p>
+      <dl class="review-list">
+        <div class="review-item"><dt>이름</dt><dd id="review-name"></dd></div>
+        <div class="review-item"><dt>나이</dt><dd id="review-age"></dd></div>
+        <div class="review-item"><dt>휴대전화 번호</dt><dd id="review-contact"></dd></div>
+        <div class="review-item"><dt>현재 상태</dt><dd id="review-stage"></dd></div>
+        <div class="review-item"><dt>도전 경험과 자기소개</dt><dd id="review-challenge"></dd></div>
+        <div class="review-item"><dt>현실에서 확인할 가능성</dt><dd id="review-why"></dd></div>
+        <div class="review-item"><dt>3개월 현실 참여 계획</dt><dd id="review-rhythm"></dd></div>
+        <div class="review-item"><dt>참여 가능한 시간대</dt><dd id="review-windows"></dd></div>
+        <div class="review-item"><dt>참여·연락 확인</dt><dd id="review-confirmations">프리과정 참여 · 본과정 참여 의향 · 사전 선발과정 참여 안내 동의</dd></div>
+      </dl>
+      <div class="review-actions">
+        <button class="secondary-action" id="review-edit-button" type="button">답변 수정하기</button>
+        <button id="final-submit-button" type="button">이 내용으로 최종 제출하기</button>
+      </div>
+      <div id="result" role="status" aria-live="polite" tabindex="-1"></div>
+    </section>
 
     <footer>제출 정보는 지원 심의와 사전 선발과정 참여 안내에만 사용됩니다. <a href="../privacy.html">개인정보 안내</a>를 확인해주세요.</footer>
   </main>
@@ -161,8 +219,23 @@
     (() => {
       const endpoint = 'https://winning-fellowship-production.up.railway.app/api/fellowship/3/applications';
       const form = document.getElementById('application-form');
+      const errorSummary = document.getElementById('error-summary');
+      const errorList = document.getElementById('error-list');
+      const reviewPanel = document.getElementById('review-panel');
+      const reviewTitle = document.getElementById('review-title');
+      const editButton = document.getElementById('review-edit-button');
+      const finalButton = document.getElementById('final-submit-button');
+      const name = document.getElementById('name');
+      const age = document.getElementById('age');
       const contact = document.getElementById('contact_value');
-      const button = document.getElementById('submit-button');
+      const stage = document.getElementById('eligibility_stage');
+      const challenge = document.getElementById('challenge_self_intro');
+      const why = document.getElementById('why_now');
+      const rhythm = document.getElementById('precourse_rhythm_plan');
+      const windowsGroup = document.getElementById('available-windows');
+      const betaConfirmation = document.getElementById('beta_commitment_confirmed');
+      const coreConfirmation = document.getElementById('core_commitment_confirmed');
+      const consentConfirmation = document.getElementById('contact_consent_confirmed');
       const result = document.getElementById('result');
       const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
       const sourceParams = new URLSearchParams(window.location.search);
@@ -170,33 +243,119 @@
         const value = sourceParams.get(key);
         return [key, value && /^[A-Za-z0-9._~-]{1,100}$/.test(value) ? value : null];
       }));
-      const show = (message, kind) => { result.className = kind; result.textContent = message; };
-      form.addEventListener('submit', async (event) => {
+      const selectedWindows = () => [...form.querySelectorAll('input[name="available_windows"]:checked')];
+      const validationItems = [
+        { anchorId:'name', control:name, error:document.getElementById('name-error'), valid:() => name.value.trim().length >= 2, message:() => name.value.trim() ? '이름을 두 글자 이상 입력해주세요.' : '이름을 입력해주세요.' },
+        { anchorId:'age', control:age, error:document.getElementById('age-error'), valid:() => Number(age.value) >= 20 && Number(age.value) <= 99, message:() => age.value ? '나이는 20부터 99 사이로 입력해주세요.' : '나이를 입력해주세요.' },
+        { anchorId:'contact_value', control:contact, error:document.getElementById('contact-error'), valid:() => /^[0-9]{10,11}$/.test(contact.value.trim()), message:() => contact.value.trim() ? '휴대전화 번호를 숫자 10~11자리로 입력해주세요.' : '휴대전화 번호를 입력해주세요.' },
+        { anchorId:'eligibility_stage', control:stage, error:document.getElementById('eligibility-error'), valid:() => Boolean(stage.value), message:() => '현재 상태를 선택해주세요.' },
+        { anchorId:'challenge_self_intro', control:challenge, error:document.getElementById('challenge-error'), valid:() => challenge.value.trim().length >= 30, message:() => '도전 경험과 자기소개를 30자 이상 입력해주세요.' },
+        { anchorId:'why_now', control:why, error:document.getElementById('why-error'), valid:() => why.value.trim().length >= 30, message:() => '탐색할 가능성과 첫 장면을 30자 이상 입력해주세요.' },
+        { anchorId:'precourse_rhythm_plan', control:rhythm, error:document.getElementById('rhythm-error'), valid:() => rhythm.value.trim().length >= 20, message:() => '3개월 현실 참여 계획을 20자 이상 입력해주세요.' },
+        { anchorId:'available-windows', control:windowsGroup, focusControl:windowsGroup.querySelector('input'), error:document.getElementById('available-windows-error'), valid:() => selectedWindows().length >= 2, message:() => '참여 가능한 시간대를 두 개 이상 선택해주세요.' },
+        { anchorId:'beta_commitment_confirmed', control:betaConfirmation, error:document.getElementById('beta-error'), valid:() => betaConfirmation.checked, message:() => '2주 프리과정 참여 가능 여부를 확인해주세요.' },
+        { anchorId:'core_commitment_confirmed', control:coreConfirmation, error:document.getElementById('core-error'), valid:() => coreConfirmation.checked, message:() => '3개월 본과정 참여 의향과 시간을 확인해주세요.' },
+        { anchorId:'contact_consent_confirmed', control:consentConfirmation, error:document.getElementById('consent-error'), valid:() => consentConfirmation.checked, message:() => '사전 선발과정 참여 안내와 개인정보 안내 동의를 확인해주세요.' },
+      ];
+      let validationAttempted = false;
+
+      const validate = (focusSummary) => {
+        const invalidItems = validationItems.filter((item) => !item.valid());
+        validationItems.forEach((item) => {
+          const invalid = invalidItems.includes(item);
+          item.error.hidden = !invalid;
+          item.error.textContent = invalid ? item.message() : '';
+          if (invalid) item.control.setAttribute('aria-invalid', 'true');
+          else item.control.removeAttribute('aria-invalid');
+        });
+        errorList.replaceChildren(...invalidItems.map((item) => {
+          const listItem = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = `#${item.anchorId}`;
+          link.textContent = item.message();
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            (item.focusControl || item.control).focus();
+          });
+          listItem.append(link);
+          return listItem;
+        }));
+        errorSummary.hidden = invalidItems.length === 0;
+        if (invalidItems.length && focusSummary) errorSummary.focus();
+        return invalidItems.length === 0;
+      };
+
+      validationItems.forEach((item) => {
+        const controls = item.control === windowsGroup ? windowsGroup.querySelectorAll('input') : [item.control];
+        controls.forEach((control) => {
+          control.addEventListener(control.type === 'checkbox' || control.tagName === 'SELECT' ? 'change' : 'input', () => {
+            if (validationAttempted) validate(false);
+          });
+        });
+      });
+
+      const populateReview = () => {
+        document.getElementById('review-name').textContent = name.value.trim();
+        document.getElementById('review-age').textContent = age.value;
+        document.getElementById('review-contact').textContent = contact.value.trim();
+        document.getElementById('review-stage').textContent = stage.selectedOptions[0].textContent;
+        document.getElementById('review-challenge').textContent = challenge.value.trim();
+        document.getElementById('review-why').textContent = why.value.trim();
+        document.getElementById('review-rhythm').textContent = rhythm.value.trim();
+        document.getElementById('review-windows').textContent = selectedWindows().map((input) => input.closest('label').textContent.trim()).join(' · ');
+      };
+
+      const payload = () => ({
+        name:name.value.trim(), age:Number(age.value), contact_channel:form.contact_channel.value, contact_value:contact.value.trim(),
+        eligibility_stage:stage.value, why_now:why.value.trim(), challenge_self_intro:challenge.value.trim(),
+        precourse_rhythm_plan:rhythm.value.trim(), available_windows:selectedWindows().map((input) => input.value),
+        beta_commitment_confirmed:betaConfirmation.checked, core_commitment_confirmed:coreConfirmation.checked,
+        contact_consent_confirmed:consentConfirmation.checked, website:form.website.value, ...attribution,
+      });
+
+      const show = (message, kind) => {
+        result.className = kind;
+        result.textContent = message;
+        result.setAttribute('role', kind === 'error' ? 'alert' : 'status');
+      };
+
+      form.addEventListener('submit', (event) => {
         event.preventDefault();
-        const windows = [...form.querySelectorAll('input[name="available_windows"]:checked')].map((input) => input.value);
-        if (windows.length < 2) { show('가능한 시간을 두 개 이상 선택해주세요.', 'error'); return; }
-        if (!form.reportValidity()) { show('필수 항목을 확인해주세요.', 'error'); return; }
-        const payload = {
-          name: form.name.value.trim(), age: Number(form.age.value), contact_channel: form.contact_channel.value, contact_value: contact.value.trim(),
-          eligibility_stage: form.eligibility_stage.value, why_now: form.why_now.value.trim(),
-          challenge_self_intro: form.challenge_self_intro.value.trim(),
-          precourse_rhythm_plan: form.precourse_rhythm_plan.value.trim(),
-          available_windows: windows,
-          beta_commitment_confirmed: form.beta_commitment_confirmed.checked,
-          core_commitment_confirmed: form.core_commitment_confirmed.checked,
-          contact_consent_confirmed: form.contact_consent_confirmed.checked, website: form.website.value,
-          ...attribution,
-        };
-        button.disabled = true;
+        validationAttempted = true;
+        if (!validate(true)) return;
+        populateReview();
+        form.hidden = true;
+        reviewPanel.hidden = false;
+        reviewTitle.focus();
+      });
+
+      editButton.addEventListener('click', () => {
+        reviewPanel.hidden = true;
+        form.hidden = false;
+        show('', '');
+        name.focus();
+      });
+
+      finalButton.addEventListener('click', async () => {
+        if (!validate(false)) {
+          reviewPanel.hidden = true;
+          form.hidden = false;
+          errorSummary.focus();
+          return;
+        }
+        finalButton.disabled = true;
+        editButton.disabled = true;
         show('지원서를 제출하고 있습니다.', 'pending');
         try {
-          const response = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'omit', body:JSON.stringify(payload) });
+          const response = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'omit', body:JSON.stringify(payload()) });
           const data = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(data.detail || '제출 중 문제가 생겼습니다. 잠시 후 다시 시도해주세요.');
           window.location.assign(new URL('complete/', window.location.href));
         } catch (error) {
           show(error instanceof Error ? error.message : '제출 중 문제가 생겼습니다. 잠시 후 다시 시도해주세요.', 'error');
-          button.disabled = false;
+          result.focus();
+          finalButton.disabled = false;
+          editButton.disabled = false;
         }
       });
     })();

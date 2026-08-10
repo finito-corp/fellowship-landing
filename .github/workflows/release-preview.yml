@@ -17,6 +17,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: Unit tests
-        run: python -m unittest tests.test_static_release -v
+        run: |
+          python -m unittest tests.test_static_release -v
+          python -m unittest tests.test_application_static -v
       - name: Validate exact checkout
         run: python scripts/validate_static_release.py .
