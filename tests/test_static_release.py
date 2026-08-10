@@ -168,12 +168,12 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("actual_term_or_regular_rhythm_starts_on", application)
         self.assertNotIn("학기 또는 정규 일정 시작일", application)
         self.assertIn('min="20"', application)
-        self.assertIn("20대 대학 재학생·졸업생을 중심으로 모집", application)
+        self.assertIn("20살 이상 성인이라면 현재 대학에 다니지 않아도 지원할 수 있습니다", application)
         self.assertIn("3개월 안에 현실에서 확인할 가능성", application)
         self.assertIn("3개월 안에 현실에서 확인할 첫 장면", application)
         self.assertIn('minlength="30"', application)
         self.assertNotIn("만 나이) ", application)
-        for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생"):
+        for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생", "기타"):
             self.assertIn(f'<option value="{stage}">', application)
         self.assertIn("내부 심의를 거쳐 사전 선발과정 참여 안내 대상자에게만 연락드립니다", application)
         self.assertIn("미선정자에게는 별도 연락을 드리지 않습니다", application)
@@ -234,7 +234,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
             "지원서에 쓰면 안 되는 정보가 있나요?",
         ):
             self.assertNotIn(retired_hedge, primary)
-        self.assertIn("20대 대학 재학생·졸업생", primary)
+        self.assertIn("20살 이상 성인 · 대학 재학 여부 무관", primary)
         self.assertIn("1·2기에서 확인한,", primary)
         self.assertIn("동료와 함께 움직이는 힘입니다.", primary)
         # 마감 카운트다운은 JS 가 채우고, 스크립트가 없어도 마감 시각은 글로 남아야 한다.
