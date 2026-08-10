@@ -237,7 +237,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.page.locator("#name").fill("테스트 지원자")
         self.page.locator("#age").fill("24")
         self.page.locator("#contact_value").fill("01012345678")
-        self.page.locator("#eligibility_stage").select_option("대학4학년이상")
+        self.page.locator("#eligibility_stage").select_option("기타")
         self.page.locator("#challenge_self_intro").fill(
             "먼저 작은 프로젝트를 공개했고 반응이 예상과 달라 설명 순서와 다음 행동을 바꿨습니다."
         )
@@ -258,6 +258,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.assertEqual(captured["precourse_rhythm_plan"], "화요일과 목요일 저녁을 비우고 일정이 겹치면 토요일 오후로 옮기겠습니다.")
         self.assertEqual(captured["contact_channel"], "phone")
         self.assertEqual(captured["contact_value"], "01012345678")
+        self.assertEqual(captured["eligibility_stage"], "기타")
         self.assertTrue(captured["core_commitment_confirmed"])
         self.assertEqual(captured["utm_source"], "linkedin")
         self.assertEqual(captured["utm_medium"], "organic_post")
