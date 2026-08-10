@@ -156,6 +156,8 @@
     body { margin: 0; overflow-x: hidden; background: var(--ink); color: var(--text-light); font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; word-break: keep-all; }
     body.menu-open { overflow: hidden; }
     a { color: inherit; text-underline-offset: 4px; }
+    .skip-link { position: fixed; z-index: 100; top: var(--space-2); left: var(--space-2); min-height: var(--target-min); padding: var(--space-3) var(--space-4); background: var(--paper); color: var(--ink); font-weight: var(--weight-label); transform: translateY(calc(-100% - var(--space-4))); transition: transform var(--motion-fast) var(--ease-out); }
+    .skip-link:focus { transform: translateY(0); }
     button, a { -webkit-tap-highlight-color: transparent; }
     button { font: inherit; }
     :focus-visible { outline: var(--rule-strong-width) solid var(--gold); outline-offset: 4px; }
@@ -409,6 +411,8 @@
   </style>
 </head>
 <body data-collection-state="server-verified" data-opening-state="open">
+  <a class="skip-link" href="#main-content">본문 바로가기</a>
+  <div id="top"></div>
   <div class="announcement">
     <div class="shell announcement-inner" aria-label="3기 지원 접수 중 · 8/4–8/14"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" data-short="3기 모집 · 8/4–8/14" aria-hidden="true">3기 지원 접수 중 · 8/4–8/14</span><a href="apply/">지원하기 ↗</a></div>
   </div>
@@ -433,7 +437,7 @@
     <button class="side-link" type="button" data-target="about"><span>소개</span></button><button class="side-link" type="button" data-target="fit"><span>대상</span></button><button class="side-link" type="button" data-target="core"><span>본과정</span></button><button class="side-link" type="button" data-target="beta"><span>선발</span></button><button class="side-link" type="button" data-target="schedule"><span>일정</span></button><button class="side-link" type="button" data-target="history"><span>여정</span></button><button class="side-link" type="button" data-target="faq"><span>FAQ</span></button><button class="side-link" type="button" data-target="apply"><span>지원</span></button>
   </aside>
 
-  <main id="top">
+  <main id="main-content">
     <section class="hero" aria-labelledby="hero-title" data-program-focus="core" data-core-window="2026-08-31/2026-11-22" data-entry-gate="precourse-selection" data-core-admission="not-guaranteed">
       <div class="shell">
         <p class="hero-overline reveal">20살 이상 성인 · 대학 재학 여부 무관 · 3개월 본과정</p>

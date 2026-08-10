@@ -57,7 +57,10 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Final CTA: direct invitation plus exact recruitment boundary.
 - Application page: a dark editorial header followed by one process summary and one numbered form. Labels name the requested information directly; examples show the expected level of specificity without implying a preferred life choice or AI skill level.
 - Form controls: 44px+ targets, persistent labels, visible required markers, gold focus rings, inline validation, pending state, and a single unambiguous submit action.
-- Completion page: confirms submission, states that only successful applicants are contacted by the response date, and provides a route back to the 3기 introduction. It does not expose internal receipt identifiers.
+- Form error recovery: one focusable error summary lists every invalid field in document order and links back to it. Each field keeps its value, exposes an adjacent error message, and sets `aria-invalid`; checkbox groups use the same pattern at group level.
+- Pre-submit review: valid answers move into a paper-toned review panel before any network request. The applicant can return to the numbered form without losing values or use one explicit final-submit action.
+- Skip link: the landing and application page expose a keyboard-visible route to `main` without adding a persistent visual navigation element.
+- Completion page: confirms submission, states that only successful applicants are contacted by the response date, provides a route back to the 3기 introduction, and exposes the correction/withdrawal email. It does not expose internal receipt identifiers.
 
 ## 6. Motion
 
@@ -84,4 +87,5 @@ Quiet, determined, human. The page should feel like a well-edited invitation fro
 - Exact dates and selection boundaries remain text, not animation-dependent.
 - Primary applicant: a late-college student or graduate completing the form on mobile, possibly under time pressure. The first screen must answer what this is, who can apply, what happens after submission, and the decision date.
 - The application remains usable with keyboard-only navigation, browser zoom, reduced motion, and 320px-wide screens. Examples supplement labels but never replace them.
+- Validation never relies on the browser tooltip alone. The error summary receives focus after a failed attempt, field messages remain visible until corrected, and no application request is sent before the review panel's final-submit action.
 - Accepted debt through the 3기 recruitment window: the static application and completion pages keep CSS and JavaScript inline and repeat the same documented tokens so they can deploy as self-contained pages. Consolidate shared assets after recruitment rather than changing asset loading during the live intake period.
