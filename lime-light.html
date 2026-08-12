@@ -641,13 +641,15 @@
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
       const sourceParams = new URLSearchParams(window.location.search);
+      const hostedPreview = /^\/fellowship-landing\/previews\/pr-\d+\//.test(window.location.pathname);
       document.querySelectorAll('a[href="apply/"]').forEach((link) => {
         const values = ATTRIBUTION_KEYS
           .map((key) => [key, sourceParams.get(key)])
           .filter(([, value]) => value && /^[A-Za-z0-9._~-]{1,100}$/.test(value));
-        if (!values.length) return;
         const target = new URL(link.getAttribute('href'), window.location.href);
         values.forEach(([key, value]) => target.searchParams.set(key, value));
+        // GitHub Pages의 PR Preview는 실제 지원 endpoint에 쓰지 않는다.
+        if (hostedPreview) target.searchParams.set('preview', '1');
         link.href = target.toString();
       });
       document.body.dataset.motion = reducedMotion ? 'reduced' : 'normal';

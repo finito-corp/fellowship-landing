@@ -190,7 +190,7 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
 
     def test_primary_hero_cta_is_fully_visible_on_a_short_desktop_viewport(self) -> None:
         self.page.set_viewport_size({"width": 1280, "height": 577})
-        button = self.page.locator('.hero-actions a[href="apply/"]').first
+        button = self.page.locator('.hero-actions a.button:not(.secondary)').first
         box = button.bounding_box()
         self.assertIsNotNone(box)
         self.assertGreaterEqual(box["y"], 0)
