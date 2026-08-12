@@ -28,20 +28,29 @@
     h1 { margin:0; max-width:680px; font-size:clamp(2.35rem,7vw,4.2rem); line-height:1.12; letter-spacing:-.035em; }
     .lead { max-width:620px; margin:22px 0 0; color:var(--muted-light); font-size:clamp(1.02rem,2vw,1.18rem); }
     main { padding:30px 0 72px; }
-    .process, form, .review-panel { border:1px solid var(--line); border-radius:20px; background:var(--surface); }
-    .process { padding:22px; }
+    .folio { display:flex; justify-content:space-between; margin:0; border-bottom:1px solid var(--line); padding:0 2px 12px; color:var(--gold-deep); font-size:.72rem; font-weight:800; letter-spacing:.12em; }
+    .paper-sheet { border-top:1px solid var(--ink); border-bottom:1px solid var(--line); background:var(--surface); }
+    .process, .preparation { padding:24px; }
+    .process { margin-top:20px; }
+    .preparation { margin-top:16px; }
     h2 { margin:0 0 14px; font-size:1.15rem; letter-spacing:-.02em; }
-    .steps { display:grid; gap:10px; margin:0; padding:0; list-style:none; counter-reset:step; }
-    .steps li { display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start; color:var(--muted-dark); font-size:.94rem; }
-    .steps li::before { counter-increment:step; content:counter(step); display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--ink); color:var(--text-light); font-size:.76rem; font-weight:800; }
-    .notice { margin:16px 0 0; border-left:3px solid var(--gold); padding:10px 13px; background:var(--notice-bg); color:var(--notice-text); font-size:.9rem; }
-    form { margin-top:22px; padding:8px 24px 26px; }
+    .steps { margin:0; padding:0; list-style:none; }
+    .steps li { display:grid; grid-template-columns:28px 1fr; gap:12px; align-items:start; border-top:1px solid var(--line); padding:13px 0; color:var(--muted-dark); font-size:.94rem; }
+    .steps li:first-child { border-top:0; padding-top:0; }
+    .steps li::before { content:attr(data-step); color:var(--gold-deep); font-size:.76rem; font-weight:850; letter-spacing:.08em; }
+    .notice { margin:18px 0 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:12px 0; color:var(--notice-text); font-size:.9rem; }
+    .preparation-list { margin:0; padding:0; list-style:none; }
+    .preparation-list li { border-top:1px solid var(--line); padding:11px 0; color:var(--muted-dark); font-size:.92rem; }
+    .preparation-list li:first-child { padding-top:0; border-top:0; }
+    .preparation-note { margin:17px 0 0; border-top:1px solid var(--line); padding-top:14px; color:var(--muted-dark); font-size:.9rem; }
+    form, .review-panel { border-top:1px solid var(--ink); border-bottom:1px solid var(--line); background:var(--surface); }
+    form { margin-top:16px; padding:8px 24px 26px; }
     fieldset { margin:0; border:0; padding:0; }
     legend { width:100%; margin:0; border-top:1px solid var(--line); padding:28px 0 2px; font-size:1.2rem; font-weight:800; letter-spacing:-.02em; }
     fieldset:first-child legend { border-top:0; }
     label { display:block; margin:18px 0 7px; font-size:.93rem; font-weight:750; }
     .required { color:var(--danger); }
-    input, select, textarea { display:block; width:100%; border:1px solid var(--field-line); border-radius:11px; padding:12px 13px; background:var(--surface); color:var(--ink); font:inherit; font-size:1rem; }
+    input, select, textarea { display:block; width:100%; border:1px solid var(--field-line); border-radius:4px; padding:12px 13px; background:var(--surface); color:var(--ink); font:inherit; font-size:1rem; }
     textarea { min-height:132px; resize:vertical; }
     input:focus-visible, select:focus-visible, textarea:focus-visible { outline:3px solid var(--gold); outline-offset:3px; border-color:var(--gold-deep); }
     input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border-color:var(--danger); }
@@ -52,20 +61,20 @@
     .error-summary ul { margin:10px 0 0; padding-left:20px; }
     .error-summary a { display:inline-flex; min-height:44px; align-items:center; color:var(--danger); font-weight:750; }
     .choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
-    .choice { display:flex; align-items:center; gap:9px; margin:0; border:1px solid var(--line); border-radius:11px; padding:11px; background:var(--surface); font-size:.9rem; font-weight:650; }
+    .choice { display:flex; align-items:center; gap:9px; margin:0; border:1px solid var(--line); border-radius:4px; padding:11px; background:var(--surface); font-size:.9rem; font-weight:650; }
     .choice input { width:18px; height:18px; margin:0; accent-color:var(--gold-deep); flex:none; }
     .choice-grid[aria-invalid="true"] .choice { border-color:var(--danger); }
-    .check { display:flex; align-items:flex-start; gap:10px; margin:17px 0 0; border-radius:11px; padding:14px; background:var(--paper); font-size:.9rem; font-weight:650; }
+    .check { display:flex; align-items:flex-start; gap:10px; margin:17px 0 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px 0; background:transparent; font-size:.9rem; font-weight:650; }
     .check input { width:19px; height:19px; margin:2px 0 0; accent-color:var(--gold-deep); flex:none; }
     .honeypot { position:absolute !important; left:-10000px !important; width:1px !important; height:1px !important; overflow:hidden !important; }
-    button { width:100%; margin-top:26px; border:0; border-radius:12px; padding:16px; background:var(--gold); color:var(--ink); font:inherit; font-size:1rem; font-weight:850; cursor:pointer; transition:filter .18s ease,transform .18s ease; }
+    button { width:100%; margin-top:26px; border:0; border-radius:4px; padding:16px; background:var(--gold); color:var(--ink); font:inherit; font-size:1rem; font-weight:850; cursor:pointer; transition:filter .18s ease,transform .18s ease; }
     button:hover { filter:brightness(1.04); }
     button:active { transform:translateY(1px); }
     button:disabled { cursor:wait; opacity:.65; }
-    #result { display:none; margin-top:14px; border-radius:11px; padding:13px; font-size:.9rem; }
+    #result { display:none; margin-top:14px; border-radius:4px; padding:13px; font-size:.9rem; }
     #result.error { display:block; border:1px solid color-mix(in srgb,var(--danger) 30%,transparent); background:color-mix(in srgb,var(--danger) 8%,var(--surface)); color:var(--danger); }
     #result.pending { display:block; border:1px solid var(--line); background:var(--notice-bg); color:var(--notice-text); }
-    .review-panel { margin-top:22px; padding:26px 24px; }
+    .review-panel { margin-top:16px; padding:26px 24px; }
     .review-panel > p { margin:8px 0 0; color:var(--muted-dark); }
     .review-list { margin:24px 0 0; }
     .review-item { border-top:1px solid var(--line); padding:18px 0; }
@@ -76,7 +85,7 @@
     .secondary-action { border:1px solid var(--ink); background:transparent; }
     footer { padding:22px 2px 0; color:var(--muted-dark); font-size:.78rem; }
     footer a { display:inline-flex; min-height:44px; align-items:center; font-weight:700; }
-    @media (max-width:520px) { .top-inner, main { width:min(100% - 24px,760px); } .hero { padding:42px 0 48px; } form { padding:5px 15px 22px; } .process { padding:18px 15px; } .choice-grid, .review-actions { grid-template-columns:1fr; } .review-panel { padding:22px 15px; } }
+    @media (max-width:520px) { .top-inner, main { width:min(100% - 24px,760px); } .hero { padding:42px 0 48px; } form { padding:5px 15px 22px; } .process, .preparation { padding:18px 15px; } .choice-grid, .review-actions { grid-template-columns:1fr; } .review-panel { padding:22px 15px; } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
   </style>
 </head>
@@ -94,15 +103,27 @@
   </header>
 
   <main id="main-content">
-    <section class="process" aria-labelledby="process-title">
-      <h2 id="process-title">지원 절차</h2>
-      <ol class="steps">
-        <li><span>8월 14일(금) 23:59까지 지원서를 제출합니다.</span></li>
-        <li><span>운영진이 3개월 참여 의향과 현실 계획을 심의해 2주 프리과정 참가자를 선발합니다.</span></li>
-        <li><span>사전 선발과정 참여 안내 대상자에게만 8월 15일까지 개별 연락하며, <span class="keep">8월 17일부터</span> 2주 프리과정을 진행합니다.</span></li>
-        <li><span>프리과정의 실제 행동과 수정을 바탕으로 <span class="keep">8월 31일부터</span> 함께할 본과정 참가자를 최종 선발합니다.</span></li>
+    <p class="folio"><span>APPLICATION · 01</span><span>WINNING FELLOWSHIP 3</span></p>
+    <section class="process paper-sheet" aria-labelledby="process-title">
+      <h2 id="process-title">지원 상태</h2>
+      <ol class="steps" aria-label="작성 → 제출 전 확인 → 접수 완료 → 내부 심의 → 8/15까지 안내 대상자 연락">
+        <li data-step="01"><span>작성</span></li>
+        <li data-step="02"><span>제출 전 확인</span></li>
+        <li data-step="03"><span>접수 완료</span></li>
+        <li data-step="04"><span>내부 심의</span></li>
+        <li data-step="05"><span>8/15까지 안내 대상자 연락</span></li>
       </ol>
-      <p class="notice">지원서 제출 후 내부 심의를 거쳐 사전 선발과정 참여 안내 대상자에게만 연락드립니다. 미선정자에게는 별도 연락을 드리지 않습니다.</p>
+      <p class="notice">제출은 접수를 뜻하며 선발을 뜻하지 않습니다. 내부 심의 후 안내 대상자에게만 연락드리며, 미선정자에게는 별도 연락이 없습니다.</p>
+    </section>
+
+    <section class="preparation paper-sheet" aria-labelledby="preparation-title">
+      <h2 id="preparation-title">작성 전 준비할 내용</h2>
+      <ol class="preparation-list">
+        <li>연락받을 휴대전화 번호와 현재 상태</li>
+        <li>지금까지의 도전 경험과 그 경험을 통한 자기소개</li>
+        <li>AI와 함께 현실에서 확인할 가능성, 그리고 3개월 동안 시간을 낼 계획</li>
+      </ol>
+      <p class="preparation-note">이 페이지는 자동 저장되지 않습니다. 작성한 모든 답변은 네트워크 제출 전에 확인 화면에서 검토하고 수정할 수 있습니다.</p>
     </section>
 
     <form id="application-form" novalidate>
@@ -125,7 +146,7 @@
         <input name="contact_channel" type="hidden" value="phone">
         <label for="contact_value">휴대전화 번호 <span class="required">*</span></label>
         <input id="contact_value" name="contact_value" type="tel" inputmode="tel" autocomplete="tel" pattern="[0-9]{10,11}" required placeholder="01012345678" aria-describedby="contact-help contact-error">
-        <p class="help" id="contact-help">합격 연락을 받을 번호를 공백·하이픈 없이 입력해주세요.</p>
+        <p class="help" id="contact-help">사전 선발과정 참여 안내를 받을 번호를 공백·하이픈 없이 입력해주세요.</p>
         <p class="field-error" id="contact-error" hidden></p>
 
         <label for="eligibility_stage">현재 상태 <span class="required">*</span></label>

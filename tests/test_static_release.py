@@ -105,7 +105,6 @@ class StaticReleaseValidationTests(unittest.TestCase):
         for retired_path_or_promise in (
             "forms.fillout.com",
             "docs.google.com/forms",
-            "mailto:",
             "2기 합류 신청",
             "AI 살롱",
             "Career Track",
@@ -113,6 +112,11 @@ class StaticReleaseValidationTests(unittest.TestCase):
             "Life Track",
         ):
             self.assertNotIn(retired_path_or_promise, index)
+        self.assertEqual(index.count('href="mailto:irs8@finito.me"'), 1)
+        self.assertIn('href="https://www.instagram.com/winning_fellowship/"', index)
+        self.assertIn("@winning_fellowship", index)
+        self.assertNotIn("운영자 노트", index)
+        self.assertNotIn("참여 안내까지 직접 잇습니다", index)
 
     def test_policy_pages_describe_the_live_application_scope_without_promising_selection(self) -> None:
         root = Path(__file__).resolve().parents[1]
@@ -126,7 +130,7 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn("송일현", privacy)
         self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
         self.assertIn("내부 심의 후 참여 안내 대상자에게만", privacy)
-        self.assertIn("winningfellowship25@gmail.com", privacy)
+        self.assertIn("irs8@finito.me", privacy)
         self.assertIn("도전 경험과 자기소개, 3개월 안에 현실에서 확인할 가능성과 첫 실행 장면", privacy)
         self.assertNotIn("3개월 동안 다룰 문제", privacy)
         self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
@@ -169,14 +173,16 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("학기 또는 정규 일정 시작일", application)
         self.assertIn('min="20"', application)
         self.assertIn("20살 이상 성인이라면 현재 대학에 다니지 않아도 지원할 수 있습니다", application)
+        self.assertIn("사전 선발과정 참여 안내를 받을 번호", application)
+        self.assertNotIn("합격 연락을 받을 번호", application)
         self.assertIn("3개월 안에 현실에서 확인할 가능성", application)
         self.assertIn("3개월 안에 현실에서 확인할 첫 장면", application)
         self.assertIn('minlength="30"', application)
         self.assertNotIn("만 나이) ", application)
         for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생", "기타"):
             self.assertIn(f'<option value="{stage}">', application)
-        self.assertIn("내부 심의를 거쳐 사전 선발과정 참여 안내 대상자에게만 연락드립니다", application)
-        self.assertIn("미선정자에게는 별도 연락을 드리지 않습니다", application)
+        self.assertIn("내부 심의 후 안내 대상자에게만 연락드리며", application)
+        self.assertIn("미선정자에게는 별도 연락이 없습니다", application)
         self.assertNotIn("대기 명단", application)
         self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', application)
         self.assertNotIn(
@@ -190,16 +196,19 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertNotIn("application_code", application)
         self.assertNotIn("접수 확인 코드", completion)
         self.assertNotIn("URLSearchParams", completion)
-        self.assertIn("지원서 제출이 완료되었습니다", completion)
+        self.assertIn("지원서 접수가 완료되었습니다", completion)
+        self.assertIn("이는 접수 확인이며, 선발을 뜻하지 않습니다", completion)
         self.assertNotIn('name="prior_ai_use_summary"', application)
         self.assertNotIn('name="personal_paid_ai_signal"', application)
         self.assertIn("2주 프리과정", application)
         self.assertIn("3개월 본과정", application)
         self.assertIn('<meta name="description" content="AI와 함께 가능성과 방향을 탐색하고 검증하는 위닝 펠로우십 3기 3개월 본과정 지원서">', application)
         self.assertIn('<span class="keep">3개월 본과정에</span>', application)
-        self.assertIn('<span class="keep">8월 31일부터</span>', application)
         self.assertIn('<span class="keep">조정 계획</span>', application)
         self.assertIn('8/31~11/22, <span class="keep">3개월 본과정에</span>', application)
+        self.assertIn("이 페이지는 자동 저장되지 않습니다", application)
+        self.assertIn("네트워크 제출 전에 확인 화면에서 검토하고 수정할 수 있습니다", application)
+        self.assertIn("8/15까지 안내 대상자 연락", application)
         for attribution_field in ("utm_source", "utm_medium", "utm_campaign", "utm_content"):
             self.assertIn(attribution_field, application)
 
@@ -249,8 +258,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         self.assertIn('data-count-to="3"', primary)
         self.assertIn("1·2기를 거쳐 간 펠로우", primary)
         self.assertIn("1기 50명, 2기 20명이 함께했습니다.", primary)
-        self.assertIn("이 소감들에 AI 이야기는 없습니다.", primary)
-        self.assertIn("달라지는 것은 도구와 탐색의 범위이고", primary)
+        self.assertIn("도구는 달라져도, 함께 해내는 방식은 같습니다.", primary)
+        self.assertIn("서로의 다음 선택을 점검하는 위닝 펠로우십의 방식은 그대로입니다.", primary)
         # 제목 텍스트는 마크업에 그대로 있어야 한다. 단어 분리는 런타임에만 일어난다.
         self.assertNotIn('class="word"', primary)
         self.assertIn("교육 관련 AI를 직접 만들었습니다", primary)
@@ -287,6 +296,12 @@ class StaticReleaseValidationTests(unittest.TestCase):
             self.assertEqual(primary.count(review), 2)
         for attribution in VERIFIED_REVIEW_ATTRIBUTIONS:
             self.assertEqual(primary.count(attribution), 2)
+        self.assertIn("지원 관련 추가 문의는", primary)
+        self.assertIn("irs8@finito.me", primary)
+        self.assertIn("@winning_fellowship", primary)
+        self.assertLess(primary.index('id="faq"'), primary.index('class="support-contact reveal"'))
+        self.assertLess(primary.index('class="support-contact reveal"'), primary.index('id="apply"'))
+        self.assertNotIn("operator-note", primary)
         self.assertIn("prefers-reduced-motion", primary)
         self.assertNotIn("8/4 OPEN 예정", primary)
         self.assertNotIn("HOW WE START", primary)

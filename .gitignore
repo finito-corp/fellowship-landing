@@ -1,3 +1,8 @@
 gold.html
 neon.html
 lime.html
+.omc/
+.omo/
+.playwright-cli/
+__pycache__/
+*.pyc
