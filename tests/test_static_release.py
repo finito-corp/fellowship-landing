@@ -244,6 +244,8 @@ class StaticReleaseValidationTests(unittest.TestCase):
         ):
             self.assertNotIn(retired_hedge, primary)
         self.assertIn("20살 이상 성인 · 대학 재학 여부 무관", primary)
+        self.assertIn("전액 고연승T 연구실 지원", primary)
+        self.assertNotIn("참가비 없음", primary)
         self.assertIn("1·2기에서 확인한,", primary)
         self.assertIn("동료와 함께 움직이는 힘입니다.", primary)
         # 마감 카운트다운은 JS 가 채우고, 스크립트가 없어도 마감 시각은 글로 남아야 한다.
