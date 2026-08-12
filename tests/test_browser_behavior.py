@@ -128,6 +128,31 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.assertEqual(guide.get_attribute("aria-hidden"), "true")
         self.assertTrue(guide.evaluate("el => el.inert"))
 
+    def test_side_guide_uses_folio_anchors_and_tracks_subchapters(self) -> None:
+        self.page.set_viewport_size({"width": 1280, "height": 800})
+        guide = self.page.locator("nav.side-guide")
+        links = guide.locator(".side-link")
+        self.assertEqual(guide.get_attribute("aria-label"), "페이지 섹션")
+        self.assertEqual(links.count(), 8)
+        self.assertEqual(
+            links.evaluate_all("els => els.map(el => el.getAttribute('href'))"),
+            ["#about", "#fit", "#core", "#beta", "#schedule", "#history", "#faq", "#apply"],
+        )
+
+        self.page.evaluate("document.getElementById('origin').scrollIntoView()")
+        self.page.wait_for_function("document.querySelector('.side-link[aria-current=\"location\"]')?.hash === '#schedule'")
+        self.assertEqual(guide.get_attribute("data-tone"), "light")
+
+        self.page.evaluate("document.getElementById('reviews').scrollIntoView()")
+        self.page.wait_for_function("document.querySelector('.side-link[aria-current=\"location\"]')?.hash === '#history'")
+        self.assertEqual(guide.get_attribute("data-tone"), "dark")
+
+        self.page.evaluate("document.getElementById('apply').scrollIntoView()")
+        self.page.wait_for_function("document.querySelector('.side-link[aria-current=\"location\"]')?.hash === '#apply'")
+        self.assertEqual(guide.get_attribute("data-tone"), "gold")
+        self.assertEqual(guide.locator('.side-link[aria-current="location"]').count(), 1)
+        self.assertEqual(guide.evaluate("el => el.style.getPropertyValue('--side-progress')"), "1")
+
     def test_visible_links_and_buttons_meet_the_minimum_target_height(self) -> None:
         for width in (320, 390, 1280):
             self.page.set_viewport_size({"width": width, "height": 844})

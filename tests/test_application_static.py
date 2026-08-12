@@ -57,7 +57,7 @@ class ApplicationUxStaticTests(unittest.TestCase):
         parser = ApplicationContractParser()
         parser.feed((root / "apply" / "complete" / "index.html").read_text(encoding="utf-8"))
 
-        self.assertEqual(parser.mailto_links, ["mailto:winningfellowship25@gmail.com"])
+        self.assertEqual(parser.mailto_links, ["mailto:irs8@finito.me"])
 
 
 if __name__ == "__main__":

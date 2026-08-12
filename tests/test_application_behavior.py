@@ -142,7 +142,7 @@ class ApplicationBehaviorTests(unittest.TestCase):
 
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/complete/?code=WF3-ABCDEF1234")
         self.assertEqual(self.page.get_by_text("접수 확인 코드").count(), 0)
-        self.assertEqual(self.page.locator('a[href="mailto:winningfellowship25@gmail.com"]').count(), 1)
+        self.assertEqual(self.page.locator('a[href="mailto:irs8@finito.me"]').count(), 1)
 
 
 if __name__ == "__main__":

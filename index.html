@@ -33,7 +33,6 @@
       --gold-meta: #654712;
       --gold-hover: #ffd268;
       --ink-hover: #2b2b2b;
-      --guide-bg: rgba(23,23,23,.92);
       --header-bg: rgba(23,23,23,.86);
       --mobile-menu-bg: rgba(23,23,23,.98);
       --nav-state-bg: rgba(255,255,255,.08);
@@ -45,8 +44,6 @@
       --gold-pulse-clear: rgba(108,70,0,0);
       --gold-shadow: rgba(242,189,63,.18);
       --gold-ring: rgba(242,189,63,.12);
-      --gold-rule: rgba(242,189,63,.45);
-      --loop-copy: #ddd8ce;
       --mask-solid: #000;
       --rule-dark: rgba(23,23,23,.15);
       --rule-light: rgba(255,255,255,.13);
@@ -92,6 +89,11 @@
       --shell-gutter: 3rem;
       --shell-gutter-compact: 2rem;
       --side-guide-inset: 1.5rem;
+      --rail-rule-on-gold: rgba(36,24,3,.24);
+      --rail-tick-inactive-scale: .38;
+      --font-rail-top: .6rem;
+      --tracking-rail-top: .08em;
+      --tracking-rail-label: .035em;
       --measure-note: 54.5rem;
       --measure-program-copy: 38.75rem;
       --measure-core-copy: 37rem;
@@ -134,7 +136,30 @@
       --space-2xl: 4.5rem;
       --content-max: 70rem;
       --copy-max: 45rem;
-      --section-space: clamp(92px, 12vw, 152px);
+      --section-space-compact: clamp(4rem, 7vw, 6rem);
+      --section-space-standard: clamp(5.5rem, 9vw, 8rem);
+      --section-space-feature: clamp(7rem, 11vw, 9.5rem);
+      --section-space: var(--section-space-standard);
+      --measure-a2-support-title: 44rem;
+      --measure-a2-note: 34rem;
+      --measure-a2-core-title: 62rem;
+      --measure-a2-core-column-min: 17.5rem;
+      --measure-a2-core-action: 24rem;
+      --measure-a2-dossier-column-min: 20rem;
+      --grid-a2-dossier-meta: 8rem;
+      --grid-a2-schedule-date-min: 12rem;
+      --a2-evidence-row-min: 13rem;
+      --font-a2-section: clamp(1.875rem, 3.5vw, 3rem);
+      --font-a2-core: clamp(2.75rem, 6vw, 5.25rem);
+      --font-a2-index: clamp(2.25rem, 4vw, 3.5rem);
+      --font-a2-date: clamp(2rem, 4.2vw, 3.75rem);
+      --font-a2-schedule-title: clamp(1.35rem, 2.5vw, 2rem);
+      --font-a2-core-compact: clamp(2.25rem, 11vw, 2.65rem);
+      --font-a2-date-compact: 2.35rem;
+      --line-a2-core: 1.03;
+      --line-a2-core-compact: 1.08;
+      --tracking-a2-index: -.06em;
+      --tracking-a2-date: -.055em;
       --font-display: clamp(2.75rem, 5.2vw, 4.2rem);
       --font-section: clamp(1.95rem, 4.4vw, 3.65rem);
       --font-heading: clamp(1.22rem, 2vw, 1.7rem);
@@ -177,9 +202,6 @@
     h3 { font-size: var(--font-heading); font-weight: var(--weight-heading); }
     .lead { max-width: var(--copy-max); margin: var(--space-lg) 0 0; color: var(--muted-dark); font-size: var(--font-lead); }
     .dark .lead { color: var(--muted-light); }
-    .reveal { opacity: 0; transform: translateY(var(--space-lg)); transition: opacity var(--motion-reveal) var(--ease), transform var(--motion-reveal) var(--ease); }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
     .announcement { position: fixed; inset: 0 0 auto; z-index: 60; height: var(--announcement-height); background: var(--gold); color: var(--announcement-ink); font-size: var(--font-label); font-weight: var(--weight-body-strong); }
     .announcement-inner { display: flex; height: 100%; align-items: center; justify-content: center; gap: var(--space-3); text-align: center; }
     .status-dot { width: var(--dot-small); height: var(--dot-small); border-radius: 50%; background: var(--gold-dot); box-shadow: 0 0 0 var(--space-1) var(--gold-pulse); animation: status-pulse var(--motion-status) ease-in-out infinite; }
@@ -210,16 +232,22 @@
     .mobile-menu a { display: flex; min-height: var(--space-10); align-items: center; justify-content: space-between; border-bottom: var(--rule-width) solid var(--menu-rule); color: var(--text-light); font-weight: var(--weight-body-strong); text-decoration: none; }
     .mobile-menu a:last-child { margin-top: var(--space-3); justify-content: center; border: 0; border-radius: var(--radius-pill); background: var(--gold); color: var(--text-on-gold); }
 
-    .side-guide { position: fixed; top: 50%; right: var(--side-guide-inset); z-index: 40; display: grid; padding: var(--space-2); justify-items: end; gap: var(--space-2); border: var(--rule-width) solid var(--rule-light); border-radius: var(--radius-pill); background: var(--guide-bg); opacity: 0; transform: translateY(-45%); transition: opacity var(--motion-standard) ease, transform var(--motion-standard) var(--ease); pointer-events: none; }
+    .side-guide { --side-rail-foreground: var(--muted-light); --side-rail-active: var(--gold); --side-rail-line: var(--rule-light); position: fixed; top: 50%; right: var(--side-guide-inset); z-index: 40; display: grid; width: var(--target-min); justify-items: stretch; color: var(--side-rail-foreground); opacity: 0; transform: translateY(-45%); transition: opacity var(--motion-standard) ease, transform var(--motion-standard) var(--ease); pointer-events: none; }
+    .side-guide[data-tone="light"] { --side-rail-foreground: var(--muted-dark); --side-rail-active: var(--gold-deep); --side-rail-line: var(--rule-dark); }
+    .side-guide[data-tone="gold"] { --side-rail-foreground: var(--gold-copy); --side-rail-active: var(--ink); --side-rail-line: var(--rail-rule-on-gold); }
     .side-guide.is-visible { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
-    .side-top, .side-link { border: 0; background: transparent; color: var(--muted-light); cursor: pointer; }
-    .side-top { display: grid; width: var(--control-target); height: var(--control-target); padding: 0; place-items: center; border: var(--rule-width) solid var(--rule-light); border-radius: 50%; }
-    .side-link { position: relative; display: flex; min-height: var(--target-min); padding: 0; align-items: center; gap: var(--space-3); }
-    .side-link::after { width: var(--dot-small); height: var(--dot-small); border: var(--rule-width) solid currentColor; border-radius: 50%; content: ""; transition: transform var(--motion-fast) ease, background var(--motion-fast) ease, color var(--motion-fast) ease; }
-    .side-link span { padding: var(--space-1) var(--space-2); border-radius: var(--radius-small); background: var(--guide-bg); font-size: var(--font-micro); font-weight: var(--weight-body-strong); opacity: 0; transform: translateX(var(--space-2)); transition: opacity var(--motion-fast) ease, transform var(--motion-fast) ease; }
-    .side-link:hover span, .side-link:focus-visible span, .side-link.is-active span { opacity: 1; transform: translateX(0); }
-    .side-link.is-active { color: var(--gold); }
-    .side-link.is-active::after { background: var(--gold); transform: scale(1.35); }
+    .side-top, .side-link { color: inherit; text-decoration: none; }
+    .side-top { display: grid; min-height: var(--target-min); place-items: center; font-size: var(--font-rail-top); font-weight: var(--weight-label); letter-spacing: var(--tracking-rail-top); }
+    .side-chapters { position: relative; margin: 0; padding: 0; list-style: none; }
+    .side-chapters::before, .side-chapters::after { position: absolute; z-index: 0; top: calc(var(--target-min) / 2); right: 0; bottom: calc(var(--target-min) / 2); width: var(--rule-width); content: ""; }
+    .side-chapters::before { background: var(--side-rail-line); }
+    .side-chapters::after { bottom: auto; height: calc(100% - var(--target-min)); background: var(--side-rail-active); transform: scaleY(var(--side-progress, 0)); transform-origin: top; transition: transform var(--motion-standard) var(--ease); pointer-events: none; }
+    .side-link { position: relative; z-index: 1; display: flex; width: 100%; min-height: var(--target-min); align-items: center; justify-content: flex-end; }
+    .side-link::after { width: var(--space-4); height: var(--rule-width); background: currentColor; content: ""; transform: scaleX(var(--rail-tick-inactive-scale)); transform-origin: right; transition: transform var(--motion-fast) var(--ease), color var(--motion-fast) ease; }
+    .side-label { position: absolute; right: calc(100% + var(--space-3)); padding: var(--space-1) 0; color: inherit; font-size: var(--font-micro); font-weight: var(--weight-body-strong); letter-spacing: var(--tracking-rail-label); opacity: 0; transform: translateX(var(--space-2)); transition: opacity var(--motion-fast) ease, transform var(--motion-fast) var(--ease); white-space: nowrap; }
+    .side-link:hover .side-label, .side-link:focus-visible .side-label, .side-link.is-active .side-label { opacity: 1; transform: translateX(0); }
+    .side-link:hover::after, .side-link:focus-visible::after, .side-link.is-active::after { transform: scaleX(1); }
+    .side-link.is-active { color: var(--side-rail-active); }
 
     .hero { display: flex; min-height: 100svh; padding: calc(var(--announcement-height) + var(--nav-height) + var(--space-hero-top)) 0 var(--space-2xl); align-items: center; background: var(--ink); }
     .hero .shell { position: relative; }
@@ -260,6 +288,7 @@
     .plain-note strong { color: var(--ink); }
     .history-transition { max-width: var(--measure-note); margin-top: var(--space-10); padding: var(--space-lg); border-left: var(--rule-strong-width) solid var(--gold); background: var(--nav-state-bg); color: var(--muted-light); }
     .history-transition strong { color: var(--text-light); }
+    .history-transition-line { display: block; }
     .philosophy-note { max-width: var(--measure-note); margin-top: var(--space-10); padding: var(--space-xl) 0 0; border-top: var(--rule-strong-width) solid var(--gold); color: var(--muted-dark); font-size: var(--font-lead); }
     .philosophy-note strong { color: var(--ink); }
 
@@ -274,8 +303,11 @@
     .program-step.is-active::before { background: var(--gold); box-shadow: 0 0 0 var(--space-1) var(--gold-ring); }
     .step-meta { margin: 0 0 var(--space-4); color: var(--gold); font-size: var(--font-label); font-weight: var(--weight-label); letter-spacing: .12em; }
     .program-step p { max-width: var(--measure-program-copy); margin: var(--space-4) 0 0; color: var(--muted-light); }
-    .action-loop { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); }
-    .action-loop span { padding: var(--space-2) var(--space-3); border-bottom: var(--rule-width) solid var(--gold-rule); color: var(--loop-copy); font-size: var(--font-overline); font-weight: var(--weight-body-strong); }
+    .process-sequence { display: grid; margin: var(--space-10) 0 0; padding: 0; border-block: var(--rule-width) solid var(--rule-dark); list-style: none; }
+    .process-sequence li { display: grid; grid-template-columns: var(--grid-support-index) 1fr; gap: var(--space-3); padding: var(--space-4) 0; align-items: baseline; }
+    .process-sequence li + li { border-top: var(--rule-width) solid var(--rule-dark); }
+    .process-sequence b { color: var(--gold-deep); font-size: var(--font-label); letter-spacing: .1em; }
+    .process-sequence span { font-weight: var(--weight-body-strong); }
 
     .core-grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(var(--core-copy-min),.95fr); gap: var(--core-gap); margin-top: var(--space-2xl); }
     .core-statement { align-self: end; }
@@ -294,8 +326,6 @@
     .lesson-row h3 { font-size: var(--font-lesson); }
     .lesson-row p { margin: 0; color: var(--muted-light); }
 
-    .reviews-heading { display: grid; grid-template-columns: 1fr .78fr; gap: var(--space-14); align-items: end; }
-    .reviews-heading .lead { margin: 0; }
     .review-marquee { width: 100%; margin-top: var(--space-2xl); overflow: hidden; mask-image: linear-gradient(90deg, transparent, var(--mask-solid) 6%, var(--mask-solid) 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, var(--mask-solid) 6%, var(--mask-solid) 94%, transparent); }
     .review-track { display: flex; width: max-content; gap: var(--space-md); animation: marquee var(--motion-marquee) linear infinite; }
     .review-track:hover, .review-track:focus-within { animation-play-state: paused; }
@@ -307,6 +337,10 @@
     .review-note { width: min(100% - var(--shell-gutter), var(--content-max)); margin: var(--space-lg) auto 0; color: var(--muted-dark); font-size: var(--font-label); }
     .reviews-continuation { padding-top: 0; }
     .dark .review-note { color: var(--muted-light); }
+    .support-contact { max-width: var(--measure-note); margin: var(--space-10) 0 0; padding-top: var(--space-lg); border-top: var(--rule-width) solid var(--rule-light); color: var(--muted-light); }
+    .support-contact a { display: inline-flex; min-height: var(--target-min); align-items: center; color: var(--gold); font-weight: var(--weight-body-strong); text-underline-offset: .18em; overflow-wrap: anywhere; }
+    .light .support-contact { border-color: var(--rule-dark); color: var(--muted-dark); }
+    .light .support-contact a { color: var(--gold-deep); }
 
     .schedule { max-width: var(--measure-final); margin-top: var(--space-2xl); border-top: var(--rule-width) solid var(--rule-dark); }
     .schedule-item { display: grid; grid-template-columns: var(--grid-lesson-index) 1fr; gap: var(--space-8); padding: var(--space-xl) 0; border-bottom: var(--rule-width) solid var(--rule-dark); }
@@ -342,6 +376,56 @@
     .footer-links { display: flex; gap: var(--space-md); }
     .footer-links a { display: inline-flex; min-height: var(--target-min); align-items: center; }
 
+    /* Selected A2: stronger evidence and pacing, translated into product tokens. */
+    h1, h2, h3 { text-wrap: balance; }
+    p, blockquote { text-wrap: pretty; }
+    .chapter, .hero, .final { scroll-margin-top: calc(var(--announcement-height) + var(--nav-height)); }
+    .chapter { padding-block: var(--section-space-standard); }
+    #about, #fit, #origin, #history, #faq { padding-block: var(--section-space-compact); }
+    #core, .final { padding-block: var(--section-space-feature); }
+    #reviews { padding-top: 0; padding-bottom: var(--section-space-compact); }
+    #about h2, #fit h2, #origin h2, #history h2, #reviews h2 { max-width: var(--measure-a2-support-title); font-size: var(--font-a2-section); }
+    #about .plain-note { max-width: var(--measure-a2-note); margin-top: var(--space-10); padding: var(--space-5) 0 0; }
+    #fit .story-list { margin-top: var(--space-10); }
+    #fit .story-row { padding-block: var(--space-8); }
+
+    #core h2 { max-width: var(--measure-a2-core-title); font-size: var(--font-a2-core); line-height: var(--line-a2-core); }
+    #core .core-grid { grid-template-columns: minmax(var(--measure-a2-core-column-min), .72fr) minmax(0, 1.28fr); gap: clamp(var(--space-14), 8vw, 6rem); margin-top: var(--space-14); }
+    #core .core-statement { align-self: start; }
+    #core .core-statement p, #core .support-item p, #core .boundary-box { color: var(--muted-light); }
+    #core .boundary-box { padding-block: var(--space-5); border-color: var(--rule-light); border-top-width: var(--rule-strong-width); }
+    #core .support-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-color: var(--rule-light); border-bottom: var(--rule-width) solid var(--rule-light); }
+    #core .support-item { grid-template-columns: 1fr; min-height: var(--a2-evidence-row-min); padding: var(--space-lg); align-content: space-between; border-color: var(--rule-light); }
+    #core .support-item:nth-child(odd) { padding-left: 0; border-right: var(--rule-width) solid var(--rule-light); }
+    #core .support-item:nth-child(even) { padding-right: 0; padding-left: var(--space-lg); }
+    #core .support-item b { color: var(--gold); font-size: var(--font-a2-index); font-variant-numeric: tabular-nums; letter-spacing: var(--tracking-a2-index); line-height: 1; }
+    #core .support-item p { max-width: var(--measure-a2-core-action); }
+
+    #beta { padding-block: var(--section-space-feature) var(--section-space-standard); }
+    #beta .program-layout { grid-template-columns: minmax(var(--measure-a2-dossier-column-min), .8fr) minmax(0, 1.2fr); gap: clamp(var(--space-14), 8vw, 6rem); }
+    #beta .process-sequence { margin-top: var(--space-8); border-top-width: var(--rule-strong-width); }
+    #beta .program-steps { padding-left: 0; border-top: var(--rule-strong-width) solid var(--ink); }
+    #beta .program-line { display: none; }
+    #beta .program-step { display: grid; grid-template-columns: var(--grid-a2-dossier-meta) 1fr; min-height: 0; padding: var(--space-lg) 0; border-bottom: var(--rule-width) solid var(--rule-dark); column-gap: var(--space-lg); }
+    #beta .program-step::before { display: none; }
+    #beta .step-meta { grid-row: 1 / span 2; grid-column: 1; margin: 0; color: var(--gold-deep); }
+    #beta .program-step h3, #beta .program-step p { grid-column: 2; }
+    #beta .program-step p { margin-top: var(--space-3); color: var(--muted-dark); }
+
+    #schedule { padding-block: var(--section-space-feature); }
+    #schedule .schedule { max-width: none; margin-top: var(--space-14); border-top-width: var(--rule-strong-width); }
+    #schedule .schedule-item { grid-template-columns: minmax(var(--grid-a2-schedule-date-min), .48fr) minmax(0, 1.52fr); padding-block: var(--space-lg); align-items: baseline; }
+    #schedule .schedule-item time { font-size: var(--font-a2-date); font-variant-numeric: tabular-nums; letter-spacing: var(--tracking-a2-date); line-height: 1; }
+    #schedule .schedule-item h3 { font-size: var(--font-a2-schedule-title); }
+
+    #origin .story-list { margin-top: var(--space-10); }
+    #origin .story-row { padding-block: var(--space-8); }
+    #history .facts-stats, #history .lesson-rows { margin-top: var(--space-10); }
+    #history .lesson-row { padding-block: var(--space-lg); }
+    #reviews .review-marquee { margin-top: var(--space-10); }
+    #reviews .review-card { flex: 0 0 auto; background: transparent; }
+    #reviews .history-transition { margin-top: var(--space-8); }
+
     @media (min-width: 761px) and (max-height: 700px) {
       .hero { min-height: 0; padding-top: calc(var(--announcement-height) + var(--nav-height) + var(--space-6)); padding-bottom: var(--space-8); }
       .hero-overline { margin-bottom: var(--space-4); }
@@ -351,15 +435,17 @@
     }
     @media (max-width: 1100px) { .side-guide { display: none; } }
     @media (max-width: 900px) {
-      .program-layout, .core-grid, .reviews-heading { grid-template-columns: 1fr; }
+      .program-layout, .core-grid { grid-template-columns: 1fr; }
       .sticky-copy { position: static; }
       .program-steps { margin-top: var(--space-14); }
-      .reviews-heading .lead { margin-top: var(--space-6); }
       .lesson-row { grid-template-columns: 7rem 1fr; }
       .lesson-row p { grid-column: 2; }
+      #core .core-grid, #beta .program-layout { grid-template-columns: 1fr; }
+      #core .support-list { margin-top: var(--space-10); }
+      #beta .program-steps { margin-top: var(--space-10); }
     }
     @media (max-width: 760px) {
-      :root { --announcement-height: 44px; --nav-height: 62px; }
+      :root { --announcement-height: 44px; --nav-height: 62px; --section-space-compact: 4rem; --section-space-standard: 5.5rem; --section-space-feature: 6.5rem; }
       .shell { width: min(100% - var(--shell-gutter-compact), var(--content-max)); }
       .announcement-inner { gap: var(--space-2); font-size: var(--font-small); white-space: nowrap; }
       .announcement-copy { font-size: 0; }
@@ -380,6 +466,15 @@
       .schedule-item { grid-template-columns: 1fr; gap: var(--space-2); }
       .review-marquee { mask-image: none; -webkit-mask-image: none; }
       .review-note { display: none; }
+      #core h2 { font-size: var(--font-a2-core-compact); line-height: var(--line-a2-core-compact); }
+      #core .support-list { grid-template-columns: 1fr; }
+      #core .support-item { min-height: 0; padding: var(--space-6) 0; }
+      #core .support-item:nth-child(odd) { border-right: 0; }
+      #core .support-item:nth-child(even) { padding-left: 0; }
+      #beta .program-step { grid-template-columns: 1fr; gap: var(--space-2); }
+      #beta .step-meta, #beta .program-step h3, #beta .program-step p { grid-row: auto; grid-column: 1; }
+      #schedule .schedule-item { grid-template-columns: 1fr; gap: var(--space-3); }
+      #schedule .schedule-item time { font-size: var(--font-a2-date-compact); }
     }
     @media (max-width: 520px) {
       .hero h1 { font-size: 2.6rem; line-height: 1.08; }
@@ -404,9 +499,10 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .reveal { opacity: 1; transform: none; }
       .review-track { width: auto; overflow-x: auto; animation: none; }
       .review-card[aria-hidden="true"] { display: none; }
+      .review-marquee { overflow-x: auto; mask-image: none; -webkit-mask-image: none; }
+      .review-track { width: max-content; }
     }
   </style>
 </head>
@@ -432,10 +528,19 @@
     </div>
   </header>
 
-  <aside class="side-guide" aria-label="페이지 내부 안내" aria-hidden="true" inert>
-    <button class="side-top" type="button" aria-label="맨 위로">↑</button>
-    <button class="side-link" type="button" data-target="about"><span>소개</span></button><button class="side-link" type="button" data-target="fit"><span>대상</span></button><button class="side-link" type="button" data-target="core"><span>본과정</span></button><button class="side-link" type="button" data-target="beta"><span>선발</span></button><button class="side-link" type="button" data-target="schedule"><span>일정</span></button><button class="side-link" type="button" data-target="history"><span>여정</span></button><button class="side-link" type="button" data-target="faq"><span>FAQ</span></button><button class="side-link" type="button" data-target="apply"><span>지원</span></button>
-  </aside>
+  <nav class="side-guide" data-tone="light" aria-label="페이지 섹션" aria-hidden="true" inert>
+    <a class="side-top" href="#top" aria-label="맨 위로">↑ TOP</a>
+    <ol class="side-chapters">
+      <li><a class="side-link" href="#about" data-target="about"><span class="side-label">01 / 소개</span></a></li>
+      <li><a class="side-link" href="#fit" data-target="fit"><span class="side-label">02 / 대상</span></a></li>
+      <li><a class="side-link" href="#core" data-target="core"><span class="side-label">03 / 본과정</span></a></li>
+      <li><a class="side-link" href="#beta" data-target="beta"><span class="side-label">04 / 선발</span></a></li>
+      <li><a class="side-link" href="#schedule" data-target="schedule"><span class="side-label">05 / 일정</span></a></li>
+      <li><a class="side-link" href="#history" data-target="history"><span class="side-label">06 / 여정</span></a></li>
+      <li><a class="side-link" href="#faq" data-target="faq"><span class="side-label">07 / FAQ</span></a></li>
+      <li><a class="side-link" href="#apply" data-target="apply"><span class="side-label">08 / 지원</span></a></li>
+    </ol>
+  </nav>
 
   <main id="main-content">
     <section class="hero" aria-labelledby="hero-title" data-program-focus="core" data-core-window="2026-08-31/2026-11-22" data-entry-gate="precourse-selection" data-core-admission="not-guaranteed">
@@ -467,7 +572,7 @@
     </section>
 
     <section class="chapter light" id="beta" aria-labelledby="beta-title">
-      <div class="shell program-layout"><div class="sticky-copy reveal"><p class="chapter-label">본과정으로 들어가는 문</p><h2 id="beta-title">2주는 체험이 아니라,<br>함께 3개월을 갈지 확인하는 과정입니다.</h2><p class="lead">8/17–8/30 동안 AI로 탐색한 가능성 하나를 현실의 작은 실험으로 옮겨 봅니다. 실행 과정과 현실의 반응, 동료와의 약속을 바탕으로 8/30에 본과정 참가자를 최종 선발합니다.</p></div><div class="program-steps" id="beta-timeline"><div class="program-line" aria-hidden="true"><div class="program-progress"></div></div><article class="program-step reveal"><p class="step-meta">WEEK 01</p><h3>탐색할 가능성을 정하고<br>작은 실험을 설계합니다.</h3><p>진로, 프로젝트, 일하는 방식처럼 지금 더 넓혀 보고 싶은 선택지와 실제로 낼 시간을 정합니다.</p></article><article class="program-step reveal"><p class="step-meta">WEEK 02</p><h3>현실의 반응을 보고<br>방향을 다시 고릅니다.</h3><p>잘된 것만 보여주지 않습니다. 새롭게 발견한 것과 막힌 지점을 공유하고 다음 탐색에서 바꿀 한 가지를 정합니다.</p></article><article class="program-step reveal"><p class="step-meta">8/30 · 최종 선발</p><h3>3개월을 이어갈 사람을 정합니다.</h3><p>프리과정 참여는 본과정 합류를 보장하지 않습니다. AI 숙련도나 완성도보다 가능성을 탐색한 태도, 현실 반응에 맞춘 수정, 참여 리듬, 3개월 지속 가능성을 함께 봅니다.</p></article></div></div>
+      <div class="shell program-layout"><div class="sticky-copy reveal"><p class="chapter-label">본과정으로 들어가는 문</p><h2 id="beta-title">2주는 체험이 아니라,<br>함께 3개월을 갈지 확인하는 과정입니다.</h2><p class="lead">8/17–8/30 동안 AI로 탐색한 가능성 하나를 현실의 작은 실험으로 옮겨 봅니다. 실행 과정과 현실의 반응, 동료와의 약속을 바탕으로 8/30에 본과정 참가자를 최종 선발합니다.</p><ol class="process-sequence" aria-label="프리과정의 전형적인 흐름"><li><b>01</b><span>탐색할 가능성 하나 정하기</span></li><li><b>02</b><span>현실에서 작은 행동으로 실행하기</span></li><li><b>03</b><span>반응을 보고 다음 방향 수정하기</span></li></ol></div><div class="program-steps" id="beta-timeline"><div class="program-line" aria-hidden="true"><div class="program-progress"></div></div><article class="program-step reveal"><p class="step-meta">WEEK 01</p><h3>탐색할 가능성을 정하고<br>작은 실험을 설계합니다.</h3><p>진로, 프로젝트, 일하는 방식처럼 지금 더 넓혀 보고 싶은 선택지와 실제로 낼 시간을 정합니다.</p></article><article class="program-step reveal"><p class="step-meta">WEEK 02</p><h3>현실의 반응을 보고<br>방향을 다시 고릅니다.</h3><p>잘된 것만 보여주지 않습니다. 새롭게 발견한 것과 막힌 지점을 공유하고 다음 탐색에서 바꿀 한 가지를 정합니다.</p></article><article class="program-step reveal"><p class="step-meta">8/30 · 최종 선발</p><h3>3개월을 이어갈 사람을 정합니다.</h3><p>프리과정 참여는 본과정 합류를 보장하지 않습니다. AI 숙련도나 완성도보다 가능성을 탐색한 태도, 현실 반응에 맞춘 수정, 참여 리듬, 3개월 지속 가능성을 함께 봅니다.</p></article></div></div>
     </section>
 
     <section class="chapter dark" id="schedule" aria-labelledby="schedule-title"><div class="shell"><p class="chapter-label reveal">전체 여정</p><h2 class="reveal" id="schedule-title">지원할 때부터,<br>3개월의 끝을 보고 시작합니다.</h2><div class="schedule"><article class="schedule-item reveal"><time datetime="2026-08-04">8/4–8/14</time><div><h3>3기 지원서 접수</h3><p>3개월 동안 탐색하고 싶은 가능성과 현실적인 참여 계획을 적습니다.</p></div></article><article class="schedule-item reveal"><time datetime="2026-08-15">8/15</time><div><h3>사전 선발과정 참여 안내</h3><p>내부 심의 후 참여 안내 대상자에게만 개별 연락합니다.</p></div></article><article class="schedule-item reveal"><time datetime="2026-08-17">8/17–8/30</time><div><h3>사전 실행·선발 과정</h3><p>AI로 가능성을 탐색하고 작은 실험으로 옮기며 본과정에서 함께할 리듬을 확인합니다.</p></div></article><article class="schedule-item reveal"><time datetime="2026-08-31">8/31–11/22</time><div><h3>3개월 본과정</h3><p>선발된 펠로우가 AI로 선택지를 넓히고, 격주 90분 공식 모임에서 각자의 발견과 실행을 점검합니다.</p></div></article></div></div></section>
@@ -523,7 +628,7 @@
         </div>
       </div>
       <p class="review-note">마우스를 올리거나 키보드로 초점을 두면 후기가 멈춥니다.</p>
-      <div class="shell"><p class="history-transition reveal"><strong>이 소감들에 AI 이야기는 없습니다.</strong><br>그때의 도구가 AI가 아니었으니 당연합니다. 다만 2기에서 교육업을 희망한 팀은 이미 교육 관련 AI를 직접 만들었고, 3기는 AI를 삶의 가능성을 넓히는 동반자로 둡니다. 달라지는 것은 도구와 탐색의 범위이고, 혼자 하지 않고 실제로 해보며 동료와 점검하는 구조는 그대로입니다.</p></div>
+      <div class="shell"><p class="history-transition reveal"><strong>도구는 달라져도, 함께 해내는 방식은 같습니다.</strong><br><span class="history-transition-line">3기는 AI로 선택지를 더 넓힙니다.</span><span class="history-transition-line">직접 시도하고, 결과를 나누고, 서로의 다음 선택을 점검하는 위닝 펠로우십의 방식은 그대로입니다.</span></p></div>
     </section>
 
     <section class="chapter light" id="faq" aria-labelledby="faq-title">
@@ -533,7 +638,7 @@
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3"><span>참가비나 별도 계정 비용이 있나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a3" role="region" aria-hidden="true"><div><p>참가비는 없습니다. 프리과정에는 개인 무료 또는 기존 유료 AI를 사용합니다. 본과정 합류 후에는 개인 유료 AI 구독 한 가지를 지원합니다.</p></div></div></div>
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4"><span>지원하면 바로 본과정 펠로우가 되나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a4" role="region" aria-hidden="true"><div><p>아닙니다. 내부 심의를 거쳐 2주 프리과정 참가자를 먼저 선발하며, 사전 선발과정 참여 안내 대상자에게만 8월 15일까지 연락드립니다. 2주 프리과정 종료 후 운영진이 3개월 본과정 참가자를 최종 선발합니다.</p></div></div></div>
         <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5"><span>모임은 언제, 어디에서 하나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a5" role="region" aria-hidden="true"><div><p>본과정 공식 모임은 격주 90분이며, 온라인으로도 직접 만나서도 진행합니다. 사전 선발과정 참여 안내 대상자에게 연락할 때 가능한 시간을 확인하고, 첫 모임 전에 최종 일정을 안내합니다.</p></div></div></div>
-      </div></div>
+      </div><p class="support-contact reveal">지원 관련 추가 문의는 <a href="mailto:irs8@finito.me">irs8@finito.me</a> 또는 Instagram <a href="https://www.instagram.com/winning_fellowship/" target="_blank" rel="noopener noreferrer">@winning_fellowship</a> DM으로 보내주세요.</p></div>
     </section>
 
     <section class="chapter final" id="apply" aria-labelledby="apply-title">
@@ -652,28 +757,45 @@
       menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') !== 'true'; menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기'); mobileMenu.dataset.open = String(open); document.body.classList.toggle('menu-open', open); });
       mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
-      const revealItems = document.querySelectorAll('.reveal');
-      if (reducedMotion || !('IntersectionObserver' in window)) revealItems.forEach(item => item.classList.add('is-visible'));
-      else {
-        const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); } }), { threshold: .12 });
-        revealItems.forEach((item, index) => { if (item.closest('.hero')) item.style.transitionDelay = `${Math.min(index, 5) * 85}ms`; revealObserver.observe(item); });
-      }
-
       const sectionIds = ['about','fit','core','beta','schedule','history','faq','apply'];
-      const sections = sectionIds.map(id => document.getElementById(id));
+      const sectionMap = { about: 'about', fit: 'fit', core: 'core', beta: 'beta', schedule: 'schedule', origin: 'schedule', history: 'history', reviews: 'history', faq: 'faq', apply: 'apply' };
+      const sections = Object.keys(sectionMap).map(id => document.getElementById(id));
       const navLinks = document.querySelectorAll('[data-nav]');
       const sideLinks = document.querySelectorAll('.side-link');
       const sideGuide = document.querySelector('.side-guide');
       const indicator = document.querySelector('.nav-indicator');
       const moveIndicator = active => { if (!active || !indicator) return; const nav = active.parentElement.getBoundingClientRect(); const rect = active.getBoundingClientRect(); indicator.style.width = `${rect.width}px`; indicator.style.transform = `translate3d(${rect.left - nav.left}px,0,0)`; indicator.style.opacity = '1'; };
-      const setActive = id => { navLinks.forEach(link => link.classList.toggle('is-active', link.dataset.nav === id)); sideLinks.forEach(link => link.classList.toggle('is-active', link.dataset.target === id)); moveIndicator(document.querySelector(`[data-nav="${id}"]`)); };
-      if ('IntersectionObserver' in window) { const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); }), { rootMargin: '-34% 0px -55%', threshold: 0 }); sections.forEach(section => sectionObserver.observe(section)); }
+      const setActive = sectionId => {
+        const id = sectionMap[sectionId] || sectionId;
+        const activeIndex = sectionIds.indexOf(id);
+        navLinks.forEach(link => link.classList.toggle('is-active', link.dataset.nav === id));
+        sideLinks.forEach(link => {
+          const active = link.dataset.target === id;
+          link.classList.toggle('is-active', active);
+          if (active) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        if (activeIndex >= 0) sideGuide.style.setProperty('--side-progress', String(activeIndex / (sectionIds.length - 1)));
+        const activeSection = document.getElementById(sectionId);
+        sideGuide.dataset.tone = activeSection?.classList.contains('final') ? 'gold' : activeSection?.classList.contains('light') ? 'light' : 'dark';
+        moveIndicator(document.querySelector(`[data-nav="${id}"]`));
+      };
       const syncSideGuide = () => { const visible = window.innerWidth > 1100 && window.scrollY > window.innerHeight * .55; sideGuide.classList.toggle('is-visible', visible); sideGuide.toggleAttribute('inert', !visible); sideGuide.setAttribute('aria-hidden', String(!visible)); };
       syncSideGuide();
-      window.addEventListener('scroll', syncSideGuide, { passive: true });
+      const syncActiveFromScroll = () => {
+        const marker = window.innerHeight * .34;
+        let current = sections[0];
+        sections.forEach(section => { if (section.getBoundingClientRect().top <= marker) current = section; });
+        if (current) setActive(current.id);
+      };
+      let activeSyncTimer;
+      const scheduleActiveSync = () => {
+        window.clearTimeout(activeSyncTimer);
+        activeSyncTimer = window.setTimeout(syncActiveFromScroll, 120);
+      };
+      syncActiveFromScroll();
+      window.addEventListener('scroll', () => { syncSideGuide(); scheduleActiveSync(); }, { passive: true });
       window.addEventListener('resize', () => { if (window.innerWidth > 760 && menuButton.getAttribute('aria-expanded') === 'true') closeMenu(); syncSideGuide(); moveIndicator(document.querySelector('.desktop-nav a.is-active')); });
-      sideLinks.forEach(link => link.addEventListener('click', () => document.getElementById(link.dataset.target).scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' })));
-      document.querySelector('.side-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' }));
 
       const timeline = document.getElementById('beta-timeline');
       const timelineProgress = timeline.querySelector('.program-progress');
