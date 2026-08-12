@@ -477,6 +477,8 @@
       #schedule .schedule-item time { font-size: var(--font-a2-date-compact); }
     }
     @media (max-width: 520px) {
+      /* P2의 긴 공개 문구도 320px에서 안전하게 줄바꿈한다. */
+      .keep { white-space: normal; }
       .hero h1 { font-size: 2.6rem; line-height: 1.08; }
       .hero-copy { margin-top: var(--space-6); font-size: 1rem; line-height: 1.6; }
       .hero-copy > span + span { margin-top: var(--space-3); }
