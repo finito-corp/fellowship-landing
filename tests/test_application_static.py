@@ -52,6 +52,7 @@ class ApplicationUxStaticTests(unittest.TestCase):
         self.assertEqual(submit_button["type"], "submit")
         self.assertNotIn("review-panel", parser.elements)
         self.assertNotIn("final-submit-button", parser.elements)
+        self.assertNotIn("제출 전 확인", (root / "apply" / "index.html").read_text(encoding="utf-8"))
         self.assertEqual(parser.elements["available-windows"]["aria-describedby"], "available-windows-help available-windows-error")
 
     def test_completion_exposes_the_correction_channel(self) -> None:
