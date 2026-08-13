@@ -75,12 +75,15 @@ class StaticReleaseValidationTests(unittest.TestCase):
             "Claude Code·Codex 같은 고성능 CLI AI 작업 도구 구독료 지원",
             "Claude Code를 처음 쓰는 사람을 위한 시작 영상·실습 자료",
             "AI 작업 세션",
+            "전액 고연승T",
+            "연구실 지원",
+            "시작 영상·실습 · CLI 구독료 · AI 작업 세션",
         )
         for phrase in required:
             self.assertIn(phrase, index)
         prohibited = (
             "8/14", "8/15", "8/17", "8/30", "8/31", "11/22",
-            "전액 고연승T 연구실 지원", "구독 한 가지", "구독 1개",
+            "구독 한 가지", "구독 1개",
             "Codex Max", "무제한", "상시 멘토링",
         )
         for phrase in prohibited:
