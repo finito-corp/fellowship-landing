@@ -72,7 +72,9 @@ class StaticReleaseValidationTests(unittest.TestCase):
             "격주 90분",
             "자동 합류가 아닙니다.",
             "해보고 싶은 일을 실제로 해볼 수 있게 돕습니다.",
-            "Claude Code·Codex 같은 고성능 AI 작업 도구",
+            "Claude Code·Codex 같은 고성능 CLI AI 작업 도구 구독료 지원",
+            "Claude Code를 처음 쓰는 사람을 위한 시작 영상·실습 자료",
+            "AI 작업 세션",
         )
         for phrase in required:
             self.assertIn(phrase, index)
