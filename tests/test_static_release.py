@@ -72,13 +72,14 @@ class StaticReleaseValidationTests(unittest.TestCase):
             "격주 90분",
             "자동 합류가 아닙니다.",
             "해보고 싶은 일을 실제로 해볼 수 있게 돕습니다.",
+            "Claude Code·Codex 같은 고성능 AI 작업 도구",
         )
         for phrase in required:
             self.assertIn(phrase, index)
         prohibited = (
             "8/14", "8/15", "8/17", "8/30", "8/31", "11/22",
             "전액 고연승T 연구실 지원", "구독 한 가지", "구독 1개",
-            "Claude Code", "Codex Max", "무제한", "상시 멘토링",
+            "Codex Max", "무제한", "상시 멘토링",
         )
         for phrase in prohibited:
             self.assertNotIn(phrase, index)
