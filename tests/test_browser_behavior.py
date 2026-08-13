@@ -73,26 +73,15 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
         self.assertEqual(questions.nth(1).get_attribute("aria-expanded"), "true")
         self.assertEqual(answers.nth(1).get_attribute("aria-hidden"), "false")
 
-    def test_deadline_countdown_fills_in_and_keeps_the_written_deadline(self) -> None:
-        count = self.page.locator(".deadline-count")
-        self.page.set_viewport_size({"width": 1280, "height": 844})
-        self.assertTrue(count.is_visible())
-        self.assertIn("마감까지", count.inner_text())
+    def test_announcement_and_hero_do_not_invent_an_unconfirmed_deadline(self) -> None:
+        announcement = self.page.locator(".announcement-inner")
         deadline = self.page.locator(".deadline-date")
-        self.assertIn("8/14", deadline.inner_text())
-
-        self.page.set_viewport_size({"width": 390, "height": 844})
-        self.assertFalse(count.is_visible())
-        self.assertIn("8/15 사전 선발과정 참여 안내", deadline.inner_text())
-        self.assertIn("본과정 합류 미보장", deadline.inner_text())
-
-    def test_announcement_follows_the_same_deadline_as_the_hero(self) -> None:
-        copy = self.page.locator(".announcement-copy")
-        self.page.wait_for_function(
-            "() => document.querySelector('.announcement-copy').textContent.includes('마감까지')"
-        )
-        self.assertIn("마감까지", copy.get_attribute("data-short"))
-        self.assertIn("마감까지", self.page.locator(".announcement-inner").get_attribute("aria-label"))
+        self.assertIn("3기 · 지원 안내", announcement.get_attribute("aria-label"))
+        self.assertIn("2주 사전과정 후 본과정 합류 결정", deadline.inner_text())
+        self.assertIn("확정 안내", deadline.inner_text())
+        self.assertNotIn("8/14", self.page.content())
+        self.assertNotIn("8/15", self.page.content())
+        self.assertEqual(self.page.locator(".deadline-count").count(), 0)
 
     def test_past_cohort_numbers_settle_on_their_written_values(self) -> None:
         self.page.locator("#history").scroll_into_view_if_needed()
@@ -191,16 +180,17 @@ class LandingBrowserBehaviorTests(unittest.TestCase):
             )
             self.assertLessEqual(heading_size, max_heading_size)
 
+            # P2 Hero는 압박→망설임→질문→전환의 4단계다.
             lines = self.page.locator(".hero-copy > span")
-            self.assertEqual(lines.count(), 3)
-            boxes = [lines.nth(index).bounding_box() for index in range(3)]
+            self.assertEqual(lines.count(), 4)
+            boxes = [lines.nth(index).bounding_box() for index in range(4)]
             self.assertTrue(all(box is not None for box in boxes))
-            self.assertGreater(boxes[1]["y"], boxes[0]["y"] + boxes[0]["height"])
-            self.assertGreater(boxes[2]["y"], boxes[1]["y"] + boxes[1]["height"])
+            for previous, following in zip(boxes, boxes[1:]):
+                self.assertGreater(following["y"], previous["y"] + previous["height"])
 
     def test_primary_hero_cta_is_fully_visible_on_a_short_desktop_viewport(self) -> None:
         self.page.set_viewport_size({"width": 1280, "height": 577})
-        button = self.page.locator('.hero-actions a[href="apply/"]').first
+        button = self.page.locator('.hero-actions a.button:not(.secondary)').first
         box = button.bounding_box()
         self.assertIsNotNone(box)
         self.assertGreaterEqual(box["y"], 0)

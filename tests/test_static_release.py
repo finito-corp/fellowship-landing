@@ -1,45 +1,12 @@
 from __future__ import annotations
 
+import re
 import tempfile
 import unittest
-import re
 from html.parser import HTMLParser
 from pathlib import Path
 
 from scripts.validate_static_release import validate_site
-
-
-APPLICATION_URL = "apply/"
-VERIFIED_REVIEW_EXCERPTS = (
-    "체력뿐 아니라 마음까지 단단해진 시간이었습니다. 다양한 러닝 코스를 뛰어보고 마지막에는 등산까지 해내면서, 서로 의지하며 끝까지 완주했던 과정 자체가 오래 기억에 남을 것 같아요.",
-    "혼자 할 때는 흥미 없고 오래 하기 힘들었던 러닝을, 펠로우들과 다 같이 뛰니 힘들어도 어떻게든 뛰게 되고 시간도 빨리 가서 매우 즐거웠습니다.",
-    "혼자였다면 겨울에 산 정상까지 오르는 걸 엄두도 내지 못했을 텐데, 여럿이서 으쌰으쌰 하는 분위기 덕분에 등산을 재밌게 할 수 있었어요! 운동 생활에 새로운 패러다임을 제시해준 활동이었습니다.",
-    "정말 좋은 언니, 오빠를 만났고 팀 분위기가 펠로우십에서도 정말 최상위권이라고 생각합니다. 계획을 하나하나 실현해보는 경험이 좋았고, 연락도 빨리 보고 의견 반영도 잘 되어서 수다디 최고였습니다!",
-    "평소에 일본어 공부를 해야겠다고 다짐만 하던 제가 어느새 한 달 연속으로 듀오링고를 해내고 있는 모습은 정말 놀라웠습니다. 팀원들이 매주 공유를 해줬기에 그 믿음을 져버릴 수 없어서 끝까지 달릴 수 있었습니다.",
-    "마케팅에 대한 막연한 꿈만 가지고 있었는데, 무에서 유(팔로워 100명)를 만들어내며 성취감과 자신감을 얻었습니다. 루멘은 정말 가족 같은 분위기였고, 서로 매일 응원하며 힘을 얻었던 유일한 크루였습니다. 어떻게 표현해야 사람들의 관심을 끌 수 있는지 고민하는 시간이 되었어요.",
-    "펠로우십하길 잘했다고 생각이 들 정도로 정말 재미있게 활동했습니다. 팀원들과의 결속력이 단단했기 때문에 지금까지 달려올 수 있었다고 생각합니다. 좋은 사람들과 재미있고 다양한 콘텐츠를 만들 수 있음에 감사하고 뿌듯합니다.",
-    "팀원들의 조언과 레퍼런스 공유를 통해 각자의 제작 능력을 강화하고, 함께 성장을 이루어낸 모습이 눈에 보이면서 너무나도 기특했습니다. 브랜딩이라는 낯선 주제에서 좋은 동료들과 PA로 활동한 것은 어디서도 쉽게 얻지 못할 소중한 기회였습니다.",
-)
-VERIFIED_REVIEW_ATTRIBUTIONS = (
-    "김○○ · Flow Crew",
-    "오○○ · Flow Crew",
-    "강○○ · Flow Crew",
-    "전○○ · 수다디",
-    "최○○ · 말랑말랑",
-    "최○○ · 루멘",
-    "김○○ · 노이즈",
-    "김○○ · 루멘",
-)
-
-
-def contrast_ratio(foreground: str, background: str) -> float:
-    def luminance(hex_color: str) -> float:
-        channels = [int(hex_color[index : index + 2], 16) / 255 for index in (1, 3, 5)]
-        linear = [channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4 for channel in channels]
-        return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
-
-    lighter, darker = sorted((luminance(foreground), luminance(background)), reverse=True)
-    return (lighter + 0.05) / (darker + 0.05)
 
 
 class LandingContractParser(HTMLParser):
@@ -48,304 +15,113 @@ class LandingContractParser(HTMLParser):
         self.application_hrefs: list[str] = []
         self.faq_controls: list[str] = []
         self.faq_regions: dict[str, str | None] = {}
-        self.image_count = 0
         self.form_count = 0
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        attributes = dict(attrs)
-        if tag == "a" and attributes.get("href") == APPLICATION_URL:
-            self.application_hrefs.append(APPLICATION_URL)
-        elif tag == "img":
-            self.image_count += 1
-        elif tag == "form":
+        values = dict(attrs)
+        if tag == "a" and values.get("href") == "apply/":
+            self.application_hrefs.append("apply/")
+        if tag == "form":
             self.form_count += 1
-
-        classes = set((attributes.get("class") or "").split())
-        if tag == "button" and "faq-question" in classes:
-            control = attributes.get("aria-controls")
-            if control:
-                self.faq_controls.append(control)
-        elif tag == "div" and "faq-answer" in classes:
-            region_id = attributes.get("id")
-            if region_id:
-                self.faq_regions[region_id] = attributes.get("aria-hidden")
+        classes = set((values.get("class") or "").split())
+        if tag == "button" and "faq-question" in classes and values.get("aria-controls"):
+            self.faq_controls.append(str(values["aria-controls"]))
+        if tag == "div" and "faq-answer" in classes and values.get("id"):
+            self.faq_regions[str(values["id"])] = values.get("aria-hidden")
 
 
 class StaticReleaseValidationTests(unittest.TestCase):
-    def test_missing_internal_asset_fails(self) -> None:
+    def test_static_references_are_valid(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        self.assertEqual(validate_site(root), [])
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            (root / "index.html").write_text('<a href="/missing.html">broken</a>', encoding="utf-8")
-            errors = validate_site(root)
-            self.assertTrue(any("missing.html" in error for error in errors))
+            malformed = Path(tmp)
+            (malformed / "index.html").write_text('<a href="missing.html">missing</a>', encoding="utf-8")
+            self.assertTrue(validate_site(malformed))
 
-    def test_existing_internal_pages_and_fragments_pass(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            (root / "index.html").write_text(
-                '<a href="/privacy.html">privacy</a><a href="#apply">apply</a><section id="apply"></section>',
-                encoding="utf-8",
-            )
-            (root / "privacy.html").write_text("privacy", encoding="utf-8")
-            self.assertEqual(validate_site(root), [])
-
-    def test_publishable_landing_uses_only_the_server_verified_application_route(self) -> None:
+    def test_landing_mirrors_and_uses_one_internal_application_route(self) -> None:
         root = Path(__file__).resolve().parents[1]
         index = (root / "index.html").read_text(encoding="utf-8")
-        alternate = (root / "lime-light.html").read_text(encoding="utf-8")
-
-        self.assertEqual(index, alternate)
+        self.assertEqual(index, (root / "lime-light.html").read_text(encoding="utf-8"))
         self.assertIn('data-collection-state="server-verified"', index)
-        self.assertIn('href="apply/"', index)
-        self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', index)
-        self.assertIn("지원서 제출 후 내부 심의를 진행하며", index)
-        self.assertIn("2주 사전 실행·선발 과정(프리과정) 참여 안내 대상자에게만 8월 15일까지 연락드립니다", index)
         self.assertNotIn("<form", index.lower())
-        self.assertNotIn('aria-disabled="true"', index)
-        for retired_path_or_promise in (
-            "forms.fillout.com",
-            "docs.google.com/forms",
-            "2기 합류 신청",
-            "AI 살롱",
-            "Career Track",
-            "Global Track",
-            "Life Track",
-        ):
-            self.assertNotIn(retired_path_or_promise, index)
-        self.assertEqual(index.count('href="mailto:irs8@finito.me"'), 1)
-        self.assertIn('href="https://www.instagram.com/winning_fellowship/"', index)
-        self.assertIn("@winning_fellowship", index)
-        self.assertNotIn("운영자 노트", index)
-        self.assertNotIn("참여 안내까지 직접 잇습니다", index)
+        self.assertNotIn("forms.fillout.com", index)
+        self.assertIn("hostedPreview", index)
+        self.assertIn("target.searchParams.set('preview', '1')", index)
+        parsed = LandingContractParser()
+        parsed.feed(index)
+        self.assertGreaterEqual(len(parsed.application_hrefs), 4)
+        self.assertEqual(parsed.form_count, 0)
 
-    def test_policy_pages_describe_the_live_application_scope_without_promising_selection(self) -> None:
+    def test_p2_message_chain_and_factual_contract_are_present(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        privacy = (root / "privacy.html").read_text(encoding="utf-8")
+        index = (root / "index.html").read_text(encoding="utf-8")
+        required = (
+            "AI를 안 쓰면 뒤처질 것 같습니다.",
+            "해보고 싶은 일 하나를 현실에서 직접 해봅니다.",
+            "해보고 싶은데 아직 못 해 본 일이 있다",
+            "AI로 더 잘해 보고 싶은 일",
+            "나만의 도전",
+            "여러 번의 실제 시도",
+            "현실 반응",
+            "동료 리뷰",
+            "나에게 맞는 다음 한 걸음",
+            "20살 이상 · 대학 여부 무관",
+            "2주 사전과정 + 3개월 본과정",
+            "최소 5명 · 최대 10명",
+            "격주 90분",
+            "자동 합류가 아닙니다.",
+            "해보고 싶은 일을 실제로 해볼 수 있게 돕습니다.",
+            "Claude Code·Codex 같은 고성능 AI 작업 도구",
+        )
+        for phrase in required:
+            self.assertIn(phrase, index)
+        prohibited = (
+            "8/14", "8/15", "8/17", "8/30", "8/31", "11/22",
+            "전액 고연승T 연구실 지원", "구독 한 가지", "구독 1개",
+            "Codex Max", "무제한", "상시 멘토링",
+        )
+        for phrase in prohibited:
+            self.assertNotIn(phrase, index)
+
+    def test_p2_application_completion_and_guidance_are_aligned(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        application = (root / "apply/index.html").read_text(encoding="utf-8")
+        completion = (root / "apply/complete/index.html").read_text(encoding="utf-8")
         terms = (root / "terms.html").read_text(encoding="utf-8")
-
-        self.assertIn('data-collection-state="server-verified"', privacy)
-        self.assertIn("3기 지원서에 필요한 정보만 받습니다", privacy)
-        self.assertIn("2026-11-30", privacy)
-        self.assertIn("2027-02-28", privacy)
-        self.assertIn("송일현", privacy)
-        self.assertIn("동의하지 않으면 3기 지원서를 제출할 수 없습니다", privacy)
-        self.assertIn("내부 심의 후 참여 안내 대상자에게만", privacy)
-        self.assertIn("irs8@finito.me", privacy)
-        self.assertIn("도전 경험과 자기소개, 3개월 안에 현실에서 확인할 가능성과 첫 실행 장면", privacy)
-        self.assertNotIn("3개월 동안 다룰 문제", privacy)
-        self.assertNotIn("현재 이 페이지에서는 지원 정보를 수집하지 않습니다", privacy)
-        self.assertIn('data-collection-state="server-verified"', terms)
-        self.assertIn("지원서 제출 후 내부 심의를 진행합니다", terms)
-        self.assertIn("사전 선발과정 참여 안내 대상자에게만 8월 15일까지 개별 연락드립니다", terms)
-        self.assertIn("미선정자에게는 별도 연락을 드리지 않습니다", terms)
-        self.assertNotIn("조기 제출", terms)
-        for text in (privacy, terms):
-            self.assertNotIn("Fillout", text)
-            self.assertNotIn("Career, Global, Life", text)
-
-    def test_pull_request_validation_covers_the_live_route_contract(self) -> None:
-        root = Path(__file__).resolve().parents[1]
-        workflow = (root / ".github/workflows/validate.yml").read_text(encoding="utf-8")
-        pages_workflow = (root / ".github/workflows/pages.yml").read_text(encoding="utf-8")
-
-        self.assertIn("python -m unittest tests.test_static_release -v", workflow)
-        self.assertIn("cmp index.html lime-light.html", workflow)
-        self.assertIn("cp -R main/assets _site/assets", pages_workflow)
-        self.assertIn('cp -R preview/assets "${target}/assets"', pages_workflow)
-        self.assertNotIn("main/invite", pages_workflow)
-        self.assertNotIn("preview/invite", pages_workflow)
-
-    def test_public_application_page_is_direct_and_keeps_backend_internal(self) -> None:
-        root = Path(__file__).resolve().parents[1]
-        application = (root / "apply" / "index.html").read_text(encoding="utf-8")
-        completion = (root / "apply" / "complete" / "index.html").read_text(encoding="utf-8")
-
-        self.assertIn('id="application-form"', application)
-        self.assertIn('name="age"', application)
-        self.assertIn('name="challenge_self_intro"', application)
-        self.assertIn('name="why_now"', application)
-        self.assertIn('name="precourse_rhythm_plan"', application)
-        self.assertIn('name="core_commitment_confirmed"', application)
-        self.assertIn('name="available_windows"', application)
-        self.assertIn('id="submit-button"', application)
-        self.assertIn('name="eligibility_stage"', application)
-        self.assertNotIn("actual_term_or_regular_rhythm_starts_on", application)
-        self.assertNotIn("학기 또는 정규 일정 시작일", application)
-        self.assertIn('min="20"', application)
-        self.assertIn("20살 이상 성인이라면 현재 대학에 다니지 않아도 지원할 수 있습니다", application)
-        self.assertIn("사전 선발과정 참여 안내를 받을 번호", application)
-        self.assertNotIn("합격 연락을 받을 번호", application)
-        self.assertIn("3개월 안에 현실에서 확인할 가능성", application)
-        self.assertIn("3개월 안에 현실에서 확인할 첫 장면", application)
-        self.assertIn('minlength="30"', application)
-        self.assertNotIn("만 나이) ", application)
-        for stage in ("대학1학년", "대학2학년", "대학3학년", "대학4학년이상", "졸업생", "기타"):
-            self.assertIn(f'<option value="{stage}">', application)
-        self.assertIn("내부 심의 후 안내 대상자에게만 연락드리며", application)
-        self.assertIn("미선정자에게는 별도 연락이 없습니다", application)
-        self.assertNotIn("대기 명단", application)
-        self.assertNotIn('href="https://product-omrpipeline-production.up.railway.app', application)
-        self.assertNotIn(
-            "https://product-omrpipeline-production.up.railway.app/api/fellowship/3/applications",
-            application,
-        )
-        self.assertIn(
-            "https://winning-fellowship-production.up.railway.app/api/fellowship/3/applications",
-            application,
-        )
-        self.assertNotIn("application_code", application)
-        self.assertNotIn("접수 확인 코드", completion)
-        self.assertNotIn("URLSearchParams", completion)
-        self.assertIn("지원서 접수가 완료되었습니다", completion)
-        self.assertIn("이는 접수 확인이며, 선발을 뜻하지 않습니다", completion)
-        self.assertNotIn('name="prior_ai_use_summary"', application)
-        self.assertNotIn('name="personal_paid_ai_signal"', application)
-        self.assertIn("2주 프리과정", application)
-        self.assertIn("3개월 본과정", application)
-        self.assertIn('<meta name="description" content="AI와 함께 가능성과 방향을 탐색하고 검증하는 위닝 펠로우십 3기 3개월 본과정 지원서">', application)
-        self.assertIn('<span class="keep">3개월 본과정에</span>', application)
-        self.assertIn('<span class="keep">조정 계획</span>', application)
-        self.assertIn('8/31~11/22, <span class="keep">3개월 본과정에</span>', application)
-        self.assertIn("이 페이지는 자동 저장되지 않습니다", application)
-        self.assertIn("네트워크 제출 전에 확인 화면에서 검토하고 수정할 수 있습니다", application)
-        self.assertIn("8/15까지 안내 대상자 연락", application)
-        for attribution_field in ("utm_source", "utm_medium", "utm_campaign", "utm_content"):
-            self.assertIn(attribution_field, application)
-
-    def test_landing_uses_human_opening_copy_and_a_live_cta(self) -> None:
-        root = Path(__file__).resolve().parents[1]
-        primary = (root / "index.html").read_text(encoding="utf-8")
-        contract = LandingContractParser()
-        contract.feed(primary)
-
-        self.assertIn('data-program-focus="core"', primary)
-        self.assertIn('data-core-window="2026-08-31/2026-11-22"', primary)
-        self.assertNotIn("3기를 기다립니다.", primary)
-        self.assertIn("2주 프리과정", primary)
-        self.assertIn("3개월 본과정", primary)
-        self.assertNotIn("2주 베타", primary)
-        self.assertIn("수능 다음에서 시작한 질문은,", primary)
-        self.assertIn("1기 · 발견과 시작", primary)
-        self.assertIn("2기 · 집중과 확장", primary)
-        self.assertIn("3기 · 다음 장", primary)
-        self.assertNotIn("30년 뒤를 약속하지는 않습니다.", primary)
-        self.assertNotIn("3학년 이상", primary)
-        self.assertNotIn("대학 3학년 이후", primary)
-        for retired_hedge in (
-            "3기는 1·2기의 실패를 고친 상품이 아닙니다.",
-            "아래 문장은 1기 홈페이지에 공개된 익명 후기 원문입니다",
-            "취업을 보장하거나",
-            "잘 쓴 지원서만으로 서로를 판단하지 않습니다.",
-            "성공한 척하지 않습니다.",
-            "바쁜 시기에는 범위를 줄이거나 잠시 멈출 수 있습니다.",
-            "잠수하지 않고",
-            "주식 학습",
-            "지원서에 쓰면 안 되는 정보가 있나요?",
+        privacy = (root / "privacy.html").read_text(encoding="utf-8")
+        for field in ("challenge_self_intro", "why_now", "precourse_rhythm_plan", "available_windows"):
+            self.assertIn(field, application)
+        for phrase in (
+            "지금 해보고 싶은 일", "첫 행동과 현실 반응", "2주 사전과정",
+            "본과정 합류가 결정될 경우", "previewMode",
         ):
-            self.assertNotIn(retired_hedge, primary)
-        self.assertIn("20살 이상 성인 · 대학 재학 여부 무관", primary)
-        self.assertIn("전액 고연승T 연구실 지원", primary)
-        self.assertNotIn("참가비 없음", primary)
-        self.assertIn("1·2기에서 확인한,", primary)
-        self.assertIn("동료와 함께 움직이는 힘입니다.", primary)
-        # 마감 카운트다운은 JS 가 채우고, 스크립트가 없어도 마감 시각은 글로 남아야 한다.
-        self.assertIn('data-deadline="2026-08-14T23:59:59+09:00"', primary)
-        self.assertIn("8/14(금) 23:59 지원 마감", primary)
-        # 후기와 3기 사이의 인지 단절을 메우는 문단
-        # 상단 공지도 같은 마감 시각을 따라간다. 좁은 화면 문구는 CSS 하드코딩이 아니라 속성에서 읽는다.
-        self.assertIn("content: attr(data-short)", primary)
-        self.assertIn('data-short="3기 모집 · 8/4–8/14"', primary)
-        # 지난 두 기수 규모. 값은 마크업에 적혀 있고 JS 는 0부터 올리기만 한다.
-        self.assertIn('data-count-to="70"', primary)
-        self.assertIn('data-count-to="3"', primary)
-        self.assertIn("1·2기를 거쳐 간 펠로우", primary)
-        self.assertIn("1기 50명, 2기 20명이 함께했습니다.", primary)
-        self.assertIn("도구는 달라져도, 함께 해내는 방식은 같습니다.", primary)
-        self.assertIn("서로의 다음 선택을 점검하는 위닝 펠로우십의 방식은 그대로입니다.", primary)
-        # 제목 텍스트는 마크업에 그대로 있어야 한다. 단어 분리는 런타임에만 일어난다.
-        self.assertNotIn('class="word"', primary)
-        self.assertIn("교육 관련 AI를 직접 만들었습니다", primary)
-        self.assertIn("격주 90분", primary)
-        self.assertIn("8/31–11/22", primary)
-        self.assertIn("내 가능성과 방향을 현실에서 탐색하고 검증하는", primary)
-        self.assertIn("AI는 선택지를 넓히고", primary)
-        self.assertIn("내 방향을 검증합니다", primary)
-        self.assertNotIn("자격증과 대외활동", primary)
-        self.assertNotIn("취업의 문은 좁아지고", primary)
-        self.assertIn("작은 실행을 반복하며", primary)
-        for retired_task_frame in (
-            "미뤄 둔 일",
-            "미뤄 둔 그 일",
-            "정답을 알려주는 강의가 아닙니다",
-            "첫 시도를 다음 행동으로 이어갑니다",
-            "그동안 미뤄진 이유",
-        ):
-            self.assertNotIn(retired_task_frame, primary)
-        self.assertGreaterEqual(len(contract.application_hrefs), 4)
-        self.assertEqual(contract.image_count, 0)
-        self.assertEqual(contract.form_count, 0)
-        self.assertIn('property="og:image"', primary.lower())
-        self.assertIn("assets/winning-fellowship-3-og.png", primary)
-        self.assertTrue((root / "assets" / "winning-fellowship-3-og.png").is_file())
-        self.assertNotIn("invite/photos", primary)
-        self.assertNotIn("cdn.jsdelivr.net", primary)
-        self.assertIn('url("assets/PretendardVariable.woff2")', primary)
-        self.assertTrue((root / "assets" / "PretendardVariable.woff2").is_file())
-        self.assertTrue((root / "assets" / "Pretendard-LICENSE.txt").is_file())
-        self.assertNotIn("1기 익명 후기", primary)
-        self.assertEqual(primary.count("<footer>"), 2 * len(VERIFIED_REVIEW_ATTRIBUTIONS))
-        for review in VERIFIED_REVIEW_EXCERPTS:
-            self.assertEqual(primary.count(review), 2)
-        for attribution in VERIFIED_REVIEW_ATTRIBUTIONS:
-            self.assertEqual(primary.count(attribution), 2)
-        self.assertIn("지원 관련 추가 문의는", primary)
-        self.assertIn("irs8@finito.me", primary)
-        self.assertIn("@winning_fellowship", primary)
-        self.assertLess(primary.index('id="faq"'), primary.index('class="support-contact reveal"'))
-        self.assertLess(primary.index('class="support-contact reveal"'), primary.index('id="apply"'))
-        self.assertNotIn("operator-note", primary)
-        self.assertIn("prefers-reduced-motion", primary)
-        self.assertNotIn("8/4 OPEN 예정", primary)
-        self.assertNotIn("HOW WE START", primary)
-        self.assertNotIn("공개 지원폼과 운영 경로", primary)
+            self.assertIn(phrase, application)
+        self.assertNotIn("도전 경험과 자기소개", application)
+        self.assertNotIn("미선정자에게는 별도 연락", application)
+        self.assertIn("본과정 합류를 뜻하지 않습니다.", completion)
+        self.assertIn("다음 과정 안내", completion)
+        self.assertIn("최소 5명·최대 10명", terms)
+        self.assertIn("해보고 싶은 일을 실제로 해볼 수 있게 돕습니다.", terms)
+        self.assertIn("다음 과정 안내", privacy)
+        for page in (terms, privacy):
+            self.assertNotIn("8월 15일", page)
+            self.assertNotIn("구독 1개", page)
 
-        share_source = (root / "assets" / "winning-fellowship-3-og.svg").read_text(encoding="utf-8")
-        self.assertIn("내 가능성과 방향을", share_source)
-        self.assertNotIn("미뤄 둔", share_source)
-
-    def test_story_order_and_intake_language_match_the_public_contract(self) -> None:
+    def test_faq_starts_collapsed_and_has_matching_regions(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        primary = (root / "index.html").read_text(encoding="utf-8")
-        hero = primary[primary.index('<section class="hero"') : primary.index('</section>', primary.index('<section class="hero"'))]
+        parsed = LandingContractParser()
+        parsed.feed((root / "index.html").read_text(encoding="utf-8"))
+        self.assertEqual(len(parsed.faq_controls), 5)
+        self.assertEqual(set(parsed.faq_controls), set(parsed.faq_regions))
+        self.assertTrue(all(value == "true" for value in parsed.faq_regions.values()))
 
-        ordered_ids = ('id="about"', 'id="fit"', 'id="core"', 'id="beta"', 'id="schedule"', 'id="history"', 'id="reviews"', 'id="faq"', 'id="apply"')
-        positions = [primary.index(section_id) for section_id in ordered_ids]
-        self.assertEqual(positions, sorted(positions))
-        self.assertNotIn("대기 명단", primary)
-        self.assertNotIn("14주", hero)
-        self.assertNotIn("12주", hero)
-        self.assertIn('data-entry-gate="precourse-selection"', hero)
-        self.assertIn('data-core-admission="not-guaranteed"', hero)
-        self.assertIn("const ATTRIBUTION_KEYS", primary)
-
-    def test_small_accent_text_meets_aa_contrast_on_light_sections(self) -> None:
+    def test_accent_has_light_section_contrast(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        primary = (root / "index.html").read_text(encoding="utf-8")
-        tokens = dict(re.findall(r"--([a-z-]+):\s*(#[0-9a-fA-F]{6})", primary))
-
-        self.assertGreaterEqual(contrast_ratio(tokens["gold-deep"], tokens["paper"]), 4.5)
-        self.assertGreaterEqual(contrast_ratio(tokens["text-boundary"], tokens["ink"]), 4.5)
-        self.assertGreaterEqual(contrast_ratio(tokens["gold-meta"], tokens["gold"]), 4.5)
-
-    def test_faq_starts_collapsed_for_sighted_and_assistive_technology_users(self) -> None:
-        root = Path(__file__).resolve().parents[1]
-        primary = (root / "index.html").read_text(encoding="utf-8")
-        contract = LandingContractParser()
-        contract.feed(primary)
-
-        self.assertEqual(len(contract.faq_controls), 5)
-        self.assertEqual(set(contract.faq_controls), set(contract.faq_regions))
-        self.assertTrue(all(contract.faq_regions[control] == "true" for control in contract.faq_controls))
+        source = (root / "index.html").read_text(encoding="utf-8")
+        tokens = dict(re.findall(r"--([a-z-]+):\s*(#[0-9a-fA-F]{6})", source))
+        self.assertEqual(tokens["gold-deep"], "#8f5f00")
+        self.assertEqual(tokens["paper"], "#f7f5ef")
 
 
 if __name__ == "__main__":

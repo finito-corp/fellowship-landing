@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI와 동료, 실행 리듬으로 내 가능성과 방향을 현실에서 탐색하고 검증하는 위닝 펠로우십 3기 모집.">
-  <meta property="og:title" content="위닝 펠로우십 3기 | 내 가능성과 방향을 검증하는 3개월">
-  <meta property="og:description" content="AI로 선택지를 넓히고, 동료와 실행하며, 나에게 맞는 방향을 현실에서 확인합니다. 8/31–11/22 본과정 참가자 모집.">
+  <meta name="description" content="해보고 싶은 일을 현실에서 직접 해 보고, 동료와 다음 한 걸음을 정하는 위닝 펠로우십 3기.">
+  <meta property="og:title" content="위닝 펠로우십 3기 | 해보고 싶은 일을 현실에서 직접 해보는 3개월">
+  <meta property="og:description" content="아직 못 해 본 일, 또는 AI로 더 잘해 보고 싶은 일을 현실에서 직접 해 보고 다음 한 걸음을 정합니다.">
   <meta property="og:image" content="https://finito-corp.github.io/fellowship-landing/assets/winning-fellowship-3-og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <title>위닝 펠로우십 3기 | 내 가능성과 방향을 검증하는 3개월</title>
+  <title>위닝 펠로우십 3기 | 해보고 싶은 일을 현실에서 직접 해보는 3개월</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23f2bd3f'/%3E%3C/svg%3E">
   <style>
     @font-face { font-family: "Pretendard Variable"; font-style: normal; font-weight: 45 920; font-display: swap; src: url("assets/PretendardVariable.woff2") format("woff2-variations"); }
@@ -477,6 +477,8 @@
       #schedule .schedule-item time { font-size: var(--font-a2-date-compact); }
     }
     @media (max-width: 520px) {
+      /* P2의 긴 공개 문구도 320px에서 안전하게 줄바꿈한다. */
+      .keep { white-space: normal; }
       .hero h1 { font-size: 2.6rem; line-height: 1.08; }
       .hero-copy { margin-top: var(--space-6); font-size: 1rem; line-height: 1.6; }
       .hero-copy > span + span { margin-top: var(--space-3); }
@@ -510,7 +512,7 @@
   <a class="skip-link" href="#main-content">본문 바로가기</a>
   <div id="top"></div>
   <div class="announcement">
-    <div class="shell announcement-inner" aria-label="3기 지원 접수 중 · 8/4–8/14"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" data-short="3기 모집 · 8/4–8/14" aria-hidden="true">3기 지원 접수 중 · 8/4–8/14</span><a href="apply/">지원하기 ↗</a></div>
+    <div class="shell announcement-inner" aria-label="위닝 펠로우십 3기 · 지원 안내"><span class="status-dot" aria-hidden="true"></span><span class="announcement-copy" data-short="3기 · 지원 안내" aria-hidden="true">위닝 펠로우십 3기 · 지원 안내</span><a href="apply/">나만의 도전 시작하기 ↗</a></div>
   </div>
 
   <header class="site-header">
@@ -518,13 +520,13 @@
       <a class="brand" href="#top">Winning <span>Fellowship</span></a>
       <div class="desktop-nav" aria-label="페이지 안내">
         <span class="nav-indicator" aria-hidden="true"></span>
-        <a href="#about" data-nav="about">소개</a><a href="#fit" data-nav="fit">3기 대상</a><a href="#core" data-nav="core">본과정</a><a href="#beta" data-nav="beta">선발 과정</a><a href="#schedule" data-nav="schedule">일정</a><a href="#history" data-nav="history">걸어온 길</a><a href="#faq" data-nav="faq">FAQ</a>
-        <a class="nav-cta" href="apply/">3기 지원</a>
+        <a href="#about" data-nav="about">소개</a><a href="#fit" data-nav="fit">이런 분께</a><a href="#core" data-nav="core">본과정</a><a href="#beta" data-nav="beta">2주 사전과정</a><a href="#schedule" data-nav="schedule">여정</a><a href="#history" data-nav="history">걸어온 길</a><a href="#faq" data-nav="faq">FAQ</a>
+        <a class="nav-cta" href="apply/">나만의 도전 시작</a>
       </div>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="메뉴 열기"><span></span></button>
     </nav>
     <div class="mobile-menu" id="mobile-menu" data-open="false">
-      <nav class="shell mobile-menu-inner" aria-label="모바일 메뉴"><a href="#about">소개 <span>01</span></a><a href="#fit">3기 대상 <span>02</span></a><a href="#core">3개월 본과정 <span>03</span></a><a href="#beta">선발 과정 <span>04</span></a><a href="#schedule">일정 <span>05</span></a><a href="#history">걸어온 길 <span>06</span></a><a href="#faq">FAQ <span>07</span></a><a href="apply/">3기 지원하기 ↗</a></nav>
+      <nav class="shell mobile-menu-inner" aria-label="모바일 메뉴"><a href="#about">소개 <span>01</span></a><a href="#fit">이런 분께 <span>02</span></a><a href="#core">3개월 본과정 <span>03</span></a><a href="#beta">2주 사전과정 <span>04</span></a><a href="#schedule">여정 <span>05</span></a><a href="#history">걸어온 길 <span>06</span></a><a href="#faq">FAQ <span>07</span></a><a href="apply/">나만의 도전 시작하기 ↗</a></nav>
     </div>
   </header>
 
@@ -534,7 +536,7 @@
       <li><a class="side-link" href="#about" data-target="about"><span class="side-label">01 / 소개</span></a></li>
       <li><a class="side-link" href="#fit" data-target="fit"><span class="side-label">02 / 대상</span></a></li>
       <li><a class="side-link" href="#core" data-target="core"><span class="side-label">03 / 본과정</span></a></li>
-      <li><a class="side-link" href="#beta" data-target="beta"><span class="side-label">04 / 선발</span></a></li>
+      <li><a class="side-link" href="#beta" data-target="beta"><span class="side-label">04 / 사전과정</span></a></li>
       <li><a class="side-link" href="#schedule" data-target="schedule"><span class="side-label">05 / 일정</span></a></li>
       <li><a class="side-link" href="#history" data-target="history"><span class="side-label">06 / 여정</span></a></li>
       <li><a class="side-link" href="#faq" data-target="faq"><span class="side-label">07 / FAQ</span></a></li>
@@ -545,37 +547,23 @@
   <main id="main-content">
     <section class="hero" aria-labelledby="hero-title" data-program-focus="core" data-core-window="2026-08-31/2026-11-22" data-entry-gate="precourse-selection" data-core-admission="not-guaranteed">
       <div class="shell">
-        <p class="hero-overline reveal">20살 이상 성인 · 대학 재학 여부 무관 · 3개월 본과정</p>
+        <p class="hero-overline reveal">20살 이상 성인 · 대학 여부 무관 · 2주 사전과정 + 3개월 본과정</p>
         <h1 class="reveal" id="hero-title">계속 뭔가 <span class="keep">하고 있는데,</span> <br><em>내 길은 아직 <span class="keep">보이지 않는다면.</span></em></h1>
-        <p class="hero-copy reveal"><span>준비와 일, 프로젝트를 이어 가도 내가 잘하는 일과 <span class="keep">가야 할 길은</span> 좀처럼 선명해지지 않습니다.</span><span>선택은 쌓이는데, 그 선택이 어디로 이어지는지는 잘 보이지 않습니다.</span><span>이번 3기는 AI로 선택지를 넓히고, 동료와 함께 작은 실행을 반복하며 <span class="keep">현실의 반응으로 내 가능성과 방향을 검증하는</span> 3개월입니다.</span></p>
-        <div class="hero-actions reveal"><a class="button" href="apply/">3기 지원하기 <span aria-hidden="true">↗</span></a><a class="button secondary" href="#history">위닝 펠로우십이 걸어온 길</a></div>
-        <p class="hero-deadline reveal" data-deadline="2026-08-14T23:59:59+09:00"><span class="deadline-dot" aria-hidden="true"></span><span class="deadline-count" aria-hidden="true" hidden></span><span class="deadline-date"><span class="keep">8/14(금) 23:59 지원 마감</span><span class="hero-decision">내부 심의 · <span class="keep">8/15 사전 선발과정 참여 안내</span> · <span class="keep">8/17–8/30 선발</span> · <span class="keep">본과정 합류 미보장</span></span></span></p>
-        <p class="hero-boundary reveal">3개월 본과정까지 이어갈 의향과 시간이 있는 분을 찾습니다. 지원서 제출 후 내부 심의를 진행하며, 2주 사전 실행·선발 과정(프리과정) 참여 안내 대상자에게만 8월 15일까지 연락드립니다. 안내받은 분은 8/17–8/30 과정에 참여하고, 참여가 본과정 합류를 보장하지 않습니다.</p>
-        <div class="facts reveal" aria-label="3기 핵심 정보">
-          <div class="fact"><strong>대상</strong><span>20살 이상 성인 · 대학 재학 여부 무관</span></div><div class="fact"><strong>본과정</strong><span>8/31–11/22</span></div><div class="fact"><strong>공식 모임</strong><span>격주 90분</span></div><div class="fact"><strong>지원</strong><span>전액 고연승T 연구실 지원</span></div>
-        </div>
-      </div>
-    </section>
+        <p class="hero-copy reveal"><span><strong>AI를 안 쓰면 뒤처질 것 같습니다.</strong></span><span>그런데 막상 내 삶에 써보려 하면, 무엇부터 해야 할지 모르겠습니다.</span><span>취업은 막막하고, 해보고 싶은 일은 자꾸 미뤄집니다. 남들이 하는 준비를 따라가지만 나는 왜 이 길을 가는지도 흐릿하다면.</span><span><strong>그래서 정답부터 찾지 않습니다. 해보고 싶은 일 하나를 현실에서 직접 해봅니다.</strong></span></p>
+        <div class="hero-actions reveal"><a class="button" href="apply/">나만의 도전 시작하기 <span aria-hidden="true">↗</span></a><a class="button secondary" href="#core">3개월 동안 무엇을 하나요?</a></div>
+        <p class="hero-deadline reveal"><span class="deadline-dot" aria-hidden="true"></span><span class="deadline-date"><span class="keep">2주 사전과정 후 본과정 합류 결정</span><span class="hero-decision">모집 일정은 확정 안내에서 확인합니다.</span></span></p>
+        <p class="hero-boundary reveal">아직 못 해 본 일, 또는 이미 하고 있지만 AI로 더 잘해 보고 싶은 일 하나를 나만의 도전으로 직접 해봅니다. 여러 번의 실제 시도와 현실 반응, 동료 리뷰를 거쳐 나에게 맞는 다음 한 걸음을 정합니다.</p>
+        <div class="facts reveal" aria-label="3기 핵심 정보"><div class="fact"><strong>대상</strong><span>20살 이상 · 대학 여부 무관</span></div><div class="fact"><strong>여정</strong><span>2주 사전과정 + 3개월 본과정</span></div><div class="fact"><strong>본과정</strong><span>최소 5명 · 최대 10명 · 격주 90분</span></div><div class="fact"><strong>지원</strong><span>실제 시도를 돕는 지원</span></div></div></div></section>
 
-    <section class="chapter light" id="about" aria-labelledby="about-title">
-      <div class="shell"><p class="chapter-label reveal">이번 3기가 하는 일</p><h2 class="reveal" id="about-title">AI로 가능성을 넓히고,<br>현실에서 <span class="keep">내 방향을 검증합니다.</span></h2><p class="lead reveal">3개월 동안 AI와 함께 내가 잘하는 것, <span class="keep">해보고 싶은 것,</span> 지금 만들 수 있는 선택지를 넓힙니다. 동료의 관점과 반복적인 실행을 더해, 그 가능성이 실제 내 길이 될 수 있는지 확인합니다.</p><p class="plain-note reveal"><strong>AI + 동료 + 실행 리듬.</strong> AI는 선택지를 넓히고, 동료는 새로운 관점을 더하며, 실행 리듬은 가능성을 현실에서 검증하게 합니다.</p></div>
-    </section>
+    <section class="chapter light" id="about" aria-labelledby="about-title"><div class="shell"><p class="chapter-label reveal">이번 3기가 하는 일</p><h2 class="reveal" id="about-title">정답을 찾기보다,<br><span class="keep">해보고 싶은 일을 현실에 꺼내 봅니다.</span></h2><p class="lead reveal">아직 못 해 본 일, 또는 이미 하고 있지만 AI로 더 잘해 보고 싶은 일을 나만의 도전으로 정합니다. 여러 번의 실제 시도 뒤 돌아온 현실 반응과 동료 리뷰를 바탕으로, 나에게 맞는 다음 한 걸음을 정합니다.</p><p class="plain-note reveal"><strong>AI는 조사·제작·시험·수정을 돕는 도구이고, 동료는 막힌 지점과 다음 행동을 함께 보는 리뷰 환경입니다.</strong></p></div></section>
 
-    <section class="chapter light" id="fit" aria-labelledby="fit-title">
-      <div class="shell"><p class="chapter-label reveal">이번 3기가 찾는 사람</p><h2 class="reveal" id="fit-title">정해진 길을 기다리기보다,<br>AI와 함께 내 가능성을 <span class="keep">넓히고 싶다면.</span></h2><p class="lead reveal">AI를 처음 쓰든 이미 능숙하든 상관없습니다. 중요한 것은 더 많은 선택지를 탐색하고, 현실에서 직접 부딪히며 내 방향을 찾으려는 태도입니다.</p>
-        <div class="story-list"><article class="story-row reveal"><span class="story-index">01</span><h3>내가 잘하는 것과 갈 길을 더 선명하게 알고 싶다</h3><p>스펙을 더하는 것만으로는 답이 나오지 않아, AI와 실제 경험을 통해 내 강점과 가능성을 확인하고 싶습니다.</p></article><article class="story-row reveal"><span class="story-index">02</span><h3>AI를 삶의 동반자로 쓰고 싶다</h3><p>과제나 검색을 빠르게 끝내는 데서 그치지 않고, 생각을 넓히고 선택을 만드는 데 AI를 활용하고 싶습니다.</p></article><article class="story-row reveal"><span class="story-index">03</span><h3>정해진 선택지 밖으로 나가 보고 싶다</h3><p>취업 한 방향만 기다리기보다 프로젝트, 새로운 일, 창업까지 내가 만들 수 있는 길을 직접 탐색하고 싶습니다.</p></article></div>
-      </div>
-    </section>
+    <section class="chapter light" id="fit" aria-labelledby="fit-title"><div class="shell"><p class="chapter-label reveal">이런 분께</p><h2 class="reveal" id="fit-title">아직 완성되지 않아도,<br><span class="keep">지금 해보고 싶은 한 가지가 있다면.</span></h2><p class="lead reveal">AI를 처음 쓰든 이미 쓰고 있든 상관없습니다. 중요한 것은 혼자 오래 생각하는 대신, 내 삶에서 실제로 해 볼 첫 행동을 정하고 반응을 읽어 보려는 마음입니다.</p><div class="story-list"><article class="story-row reveal"><span class="story-index">01</span><h3>해보고 싶은데 아직 못 해 본 일이 있다</h3><p>거대한 계획보다, 지금 한 번 현실에 꺼내 볼 작은 첫 접점이 필요합니다.</p></article><article class="story-row reveal"><span class="story-index">02</span><h3>이미 하는 일을 AI로 더 잘해 보고 싶다</h3><p>AI를 답이나 경쟁이 아니라 조사·제작·시험·수정의 도구로 써 보고 싶습니다.</p></article><article class="story-row reveal"><span class="story-index">03</span><h3>혼자 결론내리지 않고 다음을 정하고 싶다</h3><p>현실의 반응과 동료의 질문을 바탕으로 더 해볼지, 바꿔볼지, 멈출지 정하고 싶습니다.</p></article></div></div></section>
 
-    <section class="chapter dark" id="core" aria-labelledby="core-title">
-      <div class="shell"><p class="chapter-label reveal">3개월 본과정 · 8/31–11/22</p><h2 class="reveal" id="core-title">AI + 동료 + 실행 리듬.<br>현실의 경험으로 <span class="keep">내 방향을 검증합니다.</span></h2><div class="core-grid"><div class="core-statement reveal"><h3>같은 길을 고르지 않아도,<br>같은 리듬으로 나아갈 수 있습니다.</h3><p>각자 탐색하고 싶은 가능성을 정하고, AI로 선택지를 넓힌 뒤, 현실에서 작은 실험을 만듭니다. 공식 모임은 격주 90분이며, 동료와 결과를 점검하고 다음 탐색 방향을 수정합니다.</p><div class="boundary-box"><strong>AI는 답을 대신 정하는 도구가 아니라, 내가 볼 수 있는 가능성을 넓히는 동반자입니다.</strong><br>어떤 결과물을 만들었는지보다 무엇을 새롭게 발견했고, 현실의 반응을 통해 어떤 방향을 남겼는지를 중요하게 봅니다.</div></div><div class="support-list reveal"><article class="support-item"><b>01</b><div><h3>가능성 넓히기</h3><p>AI와 함께 지금까지 생각하지 못했던 역할, 프로젝트, 경로를 탐색합니다.</p></div></article><article class="support-item"><b>02</b><div><h3>현실에서 시험하기</h3><p>관심을 작은 작업물, 대화, 프로젝트로 옮겨 실제 반응을 확인합니다.</p></div></article><article class="support-item"><b>03</b><div><h3>동료의 관점 더하기</h3><p>격주 90분 동안 발견과 막힘을 공유하고 혼자 보지 못한 선택지를 더합니다.</p></div></article><article class="support-item"><b>04</b><div><h3>내 방향으로 남기기</h3><p>탐색과 실행에서 얻은 근거를 바탕으로 다음에 이어갈 방향을 직접 고릅니다.</p></div></article></div></div></div>
-    </section>
+    <section class="chapter dark" id="core" aria-labelledby="core-title"><div class="shell"><p class="chapter-label reveal">3개월 본과정</p><h2 class="reveal" id="core-title">각자 다른 일을 해도,<br><span class="keep">같은 질문으로 다음 한 걸음을 고칩니다.</span></h2><div class="core-grid"><div class="core-statement reveal"><h3>완성된 결과보다, 현실에서 얻은 판단 근거를 남깁니다.</h3><p>최소 5명에서 최대 10명이 각자의 나만의 도전을 이어 갑니다. 격주 90분 공식 모임에서 시도와 반응, 막힌 지점과 다음 행동을 돌아봅니다.</p><div class="boundary-box"><strong>AI는 삶의 답을 정하지 않습니다.</strong><br>AI는 조사·제작·시험·수정을 돕고, 동료는 해 본 것과 돌아온 반응을 더 현실적으로 읽게 합니다.</div></div><div class="support-list reveal"><article class="support-item"><b>01</b><div><h3>나만의 도전 정하기</h3><p>해보고 싶은 일 하나와 현실에서 만날 첫 장면을 정합니다.</p></div></article><article class="support-item"><b>02</b><div><h3>여러 번 실제로 시도하기</h3><p>완성이 아니라 사람·사용·시간·비용 같은 현실과 만나는 행동을 합니다.</p></div></article><article class="support-item"><b>03</b><div><h3>반응과 동료 리뷰 보기</h3><p>잘된 것뿐 아니라 거절·무응답·제약도 읽고, 동료와 막힌 지점을 돌아봅니다.</p></div></article><article class="support-item"><b>04</b><div><h3>다음 한 걸음 남기기</h3><p>더 해볼지, 바꿔볼지, 멈출지 정한 근거와 개인 변화 기록을 남깁니다.</p></div></article></div></div></div></section>
 
-    <section class="chapter light" id="beta" aria-labelledby="beta-title">
-      <div class="shell program-layout"><div class="sticky-copy reveal"><p class="chapter-label">본과정으로 들어가는 문</p><h2 id="beta-title">2주는 체험이 아니라,<br>함께 3개월을 갈지 확인하는 과정입니다.</h2><p class="lead">8/17–8/30 동안 AI로 탐색한 가능성 하나를 현실의 작은 실험으로 옮겨 봅니다. 실행 과정과 현실의 반응, 동료와의 약속을 바탕으로 8/30에 본과정 참가자를 최종 선발합니다.</p><ol class="process-sequence" aria-label="프리과정의 전형적인 흐름"><li><b>01</b><span>탐색할 가능성 하나 정하기</span></li><li><b>02</b><span>현실에서 작은 행동으로 실행하기</span></li><li><b>03</b><span>반응을 보고 다음 방향 수정하기</span></li></ol></div><div class="program-steps" id="beta-timeline"><div class="program-line" aria-hidden="true"><div class="program-progress"></div></div><article class="program-step reveal"><p class="step-meta">WEEK 01</p><h3>탐색할 가능성을 정하고<br>작은 실험을 설계합니다.</h3><p>진로, 프로젝트, 일하는 방식처럼 지금 더 넓혀 보고 싶은 선택지와 실제로 낼 시간을 정합니다.</p></article><article class="program-step reveal"><p class="step-meta">WEEK 02</p><h3>현실의 반응을 보고<br>방향을 다시 고릅니다.</h3><p>잘된 것만 보여주지 않습니다. 새롭게 발견한 것과 막힌 지점을 공유하고 다음 탐색에서 바꿀 한 가지를 정합니다.</p></article><article class="program-step reveal"><p class="step-meta">8/30 · 최종 선발</p><h3>3개월을 이어갈 사람을 정합니다.</h3><p>프리과정 참여는 본과정 합류를 보장하지 않습니다. AI 숙련도나 완성도보다 가능성을 탐색한 태도, 현실 반응에 맞춘 수정, 참여 리듬, 3개월 지속 가능성을 함께 봅니다.</p></article></div></div>
-    </section>
+    <section class="chapter light" id="beta" aria-labelledby="beta-title"><div class="shell program-layout"><div class="sticky-copy reveal"><p class="chapter-label">2주 사전과정</p><h2 id="beta-title">2주 동안 먼저 직접 해 봅니다.</h2><p class="lead">나만의 도전의 첫 행동을 하고, 현실에서 돌아온 반응과 동료 리듬을 경험합니다. 그 뒤 서로 3개월을 함께할지 확인합니다. 사전과정 참여가 본과정 합류를 뜻하지는 않습니다.</p><ol class="process-sequence" aria-label="사전과정 흐름"><li><b>01</b><span>해보고 싶은 일 하나 정하기</span></li><li><b>02</b><span>현실에서 첫 행동 하기</span></li><li><b>03</b><span>반응과 다음 한 걸음 돌아보기</span></li></ol></div><div class="program-steps" id="beta-timeline"><div class="program-line" aria-hidden="true"><div class="program-progress"></div></div><article class="program-step reveal"><p class="step-meta">WEEK 01</p><h3>첫 행동을 현실에 꺼내 봅니다.</h3><p>누구에게, 어디에서, 어떤 제약 안에서 해 볼지 정하고 작은 첫 접점을 만듭니다.</p></article><article class="program-step reveal"><p class="step-meta">WEEK 02</p><h3>반응을 읽고 다음 행동을 고칩니다.</h3><p>무엇이 돌아왔고 어디에서 막혔는지 본 뒤, 동료와 다음으로 가장 작게 해 볼 행동을 정합니다.</p></article><article class="program-step reveal"><p class="step-meta">NEXT</p><h3>본과정 합류를 함께 결정합니다.</h3><p>실제 시도·현실 반응·수정 가능성·3개월의 참여 리듬을 함께 확인합니다. 자동 합류는 아닙니다.</p></article></div></div></section>
 
-    <section class="chapter dark" id="schedule" aria-labelledby="schedule-title"><div class="shell"><p class="chapter-label reveal">전체 여정</p><h2 class="reveal" id="schedule-title">지원할 때부터,<br>3개월의 끝을 보고 시작합니다.</h2><div class="schedule"><article class="schedule-item reveal"><time datetime="2026-08-04">8/4–8/14</time><div><h3>3기 지원서 접수</h3><p>3개월 동안 탐색하고 싶은 가능성과 현실적인 참여 계획을 적습니다.</p></div></article><article class="schedule-item reveal"><time datetime="2026-08-15">8/15</time><div><h3>사전 선발과정 참여 안내</h3><p>내부 심의 후 참여 안내 대상자에게만 개별 연락합니다.</p></div></article><article class="schedule-item reveal"><time datetime="2026-08-17">8/17–8/30</time><div><h3>사전 실행·선발 과정</h3><p>AI로 가능성을 탐색하고 작은 실험으로 옮기며 본과정에서 함께할 리듬을 확인합니다.</p></div></article><article class="schedule-item reveal"><time datetime="2026-08-31">8/31–11/22</time><div><h3>3개월 본과정</h3><p>선발된 펠로우가 AI로 선택지를 넓히고, 격주 90분 공식 모임에서 각자의 발견과 실행을 점검합니다.</p></div></article></div></div></section>
+    <section class="chapter dark" id="schedule" aria-labelledby="schedule-title"><div class="shell"><p class="chapter-label reveal">전체 여정</p><h2 class="reveal" id="schedule-title">지원부터 끝까지,<br><span class="keep">실제 시도로 다음을 정합니다.</span></h2><div class="schedule"><article class="schedule-item reveal"><time>01</time><div><h3>지원</h3><p>해보고 싶은 일, 첫 행동, 보고 싶은 현실 반응과 참여 계획을 적습니다.</p></div></article><article class="schedule-item reveal"><time>02</time><div><h3>2주 사전과정</h3><p>먼저 직접 해 보고 현실 반응과 동료 리듬을 경험합니다.</p></div></article><article class="schedule-item reveal"><time>03</time><div><h3>본과정 합류 결정</h3><p>사전과정 후 서로 3개월을 함께할지 확인합니다. 자동 합류는 아닙니다.</p></div></article><article class="schedule-item reveal"><time>04</time><div><h3>3개월 본과정</h3><p>실제 시도 → 현실 반응 → 동료 리뷰 → 나에게 맞는 다음 한 걸음을 반복합니다.</p></div></article></div></div></section>
 
     <section class="chapter light" id="origin" aria-labelledby="origin-title">
       <div class="shell">
@@ -633,16 +621,16 @@
 
     <section class="chapter light" id="faq" aria-labelledby="faq-title">
       <div class="shell"><p class="chapter-label reveal">자주 묻는 질문</p><h2 class="reveal" id="faq-title">지원 전에,<br>이것만은 확인해주세요.</h2><div class="faq-list reveal">
-        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1"><span>AI를 잘 다루지 못해도 <span class="keep">지원할 수 있나요?</span></span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a1" role="region" aria-hidden="true"><div><p>네. 처음 쓰는 분도 이미 능숙한 분도 지원할 수 있습니다. 기능 숙련도보다 AI로 새로운 가능성을 탐색하고, 현실에서 시험하며 방향을 수정하려는 태도를 봅니다. 무료 계정만 있어도 프리과정에 참여할 수 있습니다.</p></div></div></div>
-        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2"><span>이미 개인 유료 AI 계정을 쓰고 있으면 유리한가요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a2" role="region" aria-hidden="true"><div><p>아니요. 유료 구독 여부와 AI 숙련도는 선발 기준이 아닙니다. 3개월 동안 탐색하고 싶은 가능성과 실제로 시간을 낼 수 있는지를 확인합니다.</p></div></div></div>
-        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3"><span>참가비나 별도 계정 비용이 있나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a3" role="region" aria-hidden="true"><div><p>전액 고연승T 연구실 지원으로 참가비는 없습니다. 프리과정에는 개인 무료 또는 기존 유료 AI를 사용합니다. 본과정 합류 후에는 개인 유료 AI 구독 한 가지를 지원합니다.</p></div></div></div>
-        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4"><span>지원하면 바로 본과정 펠로우가 되나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a4" role="region" aria-hidden="true"><div><p>아닙니다. 내부 심의를 거쳐 2주 프리과정 참가자를 먼저 선발하며, 사전 선발과정 참여 안내 대상자에게만 8월 15일까지 연락드립니다. 2주 프리과정 종료 후 운영진이 3개월 본과정 참가자를 최종 선발합니다.</p></div></div></div>
-        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5"><span>모임은 언제, 어디에서 하나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a5" role="region" aria-hidden="true"><div><p>본과정 공식 모임은 격주 90분이며, 온라인으로도 직접 만나서도 진행합니다. 사전 선발과정 참여 안내 대상자에게 연락할 때 가능한 시간을 확인하고, 첫 모임 전에 최종 일정을 안내합니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1"><span>AI를 잘 다루지 못해도 지원할 수 있나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a1" role="region" aria-hidden="true"><div><p>네. AI 숙련도나 유료 사용 여부보다, 해보고 싶은 일을 실제로 해 보고 반응을 읽어 보려는 태도를 봅니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2"><span>지원하면 바로 본과정에 합류하나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a2" role="region" aria-hidden="true"><div><p>아닙니다. 2주 사전과정에서 먼저 직접 해 보고, 서로 3개월을 함께할지 확인합니다. 자동 합류가 아닙니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3"><span>무엇을 지원하나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a3" role="region" aria-hidden="true"><div><p>해보고 싶은 일을 실제로 해볼 수 있게 돕습니다. 본과정 동안 Claude Code·Codex 같은 고성능 AI 작업 도구 접근을 각자의 도전과 실제 병목에 맞춰 지원합니다. 단순 챗봇 체험이 아니라 조사·기획·제작·개발·자동화·수정에 써 보고, 다음 행동을 정할 수 있게 돕습니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4"><span>3개월 동안 무엇이 남나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a4" role="region" aria-hidden="true"><div><p>무엇을 해 봤고 어떤 반응이 있었는지, 그래서 무엇을 더 해보거나 바꾸거나 멈출지 적은 개인 변화 기록을 남깁니다.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5"><span>공식 모임은 어떻게 진행하나요?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-answer" id="faq-a5" role="region" aria-hidden="true"><div><p>본과정은 격주 90분 공식 모임으로 진행합니다. 상세 일정과 방식은 본과정 합류 전 안내합니다.</p></div></div></div>
       </div><p class="support-contact reveal">지원 관련 추가 문의는 <a href="mailto:irs8@finito.me">irs8@finito.me</a> 또는 Instagram <a href="https://www.instagram.com/winning_fellowship/" target="_blank" rel="noopener noreferrer">@winning_fellowship</a> DM으로 보내주세요.</p></div>
     </section>
 
     <section class="chapter final" id="apply" aria-labelledby="apply-title">
-      <div class="shell reveal"><p class="chapter-label">3기 지원</p><h2 id="apply-title">AI와 함께 더 넓은 가능성을 발견하고,<br>내 방향을 현실에서 <span class="keep">검증하고 싶다면.</span></h2><p>지원서에는 3개월 동안 탐색하고 싶은 가능성, 최근에 현실의 반응을 보고 선택을 바꾼 경험, 본과정까지 시간을 낼 계획을 적습니다.</p><a class="button" href="apply/">위닝 펠로우십 3기 지원서 작성 <span aria-hidden="true">↗</span></a><small>지원서 접수 8/4–8/14 · 사전 선발과정 참여 안내 8/15 · 사전 실행·선발 과정 시작 8/17</small></div>
+      <div class="shell reveal"><p class="chapter-label">3기 지원</p><h2 id="apply-title">지금의 막막함을,<br><span class="keep">해보고 싶은 일의 첫 시도로 바꿔 보고 싶다면.</span></h2><p>지원서에는 해보고 싶은 일, 2주 안에 할 첫 행동, 보고 싶은 현실 반응, 그리고 반응 뒤 다음 선택을 바꾸는 기준을 적습니다.</p><a class="button" href="apply/">나만의 도전 시작하기 <span aria-hidden="true">↗</span></a><small>20살 이상 · 대학 여부 무관 / 2주 사전과정 후 본과정 합류 결정</small></div>
     </section>
   </main>
 
@@ -653,58 +641,20 @@
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
       const sourceParams = new URLSearchParams(window.location.search);
+      const hostedPreview = /^\/fellowship-landing\/previews\/pr-\d+\//.test(window.location.pathname);
       document.querySelectorAll('a[href="apply/"]').forEach((link) => {
         const values = ATTRIBUTION_KEYS
           .map((key) => [key, sourceParams.get(key)])
           .filter(([, value]) => value && /^[A-Za-z0-9._~-]{1,100}$/.test(value));
-        if (!values.length) return;
         const target = new URL(link.getAttribute('href'), window.location.href);
         values.forEach(([key, value]) => target.searchParams.set(key, value));
+        // GitHub Pages의 PR Preview는 실제 지원 endpoint에 쓰지 않는다.
+        if (hostedPreview) target.searchParams.set('preview', '1');
         link.href = target.toString();
       });
       document.body.dataset.motion = reducedMotion ? 'reduced' : 'normal';
-      // 지원 마감까지 남은 시간. 히어로와 상단 공지가 같은 시각 하나를 보고 함께 움직인다.
-      const deadlineBox = document.querySelector('.hero-deadline');
-      if (deadlineBox) {
-        const deadline = new Date(deadlineBox.dataset.deadline);
-        const countEl = deadlineBox.querySelector('.deadline-count');
-        const dateEl = deadlineBox.querySelector('.deadline-date');
-        const banner = document.querySelector('.announcement');
-        const bannerInner = banner && banner.querySelector('.announcement-inner');
-        const bannerCopy = banner && banner.querySelector('.announcement-copy');
-        const CLOSED_COPY = '3기 지원 접수가 마감되었습니다';
-        const setBanner = (long, short) => {
-          if (!bannerCopy) return;
-          bannerCopy.textContent = long;
-          bannerCopy.dataset.short = short;
-          bannerInner.setAttribute('aria-label', long);
-        };
-        const closeAll = () => {
-          deadlineBox.dataset.state = 'closed';
-          countEl.hidden = true;
-          dateEl.textContent = CLOSED_COPY + '.';
-          if (banner) banner.dataset.state = 'closed';
-          setBanner(CLOSED_COPY, CLOSED_COPY);
-          return false;
-        };
-        const syncDeadline = () => {
-          const left = deadline.getTime() - Date.now();
-          // 날짜 속성이 깨졌으면 숫자를 감추고 원래 문구를 그대로 둔다. 틀린 숫자를 띄우지 않는다.
-          if (!Number.isFinite(left)) { countEl.hidden = true; return false; }
-          if (left <= 0) return closeAll();
-          const minutes = Math.floor(left / 60000);
-          const days = Math.floor(minutes / 1440);
-          const hours = Math.floor((minutes % 1440) / 60);
-          const left_text = days > 0 ? `${days}일 ${hours}시간` : `${hours}시간 ${minutes % 60}분`;
-          countEl.textContent = `마감까지 ${left_text}`;
-          countEl.hidden = false;
-          setBanner(`3기 지원 접수 중 · 마감까지 ${left_text}`, `3기 모집 · 마감까지 ${left_text}`);
-          return true;
-        };
-        if (syncDeadline() !== false) {
-          const deadlineTimer = setInterval(() => { if (syncDeadline() === false) clearInterval(deadlineTimer); }, 30000);
-        }
-      }
+      // 모집 일정은 실제 재오픈 시 단일 정본에서 주입한다. 이 Preview에는 마감 카운트다운을 두지 않는다.
+
 
       // 지난 기수 규모는 화면에 들어올 때 0부터 올라간다. 값은 마크업에 이미 적혀 있다.
       const counters = document.querySelectorAll('[data-count-to]');
