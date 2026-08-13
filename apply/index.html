@@ -67,10 +67,14 @@
     .check { display:flex; align-items:flex-start; gap:10px; margin:17px 0 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px 0; background:transparent; font-size:.9rem; font-weight:650; }
     .check input { width:19px; height:19px; margin:2px 0 0; accent-color:var(--gold-deep); flex:none; }
     .honeypot { position:absolute !important; left:-10000px !important; width:1px !important; height:1px !important; overflow:hidden !important; }
-    button { width:100%; margin-top:26px; border:0; border-radius:4px; padding:16px; background:var(--gold); color:var(--ink); font:inherit; font-size:1rem; font-weight:850; cursor:pointer; transition:filter .18s ease,transform .18s ease; }
+    .draft-note { margin:18px 0 0; border-top:1px solid var(--line); padding-top:14px; color:var(--muted-dark); font-size:.86rem; }
+    .draft-note[data-state="restored"] { color:var(--gold-deep); font-weight:750; }
+    .form-actions { display:grid; grid-template-columns:1fr 1.5fr; gap:10px; margin-top:26px; }
+    button { width:100%; margin:0; border:0; border-radius:4px; padding:16px; background:var(--gold); color:var(--ink); font:inherit; font-size:1rem; font-weight:850; cursor:pointer; transition:filter .18s ease,transform .18s ease; }
     button:hover { filter:brightness(1.04); }
     button:active { transform:translateY(1px); }
     button:disabled { cursor:wait; opacity:.65; }
+    .clear-draft { border:1px solid var(--ink); background:transparent; color:var(--ink); }
     #result { display:none; margin-top:14px; border-radius:4px; padding:13px; font-size:.9rem; }
     #result.error { display:block; border:1px solid color-mix(in srgb,var(--danger) 30%,transparent); background:color-mix(in srgb,var(--danger) 8%,var(--surface)); color:var(--danger); }
     #result.pending { display:block; border:1px solid var(--line); background:var(--notice-bg); color:var(--notice-text); }
@@ -85,7 +89,7 @@
     .secondary-action { border:1px solid var(--ink); background:transparent; }
     footer { padding:22px 2px 0; color:var(--muted-dark); font-size:.78rem; }
     footer a { display:inline-flex; min-height:44px; align-items:center; font-weight:700; }
-    @media (max-width:520px) { .top-inner, main { width:min(100% - 24px,760px); } .hero { padding:42px 0 48px; } form { padding:5px 15px 22px; } .process, .preparation { padding:18px 15px; } .choice-grid, .review-actions { grid-template-columns:1fr; } .review-panel { padding:22px 15px; } }
+    @media (max-width:520px) { .top-inner, main { width:min(100% - 24px,760px); } .hero { padding:42px 0 48px; } form { padding:5px 15px 22px; } .process, .preparation { padding:18px 15px; } .choice-grid, .form-actions, .review-actions { grid-template-columns:1fr; } .review-panel { padding:22px 15px; } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; } }
   </style>
 </head>
@@ -123,7 +127,7 @@
         <li>보고 싶은 현실 반응과 그 반응 뒤 바꿔 볼 다음 선택</li>
         <li>3개월 동안 시간을 낼 계획</li>
       </ol>
-      <p class="preparation-note">이 페이지는 자동 저장되지 않습니다. 제출 전에는 입력한 답변을 다시 읽어보고, <strong>지원서 제출하기</strong>를 누르면 접수가 진행됩니다.</p>
+      <p class="preparation-note">작성 내용은 이 기기·브라우저에 자동 임시저장됩니다. 제출 전에는 입력한 답변을 다시 읽어보고, <strong>지원서 제출하기</strong>를 누르면 접수가 진행됩니다.</p>
     </section>
 
     <form id="application-form" novalidate>
@@ -209,7 +213,11 @@
       </fieldset>
       </div>
 
-      <button id="submit-button" type="submit">지원서 제출하기</button>
+      <p class="draft-note" id="draft-status" role="status" aria-live="polite">작성 내용은 이 기기·브라우저에만 자동 임시저장됩니다. 공용 기기에서는 작성 후 지워주세요.</p>
+      <div class="form-actions">
+        <button class="clear-draft" id="clear-draft-button" type="button">작성 내용 지우기</button>
+        <button id="submit-button" type="submit">지원서 제출하기</button>
+      </div>
       <p id="result" role="status" aria-live="polite" tabindex="-1"></p>
     </form>
 
@@ -236,6 +244,9 @@
       const coreConfirmation = document.getElementById('core_commitment_confirmed');
       const consentConfirmation = document.getElementById('contact_consent_confirmed');
       const result = document.getElementById('result');
+      const draftStatus = document.getElementById('draft-status');
+      const clearDraftButton = document.getElementById('clear-draft-button');
+      const DRAFT_KEY = 'winning-fellowship-3-application-draft-v1';
       const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
       const sourceParams = new URLSearchParams(window.location.search);
       const attribution = Object.fromEntries(ATTRIBUTION_KEYS.map((key) => {
@@ -243,6 +254,43 @@
         return [key, value && /^[A-Za-z0-9._~-]{1,100}$/.test(value) ? value : null];
       }));
       const selectedWindows = () => [...form.querySelectorAll('input[name="available_windows"]:checked')];
+      const draftFieldNames = ['name', 'age', 'contact_value', 'eligibility_stage', 'challenge_self_intro', 'why_now', 'precourse_rhythm_plan', 'beta_commitment_confirmed', 'core_commitment_confirmed', 'contact_consent_confirmed'];
+      const setDraftStatus = (message, state = '') => {
+        draftStatus.textContent = message;
+        if (state) draftStatus.dataset.state = state;
+        else delete draftStatus.dataset.state;
+      };
+      const draftSnapshot = () => Object.fromEntries(draftFieldNames.map((field) => {
+        const control = form.elements.namedItem(field);
+        return [field, control instanceof HTMLInputElement && control.type === 'checkbox' ? control.checked : control?.value || ''];
+      }).concat([['available_windows', selectedWindows().map((input) => input.value)]]));
+      const persistDraft = () => {
+        try {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify({version: 1, fields: draftSnapshot()}));
+          setDraftStatus('작성 내용은 이 기기·브라우저에 자동 임시저장되었습니다. 공용 기기에서는 작성 후 지워주세요.');
+        } catch { setDraftStatus('이 브라우저에서는 자동 임시저장을 사용할 수 없습니다. 제출 전까지 이 창을 유지해주세요.'); }
+      };
+      const clearDraft = (message = '이 기기의 임시 작성 내용을 지웠습니다.') => {
+        try { localStorage.removeItem(DRAFT_KEY); } catch { /* Storage access may be unavailable. */ }
+        setDraftStatus(message);
+      };
+      const restoreDraft = () => {
+        try {
+          const stored = localStorage.getItem(DRAFT_KEY);
+          if (!stored) return;
+          const draft = JSON.parse(stored);
+          if (draft?.version !== 1 || !draft.fields || typeof draft.fields !== 'object') return clearDraft('이전 임시 작성 내용은 복원할 수 없어 지웠습니다.');
+          draftFieldNames.forEach((field) => {
+            const control = form.elements.namedItem(field);
+            const value = draft.fields[field];
+            if (control instanceof HTMLInputElement && control.type === 'checkbox') control.checked = value === true;
+            else if (control && typeof value === 'string') control.value = value;
+          });
+          const windows = Array.isArray(draft.fields.available_windows) ? new Set(draft.fields.available_windows) : new Set();
+          form.querySelectorAll('input[name="available_windows"]').forEach((input) => { input.checked = windows.has(input.value); });
+          setDraftStatus('이 기기·브라우저에 임시저장한 작성 내용을 복원했습니다. 제출 전 다시 확인해주세요.', 'restored');
+        } catch { clearDraft('이전 임시 작성 내용은 복원할 수 없어 지웠습니다.'); }
+      };
       const validationItems = [
         { anchorId:'name', control:name, error:document.getElementById('name-error'), valid:() => name.value.trim().length >= 2, message:() => name.value.trim() ? '이름을 두 글자 이상 입력해주세요.' : '이름을 입력해주세요.' },
         { anchorId:'age', control:age, error:document.getElementById('age-error'), valid:() => Number(age.value) >= 20 && Number(age.value) <= 99, message:() => age.value ? '나이는 20부터 99 사이로 입력해주세요.' : '나이를 입력해주세요.' },
@@ -284,13 +332,25 @@
         return invalidItems.length === 0;
       };
 
+      restoreDraft();
       validationItems.forEach((item) => {
         const controls = item.control === windowsGroup ? windowsGroup.querySelectorAll('input') : [item.control];
         controls.forEach((control) => {
           control.addEventListener(control.type === 'checkbox' || control.tagName === 'SELECT' ? 'change' : 'input', () => {
+            persistDraft();
             if (validationAttempted) validate(false);
           });
         });
+      });
+      clearDraftButton.addEventListener('click', () => {
+        form.reset();
+        validationAttempted = false;
+        validationItems.forEach((item) => { item.error.hidden = true; item.error.textContent = ''; item.control.removeAttribute('aria-invalid'); });
+        errorList.replaceChildren();
+        errorSummary.hidden = true;
+        show('', '');
+        clearDraft();
+        name.focus();
       });
 
       const payload = () => ({
@@ -318,6 +378,7 @@
           const response = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'omit', body:JSON.stringify(payload()) });
           const data = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(data.detail || '제출 중 문제가 생겼습니다. 잠시 후 다시 시도해주세요.');
+          clearDraft('지원서가 접수되어 이 기기의 임시 작성 내용을 지웠습니다.');
           window.location.assign(new URL('complete/', window.location.href));
         } catch (error) {
           show(error instanceof Error ? error.message : '제출 중 문제가 생겼습니다. 잠시 후 다시 시도해주세요.', 'error');

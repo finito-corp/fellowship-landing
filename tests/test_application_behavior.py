@@ -30,6 +30,8 @@ class ApplicationBehaviorTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.page.goto(f"http://127.0.0.1:{self.server.server_port}/apply/")
+        self.page.evaluate("localStorage.clear()")
+        self.page.reload()
 
     def _fill_valid_application(self) -> None:
         self.page.locator("#name").fill("테스트 지원자")
@@ -120,6 +122,35 @@ class ApplicationBehaviorTests(unittest.TestCase):
         self.assertFalse(self.page.locator("#submit-button").is_disabled())
         self.assertEqual(self.page.locator("#name").input_value(), "테스트 지원자")
         self.assertEqual(self.page.locator("#contact_value").input_value(), "01012345678")
+        self.page.unroute(endpoint)
+
+    def test_draft_restores_after_reload_and_manual_clear_removes_it(self) -> None:
+        self.page.locator("#name").fill("임시 저장 지원자")
+        self.page.locator("#challenge_self_intro").fill("새로고침 뒤에도 작성한 지원서 내용이 남아 있는지 확인하는 충분히 긴 문장입니다.")
+        self.page.locator('input[name="available_windows"]').nth(0).check()
+        self.page.locator('input[name="available_windows"]').nth(1).check()
+
+        self.page.reload()
+
+        self.assertEqual(self.page.locator("#name").input_value(), "임시 저장 지원자")
+        self.assertIn("복원했습니다", self.page.locator("#draft-status").inner_text())
+        self.assertTrue(self.page.locator('input[name="available_windows"]').nth(0).is_checked())
+        self.assertTrue(self.page.locator('input[name="available_windows"]').nth(1).is_checked())
+
+        self.page.locator("#clear-draft-button").click()
+        self.assertEqual(self.page.locator("#name").input_value(), "")
+        self.assertEqual(self.page.evaluate("localStorage.getItem('winning-fellowship-3-application-draft-v1')"), None)
+
+    def test_successful_submission_clears_draft_before_completion(self) -> None:
+        endpoint = "https://winning-fellowship-production.up.railway.app/api/fellowship/3/applications"
+        self.page.route(endpoint, lambda route: route.fulfill(status=201, content_type="application/json", body='{"message":"ok"}'))
+        self._fill_valid_application()
+        self.assertIsNotNone(self.page.evaluate("localStorage.getItem('winning-fellowship-3-application-draft-v1')"))
+
+        self.page.locator("#submit-button").click()
+        self.page.wait_for_url("**/apply/complete/")
+
+        self.assertEqual(self.page.evaluate("localStorage.getItem('winning-fellowship-3-application-draft-v1')"), None)
         self.page.unroute(endpoint)
 
     def test_application_and_completion_fit_supported_viewports(self) -> None:
