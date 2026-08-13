@@ -77,7 +77,7 @@ class ApplicationBehaviorTests(unittest.TestCase):
         self.assertIn("utm_campaign=wf3_202608", self.page.url)
         self.assertIn("utm_content=main", self.page.url)
 
-    def test_review_allows_editing_and_defers_the_network_request(self) -> None:
+    def test_direct_submit_posts_once_and_navigates_to_completion(self) -> None:
         submissions: list[dict[str, str | int | bool | list[str] | None]] = []
 
         def capture_submission(route: Route) -> None:
@@ -93,20 +93,6 @@ class ApplicationBehaviorTests(unittest.TestCase):
         self._fill_valid_application()
 
         self.page.locator("#submit-button").click()
-
-        self.assertEqual(submissions, [])
-        self.assertTrue(self.page.locator("#review-panel").is_visible())
-        self.assertFalse(self.page.locator("#form-fields").is_visible())
-        self.assertEqual(self.page.evaluate("document.activeElement.id"), "review-title")
-        self.assertEqual(self.page.locator("#review-name").inner_text(), "테스트 지원자")
-
-        self.page.locator("#review-edit-button").click()
-
-        self.assertTrue(self.page.locator("#form-fields").is_visible())
-        self.assertEqual(self.page.locator("#name").input_value(), "테스트 지원자")
-
-        self.page.locator("#submit-button").click()
-        self.page.locator("#final-submit-button").click()
         self.page.wait_for_url("**/apply/complete/")
 
         self.assertEqual(len(submissions), 1)
@@ -119,6 +105,21 @@ class ApplicationBehaviorTests(unittest.TestCase):
         self.assertEqual(submissions[0]["utm_content"], "main")
         self.assertNotIn("prior_ai_use_summary", submissions[0])
         self.assertNotIn("personal_paid_ai_signal", submissions[0])
+        self.page.unroute(endpoint)
+
+    def test_direct_submit_keeps_answers_and_reenables_button_after_server_error(self) -> None:
+        endpoint = "https://winning-fellowship-production.up.railway.app/api/fellowship/3/applications"
+        self.page.route(endpoint, lambda route: route.fulfill(status=503, content_type="application/json", body='{"detail":"현재 접수 경로를 준비하고 있습니다."}'))
+        self._fill_valid_application()
+
+        self.page.locator("#submit-button").click()
+        self.page.wait_for_function("document.getElementById('result').textContent.includes('현재 접수 경로를 준비하고 있습니다.')")
+
+        self.assertTrue(self.page.locator("#result").is_visible())
+        self.assertIn("현재 접수 경로를 준비하고 있습니다.", self.page.locator("#result").inner_text())
+        self.assertFalse(self.page.locator("#submit-button").is_disabled())
+        self.assertEqual(self.page.locator("#name").input_value(), "테스트 지원자")
+        self.assertEqual(self.page.locator("#contact_value").input_value(), "01012345678")
         self.page.unroute(endpoint)
 
     def test_application_and_completion_fit_supported_viewports(self) -> None:
