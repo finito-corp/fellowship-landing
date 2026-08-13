@@ -210,29 +210,9 @@
       </fieldset>
       </div>
 
-      <button id="submit-button" type="submit">작성한 답변 확인하기</button>
+      <button id="submit-button" type="submit">지원서 제출하기</button>
+      <p id="result" role="status" aria-live="polite" tabindex="-1"></p>
     </form>
-
-    <section class="review-panel" id="review-panel" aria-labelledby="review-title" hidden>
-      <h2 id="review-title" tabindex="-1">제출 전 확인</h2>
-      <p>아래 내용이 맞는지 확인해주세요. 최종 제출 전까지 <span class="keep">답변을 수정할 수 있습니다.</span></p>
-      <dl class="review-list">
-        <div class="review-item"><dt>이름</dt><dd id="review-name"></dd></div>
-        <div class="review-item"><dt>나이</dt><dd id="review-age"></dd></div>
-        <div class="review-item"><dt>휴대전화 번호</dt><dd id="review-contact"></dd></div>
-        <div class="review-item"><dt>현재 상태</dt><dd id="review-stage"></dd></div>
-        <div class="review-item"><dt>지금 해보고 싶은 일</dt><dd id="review-challenge"></dd></div>
-        <div class="review-item"><dt>첫 행동과 현실 반응</dt><dd id="review-why"></dd></div>
-        <div class="review-item"><dt>3개월 현실 참여 계획</dt><dd id="review-rhythm"></dd></div>
-        <div class="review-item"><dt>참여 가능한 시간대</dt><dd id="review-windows"></dd></div>
-        <div class="review-item"><dt>참여·연락 확인</dt><dd id="review-confirmations">2주 사전과정 참여 · 본과정 참여 의향 · 다음 과정 안내 동의</dd></div>
-      </dl>
-      <div class="review-actions">
-        <button class="secondary-action" id="review-edit-button" type="button">답변 수정하기</button>
-        <button id="final-submit-button" type="button">이 내용으로 최종 제출하기</button>
-      </div>
-      <div id="result" role="status" aria-live="polite" tabindex="-1"></div>
-    </section>
 
     <footer>제출 정보는 지원 검토와 다음 과정 안내에만 사용됩니다. <a href="../privacy.html">개인정보 안내</a>를 확인해주세요.</footer>
   </main>
@@ -244,10 +224,7 @@
       const form = document.getElementById('application-form');
       const errorSummary = document.getElementById('error-summary');
       const errorList = document.getElementById('error-list');
-      const reviewPanel = document.getElementById('review-panel');
-      const reviewTitle = document.getElementById('review-title');
-      const editButton = document.getElementById('review-edit-button');
-      const finalButton = document.getElementById('final-submit-button');
+      const submitButton = document.getElementById('submit-button');
       const name = document.getElementById('name');
       const age = document.getElementById('age');
       const contact = document.getElementById('contact_value');
@@ -317,17 +294,6 @@
         });
       });
 
-      const populateReview = () => {
-        document.getElementById('review-name').textContent = name.value.trim();
-        document.getElementById('review-age').textContent = age.value;
-        document.getElementById('review-contact').textContent = contact.value.trim();
-        document.getElementById('review-stage').textContent = stage.selectedOptions[0].textContent;
-        document.getElementById('review-challenge').textContent = challenge.value.trim();
-        document.getElementById('review-why').textContent = why.value.trim();
-        document.getElementById('review-rhythm').textContent = rhythm.value.trim();
-        document.getElementById('review-windows').textContent = selectedWindows().map((input) => input.closest('label').textContent.trim()).join(' · ');
-      };
-
       const payload = () => ({
         name:name.value.trim(), age:Number(age.value), contact_channel:form.contact_channel.value, contact_value:contact.value.trim(),
         eligibility_stage:stage.value, why_now:why.value.trim(), challenge_self_intro:challenge.value.trim(),
@@ -342,33 +308,12 @@
         result.setAttribute('role', kind === 'error' ? 'alert' : 'status');
       };
 
-      form.addEventListener('submit', (event) => {
+      form.addEventListener('submit', async (event) => {
         event.preventDefault();
         validationAttempted = true;
         if (!validate(true)) return;
-        populateReview();
-        form.hidden = true;
-        reviewPanel.hidden = false;
-        reviewTitle.focus();
-      });
-
-      editButton.addEventListener('click', () => {
-        reviewPanel.hidden = true;
-        form.hidden = false;
-        show('', '');
-        name.focus();
-      });
-
-      finalButton.addEventListener('click', async () => {
         if (previewMode) { window.location.assign(new URL('complete/?preview=1', window.location.href)); return; }
-        if (!validate(false)) {
-          reviewPanel.hidden = true;
-          form.hidden = false;
-          errorSummary.focus();
-          return;
-        }
-        finalButton.disabled = true;
-        editButton.disabled = true;
+        submitButton.disabled = true;
         show('지원서를 제출하고 있습니다.', 'pending');
         try {
           const response = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'omit', body:JSON.stringify(payload()) });
@@ -378,8 +323,7 @@
         } catch (error) {
           show(error instanceof Error ? error.message : '제출 중 문제가 생겼습니다. 잠시 후 다시 시도해주세요.', 'error');
           result.focus();
-          finalButton.disabled = false;
-          editButton.disabled = false;
+          submitButton.disabled = false;
         }
       });
     })();

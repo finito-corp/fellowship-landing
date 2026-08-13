@@ -36,20 +36,22 @@ class ApplicationUxStaticTests(unittest.TestCase):
             self.assertIn("#main-content", parser.skip_targets)
             self.assertEqual(parser.elements["main-content"]["tag"], "main")
 
-    def test_application_declares_error_and_review_states(self) -> None:
+    def test_application_declares_error_and_direct_submit_state(self) -> None:
         root = Path(__file__).resolve().parents[1]
         parser = ApplicationContractParser()
         parser.feed((root / "apply" / "index.html").read_text(encoding="utf-8"))
 
         error_summary = parser.elements["error-summary"]
-        review_panel = parser.elements["review-panel"]
+        result = parser.elements["result"]
+        submit_button = parser.elements["submit-button"]
         self.assertEqual(error_summary["role"], "alert")
         self.assertEqual(error_summary["tabindex"], "-1")
         self.assertIn("hidden", error_summary)
-        self.assertEqual(review_panel["aria-labelledby"], "review-title")
-        self.assertIn("hidden", review_panel)
-        self.assertEqual(parser.elements["review-edit-button"]["type"], "button")
-        self.assertEqual(parser.elements["final-submit-button"]["type"], "button")
+        self.assertEqual(result["role"], "status")
+        self.assertEqual(result["aria-live"], "polite")
+        self.assertEqual(submit_button["type"], "submit")
+        self.assertNotIn("review-panel", parser.elements)
+        self.assertNotIn("final-submit-button", parser.elements)
         self.assertEqual(parser.elements["available-windows"]["aria-describedby"], "available-windows-help available-windows-error")
 
     def test_completion_exposes_the_correction_channel(self) -> None:
