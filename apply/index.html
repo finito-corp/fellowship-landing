@@ -78,6 +78,8 @@
     #result { display:none; margin-top:14px; border-radius:4px; padding:13px; font-size:.9rem; }
     #result.error { display:block; border:1px solid color-mix(in srgb,var(--danger) 30%,transparent); background:color-mix(in srgb,var(--danger) 8%,var(--surface)); color:var(--danger); }
     #result.pending { display:block; border:1px solid var(--line); background:var(--notice-bg); color:var(--notice-text); }
+    .submission-fallback { margin:14px 0 0; border-top:1px solid var(--line); padding-top:14px; color:var(--muted-dark); font-size:.86rem; }
+    .submission-fallback a { display:inline-flex; min-height:44px; align-items:center; color:var(--gold-deep); font-weight:800; }
     .review-panel { margin-top:16px; padding:26px 24px; }
     .review-panel > p { margin:8px 0 0; color:var(--muted-dark); }
     .review-list { margin:24px 0 0; }
@@ -219,6 +221,7 @@
         <button id="submit-button" type="submit">지원서 제출하기</button>
       </div>
       <p id="result" role="status" aria-live="polite" tabindex="-1"></p>
+      <p class="submission-fallback" id="submission-fallback">제출이 원활하지 않으면 작성하신 지원 내용을 <a href="mailto:irs8@finito.me">irs8@finito.me</a>로 보내주세요.</p>
     </form>
 
     <footer>제출 정보는 지원 검토와 다음 과정 안내에만 사용됩니다. <a href="../privacy.html">개인정보 안내</a>를 확인해주세요.</footer>

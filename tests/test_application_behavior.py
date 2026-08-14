@@ -122,6 +122,8 @@ class ApplicationBehaviorTests(unittest.TestCase):
         self.assertFalse(self.page.locator("#submit-button").is_disabled())
         self.assertEqual(self.page.locator("#name").input_value(), "테스트 지원자")
         self.assertEqual(self.page.locator("#contact_value").input_value(), "01012345678")
+        self.assertTrue(self.page.locator("#submission-fallback").is_visible())
+        self.assertEqual(self.page.locator("#submission-fallback a").get_attribute("href"), "mailto:irs8@finito.me")
         self.page.unroute(endpoint)
 
     def test_draft_restores_after_reload_and_manual_clear_removes_it(self) -> None:

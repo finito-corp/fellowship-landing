@@ -64,6 +64,14 @@ class ApplicationUxStaticTests(unittest.TestCase):
 
         self.assertEqual(parser.mailto_links, ["mailto:irs8@finito.me"])
 
+    def test_application_exposes_the_submission_fallback_channel(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        parser = ApplicationContractParser()
+        parser.feed((root / "apply" / "index.html").read_text(encoding="utf-8"))
+
+        self.assertEqual(parser.elements["submission-fallback"]["tag"], "p")
+        self.assertEqual(parser.mailto_links, ["mailto:irs8@finito.me"])
+
 
 if __name__ == "__main__":
     unittest.main()
