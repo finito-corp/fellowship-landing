@@ -52,6 +52,7 @@ class ApplicationUxStaticTests(unittest.TestCase):
         self.assertEqual(submit_button["type"], "submit")
         self.assertEqual(parser.elements["clear-draft-button"]["type"], "button")
         self.assertEqual(parser.elements["draft-status"]["role"], "status")
+        self.assertEqual(parser.elements["contact_value"]["pattern"], "01[016789][0-9]{7,8}")
         self.assertNotIn("review-panel", parser.elements)
         self.assertNotIn("final-submit-button", parser.elements)
         self.assertNotIn("제출 전 확인", (root / "apply" / "index.html").read_text(encoding="utf-8"))

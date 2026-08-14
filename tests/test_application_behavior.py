@@ -65,6 +65,26 @@ class ApplicationBehaviorTests(unittest.TestCase):
         self.assertEqual(self.page.locator("#available-windows").get_attribute("aria-invalid"), "true")
         self.assertTrue(self.page.locator("#available-windows-error").is_visible())
 
+    def test_non_mobile_digit_sequence_is_rejected_before_request(self) -> None:
+        endpoint = "https://winning-fellowship-production.up.railway.app/api/fellowship/3/applications"
+        submissions: list[dict] = []
+
+        def capture_submission(route: Route) -> None:
+            submissions.append(route.request.post_data_json)
+            route.abort()
+
+        self.page.route(endpoint, capture_submission)
+        self._fill_valid_application()
+        self.page.locator("#contact_value").fill("00000000000")
+
+        self.page.locator("#submit-button").click()
+
+        self.assertEqual(submissions, [])
+        self.assertTrue(self.page.locator("#contact-error").is_visible())
+        self.assertIn("010·011·016·017·018·019", self.page.locator("#contact-error").inner_text())
+        self.assertEqual(self.page.locator("#contact_value").get_attribute("aria-invalid"), "true")
+        self.page.unroute(endpoint)
+
     def test_landing_application_link_preserves_supported_attribution(self) -> None:
         self.page.goto(
             f"http://127.0.0.1:{self.server.server_port}/index.html"
